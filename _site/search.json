@@ -4,7 +4,7 @@
     "href": "HE01.html",
     "title": "Hands-on Exercise 1",
     "section": "",
-    "text": "pacman::p_load(tidyverse)"
+    "text": "This is my first attempt to create the course website.\n\n\n\npacman::p_load(tidyverse)"
   },
   {
     "objectID": "HE01.html#getting-started",

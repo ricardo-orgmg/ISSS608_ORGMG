@@ -12,6 +12,8 @@ execute:
 
 # Overview
 
+This is my first attempt to create the course website.
+
 ## Getting Started
 
 ```{r}
