@@ -1,10 +1,10 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ISSS608_ORGMG",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "Welcome to ISSS608 Visual Analytics and Applications.\nIn this website you will find my coursework prepared for this course."
   },
   {
     "objectID": "Hands-on_Ex/Hands-on_EX01/HE01.html",
@@ -28,10 +28,10 @@
     "text": "The Data\nImporting the data\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ISSS608_ORGMG",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "Welcome to ISSS608 Visual Analytics and Applications. In this website you will find my coursework prepared for this course."
+    "text": "About this site\nIn this website you will find the coursework prepared for the course: ISSS608 - Visual Analytics and Applications."
   }
 ]

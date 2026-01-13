@@ -4,6 +4,4 @@ title: "About"
 
 About this site
 
-```{r}
-1 + 1
-```
+In this website you will find the coursework prepared for the course: ISSS608 - Visual Analytics and Applications.

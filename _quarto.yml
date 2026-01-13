@@ -12,7 +12,7 @@ website:
     - text: "In-class Exercise"
       menu:
       - text: "In-Class Exercise 1" 
-        href: "IE01.html"
+        href: "In-class_Ex/In-class_Ex01/ICE01.html"
     right:
       - href: index.qmd
         text: Home
