@@ -39,6 +39,13 @@ Plotting a simple bar chart
 ```{r}
 #| echo: false
 ggplot(data = exam_data,
-       aes (x = RACE)) + 
-  geom_bar()
+       aes(x = RACE)) + 
+  geom_bar(fill = "steelblue4", color = "grey40") +
+  labs(
+    x = "Race",
+    y = "Number of Students"
+  ) +
+  theme(
+    panel.background = element_rect(fill = "white")
+  )
 ```
