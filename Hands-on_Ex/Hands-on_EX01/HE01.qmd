@@ -1,0 +1,44 @@
+---
+title: "Hands-on Exercise 1"
+author: "Oscar Ricardo Moreno Gonzalez"
+date: "January 10, 2026"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+---
+
+# Overview
+
+This is my first attempt to create the course website.
+
+# Getting Started
+
+## Install and launching R packages
+
+The code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.
+
+```{r}
+pacman::p_load(tidyverse) 
+```
+
+## The Data
+
+Importing the data
+
+```{r}
+exam_data <- read_csv("data/Exam_data.csv")
+```
+
+# Data Visualization
+
+Plotting a simple bar chart
+
+```{r}
+#| echo: false
+ggplot(data = exam_data,
+       aes (x = RACE)) + 
+  geom_bar()
+```

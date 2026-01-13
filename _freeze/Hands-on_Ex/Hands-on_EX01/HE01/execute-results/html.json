@@ -1,0 +1,17 @@
+{
+  "hash": "800fd032687cd85111fcc3fc5d5b8f59",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Hands-on Exercise 1\"\nauthor: \"Oscar Ricardo Moreno Gonzalez\"\ndate: \"January 10, 2026\"\ndate-modified: \"last-modified\"\nexecute: \n  eval: true\n  echo: true\n  warning: false\n  freeze: true\n---\n\n# Overview\n\nThis is my first attempt to create the course website.\n\n# Getting Started\n\n## Install and launching R packages\n\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(tidyverse) \n```\n:::\n\n\n## The Data\n\nImporting the data\n\n\n::: {.cell}\n\n```{.r .cell-code}\nexam_data <- read_csv(\"data/Exam_data.csv\")\n```\n:::\n\n\n# Data Visualization\n\nPlotting a simple bar chart\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](HE01_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n",
+    "supporting": [
+      "HE01_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
