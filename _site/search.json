@@ -1,26 +1,5 @@
 [
   {
-    "objectID": "HE01.html",
-    "href": "HE01.html",
-    "title": "Hands-on Exercise 1",
-    "section": "",
-    "text": "This is my first attempt to create the course website.\n\n\n\npacman::p_load(tidyverse)"
-  },
-  {
-    "objectID": "HE01.html#getting-started",
-    "href": "HE01.html#getting-started",
-    "title": "Hands-on Exercise 1",
-    "section": "",
-    "text": "pacman::p_load(tidyverse)"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ISSS608_ORGMG",
-    "section": "",
-    "text": "Welcome to ISSS608 Visual Analytics and Applications. In this website you will find my coursework prepared for this course."
-  },
-  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -35,13 +14,6 @@
     "text": "This is my first attempt to create the course website."
   },
   {
-    "objectID": "Hands-on_Ex/Hands-on_EX01/HE01.html#getting-started",
-    "href": "Hands-on_Ex/Hands-on_EX01/HE01.html#getting-started",
-    "title": "Hands-on Exercise 1",
-    "section": "",
-    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(tidyverse)"
-  },
-  {
     "objectID": "Hands-on_Ex/Hands-on_EX01/HE01.html#install-and-launching-r-packages",
     "href": "Hands-on_Ex/Hands-on_EX01/HE01.html#install-and-launching-r-packages",
     "title": "Hands-on Exercise 1",
@@ -49,17 +21,17 @@
     "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(tidyverse)"
   },
   {
-    "objectID": "Hands-on_Ex/Hands-on_EX01/HE01.html#importing-the-data",
-    "href": "Hands-on_Ex/Hands-on_EX01/HE01.html#importing-the-data",
-    "title": "Hands-on Exercise 1",
-    "section": "Importing the Data",
-    "text": "Importing the Data\nImporting the data\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
-  },
-  {
     "objectID": "Hands-on_Ex/Hands-on_EX01/HE01.html#the-data",
     "href": "Hands-on_Ex/Hands-on_EX01/HE01.html#the-data",
     "title": "Hands-on Exercise 1",
     "section": "The Data",
     "text": "The Data\nImporting the data\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ISSS608_ORGMG",
+    "section": "",
+    "text": "Welcome to ISSS608 Visual Analytics and Applications. In this website you will find my coursework prepared for this course."
   }
 ]
