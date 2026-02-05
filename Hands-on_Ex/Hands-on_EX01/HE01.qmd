@@ -51,6 +51,20 @@ ggplot(data = exam_data,
 ```
 
 ```{r}
+ggplot(data = exam_data,
+       aes(x = RACE)) + 
+  geom_bar(fill = "steelblue4", color = "grey40") +
+  labs(
+    x = "Race",
+    y = "Number of Students"
+  ) +
+  theme(
+    panel.background = element_rect(fill = "white")
+  ) +
+  coord_flip()
+```
+
+```{r}
 ggplot(data=exam_data, 
        aes(x = MATHS)) +
   geom_dotplot(binwidth=2.5,         
@@ -72,4 +86,61 @@ ggplot(data=exam_data,
        aes(x = MATHS, 
            colour = GENDER)) +
   geom_density()
+```
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, 
+           x= GENDER)) +
+  geom_boxplot(notch=TRUE)
+```
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, 
+           x= GENDER)) +
+  geom_violin()
+```
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, 
+           y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(method=lm, 
+              linewidth=0.5)
+```
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, 
+           x= GENDER)) +
+  geom_boxplot() +                    
+  geom_point(position="jitter", 
+             size = 0.5)        
+```
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, x= GENDER)) +
+  geom_boxplot() +
+  geom_point(stat="summary",        
+             fun="mean",           
+             colour="red",          
+             size=4)          
+```
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS)) +
+  geom_histogram(bins=20) +
+    facet_wrap(~ CLASS)
+```
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS)) +
+  geom_histogram(bins=20) +
+    facet_grid(~ CLASS)
+
 ```
