@@ -49,3 +49,27 @@ ggplot(data = exam_data,
     panel.background = element_rect(fill = "white")
   )
 ```
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS)) +
+  geom_dotplot(binwidth=2.5,         
+               dotsize = 0.5) +      
+  scale_y_continuous(NULL,           
+                     breaks = NULL)  
+```
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, 
+           fill = GENDER)) +
+  geom_histogram(bins=20, 
+                 color="grey30")
+```
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS, 
+           colour = GENDER)) +
+  geom_density()
+```
