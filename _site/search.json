@@ -39,6 +39,20 @@
     "href": "Hands-on_Ex/Hands-on_EX02/HE02.html",
     "title": "Hands-on Exercise 2",
     "section": "",
-    "text": "pacman::p_load(ggrepel, patchwork, \n               ggthemes, hrbrthemes,\n               tidyverse) \n\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
+    "text": "Hands-On Exercise # 2."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX02/HE02.html#install-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_EX02/HE02.html#install-and-launching-r-packages",
+    "title": "Hands-on Exercise 2",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(ggrepel, patchwork, \n               ggthemes, hrbrthemes,\n               tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX02/HE02.html#the-data",
+    "href": "Hands-on_Ex/Hands-on_EX02/HE02.html#the-data",
+    "title": "Hands-on Exercise 2",
+    "section": "The Data",
+    "text": "The Data\nImporting the data\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
   }
 ]
