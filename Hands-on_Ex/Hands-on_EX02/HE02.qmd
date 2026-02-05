@@ -1,0 +1,11 @@
+---
+title: "Hands-on Exercise 2"
+author: "Oscar Ricardo Moreno Gonzalez"
+date: "January 17, 2026"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+---
