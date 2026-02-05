@@ -33,5 +33,12 @@
     "title": "About",
     "section": "",
     "text": "About this site\nIn this website you will find the coursework prepared for the course: ISSS608 - Visual Analytics and Applications."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX02/HE02.html",
+    "href": "Hands-on_Ex/Hands-on_EX02/HE02.html",
+    "title": "Hands-on Exercise 2",
+    "section": "",
+    "text": "pacman::p_load(ggrepel, patchwork, \n               ggthemes, hrbrthemes,\n               tidyverse) \n\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
   }
 ]

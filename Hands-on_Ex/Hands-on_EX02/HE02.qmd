@@ -9,3 +9,13 @@ execute:
   warning: false
   freeze: true
 ---
+
+```{r}
+pacman::p_load(ggrepel, patchwork, 
+               ggthemes, hrbrthemes,
+               tidyverse) 
+```
+
+```{r}
+exam_data <- read_csv("data/Exam_data.csv")
+```
