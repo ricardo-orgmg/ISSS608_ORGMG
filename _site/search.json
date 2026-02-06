@@ -54,5 +54,285 @@
     "title": "Hands-on Exercise 2",
     "section": "The Data",
     "text": "The Data\nImporting the data\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex03/HE03.html",
+    "href": "Hands-on_Ex/Hands-on_Ex03/HE03.html",
+    "title": "Hands-on Exercise 3",
+    "section": "",
+    "text": "Hands-On Exercise # 3."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex03/HE03.html#install-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_Ex03/HE03.html#install-and-launching-r-packages",
+    "title": "Hands-on Exercise 3",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(ggiraph, plotly, \n               patchwork, DT, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex03/HE03.html#the-data",
+    "href": "Hands-on_Ex/Hands-on_Ex03/HE03.html#the-data",
+    "title": "Hands-on Exercise 3",
+    "section": "The Data",
+    "text": "The Data\nImporting the data\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex03/HE03.html#interactivity-tooltips",
+    "href": "Hands-on_Ex/Hands-on_Ex03/HE03.html#interactivity-tooltips",
+    "title": "Hands-on Exercise 3",
+    "section": "Interactivity & Tooltips",
+    "text": "Interactivity & Tooltips\n\ntooltip_css &lt;- \"background-color:white; #&lt;&lt;\nfont-style:bold; color:black;\" #&lt;&lt;\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(tooltip = ID),                   \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(    #&lt;&lt;\n    opts_tooltip(    #&lt;&lt;\n      css = tooltip_css)) #&lt;&lt;\n)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex03/HE03.html#statistics-on-tooltip",
+    "href": "Hands-on_Ex/Hands-on_Ex03/HE03.html#statistics-on-tooltip",
+    "title": "Hands-on Exercise 3",
+    "section": "Statistics on Tooltip",
+    "text": "Statistics on Tooltip\n\ntooltip &lt;- function(y, ymax, accuracy = .01) {\n  mean &lt;- scales::number(y, accuracy = accuracy)\n  sem &lt;- scales::number(ymax - y, accuracy = accuracy)\n  paste(\"Mean maths scores:\", mean, \"+/-\", sem)\n}\n\ngg_point &lt;- ggplot(data=exam_data, \n                   aes(x = RACE),\n) +\n  stat_summary(aes(y = MATHS, \n                   tooltip = after_stat(  \n                     tooltip(y, ymax))),  \n    fun.data = \"mean_se\", \n    geom = GeomInteractiveCol,  \n    fill = \"light blue\"\n  ) +\n  stat_summary(aes(y = MATHS),\n    fun.data = mean_se,\n    geom = \"errorbar\", width = 0.2, size = 0.2\n  )\n\ngirafe(ggobj = gg_point,\n       width_svg = 8,\n       height_svg = 8*0.618)\n\n\n\n\n\n\nHover Effect\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(tooltip = CLASS, \n        data_id = CLASS),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(                        \n    opts_hover(css = \"fill: #202020;\"),  \n    opts_hover_inv(css = \"opacity:0.2;\") \n  )                                        \n)                                                \n\n\n\n\n\n\n\nClick Effect with Onclick\n\nexam_data$onclick &lt;- sprintf(\"window.open(\\\"%s%s\\\")\",\n\"https://www.moe.gov.sg/schoolfinder?journey=Primary%20school\",\nas.character(exam_data$ID))\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(onclick = onclick),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618)                                        \n\n\n\n\n\n\n\nMultiple Views with ggiraph\n\np1 &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(data_id = ID),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +  \n  coord_cartesian(xlim=c(0,100)) + \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\n\np2 &lt;- ggplot(data=exam_data, \n       aes(x = ENGLISH)) +\n  geom_dotplot_interactive(              \n    aes(data_id = ID),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") + \n  coord_cartesian(xlim=c(0,100)) + \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\n\ngirafe(code = print(p1 + p2), \n       width_svg = 6,\n       height_svg = 3,\n       options = list(\n         opts_hover(css = \"fill: #202020;\"),\n         opts_hover_inv(css = \"opacity:0.2;\")\n         )\n       ) \n\n\n\n\n\n\n\nInteractive Data Vizualisation (Plotly Methods)\n\np &lt;- ggplot(data=exam_data, \n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nggplotly(p)\n\n\n\n\n\n\nd &lt;- highlight_key(exam_data)\np1 &lt;- ggplot(data=d, \n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\np2 &lt;- ggplot(data=d, \n            aes(x = MATHS,\n                y = SCIENCE)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nsubplot(ggplotly(p1),\n        ggplotly(p2))\n\n\n\n\n\n\n\nInteractive Data Table\n\nd &lt;- highlight_key(exam_data) \np &lt;- ggplot(d, \n            aes(ENGLISH, \n                MATHS)) + \n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\ngg &lt;- highlight(ggplotly(p),        \n                \"plotly_selected\")  \n\ncrosstalk::bscols(gg,               \n                  DT::datatable(d), \n                  widths = 5)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex03/HE03.html#install-and-launching-r-packages-1",
+    "href": "Hands-on_Ex/Hands-on_Ex03/HE03.html#install-and-launching-r-packages-1",
+    "title": "Hands-on Exercise 3",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(readxl, gifski, gapminder,\n               plotly, gganimate, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex03/HE03.html#the-data-1",
+    "href": "Hands-on_Ex/Hands-on_Ex03/HE03.html#the-data-1",
+    "title": "Hands-on Exercise 3",
+    "section": "The Data",
+    "text": "The Data\nImporting the data\n\ncol &lt;- c(\"Country\", \"Continent\")\nglobalPop &lt;- read_xls(\"data/GlobalPopulation.xls\",\n                      sheet=\"Data\") %&gt;%\n  mutate(across(col, as.factor)) %&gt;%\n  mutate(Year = as.integer(Year))\n\n\nStatic Population Bubble Plot\n\nggplot(globalPop, aes(x = Old, y = Young, \n                      size = Population, \n                      colour = Country)) +\n  geom_point(alpha = 0.7, \n             show.legend = FALSE) +\n  scale_colour_manual(values = country_colors) +\n  scale_size(range = c(2, 12)) +\n  labs(title = 'Year: {frame_time}', \n       x = '% Aged', \n       y = '% Young') \n\n\n\n\n\n\n\n\n\n\nAnimated Bubble Plot\n\ngg &lt;- ggplot(globalPop, \n       aes(x = Old, \n           y = Young, \n           size = Population, \n           colour = Country)) +\n  geom_point(aes(size = Population,\n                 frame = Year),\n             alpha = 0.7, \n             show.legend = FALSE) +\n  scale_colour_manual(values = country_colors) +\n  scale_size(range = c(2, 12)) +\n  labs(x = '% Aged', \n       y = '% Young')\n\nggplotly(gg)\n\n\n\n\n\n\nbp &lt;- globalPop %&gt;%\n  plot_ly(x = ~Old, \n          y = ~Young, \n          size = ~Population, \n          color = ~Continent,\n          sizes = c(2, 100),\n          frame = ~Year, \n          text = ~Country, \n          hoverinfo = \"text\",\n          type = 'scatter',\n          mode = 'markers'\n          ) %&gt;%\n  layout(showlegend = FALSE)\nbp"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html",
+    "title": "Hands-on Exercise 4",
+    "section": "",
+    "text": "Hands-On Exercise # 4."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#overview",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#overview",
+    "title": "Hands-on Exercise 4",
+    "section": "",
+    "text": "Hands-On Exercise # 4."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages",
+    "title": "Hands-on Exercise 4",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(ggdist, ggridges, ggthemes,\n               colorspace, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#the-data",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#the-data",
+    "title": "Hands-on Exercise 4",
+    "section": "The Data",
+    "text": "The Data\nImporting the data\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-graph-ggridges-method",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-graph-ggridges-method",
+    "title": "Hands-on Exercise 4",
+    "section": "Ridgeline Graph: ggridges Method",
+    "text": "Ridgeline Graph: ggridges Method\n\nggplot(data=exam_data, \n       aes(x = ENGLISH, \n           y = CLASS, \n           fill = 0.5 - abs(0.5-after_stat(ecdf)))) +\n  stat_density_ridges(geom = \"density_ridges_gradient\", \n                      calc_ecdf = TRUE) +\n  scale_fill_viridis_c(name = \"Tail probability\",\n                       direction = -1) +\n  theme_ridges()"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-plots-with-quantile-lines",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-plots-with-quantile-lines",
+    "title": "Hands-on Exercise 4",
+    "section": "Ridgeline Plots with Quantile Lines",
+    "text": "Ridgeline Plots with Quantile Lines\n\nggplot(data=exam_data,\n       aes(x = ENGLISH, \n           y = CLASS, \n           fill = factor(stat(quantile))\n           )) +\n  stat_density_ridges(\n    geom = \"density_ridges_gradient\",\n    calc_ecdf = TRUE, \n    quantiles = c(0.025, 0.975)\n    ) +\n  scale_fill_manual(\n    name = \"Probability\",\n    values = c(\"#FF0000A0\", \"#A0A0A0A0\", \"#0000FFA0\"),\n    labels = c(\"(0, 0.025]\", \"(0.025, 0.975]\", \"(0.975, 1]\")\n  ) +\n  theme_ridges()"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-plots-with-quantile-lines-1",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-plots-with-quantile-lines-1",
+    "title": "Hands-on Exercise 4",
+    "section": "Ridgeline Plots with Quantile Lines",
+    "text": "Ridgeline Plots with Quantile Lines\n\nggplot(data=exam_data,\n       aes(x = RACE, \n           y = ENGLISH)) +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.2,\n               .width = 0,\n               point_colour = NA) +\n  geom_boxplot(width = .20,\n               outlier.shape = NA) +\n  stat_dots(side = \"left\", \n            justification = 1.2, \n            binwidth = NA,\n            dotsize = 1.5) +\n  coord_flip() +\n  theme_economist()"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages-1",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages-1",
+    "title": "Hands-on Exercise 4",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(ggstatsplot, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#one-sample-test-gghistostats-method",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#one-sample-test-gghistostats-method",
+    "title": "Hands-on Exercise 4",
+    "section": "One-sample test: gghistostats() method",
+    "text": "One-sample test: gghistostats() method\n\nset.seed(1234)\n\ngghistostats(\n  data = exam_data,\n  x = ENGLISH,\n  type = \"bayes\",\n  test.value = 60,\n  xlab = \"English scores\"\n)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#one-sample-test",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#one-sample-test",
+    "title": "Hands-on Exercise 4",
+    "section": "One-Sample Test",
+    "text": "One-Sample Test\n\nset.seed(1234)\n\ngghistostats(\n  data = exam_data,\n  x = ENGLISH,\n  type = \"bayes\",\n  test.value = 60,\n  xlab = \"English scores\"\n)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#two-sample-mean",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#two-sample-mean",
+    "title": "Hands-on Exercise 4",
+    "section": "Two-Sample Mean",
+    "text": "Two-Sample Mean\n\nggbetweenstats(\n  data = exam_data,\n  x = GENDER, \n  y = MATHS,\n  type = \"np\",\n  \n  messages = FALSE\n)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#oneway-anova",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#oneway-anova",
+    "title": "Hands-on Exercise 4",
+    "section": "Oneway ANOVA",
+    "text": "Oneway ANOVA\n\nggbetweenstats(\n  data = exam_data,\n  x = RACE, \n  y = ENGLISH,\n  type = \"p\",\n  mean.ci = TRUE, \n  pairwise.comparisons = TRUE, \n  pairwise.display = \"s\",\n  p.adjust.method = \"fdr\",\n  messages = FALSE\n)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#test-of-correlation",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#test-of-correlation",
+    "title": "Hands-on Exercise 4",
+    "section": "Test of Correlation",
+    "text": "Test of Correlation\n\nggscatterstats(\n  data = exam_data,\n  x = MATHS,\n  y = ENGLISH,\n  marginal = FALSE,\n  )"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#test-of-association-depedence",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#test-of-association-depedence",
+    "title": "Hands-on Exercise 4",
+    "section": "Test of Association (Depedence)",
+    "text": "Test of Association (Depedence)\n\nMaths Scores: Binned into 4-Class Variable\n\nexam1 &lt;- exam_data %&gt;% \n  mutate(MATHS_bins = \n           cut(MATHS, \n               breaks = c(0,60,75,85,100))\n)\n\n\n\nVisual: Significant Test of Association\n\nggbarstats(exam1, \n           x = MATHS_bins, \n           y = GENDER)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages-2",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages-2",
+    "title": "Hands-on Exercise 4",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(plotly, crosstalk, DT, \n               ggdist, ggridges, colorspace,\n               gganimate, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#visualizing-uncertainty-of-point-estimates",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#visualizing-uncertainty-of-point-estimates",
+    "title": "Hands-on Exercise 4",
+    "section": "Visualizing Uncertainty of Point Estimates",
+    "text": "Visualizing Uncertainty of Point Estimates\n\nSummary Statistics\n\nmy_sum &lt;- exam_data %&gt;%\n  group_by(RACE) %&gt;%\n  summarise(\n    n=n(),\n    mean=mean(MATHS),\n    sd=sd(MATHS)\n    ) %&gt;%\n  mutate(se=sd/sqrt(n-1))\n\n\n\nDisplay Data Frame in Table Format\n\nknitr::kable(head(my_sum), format = 'html')\n\n\n\n\nRACE\nn\nmean\nsd\nse\n\n\n\n\nChinese\n193\n76.50777\n15.69040\n1.132357\n\n\nIndian\n12\n60.66667\n23.35237\n7.041005\n\n\nMalay\n108\n57.44444\n21.13478\n2.043177\n\n\nOthers\n9\n69.66667\n10.72381\n3.791438"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#standard-error-bars",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#standard-error-bars",
+    "title": "Hands-on Exercise 4",
+    "section": "Standard Error Bars",
+    "text": "Standard Error Bars\n\nggplot(my_sum) +\n  geom_errorbar(\n    aes(x=RACE, \n        ymin=mean-se, \n        ymax=mean+se), \n    width=0.2, \n    colour=\"black\", \n    alpha=0.9, \n    linewidth=0.5) +\n  geom_point(aes\n           (x=RACE, \n            y=mean), \n           stat=\"identity\", \n           color=\"red\",\n           size = 1.5,\n           alpha=1) +\n  ggtitle(\"Standard error of mean maths score by rac\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#confidence-intervals",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#confidence-intervals",
+    "title": "Hands-on Exercise 4",
+    "section": "Confidence Intervals ",
+    "text": "Confidence Intervals \n\nggplot(my_sum) +\n  geom_errorbar(\n    aes(x=reorder(RACE, -mean), \n        ymin=mean-1.96*se, \n        ymax=mean+1.96*se), \n    width=0.2, \n    colour=\"black\", \n    alpha=0.9, \n    linewidth=0.5) +\n  geom_point(aes\n           (x=RACE, \n            y=mean), \n           stat=\"identity\", \n           color=\"red\",\n           size = 1.5,\n           alpha=1) +\n  labs(x = \"Maths score\",\n       title = \"95% confidence interval of mean maths score by race\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#title",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#title",
+    "title": "Hands-on Exercise 4",
+    "section": "Title",
+    "text": "Title"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-1",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-1",
+    "title": "Hands-on Exercise 4",
+    "section": "Title",
+    "text": "Title"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-2",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-2",
+    "title": "Hands-on Exercise 4",
+    "section": "Title",
+    "text": "Title"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#interactive-error-bars",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#interactive-error-bars",
+    "title": "Hands-on Exercise 4",
+    "section": "Interactive Error Bars",
+    "text": "Interactive Error Bars\n\nshared_df = SharedData$new(my_sum)\n\nbscols(widths = c(4,8),\n       ggplotly((ggplot(shared_df) +\n                   geom_errorbar(aes(\n                     x=reorder(RACE, -mean),\n                     ymin=mean-2.58*se, \n                     ymax=mean+2.58*se), \n                     width=0.2, \n                     colour=\"black\", \n                     alpha=0.9, \n                     size=0.5) +\n                   geom_point(aes(\n                     x=RACE, \n                     y=mean, \n                     text = paste(\"Race:\", `RACE`, \n                                  \"&lt;br&gt;N:\", `n`,\n                                  \"&lt;br&gt;Avg. Scores:\", round(mean, digits = 2),\n                                  \"&lt;br&gt;95% CI:[\", \n                                  round((mean-2.58*se), digits = 2), \",\",\n                                  round((mean+2.58*se), digits = 2),\"]\")),\n                     stat=\"identity\", \n                     color=\"red\", \n                     size = 1.5, \n                     alpha=1) + \n                   xlab(\"Race\") + \n                   ylab(\"Average Scores\") + \n                   theme_minimal() + \n                   theme(axis.text.x = element_text(\n                     angle = 45, vjust = 0.5, hjust=1)) +\n                   ggtitle(\"99% Confidence interval of average /&lt;br&gt;maths scores by race\")), \n                tooltip = \"text\"), \n       DT::datatable(shared_df, \n                     rownames = FALSE, \n                     class=\"compact\", \n                     width=\"100%\", \n                     options = list(pageLength = 10,\n                                    scrollX=T), \n                     colnames = c(\"No. of pupils\", \n                                  \"Avg Scores\",\n                                  \"Std Dev\",\n                                  \"Std Error\")) %&gt;%\n         formatRound(columns=c('mean', 'sd', 'se'),\n                     digits=2))"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#uncertainty-of-point-estimates-with-ggdistmethods",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#uncertainty-of-point-estimates-with-ggdistmethods",
+    "title": "Hands-on Exercise 4",
+    "section": "Uncertainty of Point Estimates with ggdistmethods",
+    "text": "Uncertainty of Point Estimates with ggdistmethods\n\nexam_data %&gt;%\n  ggplot(aes(x = RACE, y = MATHS)) +\n  stat_pointinterval(.width = 0.95,\n  .point = median,\n  .interval = qi) +\n  labs(\n    title = \"Visualising confidence intervals of median math score\",\n    subtitle = \"Median Point + Multiple-interval plot\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#uncertainty-of-point-estimates-with-ggdistmethods-1",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#uncertainty-of-point-estimates-with-ggdistmethods-1",
+    "title": "Hands-on Exercise 4",
+    "section": "Uncertainty of Point Estimates with ggdistmethods",
+    "text": "Uncertainty of Point Estimates with ggdistmethods\n\nexam_data %&gt;%\n  ggplot(aes(x = RACE, \n             y = MATHS)) +\n  stat_gradientinterval(   \n    fill = \"skyblue\",      \n    show.legend = TRUE     \n  ) +                        \n  labs(\n    title = \"Visualising confidence intervals of mean math score\",\n    subtitle = \"Gradient + interval plot\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-3",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-3",
+    "title": "Hands-on Exercise 4",
+    "section": "Title",
+    "text": "Title"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-4",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-4",
+    "title": "Hands-on Exercise 4",
+    "section": "Title",
+    "text": "Title"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-5",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-5",
+    "title": "Hands-on Exercise 4",
+    "section": "Title",
+    "text": "Title"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#installing-ungeviz-package",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#installing-ungeviz-package",
+    "title": "Hands-on Exercise 4",
+    "section": "Installing ungeviz Package",
+    "text": "Installing ungeviz Package\n\ndevtools::install_github(\"wilkelab/ungeviz\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#hops",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#hops",
+    "title": "Hands-on Exercise 4",
+    "section": "HOPs",
+    "text": "HOPs\n\nggplot(\n  data = exam_data,\n  aes(x = factor(RACE), y = MATHS)\n) +\n  geom_point(\n    position = position_jitter(height = 0.3, width = 0.05),\n    size = 0.4,\n    color = \"#0072B2\",\n    alpha = 0.5\n  ) +\n  stat_summary(\n    fun = mean,\n    geom = \"crossbar\",\n    width = 0.6,\n    color = \"#D55E00\"\n  ) +\n  theme_bw()"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#installing-r-packages",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#installing-r-packages",
+    "title": "Hands-on Exercise 4",
+    "section": "Installing R Packages",
+    "text": "Installing R Packages\n\npacman::p_load(tidyverse, FunnelPlotR, plotly, knitr)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#the-data-1",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#the-data-1",
+    "title": "Hands-on Exercise 4",
+    "section": "The Data",
+    "text": "The Data\nImporting the data\n\ncovid19 &lt;- read_csv(\"data/COVID-19_DKI_Jakarta.csv\") %&gt;%\n  mutate_if(is.character, as.factor)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#funnelplotr-basic-plot",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#funnelplotr-basic-plot",
+    "title": "Hands-on Exercise 4",
+    "section": "FunnelPlotR: Basic Plot",
+    "text": "FunnelPlotR: Basic Plot\n\nfunnel_plot(\n  .data = covid19,\n  numerator = Death,\n  denominator = Positive,\n  group = `Sub-district`,\n  data_type = \"PR\",   \n  xrange = c(0, 6500),  \n  yrange = c(0, 0.05),\n  label = NA,\n  title = \"Cumulative COVID-19 Fatality Rate by Cumulative Total Number of COVID-19 Positive Cases\", #&lt;&lt;           \n  x_label = \"Cumulative COVID-19 Positive Cases\", #&lt;&lt;\n  y_label = \"Cumulative Fatality Rate\"  #&lt;&lt;\n)\n\n\n\n\n\n\n\n\nA funnel plot object with 267 points of which 7 are outliers. \nPlot is adjusted for overdispersion."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#funnel-plot-ggplot2-methods",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#funnel-plot-ggplot2-methods",
+    "title": "Hands-on Exercise 4",
+    "section": "Funnel Plot: ggplot2 Methods",
+    "text": "Funnel Plot: ggplot2 Methods\n\nComputing Derived Fields\n\ndf &lt;- covid19 %&gt;%\n  mutate(rate = Death / Positive) %&gt;%\n  mutate(rate.se = sqrt((rate*(1-rate)) / (Positive))) %&gt;%\n  filter(rate &gt; 0)\n\n\nfit.mean &lt;- weighted.mean(df$rate, 1/df$rate.se^2)\n\n\n\nCalculate Lower & Upper CI Limits\n\nnumber.seq &lt;- seq(1, max(df$Positive), 1)\nnumber.ll95 &lt;- fit.mean - 1.96 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \nnumber.ul95 &lt;- fit.mean + 1.96 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \nnumber.ll999 &lt;- fit.mean - 3.29 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \nnumber.ul999 &lt;- fit.mean + 3.29 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \ndfCI &lt;- data.frame(number.ll95, number.ul95, number.ll999, \n                   number.ul999, number.seq, fit.mean)\n\n\n\nPlot Static Funnel\n\np &lt;- ggplot(df, aes(x = Positive, y = rate)) +\n  geom_point(aes(label=`Sub-district`), \n             alpha=0.4) +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ll95), \n            size = 0.4, \n            colour = \"grey40\", \n            linetype = \"dashed\") +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ul95), \n            size = 0.4, \n            colour = \"grey40\", \n            linetype = \"dashed\") +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ll999), \n            size = 0.4, \n            colour = \"grey40\") +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ul999), \n            size = 0.4, \n            colour = \"grey40\") +\n  geom_hline(data = dfCI, \n             aes(yintercept = fit.mean), \n             size = 0.4, \n             colour = \"grey40\") +\n  coord_cartesian(ylim=c(0,0.05)) +\n  annotate(\"text\", x = 1, y = -0.13, label = \"95%\", size = 3, colour = \"grey40\") + \n  annotate(\"text\", x = 4.5, y = -0.18, label = \"99%\", size = 3, colour = \"grey40\") + \n  ggtitle(\"Cumulative Fatality Rate by Cumulative Number of COVID-19 Cases\") +\n  xlab(\"Cumulative Number of COVID-19 Cases\") + \n  ylab(\"Cumulative Fatality Rate\") +\n  theme_light() +\n  theme(plot.title = element_text(size=12),\n        legend.position = c(0.91,0.85), \n        legend.title = element_text(size=7),\n        legend.text = element_text(size=7),\n        legend.background = element_rect(colour = \"grey60\", linetype = \"dotted\"),\n        legend.key.height = unit(0.3, \"cm\"))\np\n\n\n\n\n\n\n\n\n\n\nInteractive Funnel\n\nfp_ggplotly &lt;- ggplotly(p,\n  tooltip = c(\"label\", \n              \"x\", \n              \"y\"))\nfp_ggplotly"
   }
 ]
