@@ -155,7 +155,7 @@ ggscatterstats(
 
 ```
 
-## **Test of Association (Depedence)** 
+## **Test of Association (Depedence)**
 
 ### Maths Scores: Binned into 4-Class Variable
 
@@ -208,7 +208,7 @@ my_sum <- exam_data %>%
 knitr::kable(head(my_sum), format = 'html')
 ```
 
-## **Standard Error Bars** 
+## **Standard Error Bars**
 
 ```{r}
 ggplot(my_sum) +

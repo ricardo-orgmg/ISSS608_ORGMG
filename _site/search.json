@@ -334,5 +334,159 @@
     "title": "Hands-on Exercise 4",
     "section": "Funnel Plot: ggplot2 Methods",
     "text": "Funnel Plot: ggplot2 Methods\n\nComputing Derived Fields\n\ndf &lt;- covid19 %&gt;%\n  mutate(rate = Death / Positive) %&gt;%\n  mutate(rate.se = sqrt((rate*(1-rate)) / (Positive))) %&gt;%\n  filter(rate &gt; 0)\n\n\nfit.mean &lt;- weighted.mean(df$rate, 1/df$rate.se^2)\n\n\n\nCalculate Lower & Upper CI Limits\n\nnumber.seq &lt;- seq(1, max(df$Positive), 1)\nnumber.ll95 &lt;- fit.mean - 1.96 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \nnumber.ul95 &lt;- fit.mean + 1.96 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \nnumber.ll999 &lt;- fit.mean - 3.29 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \nnumber.ul999 &lt;- fit.mean + 3.29 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \ndfCI &lt;- data.frame(number.ll95, number.ul95, number.ll999, \n                   number.ul999, number.seq, fit.mean)\n\n\n\nPlot Static Funnel\n\np &lt;- ggplot(df, aes(x = Positive, y = rate)) +\n  geom_point(aes(label=`Sub-district`), \n             alpha=0.4) +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ll95), \n            size = 0.4, \n            colour = \"grey40\", \n            linetype = \"dashed\") +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ul95), \n            size = 0.4, \n            colour = \"grey40\", \n            linetype = \"dashed\") +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ll999), \n            size = 0.4, \n            colour = \"grey40\") +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ul999), \n            size = 0.4, \n            colour = \"grey40\") +\n  geom_hline(data = dfCI, \n             aes(yintercept = fit.mean), \n             size = 0.4, \n             colour = \"grey40\") +\n  coord_cartesian(ylim=c(0,0.05)) +\n  annotate(\"text\", x = 1, y = -0.13, label = \"95%\", size = 3, colour = \"grey40\") + \n  annotate(\"text\", x = 4.5, y = -0.18, label = \"99%\", size = 3, colour = \"grey40\") + \n  ggtitle(\"Cumulative Fatality Rate by Cumulative Number of COVID-19 Cases\") +\n  xlab(\"Cumulative Number of COVID-19 Cases\") + \n  ylab(\"Cumulative Fatality Rate\") +\n  theme_light() +\n  theme(plot.title = element_text(size=12),\n        legend.position = c(0.91,0.85), \n        legend.title = element_text(size=7),\n        legend.text = element_text(size=7),\n        legend.background = element_rect(colour = \"grey60\", linetype = \"dotted\"),\n        legend.key.height = unit(0.3, \"cm\"))\np\n\n\n\n\n\n\n\n\n\n\nInteractive Funnel\n\nfp_ggplotly &lt;- ggplotly(p,\n  tooltip = c(\"label\", \n              \"x\", \n              \"y\"))\nfp_ggplotly"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html",
+    "href": "Take-home_Ex/TakeHome01/th_exc01.html",
+    "title": "Take-Home Exercise 1",
+    "section": "",
+    "text": "Introduction: This project applies visual analytics techniques to explore factors associated with student learning outcomes using a large-scale survey dataset from the University of Education, Vietnam National University, Hanoi. The dataset captures students demographic characteristics, study behaviors, time allocation, and perceptions of institutional and social support, alongside their academic performance measured by GPA.\nObjective: Use visually driven analysis to uncover and communicate key patterns in how individual, social, and institutional factors relate to student outcomes.\nThe analysis emphasizes exploratory visualization to support reasoning, comparison, and interpretation. Using R, ggplot2, and selected visualization extensions, the project identifies a set of key observations that highlight meaningful relationships and distributions within the data, demonstrating how visual analytics can inform understanding of educational processes and learning environments."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#install-and-launching-r-packages",
+    "href": "Take-home_Ex/TakeHome01/th_exc01.html#install-and-launching-r-packages",
+    "title": "Take-Home Exercise 1",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(tidyverse, ggcorrplot, ggridges,\n               scales)"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#data-preprocessing",
+    "href": "Take-home_Ex/TakeHome01/th_exc01.html#data-preprocessing",
+    "title": "Take-Home Exercise 1",
+    "section": "Data Preprocessing",
+    "text": "Data Preprocessing\nThe original dataset was provided as an CSV file containing numerically coded demographic, behavioral, and perception variables.\n\nData preparation was conducted in R.\nAll categorical and ordinal variables were explicitly recoded as factors with meaningful labels based on the survey documentation (e.g., GPA levels, Likert-scale perceptions, and time-use categories).\nOrdinal variables were converted to ordered factors to preserve their inherent ranking.\nNo observations were removed during preprocessing, as the dataset contained complete responses.\nAll transformations and analytical visualizations are fully reproducible within this Quarto document.\n\n\nlearning_data &lt;- read_csv(\"data/database.csv\")\n\n\nlearning_data &lt;- learning_data %&gt;%\n  mutate(\n    GPA = factor(\n      GPA,\n      levels = 1:5,\n      labels = c(\"Poor\", \"Average\", \"Fair\", \"Good\", \"Excellent\"),\n      ordered = TRUE\n    ),\n\n    Gender = factor(\n      Gender,\n      levels = c(1, 2),\n      labels = c(\"Male\", \"Female\")\n    ),\n\n    Study_Methods = factor(Study_Methods, ordered = TRUE),\n    Quality_Lecturer = factor(Quality_Lecturer, ordered = TRUE),\n    TrainingCurriculum = factor(TrainingCurriculum, ordered = TRUE)\n  )"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html",
+    "title": "Hands-on Exercise 5",
+    "section": "",
+    "text": "Hands-On Exercise # 5."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#overview",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#overview",
+    "title": "Hands-on Exercise 5",
+    "section": "",
+    "text": "Hands-On Exercise # 5."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#install-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#install-and-launching-r-packages",
+    "title": "Hands-on Exercise 5",
+    "section": "Install and Launching R Packages",
+    "text": "Install and Launching R Packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(plotly, ggtern, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#the-data",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#the-data",
+    "title": "Hands-on Exercise 5",
+    "section": "The Data",
+    "text": "The Data\n\nImporting the Data\n\npop_data &lt;- read_csv(\"data/resp.csv\")\n\n\n\nPreparing the Data\nUse the mutate() function of dplyr package to derive three new measures, namely: young, active, and old.\n\n#Deriving the young, economy active and old measures\nagpop_mutated &lt;- pop_data %&gt;%\n  mutate(`Year` = as.character(Year))%&gt;%\n  spread(AG, Population) %&gt;%\n  mutate(YOUNG = rowSums(.[4:8]))%&gt;%\n  mutate(ACTIVE = rowSums(.[9:16]))  %&gt;%\n  mutate(OLD = rowSums(.[17:21])) %&gt;%\n  mutate(TOTAL = rowSums(.[22:24])) %&gt;%\n  filter(Year == 2018)%&gt;%\n  filter(TOTAL &gt; 0)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#plotting-a-static-ternary-diagram",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#plotting-a-static-ternary-diagram",
+    "title": "Hands-on Exercise 5",
+    "section": "Plotting a Static Ternary Diagram",
+    "text": "Plotting a Static Ternary Diagram\n\n#Building the static ternary plot\nggtern(data=agpop_mutated, aes(x=YOUNG,y=ACTIVE, z=OLD)) +\n  geom_point() +\n  labs(title=\"Population structure, 2015\") +\n  theme_rgbw()"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#plotting-an-interative-ternary-diagram",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#plotting-an-interative-ternary-diagram",
+    "title": "Hands-on Exercise 5",
+    "section": "Plotting an Interative Ternary Diagram",
+    "text": "Plotting an Interative Ternary Diagram\n\n# reusable function for creating annotation object\nlabel &lt;- function(txt) {\n  list(\n    text = txt, \n    x = 0.1, y = 1,\n    ax = 0, ay = 0,\n    xref = \"paper\", yref = \"paper\", \n    align = \"center\",\n    font = list(family = \"serif\", size = 15, color = \"white\"),\n    bgcolor = \"#b3b3b3\", bordercolor = \"black\", borderwidth = 2\n  )\n}\n\n# reusable function for axis formatting\naxis &lt;- function(txt) {\n  list(\n    title = txt, tickformat = \".0%\", tickfont = list(size = 10)\n  )\n}\n\nternaryAxes &lt;- list(\n  aaxis = axis(\"Young\"), \n  baxis = axis(\"Active\"), \n  caxis = axis(\"Old\")\n)\n\n# Initiating a plotly visualization \nplot_ly(\n  agpop_mutated, \n  a = ~YOUNG, \n  b = ~ACTIVE, \n  c = ~OLD, \n  color = I(\"black\"), \n  type = \"scatterternary\"\n) %&gt;%\n  layout(\n    annotations = label(\"Ternary Markers\"), \n    ternary = ternaryAxes\n  )"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#install-and-launching-r-packages-1",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#install-and-launching-r-packages-1",
+    "title": "Hands-on Exercise 5",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(corrplot, ggstatsplot, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#the-data-1",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#the-data-1",
+    "title": "Hands-on Exercise 5",
+    "section": "The Data",
+    "text": "The Data\n\nImporting the Data\n\nwine &lt;- read_csv(\"data/wine_quality.csv\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#building-correlation-matrix",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#building-correlation-matrix",
+    "title": "Hands-on Exercise 5",
+    "section": "Building Correlation Matrix",
+    "text": "Building Correlation Matrix\n\nPlotting a Basic Correlation Matrix: pairs() method\n\npairs(wine[,2:12])\n\n\n\n\n\n\n\n\n\n\nDrawing the Lower Corner\n\npairs(wine[,2:12], upper.panel = NULL)\n\n\n\n\n\n\n\n\n\n\nDrawing the Upper Corner\n\npairs(wine[,2:12], lower.panel = NULL)\n\n\n\n\n\n\n\n\n\n\nIncluding with correlation coefficients\n\npanel.cor &lt;- function(x, y, digits=2, prefix=\"\", cex.cor, ...) {\nusr &lt;- par(\"usr\")\non.exit(par(usr))\npar(usr = c(0, 1, 0, 1))\nr &lt;- abs(cor(x, y, use=\"complete.obs\"))\ntxt &lt;- format(c(r, 0.123456789), digits=digits)[1]\ntxt &lt;- paste(prefix, txt, sep=\"\")\nif(missing(cex.cor)) cex.cor &lt;- 0.8/strwidth(txt)\ntext(0.5, 0.5, txt, cex = cex.cor * (1 + r) / 2)\n}\n\npairs(wine[,2:12], \n      upper.panel = panel.cor)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#visualizing-correlation-matrix-ggcormat",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#visualizing-correlation-matrix-ggcormat",
+    "title": "Hands-on Exercise 5",
+    "section": "Visualizing Correlation Matrix: ggcormat()",
+    "text": "Visualizing Correlation Matrix: ggcormat()\n\nThe Basic Plot\n\nggstatsplot::ggcorrmat(\n  data = wine, \n  cor.vars = 1:11,\n  ggcorrplot.args = list(outline.color = \"black\", \n                         hc.order = TRUE,\n                         tl.cex = 10),\n  title    = \"Correlogram for wine dataset\",\n  subtitle = \"Four pairs are no significant at p &lt; 0.05\"\n)\n\n\n\n\n\n\n\nggplot.component = list(\n    theme(text=element_text(size=5),\n      axis.text.x = element_text(size = 8),\n      axis.text.y = element_text(size = 8)))"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#building-multiple-plots",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#building-multiple-plots",
+    "title": "Hands-on Exercise 5",
+    "section": "Building multiple plots",
+    "text": "Building multiple plots\n\ngrouped_ggcorrmat(\n  data = wine,\n  cor.vars = 1:11,\n  grouping.var = type,\n  type = \"robust\",\n  p.adjust.method = \"holm\",\n  plotgrid.args = list(ncol = 2),\n  ggcorrplot.args = list(outline.color = \"black\", \n                         hc.order = TRUE,\n                         tl.cex = 10),\n  annotation.args = list(\n    tag_levels = \"a\",\n    title = \"Correlogram for wine dataset\",\n    subtitle = \"The measures are: alcohol, sulphates, fixed acidity, citric acid, chlorides, residual sugar, density, free sulfur dioxide and volatile acidity\",\n    caption = \"Dataset: UCI Machine Learning Repository\"\n  )\n)"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#install-and-launch-r-packages",
+    "href": "Take-home_Ex/TakeHome01/th_exc01.html#install-and-launch-r-packages",
+    "title": "Take-Home Exercise 1",
+    "section": "Install and Launch R packages",
+    "text": "Install and Launch R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(tidyverse, ggcorrplot, ggridges,\n               scales)"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#gpa-distribution-by-gender",
+    "href": "Take-home_Ex/TakeHome01/th_exc01.html#gpa-distribution-by-gender",
+    "title": "Take-Home Exercise 1",
+    "section": "1. GPA Distribution by Gender",
+    "text": "1. GPA Distribution by Gender\n\nlearning_data %&gt;%\n  count(GPA, Gender) %&gt;%\n  mutate(prop = n / sum(n)) %&gt;%\n  ggplot(aes(x = GPA, y = prop, fill = Gender)) +\n  geom_col() +\n  geom_text(\n    aes(label = scales::percent(prop, accuracy = 0.1)),\n    position = position_stack(vjust = 0.5),\n    size = 3.5,\n    color = \"white\"\n  ) +\n  scale_y_continuous(labels = scales::percent) +\n  labs(\n    title = \"Overall GPA Distribution by Gender\",\n    x = \"GPA Category\",\n    y = \"Proportion of All Students\",\n    fill = \"Gender\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\nThis graph show us the distribution of GPA categories segmented by gender. Overall, most students cluster within the “Fair” and “Good” categories, with relatively few in the “Poor” or “Excellent” extremes. When segmented, female students show a slightly higher proportional concentration in the upper GPA categories, particularly “Good,” while male students appear somewhat more represented in the lower GPA ranges. However, the overall pattern remains similar across both groups, indicating that gender differences in academic outcomes are present but not pronounced. Visually, the chart suggests modest differences rather than structural disparities in performance between genders."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#study-time-vs-gpa",
+    "href": "Take-home_Ex/TakeHome01/th_exc01.html#study-time-vs-gpa",
+    "title": "Take-Home Exercise 1",
+    "section": "2. Study Time vs GPA",
+    "text": "2. Study Time vs GPA\n\nlearning_data %&gt;%\n  count(Time_Studying, GPA) %&gt;%\n  group_by(Time_Studying) %&gt;%\n  mutate(prop = n / sum(n)) %&gt;%\n  ggplot(aes(x = GPA, y = Time_Studying, fill = prop)) +\n  geom_tile(color = \"white\") +\n  geom_text(\n    aes(label = scales::percent(prop, accuracy = 0.1)),\n    size = 3\n  ) +\n  scale_fill_gradient(\n    low = \"white\",\n    high = \"steelblue\",\n    labels = scales::percent\n  ) +\n  labs(\n    title = \"Study Time vs GPA Distribution\",\n    x = \"GPA Category\",\n    y = \"Average Daily Study Time\",\n    fill = \"Proportion\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\nThis heatmap visualization represents the distribution of GPA categories across different levels of daily study time. While higher study time categories show a greater concentration of “Good” and “Excellent” outcomes, the relationship is not strictly linear.\nModerate study time also display substantial representation in upper GPA categories, suggesting diminishing returns beyond a certain limit. (Students reporting extremely high study time do not exclusively dominate the top GPA category) Indicating that time investment alone does not fully determine performance."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#study-methods-vs-gpa",
+    "href": "Take-home_Ex/TakeHome01/th_exc01.html#study-methods-vs-gpa",
+    "title": "Take-Home Exercise 1",
+    "section": "4. Study Methods vs GPA",
+    "text": "4. Study Methods vs GPA\n\nggplot(learning_data, aes(x = GPA, y = as.numeric(Study_Methods))) +\n  geom_violin(fill = \"lightblue\", alpha = 0.7) +\n  geom_boxplot(width = 0.15, outlier.shape = NA) +\n  labs(\n    title = \"Perceived Study Methods by GPA\",\n    x = \"GPA Category\",\n    y = \"Study Methods Rating\"\n  ) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#lecturer-quality-vs-gpa",
+    "href": "Take-home_Ex/TakeHome01/th_exc01.html#lecturer-quality-vs-gpa",
+    "title": "Take-Home Exercise 1",
+    "section": "5. Lecturer Quality vs GPA",
+    "text": "5. Lecturer Quality vs GPA\n\nggplot(learning_data, aes(\n  x = as.numeric(Quality_Lecturer),\n  y = GPA,\n  fill = GPA\n)) +\n  geom_density_ridges(alpha = 0.7, scale = 1.1) +\n  labs(\n    title = \"Perceived Lecturer Quality Across GPA Levels\",\n    x = \"Lecturer Quality Rating\",\n    y = \"GPA Category\"\n  ) +\n  theme_minimal() +\n  theme(legend.position = \"none\")\n\n\n\n\n\n\n\n\nThe ridgeline plot reveals a gradual upward shift in perceived lecturer quality as GPA increases. Higher-performing students tend to report stronger and more concentrated evaluations of lecturer quality, while lower GPA categories display broader and slightly lower distributions. The compression of variance among top GPA groups suggests greater consensus in their perceptions. The visual progression across GPA levels supports the interpretation that instructional quality contributes positively to student outcomes, but it operates within a broader ecosystem of academic and personal influences. Overall, the pattern highlights lecturer quality as a stabilizing rather than singular factor in performance differentiation."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#correlation-matrix-of-learning-factors",
+    "href": "Take-home_Ex/TakeHome01/th_exc01.html#correlation-matrix-of-learning-factors",
+    "title": "Take-Home Exercise 1",
+    "section": "6. Correlation Matrix of Learning Factors",
+    "text": "6. Correlation Matrix of Learning Factors\n\ngroup_b &lt;- learning_data %&gt;%\n  select(\n    GPA,\n    Adapt_Learning_Uni,\n    Study_Methods,\n    SupportOf_Uni,\n    SupportOf_Lec,\n    Facilitie_Uni,\n    Quality_Lecturer,\n    TrainingCurriculum,\n    Competitive_Class,\n    InfuenceF_Friends\n  ) %&gt;%\n  mutate(across(everything(), as.numeric))\n\ncorr_matrix &lt;- cor(group_b, use = \"complete.obs\")\n\nggcorrplot(\n  corr_matrix,\n  type = \"lower\",\n  lab = TRUE,\n  lab_size = 3,\n  colors = c(\"firebrick\", \"white\", \"steelblue\")\n) +\n  labs(title = \"Correlation Matrix of Learning Factors and GPA\")\n\n\n\n\n\n\n\n\nThis correlation graph summarizes the relationships among institutional, behavioral, and social factors alongside GPA. Strong positive correlations are visible among institutional variables such as lecturer quality, university support, and curriculum suitability, suggesting that students perceive these elements as interconnected.\nWe can see that correlations between these factors and GPA are positive but comparatively modest, which indicates that academic performance is influenced by multiple dimensions rather than a single dominant variable.\n\nggplot(learning_data,\n       aes(x = GPA, y = as.numeric(Competitive_Class))) +\n  geom_boxplot(fill = \"steelblue\") +\n  labs(\n    title = \"Perceived Classroom Competition by GPA\",\n    x = \"GPA Category\",\n    y = \"Competition Level\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\nThis boxplot compares perceived classroom competition levels across GPA categories. Median competition ratings tend to increase slightly with higher GPA levels, suggesting that academically stronger students may experience or interpret competitive environments more positively. Additionally, variability is greater among lower GPA groups, indicating less consistent perceptions of competition. The overlapping distributions across categories imply that competitive classroom dynamics affect students differently rather than uniformly. While moderate competition appears common across all GPA levels, extreme competition levels are less dominant among lower-performing students. The visualization suggests that competition may function as a motivating factor for some students, but its influence likely depends on individual adaptability and study strategies. Overall, the pattern supports the interpretation that classroom environment contributes to performance variation without serving as a sole explanatory factor."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#social-media-usage-vs-gpa",
+    "href": "Take-home_Ex/TakeHome01/th_exc01.html#social-media-usage-vs-gpa",
+    "title": "Take-Home Exercise 1",
+    "section": "3. Social Media Usage vs GPA",
+    "text": "3. Social Media Usage vs GPA\n\nlearning_data %&gt;%\n  count(Time_SocialMedia, GPA) %&gt;%\n  group_by(Time_SocialMedia) %&gt;%\n  mutate(prop = n / sum(n)) %&gt;%\n  ggplot(aes(x = GPA, y = Time_SocialMedia, fill = prop)) +\n  geom_tile(color = \"white\") +\n  geom_text(aes(label = scales::percent(prop, accuracy = 0.1)),\n            size = 3) +\n  scale_fill_gradient(low = \"white\", high = \"steelblue\",\n                      labels = scales::percent) +\n  labs(\n    title = \"Social Media Usage vs GPA Distribution\",\n    x = \"GPA Category\",\n    y = \"Daily Social Media Time\",\n    fill = \"Proportion\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\nThis second heatmap illustrates the distribution of GPA categories across levels of daily social media usage. Higher concentrations of “Good” and “Excellent” GPAs appear among students reporting moderate or lower usage, while heavier usage categories show a relatively larger presence in middle GPA tiers. However, the relationship is not completely linear. Overall, the pattern suggests that balanced time allocation may be more relevant than absolute restriction."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#filtering-relevant-variables",
+    "href": "Take-home_Ex/TakeHome01/th_exc01.html#filtering-relevant-variables",
+    "title": "Take-Home Exercise 1",
+    "section": "Filtering Relevant Variables",
+    "text": "Filtering Relevant Variables\nOut of the 22 variables available in the original dataset, a subset of ## key academic, behavioral, and demographic variables was elected to address the analytical questions. These fields were chosen because they directly relate to student performance, learning behavior and institutional context. Together, they provide a structured framework to examine how individual effort, environmental factors, and socioeconomic context have an impact on academic outcomes.\n\n\n\n\n\n\n\nCol1\nCol2\n\n\n\n\nGPA\nOrdinal academic performance category ranging from Poor to Excellent.\n\n\nGender\nBinary categorical variable (Male/Female).\n\n\nTime_Studying\nNumber of hours spent studying per day.\n\n\nTime_SocialMedia\nDaily time allocated to social media usage.\n\n\nStudy_Methods\nSelf-reported effectiveness or quality of study strategies.\n\n\nQuality_Lecturer\nStudent perception of teaching effectiveness.\n\n\n\n\n\n\nAdapt_Learning_Uni, Study_Methods, SupportOf_Uni, SupportOf_Lec, Facilitie_Uni, Quality_Lecturer, TrainingCurriculum, Competitive_Class, InfuenceF_Friends"
   }
 ]
