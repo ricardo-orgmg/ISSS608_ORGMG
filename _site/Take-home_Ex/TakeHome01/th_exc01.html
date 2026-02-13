@@ -277,6 +277,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, ggcorrplot, ggridges,</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               scales)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 64%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>tidyverse</td>
+<td>A collection of R packages (including <em>ggplot2</em>, <em>dplyr</em>, and <em>tidyr</em>) used for data cleaning, transformation, and visualization.</td>
+</tr>
+<tr class="even">
+<td>ggcorrplot</td>
+<td>Used to visualize correlation matrices in a graphical format.</td>
+</tr>
+<tr class="odd">
+<td>ggridges</td>
+<td>Provides ridgeplots that allow comparison of distributions across multiple groups.</td>
+</tr>
+<tr class="even">
+<td>scales</td>
+<td>Enhances visualizations by formatting axes and legends (percentages, labels, breaks, etc.).</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="data-preprocessing" class="level2">
 <h2 class="anchored" data-anchor-id="data-preprocessing">Data Preprocessing</h2>
@@ -318,13 +348,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Out of the 22 variables available in the original dataset, a subset of <strong>##</strong> key academic, behavioral, and demographic variables was elected to address the analytical questions. These fields were chosen because they directly relate to student performance, learning behavior and institutional context. Together, they provide a structured framework to examine how individual effort, environmental factors, and socioeconomic context have an impact on academic outcomes.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 34%">
+<col style="width: 65%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Col1</th>
-<th>Col2</th>
+<th>Variable</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -334,7 +364,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td>Gender</td>
-<td>Binary categorical variable (Male/Female).</td>
+<td>Binary variable (Male/Female).</td>
 </tr>
 <tr class="odd">
 <td>Time_Studying</td>
@@ -350,23 +380,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td>Quality_Lecturer</td>
-<td>Student perception of teaching effectiveness.</td>
+<td>Student’s perception of teaching effectiveness.</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td></td>
+<td>Adapt_Learning_Uni</td>
+<td>Perception of student’s adaptation to university.</td>
 </tr>
 <tr class="even">
-<td>Adapt_Learning_Uni, Study_Methods, SupportOf_Uni, SupportOf_Lec, Facilitie_Uni, Quality_Lecturer, TrainingCurriculum, Competitive_Class, InfuenceF_Friends</td>
-<td></td>
+<td>Study_Methods</td>
+<td>Effectiveness and organization of student’s study strategies and learning approaches.</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td></td>
+<td>SupportOf_Uni</td>
+<td>Perception of academic and administrative support.</td>
 </tr>
 <tr class="even">
-<td></td>
-<td></td>
+<td>SupportOf_Lec</td>
+<td>Level of guidance, accessibility, and academic assistance from lecturers.</td>
+</tr>
+<tr class="odd">
+<td>Facilitie_Uni</td>
+<td>Adequacy and quality of university facilities.</td>
+</tr>
+<tr class="even">
+<td>Quality_Lecturer</td>
+<td>Perception of teaching effectiveness.</td>
+</tr>
+<tr class="odd">
+<td>TrainingCurriculum</td>
+<td>Perceived relevance and structure of the curriculum.</td>
+</tr>
+<tr class="even">
+<td>Competitive_Class</td>
+<td>Perceived level of academic competition in the classroom.</td>
+</tr>
+<tr class="odd">
+<td>InfuenceF_Friends</td>
+<td>Perceived influence of peers and friends on academic motivation and performance.</td>
 </tr>
 </tbody>
 </table>
@@ -575,7 +625,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>This boxplot compares <strong>perceived classroom competition</strong> levels across <strong>GPA</strong> categories. Median competition ratings tend to increase slightly with higher GPA levels, suggesting that academically stronger students may experience or interpret competitive environments more positively. Additionally, variability is greater among lower GPA groups, indicating less consistent perceptions of competition. The overlapping distributions across categories imply that competitive classroom dynamics affect students differently rather than uniformly. While moderate competition appears common across all GPA levels, extreme competition levels are less dominant among lower-performing students. The visualization suggests that competition may function as a motivating factor for some students, but its influence likely depends on individual adaptability and study strategies. Overall, the pattern supports the interpretation that classroom environment contributes to performance variation without serving as a sole explanatory factor.</p>
+<p>This plot compares <strong>perceived classroom competition</strong> levels across <strong>GPA</strong> categories. Median competition ratings tend to increase slightly with higher GPA levels, suggesting that academically stronger students may experience or interpret competitive environments more positively.</p>
+<p>We can see <strong>variability</strong> is greater among <strong>lower GPA groups</strong>, indicating less consistent perceptions of competition. While moderate competition appears common across all GPA levels, extreme competition levels are less dominant among lower-performing students. The visualization suggests that competition may function as a motivating factor for some students, but its influence likely depends on individual adaptability and study strategies.</p>
 
 
 </section>
