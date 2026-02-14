@@ -1,5 +1,5 @@
 ---
-title: "Take-Home Exercise 1"
+title: "Exploring the Drivers of Student Academic Performance: A Visual Analytics Approach"
 author: "Oscar Ricardo Moreno Gonzalez"
 date: "February 12, 2026"
 date-modified: "last-modified"
@@ -12,7 +12,9 @@ execute:
 
 ![](data/418730777_122098736198182860_2587865680529483891_n.jpg){width="141"}
 
-# Overview
+# Exploring the Drivers of Student Academic Performance: A Visual Analytics Approach
+
+## Overview
 
 **Introduction:** This project applies visual analytics techniques to explore factors associated with student learning outcomes using a large-scale survey dataset from the University of Education, Vietnam National University, Hanoi. The dataset captures students demographic characteristics, study behaviors, time allocation, and perceptions of institutional and social support, alongside their academic performance measured by GPA.
 
@@ -20,25 +22,24 @@ execute:
 
 The analysis emphasizes exploratory visualization to support reasoning, comparison, and interpretation. Using R, *ggplot2*, and selected visualization extensions, the project identifies a set of key observations that highlight meaningful relationships and distributions within the data, demonstrating how visual analytics can help us understand of educational processes and learning environments.
 
-# Getting Started
+## Getting Started
 
-## Install and Launch R packages
+### Install and Launch R packages
 
 The code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.
 
 ```{r}
-pacman::p_load(tidyverse, ggcorrplot, ggridges,
-               scales)
+pacman::p_load(tidyverse, ggcorrplot, ggridges, scales)
 ```
 
 | Package | Description |
-|-------------------------|----------------------------------------------|
+|------------------------------------|------------------------------------|
 | tidyverse | A collection of R packages (including *ggplot2*, *dplyr*, and *tidyr*) used for data cleaning, transformation, and visualization. |
 | ggcorrplot | Used to visualize correlation matrices in a graphical format. |
 | ggridges | Provides ridgeplots that allow comparison of distributions across multiple groups. |
 | scales | Enhances visualizations by formatting axes and legends (percentages, labels, breaks, etc.). |
 
-## Data Preprocessing
+### Data Preprocessing
 
 The original dataset was provided as an CSV file containing numerically coded demographic, behavioral, and perception variables.
 
@@ -78,12 +79,12 @@ learning_data <- learning_data %>%
   )
 ```
 
-## **Filtering Relevant Variables**
+### **Filtering Relevant Variables**
 
-Out of the 22 variables available in the original dataset, a subset of **\##** key academic, behavioral, and demographic variables was elected to address the analytical questions. These fields were chosen because they directly relate to student performance, learning behavior and institutional context. Together, they provide a structured framework to examine how individual effort, environmental factors, and socioeconomic context have an impact on academic outcomes.
+Out of the 22 variables available in the original dataset, a subset of 15 key academic, behavioral, and demographic variables was elected to address the analytical questions. These fields were chosen because they directly relate to student performance, learning behavior and institutional context. Together, they provide a structured framework to examine how individual effort, environmental factors, and socioeconomic context have an impact on academic outcomes.
 
 | Variable | Description |
-|-------------------------|-----------------------------------------------|
+|------------------------------------|------------------------------------|
 | GPA | Ordinal academic performance category ranging from Poor to Excellent. |
 | Gender | Binary variable (Male/Female). |
 | Time_Studying | Number of hours spent studying per day. |
@@ -100,9 +101,15 @@ Out of the 22 variables available in the original dataset, a subset of **\##** k
 | Competitive_Class | Perceived level of academic competition in the classroom. |
 | InfuenceF_Friends | Perceived influence of peers and friends on academic motivation and performance. |
 
-# Key Observations
+# Analysis
 
-## 1. GPA Distribution by Gender
+This analysis investigates the factors associated with student academic performance by progressively moving from broad outcome patterns to more specific behavioral and institutional influences.
+
+The sequence is intentionally structured to guide the reader through a logical analytical journey. It begins with a demographic overview of performance differences, then examines how individual time allocation relates to outcomes, before moving toward study behavior and instructional quality. The final step synthesizes these dimensions to highlight how multiple factors interact simultaneously.
+
+## Key Observations
+
+### 1. GPA Distribution by Gender
 
 ```{r}
 learning_data %>%
@@ -128,7 +135,7 @@ learning_data %>%
 
 This graph show us the distribution of **GPA categories** segmented by **gender**. Overall, most students cluster within the “Fair” and “Good” categories, with relatively few in the “Poor” or “Excellent” extremes. When segmented, female students show a slightly higher proportional concentration in the upper GPA categories, particularly “Good,” while male students appear somewhat more represented in the lower GPA ranges. However, the overall pattern remains similar across both groups, indicating that **gender differences** in academic outcomes are **present but not pronounced**. Visually, the chart suggests modest differences rather than structural disparities in performance between genders.
 
-## 2. Study Time vs GPA
+### 2. Study Time vs GPA
 
 ```{r}
 learning_data %>%
@@ -160,7 +167,7 @@ This heatmap visualization represents the distribution of **GPA** categories acr
 
 Moderate study time also display substantial representation in upper GPA categories, suggesting **diminishing returns beyond a certain limit.** (Students reporting extremely high study time do not exclusively dominate the top GPA category) Indicating that time investment alone does not fully determine performance.
 
-## 3. Social Media Usage vs GPA
+### 3. Social Media Usage vs GPA
 
 ```{r}
 learning_data %>%
@@ -185,7 +192,7 @@ learning_data %>%
 
 This second heatmap illustrates the distribution of **GPA** categories across levels of daily **social media usage**. Higher concentrations of “Good” and “Excellent” GPAs appear among students reporting moderate or lower usage, while heavier usage categories show a relatively larger presence in middle GPA tiers. However, the relationship is not completely linear. Overall, the pattern suggests that balanced time allocation may be more relevant than absolute restriction.
 
-## 4. Study Methods vs GPA
+### 4. Study Methods vs GPA
 
 ```{r}
 ggplot(learning_data, aes(x = GPA, y = as.numeric(Study_Methods))) +
@@ -199,7 +206,7 @@ ggplot(learning_data, aes(x = GPA, y = as.numeric(Study_Methods))) +
   theme_minimal()
 ```
 
-## 5. Lecturer Quality vs GPA
+### 5. Lecturer Quality vs GPA
 
 ```{r}
 ggplot(learning_data, aes(
@@ -220,7 +227,7 @@ ggplot(learning_data, aes(
 
 The ridgeline plot reveals a gradual upward shift in **perceived lecturer quality** as **GPA** increases. Higher-performing students tend to report stronger and more concentrated evaluations of lecturer quality, while lower GPA categories display broader and slightly lower distributions. The compression of variance among top GPA groups suggests greater consensus in their perceptions. The visual progression across GPA levels supports the interpretation that instructional quality contributes positively to student outcomes, but it operates within a broader ecosystem of academic and personal influences. Overall, the pattern highlights lecturer quality as a stabilizing rather than singular factor in performance differentiation.
 
-## 6. Correlation Matrix of Learning Factors
+### 6. Correlation Matrix of Learning Factors
 
 ```{r}
 #| echo: true
@@ -256,9 +263,9 @@ This correlation graph summarizes the relationships among **institutional, behav
 We can see that correlations between these factors and GPA are positive but comparatively modest, which indicates that academic performance is influenced by **multiple dimensions** rather than a single dominant variable.
 
 ```{r}
-ggplot(learning_data,
-       aes(x = GPA, y = as.numeric(Competitive_Class))) +
-  geom_boxplot(fill = "steelblue") +
+ggplot(learning_data, aes(x = GPA, y = as.numeric(Competitive_Class))) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(width = 0.15, alpha = 0.3) +
   labs(
     title = "Perceived Classroom Competition by GPA",
     x = "GPA Category",
@@ -266,8 +273,15 @@ ggplot(learning_data,
   ) +
   theme_minimal()
 
+
 ```
 
-This plot compares **perceived classroom competition** levels across **GPA** categories. Median competition ratings tend to increase slightly with higher GPA levels, suggesting that academically stronger students may experience or interpret competitive environments more positively.
+This plot compares **perceived classroom competition** levels across **GPA** categories. We can see that the distribution of perceived competition levels is relatively consistent across GPA categories, suggesting that classroom competition does not substantially differ between high or low performing students.
 
-We can see **variability** is greater among **lower GPA groups**, indicating less consistent perceptions of competition. While moderate competition appears common across all GPA levels, extreme competition levels are less dominant among lower-performing students. The visualization suggests that competition may function as a motivating factor for some students, but its influence likely depends on individual adaptability and study strategies.
+We can also notice **variability** is larger among **lower GPA groups**, indicating less consistent perceptions of competition. While moderate competition appears common across all GPA levels, extreme competition levels are less dominant among lower-performing students. The visualization suggests that competition may function as a motivating factor for some students, but its influence likely depends on individual adaptability and study strategies.
+
+# Conclusion
+
+This project used visual analytics to explore how different factors relate to student academic performance. The visual sequence showed that performance patterns cannot be attributed to a single variable; instead, they reflect the combined influence of effort, learning strategies, and perceived educational support. The correlation structure show us that these factors interact rather than operate independently.
+
+Overall, the analysis highlights that student success is multidimensional, shaped by both individual practices and the broader learning environment. The findings demonstrate the value of visual exploration in uncovering patterns that may not be immediately evident in raw data and provide a foundation for further investigation into how universities can support effective learning behaviors and academic achievement.

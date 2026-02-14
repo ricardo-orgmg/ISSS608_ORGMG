@@ -9,7 +9,7 @@
 <meta name="author" content="Oscar Ricardo Moreno Gonzalez">
 <meta name="dcterms.date" content="2026-02-12">
 
-<title>Take-Home Exercise 1 – ISSS608_Coursework Website</title>
+<title>Exploring the Drivers of Student Academic Performance: A Visual Analytics Approach – ISSS608_Coursework Website</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -202,13 +202,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#exploring-the-drivers-of-student-academic-performance-a-visual-analytics-approach" id="toc-exploring-the-drivers-of-student-academic-performance-a-visual-analytics-approach" class="nav-link active" data-scroll-target="#exploring-the-drivers-of-student-academic-performance-a-visual-analytics-approach">Exploring the Drivers of Student Academic Performance: A Visual Analytics Approach</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a>
   <ul class="collapse">
   <li><a href="#install-and-launch-r-packages" id="toc-install-and-launch-r-packages" class="nav-link" data-scroll-target="#install-and-launch-r-packages">Install and Launch R packages</a></li>
   <li><a href="#data-preprocessing" id="toc-data-preprocessing" class="nav-link" data-scroll-target="#data-preprocessing">Data Preprocessing</a></li>
   <li><a href="#filtering-relevant-variables" id="toc-filtering-relevant-variables" class="nav-link" data-scroll-target="#filtering-relevant-variables"><strong>Filtering Relevant Variables</strong></a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a>
+  <ul class="collapse">
   <li><a href="#key-observations" id="toc-key-observations" class="nav-link" data-scroll-target="#key-observations">Key Observations</a>
   <ul class="collapse">
   <li><a href="#gpa-distribution-by-gender" id="toc-gpa-distribution-by-gender" class="nav-link" data-scroll-target="#gpa-distribution-by-gender">1. GPA Distribution by Gender</a></li>
@@ -218,6 +223,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#lecturer-quality-vs-gpa" id="toc-lecturer-quality-vs-gpa" class="nav-link" data-scroll-target="#lecturer-quality-vs-gpa">5. Lecturer Quality vs GPA</a></li>
   <li><a href="#correlation-matrix-of-learning-factors" id="toc-correlation-matrix-of-learning-factors" class="nav-link" data-scroll-target="#correlation-matrix-of-learning-factors">6. Correlation Matrix of Learning Factors</a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -226,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Take-Home Exercise 1</h1>
+<h1 class="title">Exploring the Drivers of Student Academic Performance: A Visual Analytics Approach</h1>
 </div>
 
 
@@ -250,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 13, 2026</p>
+      <p class="date-modified">February 14, 2026</p>
     </div>
   </div>
     
@@ -262,25 +269,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><img src="data/418730777_122098736198182860_2587865680529483891_n.jpg" class="img-fluid" width="141"></p>
-<section id="overview" class="level1">
-<h1>Overview</h1>
+<section id="exploring-the-drivers-of-student-academic-performance-a-visual-analytics-approach" class="level1">
+<h1>Exploring the Drivers of Student Academic Performance: A Visual Analytics Approach</h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p><strong>Introduction:</strong> This project applies visual analytics techniques to explore factors associated with student learning outcomes using a large-scale survey dataset from the University of Education, Vietnam National University, Hanoi. The dataset captures students demographic characteristics, study behaviors, time allocation, and perceptions of institutional and social support, alongside their academic performance measured by GPA.</p>
 <p><strong>Objective:</strong> Use visually driven analysis to uncover and communicate key patterns in how individual, social, and institutional factors relate to student outcomes.</p>
 <p>The analysis emphasizes exploratory visualization to support reasoning, comparison, and interpretation. Using R, <em>ggplot2</em>, and selected visualization extensions, the project identifies a set of key observations that highlight meaningful relationships and distributions within the data, demonstrating how visual analytics can help us understand of educational processes and learning environments.</p>
 </section>
-<section id="getting-started" class="level1">
-<h1>Getting Started</h1>
-<section id="install-and-launch-r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="install-and-launch-r-packages">Install and Launch R packages</h2>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
+<section id="install-and-launch-r-packages" class="level3">
+<h3 class="anchored" data-anchor-id="install-and-launch-r-packages">Install and Launch R packages</h3>
 <p>The code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, ggcorrplot, ggridges,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               scales)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, ggcorrplot, ggridges, scales)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 35%">
-<col style="width: 64%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -308,8 +316,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="data-preprocessing" class="level2">
-<h2 class="anchored" data-anchor-id="data-preprocessing">Data Preprocessing</h2>
+<section id="data-preprocessing" class="level3">
+<h3 class="anchored" data-anchor-id="data-preprocessing">Data Preprocessing</h3>
 <p>The original dataset was provided as an CSV file containing numerically coded demographic, behavioral, and perception variables.</p>
 <ul>
 <li><p>Data preparation was conducted in R.</p></li>
@@ -343,13 +351,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="filtering-relevant-variables" class="level2">
-<h2 class="anchored" data-anchor-id="filtering-relevant-variables"><strong>Filtering Relevant Variables</strong></h2>
-<p>Out of the 22 variables available in the original dataset, a subset of <strong>##</strong> key academic, behavioral, and demographic variables was elected to address the analytical questions. These fields were chosen because they directly relate to student performance, learning behavior and institutional context. Together, they provide a structured framework to examine how individual effort, environmental factors, and socioeconomic context have an impact on academic outcomes.</p>
+<section id="filtering-relevant-variables" class="level3">
+<h3 class="anchored" data-anchor-id="filtering-relevant-variables"><strong>Filtering Relevant Variables</strong></h3>
+<p>Out of the 22 variables available in the original dataset, a subset of 15 key academic, behavioral, and demographic variables was elected to address the analytical questions. These fields were chosen because they directly relate to student performance, learning behavior and institutional context. Together, they provide a structured framework to examine how individual effort, environmental factors, and socioeconomic context have an impact on academic outcomes.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 34%">
-<col style="width: 65%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -422,10 +430,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </section>
 </section>
-<section id="key-observations" class="level1">
-<h1>Key Observations</h1>
-<section id="gpa-distribution-by-gender" class="level2">
-<h2 class="anchored" data-anchor-id="gpa-distribution-by-gender">1. GPA Distribution by Gender</h2>
+</section>
+<section id="analysis" class="level1">
+<h1>Analysis</h1>
+<p>This analysis investigates the factors associated with student academic performance by progressively moving from broad outcome patterns to more specific behavioral and institutional influences.</p>
+<p>The sequence is intentionally structured to guide the reader through a logical analytical journey. It begins with a demographic overview of performance differences, then examines how individual time allocation relates to outcomes, before moving toward study behavior and instructional quality. The final step synthesizes these dimensions to highlight how multiple factors interact simultaneously.</p>
+<section id="key-observations" class="level2">
+<h2 class="anchored" data-anchor-id="key-observations">Key Observations</h2>
+<section id="gpa-distribution-by-gender" class="level3">
+<h3 class="anchored" data-anchor-id="gpa-distribution-by-gender">1. GPA Distribution by Gender</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>learning_data <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(GPA, Gender) <span class="sc">%&gt;%</span></span>
@@ -456,8 +469,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>This graph show us the distribution of <strong>GPA categories</strong> segmented by <strong>gender</strong>. Overall, most students cluster within the “Fair” and “Good” categories, with relatively few in the “Poor” or “Excellent” extremes. When segmented, female students show a slightly higher proportional concentration in the upper GPA categories, particularly “Good,” while male students appear somewhat more represented in the lower GPA ranges. However, the overall pattern remains similar across both groups, indicating that <strong>gender differences</strong> in academic outcomes are <strong>present but not pronounced</strong>. Visually, the chart suggests modest differences rather than structural disparities in performance between genders.</p>
 </section>
-<section id="study-time-vs-gpa" class="level2">
-<h2 class="anchored" data-anchor-id="study-time-vs-gpa">2. Study Time vs GPA</h2>
+<section id="study-time-vs-gpa" class="level3">
+<h3 class="anchored" data-anchor-id="study-time-vs-gpa">2. Study Time vs GPA</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>learning_data <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Time_Studying, GPA) <span class="sc">%&gt;%</span></span>
@@ -492,8 +505,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This heatmap visualization represents the distribution of <strong>GPA</strong> categories across different levels of <strong>daily study</strong> <strong>time</strong>. While higher study time categories show a greater concentration of “Good” and “Excellent” outcomes, the <strong>relationship is not strictly linear</strong>.</p>
 <p>Moderate study time also display substantial representation in upper GPA categories, suggesting <strong>diminishing returns beyond a certain limit.</strong> (Students reporting extremely high study time do not exclusively dominate the top GPA category) Indicating that time investment alone does not fully determine performance.</p>
 </section>
-<section id="social-media-usage-vs-gpa" class="level2">
-<h2 class="anchored" data-anchor-id="social-media-usage-vs-gpa">3. Social Media Usage vs GPA</h2>
+<section id="social-media-usage-vs-gpa" class="level3">
+<h3 class="anchored" data-anchor-id="social-media-usage-vs-gpa">3. Social Media Usage vs GPA</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>learning_data <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Time_SocialMedia, GPA) <span class="sc">%&gt;%</span></span>
@@ -522,8 +535,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>This second heatmap illustrates the distribution of <strong>GPA</strong> categories across levels of daily <strong>social media usage</strong>. Higher concentrations of “Good” and “Excellent” GPAs appear among students reporting moderate or lower usage, while heavier usage categories show a relatively larger presence in middle GPA tiers. However, the relationship is not completely linear. Overall, the pattern suggests that balanced time allocation may be more relevant than absolute restriction.</p>
 </section>
-<section id="study-methods-vs-gpa" class="level2">
-<h2 class="anchored" data-anchor-id="study-methods-vs-gpa">4. Study Methods vs GPA</h2>
+<section id="study-methods-vs-gpa" class="level3">
+<h3 class="anchored" data-anchor-id="study-methods-vs-gpa">4. Study Methods vs GPA</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(learning_data, <span class="fu">aes</span>(<span class="at">x =</span> GPA, <span class="at">y =</span> <span class="fu">as.numeric</span>(Study_Methods))) <span class="sc">+</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
@@ -543,8 +556,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="lecturer-quality-vs-gpa" class="level2">
-<h2 class="anchored" data-anchor-id="lecturer-quality-vs-gpa">5. Lecturer Quality vs GPA</h2>
+<section id="lecturer-quality-vs-gpa" class="level3">
+<h3 class="anchored" data-anchor-id="lecturer-quality-vs-gpa">5. Lecturer Quality vs GPA</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(learning_data, <span class="fu">aes</span>(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">as.numeric</span>(Quality_Lecturer),</span>
@@ -569,8 +582,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The ridgeline plot reveals a gradual upward shift in <strong>perceived lecturer quality</strong> as <strong>GPA</strong> increases. Higher-performing students tend to report stronger and more concentrated evaluations of lecturer quality, while lower GPA categories display broader and slightly lower distributions. The compression of variance among top GPA groups suggests greater consensus in their perceptions. The visual progression across GPA levels supports the interpretation that instructional quality contributes positively to student outcomes, but it operates within a broader ecosystem of academic and personal influences. Overall, the pattern highlights lecturer quality as a stabilizing rather than singular factor in performance differentiation.</p>
 </section>
-<section id="correlation-matrix-of-learning-factors" class="level2">
-<h2 class="anchored" data-anchor-id="correlation-matrix-of-learning-factors">6. Correlation Matrix of Learning Factors</h2>
+<section id="correlation-matrix-of-learning-factors" class="level3">
+<h3 class="anchored" data-anchor-id="correlation-matrix-of-learning-factors">6. Correlation Matrix of Learning Factors</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>group_b <span class="ot">&lt;-</span> learning_data <span class="sc">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
@@ -608,9 +621,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This correlation graph summarizes the relationships among <strong>institutional, behavioral, and social</strong> factors alongside <strong>GPA</strong>. Strong positive correlations are visible among institutional variables such as lecturer quality, university support, and curriculum suitability, suggesting that students perceive these elements as interconnected.</p>
 <p>We can see that correlations between these factors and GPA are positive but comparatively modest, which indicates that academic performance is influenced by <strong>multiple dimensions</strong> rather than a single dominant variable.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(learning_data,</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> GPA, <span class="at">y =</span> <span class="fu">as.numeric</span>(Competitive_Class))) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(learning_data, <span class="fu">aes</span>(<span class="at">x =</span> GPA, <span class="at">y =</span> <span class="fu">as.numeric</span>(Competitive_Class))) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.15</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Perceived Classroom Competition by GPA"</span>,</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"GPA Category"</span>,</span>
@@ -625,11 +638,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>This plot compares <strong>perceived classroom competition</strong> levels across <strong>GPA</strong> categories. Median competition ratings tend to increase slightly with higher GPA levels, suggesting that academically stronger students may experience or interpret competitive environments more positively.</p>
-<p>We can see <strong>variability</strong> is greater among <strong>lower GPA groups</strong>, indicating less consistent perceptions of competition. While moderate competition appears common across all GPA levels, extreme competition levels are less dominant among lower-performing students. The visualization suggests that competition may function as a motivating factor for some students, but its influence likely depends on individual adaptability and study strategies.</p>
-
-
+<p>This plot compares <strong>perceived classroom competition</strong> levels across <strong>GPA</strong> categories. We can see that the distribution of perceived competition levels is relatively consistent across GPA categories, suggesting that classroom competition does not substantially differ between high or low performing students.</p>
+<p>We can also notice <strong>variability</strong> is larger among <strong>lower GPA groups</strong>, indicating less consistent perceptions of competition. While moderate competition appears common across all GPA levels, extreme competition levels are less dominant among lower-performing students. The visualization suggests that competition may function as a motivating factor for some students, but its influence likely depends on individual adaptability and study strategies.</p>
 </section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>This project used visual analytics to explore how different factors relate to student academic performance. The visual sequence showed that performance patterns cannot be attributed to a single variable; instead, they reflect the combined influence of effort, learning strategies, and perceived educational support. The correlation structure show us that these factors interact rather than operate independently.</p>
+<p>Overall, the analysis highlights that student success is multidimensional, shaped by both individual practices and the broader learning environment. The findings demonstrate the value of visual exploration in uncovering patterns that may not be immediately evident in raw data and provide a foundation for further investigation into how universities can support effective learning behaviors and academic achievement.</p>
+
+
 </section>
 
 </main> <!-- /main -->
