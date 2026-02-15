@@ -23,7 +23,7 @@ website:
         href: "In-class_Ex/In-class_Ex01/ICE01.html"
     - text: "Take-Home Exercise"
       menu:
-      - text: "Take-home Exercise 1" 
+      - text: "Take-Home Exercise 1" 
         href: "Take-home_Ex/TakeHome01/th_exc01.html"
     right:
       - href: index.qmd
