@@ -516,5 +516,61 @@
     "title": "Take-Home Exercise 1",
     "section": "6. Classroom Competition vs GPA",
     "text": "6. Classroom Competition vs GPA\n\nPlotCode\n\n\n\nplot_competition\n\n\n\n\n\n\n\n\n\n\nplot_competition &lt;- ggplot(learning_data, aes(x = GPA, y = as.numeric(Competitive_Class))) +\n  geom_boxplot(outlier.shape = NA, color = \"steelblue\") +\n  geom_jitter(width = 0.15, alpha = 0.3, color = \"steelblue\") +\n  labs(\n    title = \"Perceived Classroom Competition by GPA\",\n    x = \"GPA Category\",\n    y = \"Competition Level\"\n  ) +\n  theme_minimal()\n\n\n\nThis plot compares perceived classroom competition levels across GPA categories. We can see that the distribution of perceived competition levels is relatively consistent across GPA categories, suggesting that classroom competition does not substantially differ between high or low performing students.\nWe can also notice variability is larger among lower GPA groups, indicating less consistent perceptions of competition. While moderate competition appears common across all GPA levels, extreme competition levels are less dominant among lower-performing students. The visualization suggests that competition may function as a motivating factor for some students, but its influence likely depends on individual adaptability and study strategies.\n\n7. Correlation Matrix of Learning Factors\n\nPlotCode\n\n\n\nplot_corr\n\n\n\n\n\n\n\n\n\n\ngroup_b &lt;- learning_data %&gt;%\n  select(\n    GPA,\n    Adapt_Learning_Uni,\n    Study_Methods,\n    SupportOf_Uni,\n    SupportOf_Lec,\n    Facilitie_Uni,\n    Quality_Lecturer,\n    TrainingCurriculum,\n    Competitive_Class,\n    InfuenceF_Friends\n  ) %&gt;%\n  mutate(across(everything(), as.numeric))\n\ncorr_matrix &lt;- cor(group_b, use = \"complete.obs\")\n\nplot_corr &lt;- ggcorrplot(\n  corr_matrix,\n  type = \"lower\",\n  lab = TRUE,\n  lab_size = 3,\n  colors = c(\"white\", \"grey80\", \"steelblue\")\n) +\n  labs(title = \"Correlation Matrix of Learning Factors and GPA\")\n\n\n\nThis correlation graph summarizes the relationships among institutional, behavioral, and social factors alongside GPA. Strong positive correlations are visible among institutional variables such as lecturer quality, university support, and curriculum suitability, suggesting that students perceive these elements as interconnected.\nWe can see that correlations between these factors and GPA are positive but modest, which indicates that academic performance is influenced by multiple dimensions rather than a single dominant variable."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html",
+    "title": "Hands-on Exercise 7",
+    "section": "",
+    "text": "Hands-On Exercise # 7."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#overview",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#overview",
+    "title": "Hands-on Exercise 7",
+    "section": "",
+    "text": "Hands-On Exercise # 7."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#install-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#install-and-launching-r-packages",
+    "title": "Hands-on Exercise 7",
+    "section": "Install and Launching R Packages",
+    "text": "Install and Launching R Packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\n\npacman::p_load(scales, viridis, lubridate, ggthemes,\n               gridExtra, readxl, knitr, data.table,\n               CGPfunctions, ggHoriPlot, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#the-data",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#the-data",
+    "title": "Hands-on Exercise 7",
+    "section": "The Data",
+    "text": "The Data\n\nImporting the Data\n\nattacks &lt;- read_csv(\"data/eventlog.csv\")\n\n\n\nPreparing the Data\nStep 1: Deriving “weekday” and “hour of day” fields\nBefore we can plot the calender heatmap, two new fields namely “wkday” and “hour” need to be derived. In this step, we will write a function to perform the task.\n\nmake_hr_wkday &lt;- function(ts, sc, tz) {\n  real_times &lt;- ymd_hms(ts, \n                        tz = tz[1], \n                        quiet = TRUE)\n  dt &lt;- data.table(source_country = sc,\n                   wkday = weekdays(real_times),\n                   hour = hour(real_times))\n  return(dt)\n  }\n\nStep 2: Deriving the attacks tibble data frame\n\nwkday_levels &lt;- c('Saturday', 'Friday', \n                  'Thursday', 'Wednesday', \n                  'Tuesday', 'Monday', \n                  'Sunday')\n\nattacks &lt;- attacks %&gt;%\n  group_by(tz) %&gt;%\n  do(make_hr_wkday(.$timestamp, \n                   .$source_country, \n                   .$tz)) %&gt;% \n  ungroup() %&gt;% \n  mutate(wkday = factor(\n    wkday, levels = wkday_levels),\n    hour  = factor(\n      hour, levels = 0:23))\n\nData Preview\n\nkable(head(attacks))\n\n\n\n\ntz\nsource_country\nwkday\nhour\n\n\n\n\nAfrica/Cairo\nBG\nSaturday\n20\n\n\nAfrica/Cairo\nTW\nSunday\n6\n\n\nAfrica/Cairo\nTW\nSunday\n8\n\n\nAfrica/Cairo\nCN\nSunday\n11\n\n\nAfrica/Cairo\nUS\nSunday\n15\n\n\nAfrica/Cairo\nCA\nMonday\n11"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-the-calendar-heatmaps",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-the-calendar-heatmaps",
+    "title": "Hands-on Exercise 7",
+    "section": "Plotting the Calendar Heatmaps",
+    "text": "Plotting the Calendar Heatmaps\n\ngrouped &lt;- attacks %&gt;% \n  count(wkday, hour) %&gt;% \n  ungroup() %&gt;%\n  na.omit()\n\nggplot(grouped, \n       aes(hour, \n           wkday, \n           fill = n)) + \ngeom_tile(color = \"white\", \n          size = 0.1) + \ntheme_tufte(base_family = \"Helvetica\") + \ncoord_equal() +\nscale_fill_gradient(name = \"# of attacks\",\n                    low = \"sky blue\", \n                    high = \"dark blue\") +\nlabs(x = NULL, \n     y = NULL, \n     title = \"Attacks by weekday and time of day\") +\ntheme(axis.ticks = element_blank(),\n      plot.title = element_text(hjust = 0.5),\n      legend.title = element_text(size = 8),\n      legend.text = element_text(size = 6) )"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-multiple-calendar-heatmaps",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-multiple-calendar-heatmaps",
+    "title": "Hands-on Exercise 7",
+    "section": "Plotting Multiple Calendar Heatmaps",
+    "text": "Plotting Multiple Calendar Heatmaps\nStep 1: Deriving attack by country object\nIdentify the top 4 countries with the highest number of attacks.\n\nattacks_by_country &lt;- count(\n  attacks, source_country) %&gt;%\n  mutate(percent = percent(n/sum(n))) %&gt;%\n  arrange(desc(n))\n\nStep 2: Preparing the tidy data frame\nExtract the attack records of the top 4 countries from the data frame and save in a new tibble data frame \n\ntop4 &lt;- attacks_by_country$source_country[1:4]\ntop4_attacks &lt;- attacks %&gt;%\n  filter(source_country %in% top4) %&gt;%\n  count(source_country, wkday, hour) %&gt;%\n  ungroup() %&gt;%\n  mutate(source_country = factor(\n    source_country, levels = top4)) %&gt;%\n  na.omit()\n\nStep 3: Plotting the Calendar Heatmaps by using ggplot2 package.\n\nggplot(top4_attacks, \n       aes(hour, \n           wkday, \n           fill = n)) + \n  geom_tile(color = \"white\", \n          size = 0.1) + \n  theme_tufte(base_family = \"Helvetica\") + \n  coord_equal() +\n  scale_fill_gradient(name = \"# of attacks\",\n                    low = \"sky blue\", \n                    high = \"dark blue\") +\n  facet_wrap(~source_country, ncol = 2) +\n  labs(x = NULL, y = NULL, \n     title = \"Attacks on top 4 countries by weekday and time of day\") +\n  theme(axis.ticks = element_blank(),\n        axis.text.x = element_text(size = 7),\n        plot.title = element_text(hjust = 0.5),\n        legend.title = element_text(size = 8),\n        legend.text = element_text(size = 6) )"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-cycle-plot",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-cycle-plot",
+    "title": "Hands-on Exercise 7",
+    "section": "Plotting Cycle Plot",
+    "text": "Plotting Cycle Plot\nStep 1: Importing the Data\n\nair &lt;- read_excel(\"data/arrivals_by_air.xlsx\")\n\nStep 2: Deriving month and year fields\n\nair$month &lt;- factor(month(air$`Month-Year`), \n                    levels=1:12, \n                    labels=month.abb, \n                    ordered=TRUE) \nair$year &lt;- year(ymd(air$`Month-Year`))\n\nStep 3: Extracting the target country\n\nVietnam &lt;- air %&gt;% \n  select(`Vietnam`, \n         month, \n         year) %&gt;%\n  filter(year &gt;= 2010)\n\nStep 4: Computing year average arrivals by month\n\nhline.data &lt;- Vietnam %&gt;% \n  group_by(month) %&gt;%\n  summarise(avgvalue = mean(`Vietnam`))\n\nStep 5: Plotting the cycle graph\n\nggplot() + \n  geom_line(data=Vietnam,\n            aes(x=year, \n                y=`Vietnam`, \n                group=month), \n            colour=\"black\") +\n  geom_hline(aes(yintercept=avgvalue), \n             data=hline.data, \n             linetype=6, \n             colour=\"red\", \n             size=0.5) + \n  facet_grid(~month) +\n  labs(axis.text.x = element_blank(),\n       title = \"Visitor arrivals from Vietnam by air, Jan 2010-Dec 2019\") +\n  xlab(\"\") +\n  ylab(\"No. of Visitors\") +\n  theme_tufte(base_family = \"Helvetica\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-slopergraph",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-slopergraph",
+    "title": "Hands-on Exercise 7",
+    "section": "Plotting Slopergraph",
+    "text": "Plotting Slopergraph\nStep 1: Data Import\n\nrice &lt;- read_csv(\"data/rice.csv\")\n\nStep 2: Plotting the slopegraph\n\nrice %&gt;% \n  mutate(Year = factor(Year)) %&gt;%\n  filter(Year %in% c(1961, 1980)) %&gt;%\n  newggslopegraph(Year, Yield, Country,\n                Title = \"Rice Yield of Top 11 Asian Counties\",\n                SubTitle = \"1961-1980\",\n                Caption = \"Prepared by: Dr. Kam Tin Seong\")"
   }
 ]

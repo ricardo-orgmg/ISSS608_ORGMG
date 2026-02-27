@@ -1,0 +1,12 @@
+name: ShinyPrototypeI
+title: ShinyPrototypeI
+username: ricardomg91
+account: ricardomg91
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 16729692
+bundleId: 11610426
+url: https://ricardomg91.shinyapps.io/ShinyPrototypeI/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
