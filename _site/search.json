@@ -572,5 +572,404 @@
     "title": "Hands-on Exercise 7",
     "section": "Plotting Slopergraph",
     "text": "Plotting Slopergraph\nStep 1: Data Import\n\nrice &lt;- read_csv(\"data/rice.csv\")\n\nStep 2: Plotting the slopegraph\n\nrice %&gt;% \n  mutate(Year = factor(Year)) %&gt;%\n  filter(Year %in% c(1961, 1980)) %&gt;%\n  newggslopegraph(Year, Yield, Country,\n                Title = \"Rice Yield of Top 11 Asian Counties\",\n                SubTitle = \"1961-1980\",\n                Caption = \"Prepared by: Dr. Kam Tin Seong\")"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html",
+    "title": "Take-Home Exercise 2",
+    "section": "",
+    "text": "Fintech companies operate in highly competitive digital markets where customer engagement and retention are critical for long-term sustainability. Unlike traditional banks, fintech platforms rely heavily on digital interactions between users and financial services. Understanding how customers interact with these platforms is essential for identifying profitable customer segments and maintaining long-term customer relationships.\n\n\n\nAny business requires significant marketing and operational costs when it wants to attract new customers. Retaining existing customers proves to be more cost-effective and provide more value for extended periods.\nCustomers who remain active on a fintech platform tend to perform more financial transactions, adopt multiple financial products, and contribute higher customer lifetime value (CLV). In contrast, customers who show declining engagement or dissatisfaction may be more likely to discontinue their use of the platform.\nIdentifying customers with high churn risk allows fintech companies to implement specific strategies for retaining those customers. Organizations also need to track which customers produce the most value because this information allows them to distribute resources toward their most profitable customer groups.\n\n\n\nThe project objective is to develop a visual analytics application using R and Shiny for the interactive exploration of fintech customer data.\nThis tools would allow users to dynamically filter data, explore patterns across multiple dimensions, and find relationships between behavioral indicators and financial outcomes.\nIt is intended to help analysts compare churn risk across customer groups, examine engagement and profitability, and identify customers at risk of leaving the platform."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#project-background",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#project-background",
+    "title": "Take-Home Exercise 2",
+    "section": "",
+    "text": "Fintech companies operate in highly competitive digital markets where customer engagement and retention are critical for long-term sustainability. Unlike traditional banks, fintech platforms rely heavily on digital interactions between users and financial services. Understanding how customers interact with these platforms is essential for identifying profitable customer segments and maintaining long-term customer relationships."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#why-customer-retention-matters",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#why-customer-retention-matters",
+    "title": "Take-Home Exercise 2",
+    "section": "",
+    "text": "Any business requires significant marketing and operational costs when it wants to attract new customers. Retaining existing customers proves to be more cost-effective and provide more value for extended periods.\nCustomers who remain active on a fintech platform tend to perform more financial transactions, adopt multiple financial products, and contribute higher customer lifetime value (CLV). In contrast, customers who show declining engagement or dissatisfaction may be more likely to discontinue their use of the platform.\nIdentifying customers with high churn risk allows fintech companies to implement specific strategies for retaining those customers. Organizations also need to track which customers produce the most value because this information allows them to distribute resources toward their most profitable customer groups."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#our-proposal",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#our-proposal",
+    "title": "Take-Home Exercise 2",
+    "section": "",
+    "text": "The project objective is to develop a visual analytics application using R and Shiny for the interactive exploration of fintech customer data.\nThis tools would allow users to dynamically filter data, explore patterns across multiple dimensions, and find relationships between behavioral indicators and financial outcomes.\nIt is intended to help analysts compare churn risk across customer groups, examine engagement and profitability, and identify customers at risk of leaving the platform."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#raw-dataset",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#raw-dataset",
+    "title": "Take-Home Exercise 2",
+    "section": "3.1. Raw Dataset",
+    "text": "3.1. Raw Dataset\nThe analysis uses the COFINFAD (Colombian Fintech Financial Analytics) dataset, which contains detailed information about fintech customers. The dataset includes demographic information, financial product usage, transaction activity, customer satisfaction indicators, and predicted churn probabilities.\nThe dataset contains approximately 48,000 customer records and more than 50 variables, providing a comprehensive view of customer behavior within a fintech platform.\n\nlibrary(tidyverse)\nfintech &lt;- read_csv(\"data/customer_data.csv\")"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#variable-grouping",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#variable-grouping",
+    "title": "Take-Home Exercise 2",
+    "section": "3.2. Variable Grouping",
+    "text": "3.2. Variable Grouping\nAlthough the dataset contains a wide range of variables, this module primarily focuses on variables related to:\n\nCustomer Value Indicators\nThese variables measure the long-term financial contribution of each customer.\n\n\n\ncustomer_lifetime_value\n\n\nclv_segment\n\n\ncustomer_segment\n\n\n\n\n\nRetention Risk Indicators\nThe indicators capture signals related to potential customer churn.\n\n\n\nchurn_probability\n\n\nsatisfaction_score\n\n\nnps_score\n\n\n\n\n\nTransaction & Engagement Behavior Indicators\nThese metrics indicate how actively a customer is and their engagement with the fintech platform.\n\n\n\nmonthly_transaction_count\n\n\naverage_transaction_value\n\n\ntotal_transaction_volume\n\n\ntransaction_frequency\n\n\nactive_products\n\n\n\n\n\nGeographic Variables\nThese fields allow spatial analysis of CLV and geographic patterns in fintech adoption.\n\n\n\ncity\n\n\ndepartment\n\n\nlatitude\n\n\nlongitude"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#customer-lifetime-value-by-customer-segment",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#customer-lifetime-value-by-customer-segment",
+    "title": "Take-Home Exercise 2",
+    "section": "4.1. Customer Lifetime Value by Customer Segment",
+    "text": "4.1. Customer Lifetime Value by Customer Segment\nA boxplot will be used to compare the distribution of customer lifetime value across customer segments.\nThis chart is appropriate because CLV is a continuous variable, while customer segment is categorical. It allows the comparison of median values, spread, and outliers across different groups.\nThis visualization helps answer the following analytical question:\nWhich customers generate the highest lifetime value?\n\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(scales)\n\nggplot(fintech, aes(x = customer_segment, y = customer_lifetime_value)) +\n  geom_boxplot() +\n  scale_y_continuous(labels = comma) +\n  labs(\n    title = \"Customer Lifetime Value by Customer Segment\",\n    x = \"Customer Segment\",\n    y = \"Customer Lifetime Value\"\n  ) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#average-churn-probability-by-customer-segment",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#average-churn-probability-by-customer-segment",
+    "title": "Take-Home Exercise 2",
+    "section": "4.2. Average Churn Probability by Customer Segment",
+    "text": "4.2. Average Churn Probability by Customer Segment\nA bar chart is used to compare the average churn probability across customer segments. This chart is effective for showing differences in the mean churn risk between groups and is easy to interpret in a dashboard environment.\nThis visualization helps answer the following analytical question:\nWhich customers are most likely to churn?\n\nlibrary(ggplot2)\nlibrary(dplyr)\n\nchurn_by_segment &lt;- fintech %&gt;%\n  group_by(customer_segment) %&gt;%\n  summarise(avg_churn = mean(churn_probability, na.rm = TRUE))\n\nggplot(churn_by_segment, aes(x = customer_segment, y = avg_churn)) +\n  geom_col() +\n  labs(\n    title = \"Average Churn Probability by Customer Segment\",\n    x = \"Customer Segment\",\n    y = \"Average Churn Probability\"\n  ) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html",
+    "title": "Hands-on Exercise 8",
+    "section": "",
+    "text": "Hands-On Exercise # 8."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#overview",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#overview",
+    "title": "Hands-on Exercise 8",
+    "section": "",
+    "text": "Hands-On Exercise # 8."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#install-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#install-and-launching-r-packages",
+    "title": "Hands-on Exercise 8",
+    "section": "Install and Launching R Packages",
+    "text": "Install and Launching R Packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(sf, tmap, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#the-data",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#the-data",
+    "title": "Hands-on Exercise 8",
+    "section": "The Data",
+    "text": "The Data\n\nImporting the Data\n\nmpsz &lt;- st_read(dsn = \"data/geospatial\", \n                layer = \"MP14_SUBZONE_WEB_PL\")\n\nReading layer `MP14_SUBZONE_WEB_PL' from data source \n  `/Users/oricardomg/ricardo-orgmg/ISSS608_ORGMG/Hands-on_Ex/Hands-on_EX08/data/geospatial' \n  using driver `ESRI Shapefile'\nSimple feature collection with 323 features and 15 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: 2667.538 ymin: 15748.72 xmax: 56396.44 ymax: 50256.33\nProjected CRS: SVY21\n\n\n\nmpsz\n\nSimple feature collection with 323 features and 15 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: 2667.538 ymin: 15748.72 xmax: 56396.44 ymax: 50256.33\nProjected CRS: SVY21\nFirst 10 features:\n   OBJECTID SUBZONE_NO       SUBZONE_N SUBZONE_C CA_IND      PLN_AREA_N\n1         1          1    MARINA SOUTH    MSSZ01      Y    MARINA SOUTH\n2         2          1    PEARL'S HILL    OTSZ01      Y          OUTRAM\n3         3          3       BOAT QUAY    SRSZ03      Y SINGAPORE RIVER\n4         4          8  HENDERSON HILL    BMSZ08      N     BUKIT MERAH\n5         5          3         REDHILL    BMSZ03      N     BUKIT MERAH\n6         6          7  ALEXANDRA HILL    BMSZ07      N     BUKIT MERAH\n7         7          9   BUKIT HO SWEE    BMSZ09      N     BUKIT MERAH\n8         8          2     CLARKE QUAY    SRSZ02      Y SINGAPORE RIVER\n9         9         13 PASIR PANJANG 1    QTSZ13      N      QUEENSTOWN\n10       10          7       QUEENSWAY    QTSZ07      N      QUEENSTOWN\n   PLN_AREA_C       REGION_N REGION_C          INC_CRC FMEL_UPD_D   X_ADDR\n1          MS CENTRAL REGION       CR 5ED7EB253F99252E 2014-12-05 31595.84\n2          OT CENTRAL REGION       CR 8C7149B9EB32EEFC 2014-12-05 28679.06\n3          SR CENTRAL REGION       CR C35FEFF02B13E0E5 2014-12-05 29654.96\n4          BM CENTRAL REGION       CR 3775D82C5DDBEFBD 2014-12-05 26782.83\n5          BM CENTRAL REGION       CR 85D9ABEF0A40678F 2014-12-05 26201.96\n6          BM CENTRAL REGION       CR 9D286521EF5E3B59 2014-12-05 25358.82\n7          BM CENTRAL REGION       CR 7839A8577144EFE2 2014-12-05 27680.06\n8          SR CENTRAL REGION       CR 48661DC0FBA09F7A 2014-12-05 29253.21\n9          QT CENTRAL REGION       CR 1F721290C421BFAB 2014-12-05 22077.34\n10         QT CENTRAL REGION       CR 3580D2AFFBEE914C 2014-12-05 24168.31\n     Y_ADDR SHAPE_Leng SHAPE_Area                       geometry\n1  29220.19   5267.381  1630379.3 MULTIPOLYGON (((31495.56 30...\n2  29782.05   3506.107   559816.2 MULTIPOLYGON (((29092.28 30...\n3  29974.66   1740.926   160807.5 MULTIPOLYGON (((29932.33 29...\n4  29933.77   3313.625   595428.9 MULTIPOLYGON (((27131.28 30...\n5  30005.70   2825.594   387429.4 MULTIPOLYGON (((26451.03 30...\n6  29991.38   4428.913  1030378.8 MULTIPOLYGON (((25899.7 297...\n7  30230.86   3275.312   551732.0 MULTIPOLYGON (((27746.95 30...\n8  30222.86   2208.619   290184.7 MULTIPOLYGON (((29351.26 29...\n9  29893.78   6571.323  1084792.3 MULTIPOLYGON (((20996.49 30...\n10 30104.18   3454.239   631644.3 MULTIPOLYGON (((24472.11 29...\n\n\n\n\nImporting Attribute Data into R\n\npopdata &lt;- read_csv(\"data/aspatial/respopagesextod2011to2020.csv\")\n\n\n\nData Preparation\nBefore the map can be prepared, we need a data table with year 2020 values. The data table should include the variables PA, SZ, YOUNG, ECONOMY ACTIVE, AGED, TOTAL, DEPENDENCY.\n\nYOUNG: age group 0 to 4 until age groyup 20 to 24,\nECONOMY ACTIVE: age group 25-29 until age group 60-64,\nAGED: age group 65 and above,\nTOTAL: all age group, and\nDEPENDENCY: the ratio between young and aged against economy active group\n\n\npopdata2020 &lt;- popdata %&gt;%\n  filter(Time == 2020) %&gt;%\n  group_by(PA, SZ, AG) %&gt;%\n  summarise(`POP` = sum(`Pop`)) %&gt;%\n  ungroup() %&gt;%\n  pivot_wider(names_from=AG, \n              values_from=POP) %&gt;%\n  mutate(YOUNG = rowSums(.[3:6])\n         +rowSums(.[12])) %&gt;%\nmutate(`ECONOMY ACTIVE` = rowSums(.[7:11])+\nrowSums(.[13:15]))%&gt;%\nmutate(`AGED`=rowSums(.[16:21])) %&gt;%\nmutate(`TOTAL`=rowSums(.[3:21])) %&gt;%  \nmutate(`DEPENDENCY` = (`YOUNG` + `AGED`)\n/`ECONOMY ACTIVE`) %&gt;%\n  select(`PA`, `SZ`, `YOUNG`, \n       `ECONOMY ACTIVE`, `AGED`, \n       `TOTAL`, `DEPENDENCY`)\n\n\n\nJoining Attribute and Geospatial Data\n1st: Convert the values in PA and SZ fields to uppercase.\n\npopdata2020 &lt;- popdata2020 %&gt;%\n  mutate(across(c(PA, SZ), toupper)) %&gt;%\n  filter(`ECONOMY ACTIVE` &gt; 0)\n\n2nd: left_join() of dplyr is used to join the geographical data and attribute table using planning subzone name\n\nmpsz_pop2020 &lt;- left_join(mpsz, popdata2020,\n                          by = c(\"SUBZONE_N\" = \"SZ\"))\n\n3rd: left_join() of dplyr package is used with mpsz simple feature data frame as the left data table is to ensure that the output will be a simple features data frame.\n\nwrite_rds(mpsz_pop2020, \"data/rds/mpszpop2020.rds\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#plotting-choropleth-map-by-using-qtm",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#plotting-choropleth-map-by-using-qtm",
+    "title": "Hands-on Exercise 8",
+    "section": "Plotting choropleth map by using qtm()",
+    "text": "Plotting choropleth map by using qtm()\n\ntmap_mode(\"plot\")\nqtm(mpsz_pop2020, \n    fill = \"DEPENDENCY\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#creating-a-choropleth-map-by-using-tmaps-elements",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#creating-a-choropleth-map-by-using-tmaps-elements",
+    "title": "Hands-on Exercise 8",
+    "section": "Creating a choropleth map by using tmap’s elements",
+    "text": "Creating a choropleth map by using tmap’s elements\n\ntm_shape(mpsz_pop2020)+\n  tm_polygons(fill = \"DEPENDENCY\", \n              fill.scale = tm_scale_intervals(\n                style = \"quantile\",\n                n = 5,\n                values = \"brewer.blues\"),\n              fill.legend = tm_legend(\n                title = \"Dependency ratio\")) +\n  tm_title(\"Distribution of Dependency Ratio by planning subzone\") +\n  tm_layout(frame = TRUE) +\n  tm_borders(fill_alpha = 0.5) +\n  tm_compass(type=\"8star\", size = 2) +\n  tm_grid(alpha =0.2) +\n  tm_credits(\"Source: Planning Sub-zone boundary from Urban Redevelopment Authorithy (URA)\\n and Population data from Department of Statistics DOS\", \n             position = c(\"left\", \"bottom\"))"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#drawing-a-base-map",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#drawing-a-base-map",
+    "title": "Hands-on Exercise 8",
+    "section": "Drawing a base map",
+    "text": "Drawing a base map\n\ntm_shape(mpsz_pop2020) +\n  tm_polygons()"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#drawing-a-choropleth-map-using-tm_polygons",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#drawing-a-choropleth-map-using-tm_polygons",
+    "title": "Hands-on Exercise 8",
+    "section": "Drawing a choropleth map using tm_polygons()",
+    "text": "Drawing a choropleth map using tm_polygons()\n\ntm_shape(mpsz_pop2020)+\n  tm_polygons(\"DEPENDENCY\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#drawing-a-choropleth-map-using-tm_fill-and-tm_border",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#drawing-a-choropleth-map-using-tm_fill-and-tm_border",
+    "title": "Hands-on Exercise 8",
+    "section": "Drawing a choropleth map using tm_fill() and tm_border()",
+    "text": "Drawing a choropleth map using tm_fill() and tm_border()\nChoropleth map by using tm_fill()alone\n\ntm_shape(mpsz_pop2020)+\n  tm_fill(\"DEPENDENCY\")\n\n\n\n\n\n\n\n\nTo add the boundary of the planning subzones, tm_borders can be used \n\ntm_shape(mpsz_pop2020)+\n  tm_polygons(fill = \"DEPENDENCY\") +\n  tm_borders(lwd = 0.01,  \n             fill_alpha = 0.1)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#data-classification-methods-of-tmap",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#data-classification-methods-of-tmap",
+    "title": "Hands-on Exercise 8",
+    "section": "Data classification methods of tmap",
+    "text": "Data classification methods of tmap\ntmap provides a total ten data classification methods: fixed, sd, equal, pretty(default), quantile, kmeans, hclust, bclust, fisher, and jenks.\n\nPlotting choropleth maps with built-in classification methods\n\ntm_shape(mpsz_pop2020)+\n  tm_polygons(\"DEPENDENCY\",\n      fill.scale = tm_scale_intervals(\n        style = \"jenks\",\n        n = 5)) +\n  tm_borders(fill_alpha = 0.5)\n\n\n\n\n\n\n\n\nEqual data classification\n\ntm_shape(mpsz_pop2020)+\n  tm_polygons(\"DEPENDENCY\",\n      fill.scale = tm_scale_intervals(\n        style = \"equal\",\n        n = 5)) +\n  tm_borders(fill_alpha = 0.5)\n\n\n\n\n\n\n\n\nfisher data classification\n\ntm_shape(mpsz_pop2020)+\n  tm_polygons(\"DEPENDENCY\",\n      fill.scale = tm_scale_intervals(\n        style = \"fisher\",\n        n = 5)) +\n  tm_borders(fill_alpha = 0.5)\n\n\n\n\n\n\n\n\n\n\nPlotting a choropleth map with custome break\nFirst we get some descriptive statistics on the variable before setting the break points.\n\nsummary(mpsz_pop2020$DEPENDENCY)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n 0.1111  0.7147  0.7867  0.8585  0.8763 19.0000      92 \n\n\nThen, we set break point at 0.60, 0.70, 0.80, and 0.90. In addition, we also need to include a minimum and maximum, which we set at 0 and 100. Our breaks vector is thus c(0, 0.60, 0.70, 0.80, 0.90, 1.00)\n\ntm_shape(mpsz_pop2020)+\n  tm_polygons(\"DEPENDENCY\",\n          breaks = c(0, 0.60, 0.70, 0.80, 0.90, 1.00)) +\n  tm_borders(fill_alpha = 0.5)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#colour-scheme",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#colour-scheme",
+    "title": "Hands-on Exercise 8",
+    "section": "Colour Scheme",
+    "text": "Colour Scheme\n\nUsing ColourBrewer Palette\n\ntm_shape(mpsz_pop2020)+\n  tm_polygons(\"DEPENDENCY\",\n      fill.scale = tm_scale_intervals(\n        style = \"quantile\",\n        n = 5,\n        values = \"-brewer.greens\")) +\n  tm_borders(fill_alpha = 0.5)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#map-layouts",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#map-layouts",
+    "title": "Hands-on Exercise 8",
+    "section": "Map Layouts",
+    "text": "Map Layouts\n\nMap Legend\n\ntm_shape(mpsz_pop2020)+\n  tm_polygons(\"DEPENDENCY\",\n      fill.scale = tm_scale_intervals(\n        style = \"jenks\",\n        n = 5,\n        values = \"brewer.greens\"),\n      fill.legend = tm_legend(\n        title = \"Dependency ratio\")) +\n  tm_borders(fill_alpha = 0.5) +\n  tm_title(\"Distribution of Dependency Ratio by planning subzone \\n(Jenks classification)\")\n\n\n\n\n\n\n\n\n\n\nMap Style\n\ntm_shape(mpsz_pop2020)+\n  tm_fill(\"DEPENDENCY\", \n          style = \"quantile\", \n          palette = \"-Greens\") +\n  tm_borders(alpha = 0.5) +\n  tmap_style(\"classic\")\n\n\n\n\n\n\n\n\n\n\nCartographic Furniture\n\ntm_shape(mpsz_pop2020)+\n  tm_polygons(fill = \"DEPENDENCY\", \n              fill.scale = tm_scale_intervals(\n                style = \"quantile\",\n                n = 5,\n                values = \"brewer.blues\"),\n              fill.legend = tm_legend(\n                title = \"Dependency ratio\")) +\n  tm_title(\"Distribution of Dependency Ratio by planning subzone\") +\n  tm_layout(frame = TRUE) +\n  tm_borders(fill_alpha = 0.5) +\n  tm_compass(type=\"8star\", size = 2) +\n  tm_grid(alpha =0.2) +\n  tm_credits(\"Source: Planning Sub-zone boundary from Urban Redevelopment Authorithy (URA)\\n and Population data from Department of Statistics DOS\", \n             position = c(\"left\", \"bottom\"))\n\n\n\n\n\n\n\n\nTo reset the default style:\n\ntmap_style(\"white\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#drawing-small-multiple-choropleth-maps",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#drawing-small-multiple-choropleth-maps",
+    "title": "Hands-on Exercise 8",
+    "section": "Drawing Small Multiple Choropleth Maps",
+    "text": "Drawing Small Multiple Choropleth Maps\n\nBy assigning multiple values to at least one of the aesthetic arguments\n\ntm_shape(mpsz_pop2020)+ \n  tm_polygons(c(\"DEPENDENCY\",\"AGED\"),\n          style = c(\"equal\", \"quantile\"), \n          palette = list(\"Blues\",\"Greens\")) +\n  tm_layout(legend.position = c(\"right\", \"bottom\"))\n\n\n\n\n\n\n\n\n\n\nBy defining a group-by variable in tm_facets()\n\ntm_shape(mpsz_pop2020) +\n  tm_fill(\"DEPENDENCY\",\n          style = \"quantile\",\n          palette = \"Blues\",\n          thres.poly = 0) + \n  tm_facets(by=\"REGION_N\", \n            free.coords=TRUE) +\n  tm_layout(legend.show = FALSE,\n            title.position = c(\"center\", \"center\"), \n            title.size = 20) +\n  tm_borders(alpha = 0.5)\n\n\n\n\n\n\n\n\n\n\nBy creating multiple stand-alone maps with tmap_arrange()\n\nyoungmap &lt;- tm_shape(mpsz_pop2020)+ \n  tm_polygons(\"YOUNG\", \n              style = \"quantile\", \n              palette = \"Blues\")\n\nagedmap &lt;- tm_shape(mpsz_pop2020)+ \n  tm_polygons(\"AGED\", \n              style = \"quantile\", \n              palette = \"Blues\")\n\ntmap_arrange(youngmap, agedmap, asp=1, ncol=2)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#mappping-spatial-object-meeting-a-selection-criterion",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#mappping-spatial-object-meeting-a-selection-criterion",
+    "title": "Hands-on Exercise 8",
+    "section": "Mappping Spatial Object Meeting a Selection Criterion",
+    "text": "Mappping Spatial Object Meeting a Selection Criterion\n\ntm_shape(mpsz_pop2020[mpsz_pop2020$REGION_N==\"CENTRAL REGION\", ])+\n  tm_fill(\"DEPENDENCY\", \n          style = \"quantile\", \n          palette = \"Blues\", \n          legend.hist = TRUE, \n          legend.is.portrait = TRUE,\n          legend.hist.z = 0.1) +\n  tm_layout(legend.outside = TRUE,\n            legend.height = 0.45, \n            legend.width = 5.0,\n            legend.position = c(\"right\", \"bottom\"),\n            frame = FALSE) +\n  tm_borders(alpha = 0.5)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#the-data-1",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#the-data-1",
+    "title": "Hands-on Exercise 8",
+    "section": "The Data",
+    "text": "The Data\n\nImporting the Data\n\nsgpools &lt;- read_csv(\"data/aspatial/SGPools_svy21.csv\")\n\n\nlist(sgpools) \n\n[[1]]\n# A tibble: 306 × 7\n   NAME           ADDRESS POSTCODE XCOORD YCOORD `OUTLET TYPE` `Gp1Gp2 Winnings`\n   &lt;chr&gt;          &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt;\n 1 Livewire (Mar… 2 Bayf…    18972 30842. 29599. Branch                        5\n 2 Livewire (Res… 26 Sen…    98138 26704. 26526. Branch                       11\n 3 SportsBuzz (K… Lotus …   738078 20118. 44888. Branch                        0\n 4 SportsBuzz (P… 1 Sele…   188306 29777. 31382. Branch                       44\n 5 Prime Serango… Blk 54…   552542 32239. 39519. Branch                        0\n 6 Singapore Poo… 1A Woo…   731001 21012. 46987. Branch                        3\n 7 Singapore Poo… Blk 64…   370064 33990. 34356. Branch                       17\n 8 Singapore Poo… Blk 88…   370088 33847. 33976. Branch                       16\n 9 Singapore Poo… Blk 30…   540308 33910. 41275. Branch                       21\n10 Singapore Poo… Blk 20…   560202 29246. 38943. Branch                       25\n# ℹ 296 more rows"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#creating-a-sf-data-frame-from-an-aspatial-data-frame",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#creating-a-sf-data-frame-from-an-aspatial-data-frame",
+    "title": "Hands-on Exercise 8",
+    "section": "Creating a sf data frame from an aspatial data frame",
+    "text": "Creating a sf data frame from an aspatial data frame\nThe code chunk below converts sgpools data frame into a simple feature data frame by using st_as_sf() of sf packages\n\nsgpools_sf &lt;- st_as_sf(sgpools, \n                       coords = c(\"XCOORD\", \"YCOORD\"),\n                       crs= 3414)\n\nYou can display the basic information of the newly created sgpools_sf by using the code chunk below.\n\nlist(sgpools_sf)\n\n[[1]]\nSimple feature collection with 306 features and 5 fields\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: 7844.194 ymin: 26525.7 xmax: 45176.57 ymax: 47987.13\nProjected CRS: SVY21 / Singapore TM\n# A tibble: 306 × 6\n   NAME                         ADDRESS POSTCODE `OUTLET TYPE` `Gp1Gp2 Winnings`\n * &lt;chr&gt;                        &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt;\n 1 Livewire (Marina Bay Sands)  2 Bayf…    18972 Branch                        5\n 2 Livewire (Resorts World Sen… 26 Sen…    98138 Branch                       11\n 3 SportsBuzz (Kranji)          Lotus …   738078 Branch                        0\n 4 SportsBuzz (PoMo)            1 Sele…   188306 Branch                       44\n 5 Prime Serangoon North        Blk 54…   552542 Branch                        0\n 6 Singapore Pools Woodlands C… 1A Woo…   731001 Branch                        3\n 7 Singapore Pools 64 Circuit … Blk 64…   370064 Branch                       17\n 8 Singapore Pools 88 Circuit … Blk 88…   370088 Branch                       16\n 9 Singapore Pools Anchorvale … Blk 30…   540308 Branch                       21\n10 Singapore Pools Ang Mo Kio … Blk 20…   560202 Branch                       25\n# ℹ 296 more rows\n# ℹ 1 more variable: geometry &lt;POINT [m]&gt;"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#drawing-proportional-symbol-map",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#drawing-proportional-symbol-map",
+    "title": "Hands-on Exercise 8",
+    "section": "Drawing Proportional Symbol Map",
+    "text": "Drawing Proportional Symbol Map\nThe code below will turn on the interactive mode of tmap.\n\ntmap_mode(\"view\")\n\n\nInteractive point symbol map\n\ntm_shape(sgpools_sf) + \n  tm_bubbles(fill = \"red\",\n           size = 1,\n           col = \"black\",\n           lwd = 1)\n\n\n\n\n\n\n\nLets make it proportional & different colour\n\ntm_shape(sgpools_sf) + \n  tm_bubbles(fill = \"OUTLET TYPE\", \n             size = \"Gp1Gp2 Winnings\",\n             col = \"black\",\n             lwd = 1)\n\n\n\n\n\n\n\n\n\nFaceted plots\n\ntm_shape(sgpools_sf) + \n  tm_bubbles(fill = \"OUTLET TYPE\", \n             size = \"Gp1Gp2 Winnings\",\n             col = \"black\",\n             lwd = 1) + \n  tm_facets(by= \"OUTLET TYPE\",\n            nrow = 1,\n            sync = TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBefore you end the session, it is wiser to switch tmap’s Viewer back to plot mode by using the code chunk below.\n\ntmap_mode(\"plot\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#the-data-2",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#the-data-2",
+    "title": "Hands-on Exercise 8",
+    "section": "The Data",
+    "text": "The Data\n\nImporting the Data\n\nNGA_wp &lt;- read_rds(\"data/rds/NGA_wp.rds\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#basic-choropleth-mapping",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#basic-choropleth-mapping",
+    "title": "Hands-on Exercise 8",
+    "section": "Basic Choropleth Mapping",
+    "text": "Basic Choropleth Mapping\n\nVisualising distribution of non-functional water point\n\np1 &lt;- tm_shape(NGA_wp) +\n  tm_polygons(fill = \"wp_functional\",\n             fill.scale = tm_scale_intervals(\n               style = \"equal\",\n               n = 10,\n               values = \"brewer.blues\"),\n             fill.legend = tm_legend(\n               position = c(\"right\", \"bottom\"))) +\n  tm_borders(lwd = 0.1,\n             fill_alpha = 1) +\n  tm_title(\"Distribution of functional water point by LGAs\")\n\n\np2 &lt;- tm_shape(NGA_wp) + \n  tm_polygons(fill = \"total_wp\", \n              fill.scale = tm_scale_intervals(\n                style = \"equal\",\n                n = 10,\n                values = \"brewer.blues\"),\n              fill.legend = tm_legend(\n                position = c(\"right\", \"bottom\"))) +\n  tm_borders(lwd = 0.1, \n             fill_alpha = 1) + \n  tm_title(\"Distribution of total  water point by LGAs\")\n\n\ntmap_arrange(p2, p1, nrow = 1)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#choropleth-map-for-rates",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#choropleth-map-for-rates",
+    "title": "Hands-on Exercise 8",
+    "section": "Choropleth Map for Rates",
+    "text": "Choropleth Map for Rates\n\nDeriving Proportion of Functional Water Points and Non-Functional Water Points\nWe will tabulate the proportion of functional water points and the proportion of non-functional water points in each LGA.\n\nNGA_wp &lt;- NGA_wp %&gt;%\n  mutate(pct_functional = wp_functional/total_wp) %&gt;%\n  mutate(pct_nonfunctional = wp_nonfunctional/total_wp)\n\n\n\nPlotting map of rate\n\ntm_shape(NGA_wp) +\n  tm_polygons(\"pct_functional\",\n              fill.scale = tm_scale_intervals(\n                style = \"equal\",\n                n = 10,\n                values = \"brewer.blues\"),\n              fill.legend = tm_legend(\n                position = c(\"right\", \"bottom\"))) + \n  tm_borders(lwd = 0.1,\n             fill_alpha = 1) +\n  tm_title(\"Rate map of functional water point by LGAs\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html#extreme-value-maps",
+    "href": "Hands-on_Ex/Hands-on_EX08/HE08.html#extreme-value-maps",
+    "title": "Hands-on Exercise 8",
+    "section": "Extreme Value Maps",
+    "text": "Extreme Value Maps\nVariations of common choropleth maps where the classification is designed to highlight extreme values at the lower and upper end of the scale\n\nPercentile Map\n\nData Preparation\nStep 1: Exclude NAs\n\nNGA_wp &lt;- NGA_wp %&gt;%\n  drop_na()\n\nStep 2: Create customised classification and extract values\n\npercent &lt;- c(0,.01,.1,.5,.9,.99,1)\nvar &lt;- NGA_wp[\"pct_functional\"] %&gt;%\n  st_set_geometry(NULL)\nquantile(var[,1], percent)\n\n       0%        1%       10%       50%       90%       99%      100% \n0.0000000 0.0000000 0.2169811 0.4791667 0.8611111 1.0000000 1.0000000 \n\n\n\n\nCreating the get.var function\n\nget.var &lt;- function(vname,df) {\n  v &lt;- df[vname] %&gt;% \n    st_set_geometry(NULL)\n  v &lt;- unname(v[,1])\n  return(v)\n}\n\n\n\nA percentile mapping function\n\npercentmap &lt;- function(vnam, df, legtitle=NA, mtitle=\"Percentile Map\"){\n  percent &lt;- c(0,.01,.1,.5,.9,.99,1)\n  var &lt;- get.var(vnam, df)\n  bperc &lt;- quantile(var, percent)\n  tm_shape(df) +\n  tm_polygons() +\n  tm_shape(df) +\n     tm_polygons(vnam,\n             title=legtitle,\n             breaks=bperc,\n             palette=\"Blues\",\n          labels=c(\"&lt; 1%\", \"1% - 10%\", \"10% - 50%\", \"50% - 90%\", \"90% - 99%\", \"&gt; 99%\"))  +\n  tm_borders() +\n  tm_layout(main.title = mtitle, \n            title.position = c(\"right\",\"bottom\"))\n}\n\n\n\nTest drive the percentile mapping function\n\npercentmap(\"total_wp\", NGA_wp)\n\n\n\n\n\n\n\n\n\n\n\nBox Map\n\nggplot(data = NGA_wp,\n       aes(x = \"\",\n           y = wp_nonfunctional)) +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\nCreating the boxbreaks function\n\nboxbreaks &lt;- function(v,mult=1.5) {\n  qv &lt;- unname(quantile(v))\n  iqr &lt;- qv[4] - qv[2]\n  upfence &lt;- qv[4] + mult * iqr\n  lofence &lt;- qv[2] - mult * iqr\n  # initialize break points vector\n  bb &lt;- vector(mode=\"numeric\",length=7)\n  # logic for lower and upper fences\n  if (lofence &lt; qv[1]) {  # no lower outliers\n    bb[1] &lt;- lofence\n    bb[2] &lt;- floor(qv[1])\n  } else {\n    bb[2] &lt;- lofence\n    bb[1] &lt;- qv[1]\n  }\n  if (upfence &gt; qv[5]) { # no upper outliers\n    bb[7] &lt;- upfence\n    bb[6] &lt;- ceiling(qv[5])\n  } else {\n    bb[6] &lt;- upfence\n    bb[7] &lt;- qv[5]\n  }\n  bb[3:5] &lt;- qv[2:4]\n  return(bb)\n}\n\n\n\nCreating the get.var function\n\nget.var &lt;- function(vname,df) {\n  v &lt;- df[vname] %&gt;% st_set_geometry(NULL)\n  v &lt;- unname(v[,1])\n  return(v)\n}\n\n\nvar &lt;- get.var(\"wp_nonfunctional\", NGA_wp) \nboxbreaks(var)\n\n[1] -56.5   0.0  14.0  34.0  61.0 131.5 278.0\n\n\n\n\nBoxmap function\n\nboxmap &lt;- function(vnam, df, \n                   legtitle=NA,\n                   mtitle=\"Box Map\",\n                   mult=1.5){\n  var &lt;- get.var(vnam,df)\n  bb &lt;- boxbreaks(var)\n  tm_shape(df) +\n    tm_polygons() +\n  tm_shape(df) +\n     tm_fill(vnam,title=legtitle,\n             breaks=bb,\n             palette=\"Blues\",\n          labels = c(\"lower outlier\", \n                     \"&lt; 25%\", \n                     \"25% - 50%\", \n                     \"50% - 75%\",\n                     \"&gt; 75%\", \n                     \"upper outlier\"))  +\n  tm_borders() +\n  tm_layout(main.title = mtitle, \n            title.position = c(\"left\",\n                               \"top\"))\n}\n\n\ntmap_mode(\"plot\")\nboxmap(\"wp_nonfunctional\", NGA_wp)"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#transaction-frequency-vs-customer-lifetime-value",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#transaction-frequency-vs-customer-lifetime-value",
+    "title": "Take-Home Exercise 2",
+    "section": "4.3 Transaction Frequency vs Customer Lifetime Value",
+    "text": "4.3 Transaction Frequency vs Customer Lifetime Value\nA scatter plot is used to examine the relationship between transaction frequency and customer lifetime value. This is appropriate because both variables are continuous, and the objective is to determine whether more active customers tend to generate greater financial value.\nThis visualisation helps answer the following analytical question:\nDo more active customers generate higher lifetime value?\n\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(scales)\n\nggplot(fintech, aes(x = transaction_frequency, y = customer_lifetime_value, color = customer_segment)) +\n  geom_point(alpha = 0.5) +\n  scale_y_continuous(labels = comma) +\n  labs(\n    title = \"Transaction Frequency vs Customer Lifetime Value\",\n    x = \"Transaction Frequency\",\n    y = \"Customer Lifetime Value\",\n    color = \"Customer Segment\"\n  ) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#customer-lifetime-value-vs-churn-probability",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#customer-lifetime-value-vs-churn-probability",
+    "title": "Take-Home Exercise 2",
+    "section": "4.4 Customer Lifetime Value vs Churn Probability",
+    "text": "4.4 Customer Lifetime Value vs Churn Probability\nA second scatter plot is used to examine the relationship between customer lifetime value and churn probability. This chart is particularly important for this module because it helps detect customers who are both highly valuable and at risk of leaving.\nThis visualization helps answer the following analytical question:\nAre high-value customers also at risk of churn?\n\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(scales)\n\nggplot(fintech, aes(x = customer_lifetime_value, y = churn_probability, color = clv_segment)) +\n  geom_point(alpha = 0.5) +\n  scale_x_continuous(labels = comma) +\n  labs(\n    title = \"Customer Lifetime Value vs Churn Probability\",\n    x = \"Customer Lifetime Value\",\n    y = \"Churn Probability\",\n    color = \"CLV Segment\"\n  ) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#active-products-by-clv-segment",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#active-products-by-clv-segment",
+    "title": "Take-Home Exercise 2",
+    "section": "4.5 Active Products by CLV Segment",
+    "text": "4.5 Active Products by CLV Segment\nA boxplot can be used to compare the number of active products across CLV segments. This helps determine whether customers with higher lifetime value also tend to use more products.\nThis visualization helps answer the following analytical question:\nDoes product ownership relate to higher customer value?\n\nlibrary(ggplot2)\nlibrary(dplyr)\n\nggplot(fintech, aes(x = clv_segment, y = active_products)) +\n  geom_boxplot() +\n  labs(\n    title = \"Active Products by CLV Segment\",\n    x = \"CLV Segment\",\n    y = \"Number of Active Products\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n5. Visualisation Design and Interaction Principles \nreadability \ncomparison across segments \nprogressive drill-down \ncoordinated views \ncolour and label choices \n6. Proposed UI Design \nstoryboard logic \nsidebar + main panel layout \ninput-output mapping \n7. Prototype Visualisations \ntested charts with code and explanation \n8. Conclusion \nhow the module supports the final Shiny application"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#project-storyline",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#project-storyline",
+    "title": "Take-Home Exercise 2",
+    "section": "2.1. Project Storyline",
+    "text": "2.1. Project Storyline\nThe project will deliver an interactive Shiny dashboard consisting of three analytical modules\n\nModule 1: Customer Overview and Exploratory Analysis\nWill provide a comprehensive overview of the customer population and identify key demographic and behavioral segments.\n\n\nModule 2: Customer Overview & Segmentation\nWill analyse how customers interact with the platform and evaluate their service experience.\n\n\nModule 3 – Retention Risk & Customer Value\nThis module will focus on analysing the relationship between customer engagement, churn risk, and long-term financial value.\nThe analysis will combines demographic, behavioral indicators and financial metrics to identify customers who generate significant value while also detecting customers who may be at risk of leaving."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#role-of-the-module-in-the-larger-system",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#role-of-the-module-in-the-larger-system",
+    "title": "Take-Home Exercise 2",
+    "section": "2.2. Role of the Module in the Larger System",
+    "text": "2.2. Role of the Module in the Larger System\nThis report focuses on Module 3: Retention Risk & Customer Value.\nWhile the first two modules provide insights into the whole customer base and how they engagement with fintech services, this module focuses specifically on the customer profitability and retention risk.\nBy integrating the previously analyzed behavioral indicators, satisfaction metrics, and financial metrics, in this module we will be able to identify who are the most valuable customer segments while also detecting early warning signals of potential churn.\nThese insights could support decision-making for marketing strategies and if executed correctly, improve long-term profitability."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#data-cleaning",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#data-cleaning",
+    "title": "Take-Home Exercise 2",
+    "section": "3.3. Data Cleaning",
+    "text": "3.3. Data Cleaning\nData preparation involved various steps to ensure the dataset was suitable for analysis:\n\nVerify data types for numerical and categorical variables\nCheck for duplicate customers\nIdentify any missing values in key analytical variables\nRemove incomplete observations where necessary"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#clv-distribution-by-customer-segment",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#clv-distribution-by-customer-segment",
+    "title": "Take-Home Exercise 2",
+    "section": "4.1. CLV Distribution by Customer Segment",
+    "text": "4.1. CLV Distribution by Customer Segment\nA boxplot is used to compare the distribution of customer lifetime value across customer segments. Because CLV values are highly skewed, a logarithmic scale is used to improve readability.\nFields used:\n\ncustomer_segment\ncustomer_lifetime_value\n\nThis visualization helps identify which segments generate the highest financial value."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#churn-probability-by-segment",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#churn-probability-by-segment",
+    "title": "Take-Home Exercise 2",
+    "section": "4.2. Churn Probability by Segment",
+    "text": "4.2. Churn Probability by Segment\nA bar chart compares average churn probability across customer segments.\nFields used:\n\ncustomer_segment\nchurn_probability\n\nThis graph highlights which customer groups exhibit higher retention risk."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#engagement-behavior-vs-customer-value",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#engagement-behavior-vs-customer-value",
+    "title": "Take-Home Exercise 2",
+    "section": "4.3. Engagement Behavior vs Customer Value",
+    "text": "4.3. Engagement Behavior vs Customer Value\nA scatter plot examines the relationship between transaction frequency and customer lifetime value.\nFields used:\n\ntransaction_frequency\ncustomer_lifetime_value\ncustomer_segment\n\nThis chart helps determine whether highly engaged customers generate higher financial value."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#geographic-distribution-of-customer-value",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#geographic-distribution-of-customer-value",
+    "title": "Take-Home Exercise 2",
+    "section": "4.4. Geographic Distribution of Customer Value",
+    "text": "4.4. Geographic Distribution of Customer Value\nA geospatial map visualises the distribution of average customer lifetime value across geographic locations.\nFields used:\n\nlatitude\nlongitude\ncustomer_lifetime_value\n\nThis map reveals geographic patterns in fintech customer value."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#readability",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#readability",
+    "title": "Take-Home Exercise 2",
+    "section": "Readability",
+    "text": "Readability\nVisualizations use clear axis labels, minimal visual clutter, and appropriate scaling to ensure readability."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#comparison-across-segments",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#comparison-across-segments",
+    "title": "Take-Home Exercise 2",
+    "section": "Comparison Across Segments",
+    "text": "Comparison Across Segments\nCharts will allow comparison across customer segments and groups to highlight meaningful differences in engagement and value."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#progressive-drill-down",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#progressive-drill-down",
+    "title": "Take-Home Exercise 2",
+    "section": "Progressive Drill-Down",
+    "text": "Progressive Drill-Down\nIn the proposed dashboard, users will be able to interactively filter the dataset to explore specific segments and behavioral patterns in greater detail."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#coordinated-views",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#coordinated-views",
+    "title": "Take-Home Exercise 2",
+    "section": "Coordinated Views",
+    "text": "Coordinated Views\nMultiple visualizations are designed to work together, enabling users to analyse relationships between engagement, customer value, and retention risk."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#colour-and-label-choices",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#colour-and-label-choices",
+    "title": "Take-Home Exercise 2",
+    "section": "Colour and Label Choices",
+    "text": "Colour and Label Choices\nConsistent color schemes will be used across visualizations to represent customer segments and ensure consistency."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#clv-distribution-by-customer-segment-1",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#clv-distribution-by-customer-segment-1",
+    "title": "Take-Home Exercise 2",
+    "section": "7.1. CLV Distribution by Customer Segment",
+    "text": "7.1. CLV Distribution by Customer Segment\n\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(scales)\n\nggplot(fintech, aes(x = customer_segment, y = customer_lifetime_value)) +\n  geom_boxplot() +\n  scale_y_log10(labels = comma) +\n  labs(\n    title = \"Customer Lifetime Value by Customer Segment (Log Scale)\",\n    x = \"Customer Segment\",\n    y = \"Customer Lifetime Value (Log Scale)\"\n  ) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#churn-probability-by-segment-1",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#churn-probability-by-segment-1",
+    "title": "Take-Home Exercise 2",
+    "section": "7.2. Churn Probability by Segment",
+    "text": "7.2. Churn Probability by Segment\n\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(scales)\n\nchurn_by_segment &lt;- fintech %&gt;%\n  group_by(customer_segment) %&gt;%\n  summarise(avg_churn = mean(churn_probability, na.rm = TRUE))\n\nggplot(churn_by_segment, aes(x = customer_segment, y = avg_churn)) +\n  geom_col() +\n  geom_text(\n    aes(label = label_percent(accuracy = 0.1)(avg_churn)),\n    vjust = -0.5\n  ) +\n  scale_y_continuous(\n    labels = label_percent(),\n    breaks = seq(0.30, 0.35, 0.01)\n  ) +\n  coord_cartesian(ylim = c(0.30, 0.35)) +\n  labs(\n    title = \"Average Churn Probability by Customer Segment\",\n    x = \"Customer Segment\",\n    y = \"Average Churn Probability\"\n  ) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#engagement-behavior-vs-customer-value-1",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#engagement-behavior-vs-customer-value-1",
+    "title": "Take-Home Exercise 2",
+    "section": "7.3. Engagement Behavior vs Customer Value",
+    "text": "7.3. Engagement Behavior vs Customer Value\n\nx_limit &lt;- quantile(fintech$transaction_frequency, 0.95)\ny_limit &lt;- quantile(fintech$customer_lifetime_value, 0.95)\n\nggplot(fintech, aes(x = transaction_frequency, y = customer_lifetime_value, color = customer_segment)) +\n  geom_point(alpha = 0.5) +\n  scale_y_continuous(labels = comma) +\n  coord_cartesian(xlim = c(0, x_limit), ylim = c(0, y_limit)) +\n  labs(\n    title = \"Transaction Frequency vs Customer Lifetime Value\",\n    x = \"Transaction Frequency\",\n    y = \"Customer Lifetime Value\",\n    color = \"Customer Segment\"\n  ) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#geographic-distribution-of-customer-value-1",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#geographic-distribution-of-customer-value-1",
+    "title": "Take-Home Exercise 2",
+    "section": "7.4. Geographic Distribution of Customer Value",
+    "text": "7.4. Geographic Distribution of Customer Value\n\n\nlibrary(maps)\n\nclv_location &lt;- fintech %&gt;%\n  group_by(city, department, latitude, longitude) %&gt;%\n  summarise(avg_clv = mean(customer_lifetime_value, na.rm = TRUE))\n\ncolombia_map &lt;- map_data(\"world\", region = \"Colombia\")\n\nggplot() +\n  geom_polygon(data = colombia_map,\n               aes(x = long, y = lat, group = group),\n               fill = \"gray90\", color = \"white\") +\n  geom_point(data = clv_location,\n             aes(x = longitude, y = latitude,\n                 color = avg_clv,\n                 size = avg_clv),\n             alpha = 0.7) +\n  scale_color_viridis_c(labels = scales::comma) +\n  labs(\n    title = \"Average Customer Lifetime Value by Location\",\n    color = \"Average CLV\",\n    size = \"Average CLV\"\n  ) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX09/HE09.html",
+    "href": "Hands-on_Ex/Hands-on_EX09/HE09.html",
+    "title": "Hands-on Exercise 9",
+    "section": "",
+    "text": "Hands-On Exercise # 9."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX09/HE09.html#overview",
+    "href": "Hands-on_Ex/Hands-on_EX09/HE09.html#overview",
+    "title": "Hands-on Exercise 9",
+    "section": "",
+    "text": "Hands-On Exercise # 9."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX09/HE09.html#install-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_EX09/HE09.html#install-and-launching-r-packages",
+    "title": "Hands-on Exercise 9",
+    "section": "Install and Launching R Packages",
+    "text": "Install and Launching R Packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(tidyverse,igraph,tidygraph,ggraph,visNetwork,lubridate,clock,graphlayouts,concaveman,ggforce)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX09/HE09.html#the-data",
+    "href": "Hands-on_Ex/Hands-on_EX09/HE09.html#the-data",
+    "title": "Hands-on Exercise 9",
+    "section": "The Data",
+    "text": "The Data\n\nImporting t\n\n\nhe Data\nWe’ll be importing two data sets. GAStech-email_edges.csv & GAStech_email_nodes.csv\n\nGAStech_nodes &lt;- read_csv(\"data/GAStech_email_node.csv\")\nGAStech_edges &lt;- read_csv(\"data/GAStech_email_edge-v2.csv\")\n\n\n\nReviewing the imported data\n\nglimpse(GAStech_edges)\n\nRows: 9,063\nColumns: 8\n$ source      &lt;dbl&gt; 43, 43, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 26, 26, 26…\n$ target      &lt;dbl&gt; 41, 40, 51, 52, 53, 45, 44, 46, 48, 49, 47, 54, 27, 28, 29…\n$ SentDate    &lt;chr&gt; \"6/1/2014\", \"6/1/2014\", \"6/1/2014\", \"6/1/2014\", \"6/1/2014\"…\n$ SentTime    &lt;time&gt; 08:39:00, 08:39:00, 08:58:00, 08:58:00, 08:58:00, 08:58:0…\n$ Subject     &lt;chr&gt; \"GT-SeismicProcessorPro Bug Report\", \"GT-SeismicProcessorP…\n$ MainSubject &lt;chr&gt; \"Work related\", \"Work related\", \"Work related\", \"Work rela…\n$ sourceLabel &lt;chr&gt; \"Sven.Flecha\", \"Sven.Flecha\", \"Kanon.Herrero\", \"Kanon.Herr…\n$ targetLabel &lt;chr&gt; \"Isak.Baza\", \"Lucas.Alcazar\", \"Felix.Resumir\", \"Hideki.Coc…\n\n\n\n\nWrangling time\n\nGAStech_edges &lt;- GAStech_edges %&gt;%\n  mutate(SendDate = dmy(SentDate)) %&gt;%\n  mutate(Weekday = wday(SentDate,\n                        label = TRUE,\n                        abbr = FALSE))\n\n\n\nWrangling attributes\n\nGAStech_edges_aggregated &lt;- GAStech_edges %&gt;%\n  filter(MainSubject == \"Work related\") %&gt;%\n  group_by(source, target, Weekday) %&gt;%\n    summarise(Weight = n()) %&gt;%\n  filter(source!=target) %&gt;%\n  filter(Weight &gt; 1) %&gt;%\n  ungroup()"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX09/HE09.html#creating-network-objects-using-tidygraph",
+    "href": "Hands-on_Ex/Hands-on_EX09/HE09.html#creating-network-objects-using-tidygraph",
+    "title": "Hands-on Exercise 9",
+    "section": "Creating network objects using tidygraph",
+    "text": "Creating network objects using tidygraph\n\nUsing tbl_graph() to build tidygraph data model.\n\nGAStech_graph &lt;- tbl_graph(nodes = GAStech_nodes,\n                           edges = GAStech_edges_aggregated, \n                           directed = TRUE)\n\n\nGAStech_graph\n\n# A tbl_graph: 54 nodes and 1372 edges\n#\n# A directed multigraph with 1 component\n#\n# Node Data: 54 × 4 (active)\n      id label               Department     Title                               \n   &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt;          &lt;chr&gt;                               \n 1     1 Mat.Bramar          Administration Assistant to CEO                    \n 2     2 Anda.Ribera         Administration Assistant to CFO                    \n 3     3 Rachel.Pantanal     Administration Assistant to CIO                    \n 4     4 Linda.Lagos         Administration Assistant to COO                    \n 5     5 Ruscella.Mies.Haber Administration Assistant to Engineering Group Mana…\n 6     6 Carla.Forluniau     Administration Assistant to IT Group Manager       \n 7     7 Cornelia.Lais       Administration Assistant to Security Group Manager \n 8    44 Kanon.Herrero       Security       Badging Office                      \n 9    45 Varja.Lagos         Security       Badging Office                      \n10    46 Stenig.Fusil        Security       Building Control                    \n# ℹ 44 more rows\n#\n# Edge Data: 1,372 × 4\n   from    to Weekday Weight\n  &lt;int&gt; &lt;int&gt; &lt;ord&gt;    &lt;int&gt;\n1     1     2 Sunday       5\n2     1     2 Monday       2\n3     1     2 Tuesday      3\n# ℹ 1,369 more rows\n\n\n\n\nChanging the active object\n\nGAStech_graph %&gt;%\n  activate(edges) %&gt;%\n  arrange(desc(Weight))\n\n# A tbl_graph: 54 nodes and 1372 edges\n#\n# A directed multigraph with 1 component\n#\n# Edge Data: 1,372 × 4 (active)\n    from    to Weekday   Weight\n   &lt;int&gt; &lt;int&gt; &lt;ord&gt;      &lt;int&gt;\n 1    40    41 Saturday      13\n 2    41    43 Monday        11\n 3    35    31 Tuesday       10\n 4    40    41 Monday        10\n 5    40    43 Monday        10\n 6    36    32 Sunday         9\n 7    40    43 Saturday       9\n 8    41    40 Monday         9\n 9    19    15 Wednesday      8\n10    35    38 Tuesday        8\n# ℹ 1,362 more rows\n#\n# Node Data: 54 × 4\n     id label           Department     Title           \n  &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;          &lt;chr&gt;           \n1     1 Mat.Bramar      Administration Assistant to CEO\n2     2 Anda.Ribera     Administration Assistant to CFO\n3     3 Rachel.Pantanal Administration Assistant to CIO\n# ℹ 51 more rows"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX09/HE09.html#plotting-static-network-graphs-with-ggraphpackage",
+    "href": "Hands-on_Ex/Hands-on_EX09/HE09.html#plotting-static-network-graphs-with-ggraphpackage",
+    "title": "Hands-on Exercise 9",
+    "section": "Plotting Static Network Graphs with ggraphpackage",
+    "text": "Plotting Static Network Graphs with ggraphpackage\n\ng &lt;- ggraph(GAStech_graph) + \n  geom_edge_link(aes(colour = 'grey50')) +\n  geom_node_point(aes(colour = 'grey40'))\n\ng + theme_graph(background = 'grey10',\n                text_colour = 'white')\n\n\n\n\n\n\n\n\n\nFruchterman and Reingold layout\n\ng &lt;- ggraph(GAStech_graph, \n            layout = \"fr\") +\n  geom_edge_link(aes()) +\n  geom_node_point(aes())\n\ng + theme_graph()\n\n\n\n\n\n\n\n\n\n\nModifying network nodes\n\ng &lt;- ggraph(GAStech_graph, \n            layout = \"nicely\") + \n  geom_edge_link(aes()) +\n  geom_node_point(aes(colour = Department, \n                      size = 3))\n\ng + theme_graph()\n\n\n\n\n\n\n\n\n\n\nModifying edges\n\ng &lt;- ggraph(GAStech_graph, \n            layout = \"nicely\") +\n  geom_edge_link(aes(width=Weight), \n                 alpha=0.2) +\n  scale_edge_width(range = c(0.1, 5)) +\n  geom_node_point(aes(colour = Department), \n                  size = 3)\n\ng + theme_graph()"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX09/HE09.html#creating-facet-graphs",
+    "href": "Hands-on_Ex/Hands-on_EX09/HE09.html#creating-facet-graphs",
+    "title": "Hands-on Exercise 9",
+    "section": "Creating facet graphs",
+    "text": "Creating facet graphs\n\nWorking with facet_edges()\n\nset_graph_style()\n\ng &lt;- ggraph(GAStech_graph, \n            layout = \"nicely\") + \n  geom_edge_link(aes(width=Weight), \n                 alpha=0.2) +\n  scale_edge_width(range = c(0.1, 5)) +\n  geom_node_point(aes(colour = Department), \n                  size = 2)\n\ng + facet_edges(~Weekday)\n\n\n\n\n\n\n\n\n\n\nA framed facet graph\n\nset_graph_style() \n\ng &lt;- ggraph(GAStech_graph, \n            layout = \"nicely\") + \n  geom_edge_link(aes(width=Weight), \n                 alpha=0.2) +\n  scale_edge_width(range = c(0.1, 5)) +\n  geom_node_point(aes(colour = Department), \n                  size = 2)\n  \ng + facet_edges(~Weekday) +\n  th_foreground(foreground = \"grey80\",  \n                border = TRUE) +\n  theme(legend.position = 'bottom')\n\n\n\n\n\n\n\n\n\n\nWorking with facet_nodes()\n\nset_graph_style()\n\ng &lt;- ggraph(GAStech_graph, \n            layout = \"nicely\") + \n  geom_edge_link(aes(width=Weight), \n                 alpha=0.2) +\n  scale_edge_width(range = c(0.1, 5)) +\n  geom_node_point(aes(colour = Department), \n                  size = 2)\n  \ng + facet_nodes(~Department)+\n  th_foreground(foreground = \"grey80\",  \n                border = TRUE) +\n  theme(legend.position = 'bottom')"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX09/HE09.html#network-metrics-analysis",
+    "href": "Hands-on_Ex/Hands-on_EX09/HE09.html#network-metrics-analysis",
+    "title": "Hands-on Exercise 9",
+    "section": "Network Metrics Analysis",
+    "text": "Network Metrics Analysis\n\nComputing centrality indices\n\ng &lt;- GAStech_graph %&gt;%\n  mutate(betweenness_centrality = centrality_betweenness()) %&gt;%\n  ggraph(layout = \"fr\") + \n  geom_edge_link(aes(width=Weight), \n                 alpha=0.2) +\n  scale_edge_width(range = c(0.1, 5)) +\n  geom_node_point(aes(colour = Department,\n            size=betweenness_centrality))\ng + theme_graph()\n\n\n\n\n\n\n\n\n\n\nVisualising network metrics\n\ng &lt;- GAStech_graph %&gt;%\n  ggraph(layout = \"fr\") + \n  geom_edge_link(aes(width=Weight), \n                 alpha=0.2) +\n  scale_edge_width(range = c(0.1, 5)) +\n  geom_node_point(aes(colour = Department, \n                      size = centrality_betweenness()))\ng + theme_graph()\n\n\n\n\n\n\n\n\n\n\nVisualizing Community\n\ng &lt;- GAStech_graph %&gt;%\n  activate(nodes) %&gt;%\n  mutate(community = as.factor(\n    group_optimal(weights = Weight)),\n         betweenness_measure = centrality_betweenness()) %&gt;%\n  ggraph(layout = \"fr\") +\n  geom_mark_hull(\n    aes(x, y, \n        group = community, \n        fill = community),  \n    alpha = 0.2,  \n    expand = unit(0.3, \"cm\"),  # Expand\n    radius = unit(0.3, \"cm\")  # Smoothness\n  ) + \n  geom_edge_link(aes(width=Weight), \n                 alpha=0.2) +\n  scale_edge_width(range = c(0.1, 5)) +\n  geom_node_point(aes(fill = Department,\n                      size = betweenness_measure),\n                      color = \"black\",\n                      shape = 21)\n  \ng + theme_graph()"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX09/HE09.html#building-interactive-network-graph-with-visnetwork",
+    "href": "Hands-on_Ex/Hands-on_EX09/HE09.html#building-interactive-network-graph-with-visnetwork",
+    "title": "Hands-on Exercise 9",
+    "section": "Building Interactive Network Graph with visNetwork",
+    "text": "Building Interactive Network Graph with visNetwork\n\nData preparation\n\nGAStech_edges_aggregated &lt;- GAStech_edges %&gt;%\n  left_join(GAStech_nodes, by = c(\"sourceLabel\" = \"label\")) %&gt;%\n  rename(from = id) %&gt;%\n  left_join(GAStech_nodes, by = c(\"targetLabel\" = \"label\")) %&gt;%\n  rename(to = id) %&gt;%\n  filter(MainSubject == \"Work related\") %&gt;%\n  group_by(from, to) %&gt;%\n    summarise(weight = n()) %&gt;%\n  filter(from!=to) %&gt;%\n  filter(weight &gt; 1) %&gt;%\n  ungroup()\n\n\n\nPlotting the first interactive network graph\n\nvisNetwork(GAStech_nodes,\n           GAStech_edges_aggregated) %&gt;%\n  visIgraphLayout(layout = \"layout_with_fr\") \n\n\n\n\n\n\n\nWorking with visual attributes - Nodes\n\nGAStech_nodes &lt;- GAStech_nodes %&gt;%\n  rename(group = Department) \n\n\nvisNetwork(GAStech_nodes,\n           GAStech_edges_aggregated) %&gt;%\n  visIgraphLayout(layout = \"layout_with_fr\") %&gt;%\n  visLegend() %&gt;%\n  visLayout(randomSeed = 123)\n\n\n\n\n\n\n\nWorking with visual attributes - Edges\n\nvisNetwork(GAStech_nodes,\n           GAStech_edges_aggregated) %&gt;%\n  visIgraphLayout(layout = \"layout_with_fr\") %&gt;%\n  visEdges(arrows = \"to\", \n           smooth = list(enabled = TRUE, \n                         type = \"curvedCW\")) %&gt;%\n  visLegend() %&gt;%\n  visLayout(randomSeed = 123)\n\n\n\n\n\n\n\nInteractivity\n\nvisNetwork(GAStech_nodes,\n           GAStech_edges_aggregated) %&gt;%\n  visIgraphLayout(layout = \"layout_with_fr\") %&gt;%\n  visOptions(highlightNearest = TRUE,\n             nodesIdSelection = TRUE) %&gt;%\n  visLegend() %&gt;%\n  visLayout(randomSeed = 123)"
   }
 ]

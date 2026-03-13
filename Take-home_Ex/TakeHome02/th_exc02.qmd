@@ -1,0 +1,332 @@
+---
+title: "Take-Home Exercise 2"
+author: "Oscar Ricardo Moreno Gonzalez"
+date: "March 15, 2026"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+---
+
+# **1. Introduction**
+
+## 1.1. Project Background
+
+Fintech companies operate in highly competitive digital markets where customer engagement and retention are critical for long-term sustainability. Unlike traditional banks, fintech platforms rely heavily on digital interactions between users and financial services. Understanding how customers interact with these platforms is essential for identifying profitable customer segments and maintaining long-term customer relationships.
+
+## 1.2. Why Customer Retention Matters?
+
+Any business requires significant marketing and operational costs when it wants to attract new customers. Retaining existing customers proves to be more cost-effective and provide more value for extended periods.
+
+Customers who remain active on a fintech platform tend to perform more financial transactions, adopt multiple financial products, and contribute higher customer lifetime value (CLV). In contrast, customers who show declining engagement or dissatisfaction may be more likely to discontinue their use of the platform.
+
+Identifying customers with high churn risk allows fintech companies to implement specific strategies for retaining those customers. Organizations also need to track which customers produce the most value because this information allows them to distribute resources toward their most profitable customer groups.
+
+## 1.3. Our Proposal
+
+The project objective is to develop a visual analytics application using R and Shiny for the interactive exploration of fintech customer data.
+
+This tools would allow users to dynamically filter data, explore patterns across multiple dimensions, and find relationships between behavioral indicators and financial outcomes.
+
+It is intended to help analysts compare churn risk across customer groups, examine engagement and profitability, and identify customers at risk of leaving the platform.
+
+# **2. Proposed Project Storyline**
+
+## 2.1. Project Storyline
+
+The project will deliver an interactive Shiny dashboard consisting of three analytical modules
+
+### **Module 1: Customer Overview and Exploratory Analysis**
+
+Will provide a comprehensive overview of the customer population and identify key demographic and behavioral segments.
+
+### **Module 2:** Customer Overview & Segmentation
+
+Will analyse how customers interact with the platform and evaluate their service experience.
+
+### **Module 3 –** Retention Risk & Customer Value
+
+This module will focus on analysing the relationship between customer engagement, churn risk, and long-term financial value.
+
+The analysis will combines demographic, behavioral indicators and financial metrics to identify customers who generate significant value while also detecting customers who may be at risk of leaving.
+
+## 2.2. Role of the Module in the Larger System
+
+This report focuses on **Module 3: Retention Risk & Customer Value**.
+
+While the first two modules provide insights into the whole customer base and how they engagement with fintech services, this module focuses specifically on the customer profitability and retention risk.
+
+By integrating the previously analyzed behavioral indicators, satisfaction metrics, and financial metrics, in this module we will be able to identify who are the most valuable customer segments while also detecting early warning signals of potential churn.
+
+These insights could support decision-making for marketing strategies and if executed correctly, improve long-term profitability.
+
+# **3. Data Preparation Process**
+
+## 3.1. Raw Dataset
+
+The analysis uses the **COFINFAD** (Colombian Fintech Financial Analytics) dataset, which contains detailed information about fintech customers. The dataset includes demographic information, financial product usage, transaction activity, customer satisfaction indicators, and predicted churn probabilities.
+
+The dataset contains approximately 48,000 customer records and more than 50 variables, providing a comprehensive view of customer behavior within a fintech platform.
+
+```{r}
+library(tidyverse)
+fintech <- read_csv("data/customer_data.csv")
+```
+
+## 3.2. Variable Grouping
+
+Although the dataset contains a wide range of variables, this module primarily focuses on variables related to:
+
+### **Customer Value Indicators**
+
+These variables measure the long-term financial contribution of each customer.
+
+|                         |
+|-------------------------|
+| customer_lifetime_value |
+| clv_segment             |
+| customer_segment        |
+
+### Retention Risk Indicators
+
+The indicators capture signals related to potential customer churn.
+
+|                    |
+|--------------------|
+| churn_probability  |
+| satisfaction_score |
+| nps_score          |
+
+### Transaction & Engagement Behavior Indicators
+
+These metrics indicate how actively a customer is and their engagement with the fintech platform.
+
+|                           |
+|---------------------------|
+| monthly_transaction_count |
+| average_transaction_value |
+| total_transaction_volume  |
+| transaction_frequency     |
+| active_products           |
+
+### Geographic Variables
+
+These fields allow spatial analysis of CLV and geographic patterns in fintech adoption.
+
+|            |
+|------------|
+| city       |
+| department |
+| latitude   |
+| longitude  |
+
+## 3.3. Data Cleaning 
+
+Data preparation involved various steps to ensure the dataset was suitable for analysis:
+
+1.  Verify data types for numerical and categorical variables
+
+2.  Check for duplicate customers
+
+3.  Identify any missing values in key analytical variables
+
+4.  Remove incomplete observations where necessary
+
+# **4. Selection of Visualization Techniques**
+
+The visualizations selected for this module are designed to examine the relationship between CLV, churn probability and customer engagement behavior. The charts were chosen to support a comparison across segments and a relationship analysis between continuous variables.
+
+The following visualizations are proposed for the prototype:
+
+## 4.1. CLV Distribution by Customer Segment
+
+A boxplot is used to compare the distribution of customer lifetime value across customer segments. Because CLV values are highly skewed, a logarithmic scale is used to improve readability.
+
+Fields used:
+
+-   customer_segment
+
+-   customer_lifetime_value
+
+This visualization helps identify which segments generate the highest financial value.
+
+## 4.2. Churn Probability by Segment
+
+A bar chart compares average churn probability across customer segments.
+
+Fields used:
+
+-   customer_segment
+
+-   churn_probability
+
+This graph highlights which customer groups exhibit higher retention risk.
+
+## 4.3. Engagement Behavior vs Customer Value
+
+A scatter plot examines the relationship between transaction frequency and customer lifetime value.
+
+Fields used:
+
+-   transaction_frequency
+
+-   customer_lifetime_value
+
+-   customer_segment
+
+This chart helps determine whether highly engaged customers generate higher financial value.
+
+## 4.4. Geographic Distribution of Customer Value
+
+A geospatial map visualises the distribution of average customer lifetime value across geographic locations.
+
+Fields used:
+
+-   latitude
+
+-   longitude
+
+-   customer_lifetime_value
+
+This map reveals geographic patterns in fintech customer value.
+
+# **5. Visualization Design and Interaction Principles**
+
+Several visual design principles were applied to ensure effective visual analytics.
+
+## Readability
+
+Visualizations use clear axis labels, minimal visual clutter, and appropriate scaling to ensure readability.
+
+## Comparison Across Segments
+
+Charts will allow comparison across customer segments and groups to highlight meaningful differences in engagement and value.
+
+## Progressive Drill-Down
+
+In the proposed dashboard, users will be able to interactively filter the dataset to explore specific segments and behavioral patterns in greater detail.
+
+## Coordinated Views
+
+Multiple visualizations are designed to work together, enabling users to analyse relationships between engagement, customer value, and retention risk.
+
+## Colour and Label Choices
+
+Consistent color schemes will be used across visualizations to represent customer segments and ensure consistency.
+
+# **6. Proposed UI Design**
+
+storyboard logic 
+
+sidebar + main panel layout 
+
+input-output mapping 
+
+# **7. Prototype Visualization**
+
+## 7.1. CLV Distribution by Customer Segment
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(scales)
+
+ggplot(fintech, aes(x = customer_segment, y = customer_lifetime_value)) +
+  geom_boxplot() +
+  scale_y_log10(labels = comma) +
+  labs(
+    title = "Customer Lifetime Value by Customer Segment (Log Scale)",
+    x = "Customer Segment",
+    y = "Customer Lifetime Value (Log Scale)"
+  ) +
+  theme_minimal()
+```
+
+## 7.2. Churn Probability by Segment
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(scales)
+
+churn_by_segment <- fintech %>%
+  group_by(customer_segment) %>%
+  summarise(avg_churn = mean(churn_probability, na.rm = TRUE))
+
+ggplot(churn_by_segment, aes(x = customer_segment, y = avg_churn)) +
+  geom_col() +
+  geom_text(
+    aes(label = label_percent(accuracy = 0.1)(avg_churn)),
+    vjust = -0.5
+  ) +
+  scale_y_continuous(
+    labels = label_percent(),
+    breaks = seq(0.30, 0.35, 0.01)
+  ) +
+  coord_cartesian(ylim = c(0.30, 0.35)) +
+  labs(
+    title = "Average Churn Probability by Customer Segment",
+    x = "Customer Segment",
+    y = "Average Churn Probability"
+  ) +
+  theme_minimal()
+```
+
+## 7.3. Engagement Behavior vs Customer Value
+
+```{r}
+x_limit <- quantile(fintech$transaction_frequency, 0.95)
+y_limit <- quantile(fintech$customer_lifetime_value, 0.95)
+
+ggplot(fintech, aes(x = transaction_frequency, y = customer_lifetime_value, color = customer_segment)) +
+  geom_point(alpha = 0.5) +
+  scale_y_continuous(labels = comma) +
+  coord_cartesian(xlim = c(0, x_limit), ylim = c(0, y_limit)) +
+  labs(
+    title = "Transaction Frequency vs Customer Lifetime Value",
+    x = "Transaction Frequency",
+    y = "Customer Lifetime Value",
+    color = "Customer Segment"
+  ) +
+  theme_minimal()
+```
+
+## 7.4. Geographic Distribution of Customer Value
+
+```{}
+```
+
+```{r}
+library(maps)
+
+clv_location <- fintech %>%
+  group_by(city, department, latitude, longitude) %>%
+  summarise(avg_clv = mean(customer_lifetime_value, na.rm = TRUE))
+
+colombia_map <- map_data("world", region = "Colombia")
+
+ggplot() +
+  geom_polygon(data = colombia_map,
+               aes(x = long, y = lat, group = group),
+               fill = "gray90", color = "white") +
+  geom_point(data = clv_location,
+             aes(x = longitude, y = latitude,
+                 color = avg_clv,
+                 size = avg_clv),
+             alpha = 0.7) +
+  scale_color_viridis_c(labels = scales::comma) +
+  labs(
+    title = "Average Customer Lifetime Value by Location",
+    color = "Average CLV",
+    size = "Average CLV"
+  ) +
+  theme_minimal()
+```
+
+# **8. Conclusion**
+
+The Retention Risk & Customer Value module provides valuable insights into how customer engagement influence long-term profitability within the fintech platform. By analyzing key indicators, this module helps identifying high-value customers and segments that may be at risk of disengagement.
+
+Overall, the prototype developed in this module demonstrates how data exploration can support data-driven decision making across multiple business functions. The proposed Shiny application could provide a powerful tool for fintech organizations seeking to optimise customer strategy and maximize business value in the long run.
