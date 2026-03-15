@@ -1,493 +1,10 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ISSS608_ORGMG",
-    "section": "",
-    "text": "Welcome to ISSS608 Visual Analytics and Applications.\nIn this website you will find my coursework prepared for this course."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX01/HE01.html",
-    "href": "Hands-on_Ex/Hands-on_EX01/HE01.html",
-    "title": "Hands-on Exercise 1",
-    "section": "",
-    "text": "This is my first attempt to create the course website."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX01/HE01.html#install-and-launching-r-packages",
-    "href": "Hands-on_Ex/Hands-on_EX01/HE01.html#install-and-launching-r-packages",
-    "title": "Hands-on Exercise 1",
-    "section": "Install and launching R packages",
-    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(tidyverse)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX01/HE01.html#the-data",
-    "href": "Hands-on_Ex/Hands-on_EX01/HE01.html#the-data",
-    "title": "Hands-on Exercise 1",
-    "section": "The Data",
-    "text": "The Data\nImporting the data\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\nIn this website you will find the coursework prepared for the course: ISSS608 - Visual Analytics and Applications."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX02/HE02.html",
-    "href": "Hands-on_Ex/Hands-on_EX02/HE02.html",
-    "title": "Hands-on Exercise 2",
-    "section": "",
-    "text": "Hands-On Exercise # 2."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX02/HE02.html#install-and-launching-r-packages",
-    "href": "Hands-on_Ex/Hands-on_EX02/HE02.html#install-and-launching-r-packages",
-    "title": "Hands-on Exercise 2",
-    "section": "Install and launching R packages",
-    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(ggrepel, patchwork, \n               ggthemes, hrbrthemes,\n               tidyverse)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX02/HE02.html#the-data",
-    "href": "Hands-on_Ex/Hands-on_EX02/HE02.html#the-data",
-    "title": "Hands-on Exercise 2",
-    "section": "The Data",
-    "text": "The Data\nImporting the data\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex03/HE03.html",
-    "href": "Hands-on_Ex/Hands-on_Ex03/HE03.html",
-    "title": "Hands-on Exercise 3",
-    "section": "",
-    "text": "Hands-On Exercise # 3."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex03/HE03.html#install-and-launching-r-packages",
-    "href": "Hands-on_Ex/Hands-on_Ex03/HE03.html#install-and-launching-r-packages",
-    "title": "Hands-on Exercise 3",
-    "section": "Install and launching R packages",
-    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(ggiraph, plotly, \n               patchwork, DT, tidyverse)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex03/HE03.html#the-data",
-    "href": "Hands-on_Ex/Hands-on_Ex03/HE03.html#the-data",
-    "title": "Hands-on Exercise 3",
-    "section": "The Data",
-    "text": "The Data\nImporting the data\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex03/HE03.html#interactivity-tooltips",
-    "href": "Hands-on_Ex/Hands-on_Ex03/HE03.html#interactivity-tooltips",
-    "title": "Hands-on Exercise 3",
-    "section": "Interactivity & Tooltips",
-    "text": "Interactivity & Tooltips\n\ntooltip_css &lt;- \"background-color:white; #&lt;&lt;\nfont-style:bold; color:black;\" #&lt;&lt;\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(tooltip = ID),                   \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(    #&lt;&lt;\n    opts_tooltip(    #&lt;&lt;\n      css = tooltip_css)) #&lt;&lt;\n)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex03/HE03.html#statistics-on-tooltip",
-    "href": "Hands-on_Ex/Hands-on_Ex03/HE03.html#statistics-on-tooltip",
-    "title": "Hands-on Exercise 3",
-    "section": "Statistics on Tooltip",
-    "text": "Statistics on Tooltip\n\ntooltip &lt;- function(y, ymax, accuracy = .01) {\n  mean &lt;- scales::number(y, accuracy = accuracy)\n  sem &lt;- scales::number(ymax - y, accuracy = accuracy)\n  paste(\"Mean maths scores:\", mean, \"+/-\", sem)\n}\n\ngg_point &lt;- ggplot(data=exam_data, \n                   aes(x = RACE),\n) +\n  stat_summary(aes(y = MATHS, \n                   tooltip = after_stat(  \n                     tooltip(y, ymax))),  \n    fun.data = \"mean_se\", \n    geom = GeomInteractiveCol,  \n    fill = \"light blue\"\n  ) +\n  stat_summary(aes(y = MATHS),\n    fun.data = mean_se,\n    geom = \"errorbar\", width = 0.2, size = 0.2\n  )\n\ngirafe(ggobj = gg_point,\n       width_svg = 8,\n       height_svg = 8*0.618)\n\n\n\n\n\n\nHover Effect\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(tooltip = CLASS, \n        data_id = CLASS),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(                        \n    opts_hover(css = \"fill: #202020;\"),  \n    opts_hover_inv(css = \"opacity:0.2;\") \n  )                                        \n)                                                \n\n\n\n\n\n\n\nClick Effect with Onclick\n\nexam_data$onclick &lt;- sprintf(\"window.open(\\\"%s%s\\\")\",\n\"https://www.moe.gov.sg/schoolfinder?journey=Primary%20school\",\nas.character(exam_data$ID))\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(onclick = onclick),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618)                                        \n\n\n\n\n\n\n\nMultiple Views with ggiraph\n\np1 &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(data_id = ID),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +  \n  coord_cartesian(xlim=c(0,100)) + \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\n\np2 &lt;- ggplot(data=exam_data, \n       aes(x = ENGLISH)) +\n  geom_dotplot_interactive(              \n    aes(data_id = ID),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") + \n  coord_cartesian(xlim=c(0,100)) + \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\n\ngirafe(code = print(p1 + p2), \n       width_svg = 6,\n       height_svg = 3,\n       options = list(\n         opts_hover(css = \"fill: #202020;\"),\n         opts_hover_inv(css = \"opacity:0.2;\")\n         )\n       ) \n\n\n\n\n\n\n\nInteractive Data Vizualisation (Plotly Methods)\n\np &lt;- ggplot(data=exam_data, \n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nggplotly(p)\n\n\n\n\n\n\nd &lt;- highlight_key(exam_data)\np1 &lt;- ggplot(data=d, \n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\np2 &lt;- ggplot(data=d, \n            aes(x = MATHS,\n                y = SCIENCE)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nsubplot(ggplotly(p1),\n        ggplotly(p2))\n\n\n\n\n\n\n\nInteractive Data Table\n\nd &lt;- highlight_key(exam_data) \np &lt;- ggplot(d, \n            aes(ENGLISH, \n                MATHS)) + \n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\ngg &lt;- highlight(ggplotly(p),        \n                \"plotly_selected\")  \n\ncrosstalk::bscols(gg,               \n                  DT::datatable(d), \n                  widths = 5)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex03/HE03.html#install-and-launching-r-packages-1",
-    "href": "Hands-on_Ex/Hands-on_Ex03/HE03.html#install-and-launching-r-packages-1",
-    "title": "Hands-on Exercise 3",
-    "section": "Install and launching R packages",
-    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(readxl, gifski, gapminder,\n               plotly, gganimate, tidyverse)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex03/HE03.html#the-data-1",
-    "href": "Hands-on_Ex/Hands-on_Ex03/HE03.html#the-data-1",
-    "title": "Hands-on Exercise 3",
-    "section": "The Data",
-    "text": "The Data\nImporting the data\n\ncol &lt;- c(\"Country\", \"Continent\")\nglobalPop &lt;- read_xls(\"data/GlobalPopulation.xls\",\n                      sheet=\"Data\") %&gt;%\n  mutate(across(col, as.factor)) %&gt;%\n  mutate(Year = as.integer(Year))\n\n\nStatic Population Bubble Plot\n\nggplot(globalPop, aes(x = Old, y = Young, \n                      size = Population, \n                      colour = Country)) +\n  geom_point(alpha = 0.7, \n             show.legend = FALSE) +\n  scale_colour_manual(values = country_colors) +\n  scale_size(range = c(2, 12)) +\n  labs(title = 'Year: {frame_time}', \n       x = '% Aged', \n       y = '% Young') \n\n\n\n\n\n\n\n\n\n\nAnimated Bubble Plot\n\ngg &lt;- ggplot(globalPop, \n       aes(x = Old, \n           y = Young, \n           size = Population, \n           colour = Country)) +\n  geom_point(aes(size = Population,\n                 frame = Year),\n             alpha = 0.7, \n             show.legend = FALSE) +\n  scale_colour_manual(values = country_colors) +\n  scale_size(range = c(2, 12)) +\n  labs(x = '% Aged', \n       y = '% Young')\n\nggplotly(gg)\n\n\n\n\n\n\nbp &lt;- globalPop %&gt;%\n  plot_ly(x = ~Old, \n          y = ~Young, \n          size = ~Population, \n          color = ~Continent,\n          sizes = c(2, 100),\n          frame = ~Year, \n          text = ~Country, \n          hoverinfo = \"text\",\n          type = 'scatter',\n          mode = 'markers'\n          ) %&gt;%\n  layout(showlegend = FALSE)\nbp"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html",
-    "title": "Hands-on Exercise 4",
-    "section": "",
-    "text": "Hands-On Exercise # 4."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#overview",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#overview",
-    "title": "Hands-on Exercise 4",
-    "section": "",
-    "text": "Hands-On Exercise # 4."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages",
-    "title": "Hands-on Exercise 4",
-    "section": "Install and launching R packages",
-    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(ggdist, ggridges, ggthemes,\n               colorspace, tidyverse)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#the-data",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#the-data",
-    "title": "Hands-on Exercise 4",
-    "section": "The Data",
-    "text": "The Data\nImporting the data\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-graph-ggridges-method",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-graph-ggridges-method",
-    "title": "Hands-on Exercise 4",
-    "section": "Ridgeline Graph: ggridges Method",
-    "text": "Ridgeline Graph: ggridges Method\n\nggplot(data=exam_data, \n       aes(x = ENGLISH, \n           y = CLASS, \n           fill = 0.5 - abs(0.5-after_stat(ecdf)))) +\n  stat_density_ridges(geom = \"density_ridges_gradient\", \n                      calc_ecdf = TRUE) +\n  scale_fill_viridis_c(name = \"Tail probability\",\n                       direction = -1) +\n  theme_ridges()"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-plots-with-quantile-lines",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-plots-with-quantile-lines",
-    "title": "Hands-on Exercise 4",
-    "section": "Ridgeline Plots with Quantile Lines",
-    "text": "Ridgeline Plots with Quantile Lines\n\nggplot(data=exam_data,\n       aes(x = ENGLISH, \n           y = CLASS, \n           fill = factor(stat(quantile))\n           )) +\n  stat_density_ridges(\n    geom = \"density_ridges_gradient\",\n    calc_ecdf = TRUE, \n    quantiles = c(0.025, 0.975)\n    ) +\n  scale_fill_manual(\n    name = \"Probability\",\n    values = c(\"#FF0000A0\", \"#A0A0A0A0\", \"#0000FFA0\"),\n    labels = c(\"(0, 0.025]\", \"(0.025, 0.975]\", \"(0.975, 1]\")\n  ) +\n  theme_ridges()"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-plots-with-quantile-lines-1",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-plots-with-quantile-lines-1",
-    "title": "Hands-on Exercise 4",
-    "section": "Ridgeline Plots with Quantile Lines",
-    "text": "Ridgeline Plots with Quantile Lines\n\nggplot(data=exam_data,\n       aes(x = RACE, \n           y = ENGLISH)) +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.2,\n               .width = 0,\n               point_colour = NA) +\n  geom_boxplot(width = .20,\n               outlier.shape = NA) +\n  stat_dots(side = \"left\", \n            justification = 1.2, \n            binwidth = NA,\n            dotsize = 1.5) +\n  coord_flip() +\n  theme_economist()"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages-1",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages-1",
-    "title": "Hands-on Exercise 4",
-    "section": "Install and launching R packages",
-    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(ggstatsplot, tidyverse)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#one-sample-test-gghistostats-method",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#one-sample-test-gghistostats-method",
-    "title": "Hands-on Exercise 4",
-    "section": "One-sample test: gghistostats() method",
-    "text": "One-sample test: gghistostats() method\n\nset.seed(1234)\n\ngghistostats(\n  data = exam_data,\n  x = ENGLISH,\n  type = \"bayes\",\n  test.value = 60,\n  xlab = \"English scores\"\n)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#one-sample-test",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#one-sample-test",
-    "title": "Hands-on Exercise 4",
-    "section": "One-Sample Test",
-    "text": "One-Sample Test\n\nset.seed(1234)\n\ngghistostats(\n  data = exam_data,\n  x = ENGLISH,\n  type = \"bayes\",\n  test.value = 60,\n  xlab = \"English scores\"\n)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#two-sample-mean",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#two-sample-mean",
-    "title": "Hands-on Exercise 4",
-    "section": "Two-Sample Mean",
-    "text": "Two-Sample Mean\n\nggbetweenstats(\n  data = exam_data,\n  x = GENDER, \n  y = MATHS,\n  type = \"np\",\n  \n  messages = FALSE\n)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#oneway-anova",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#oneway-anova",
-    "title": "Hands-on Exercise 4",
-    "section": "Oneway ANOVA",
-    "text": "Oneway ANOVA\n\nggbetweenstats(\n  data = exam_data,\n  x = RACE, \n  y = ENGLISH,\n  type = \"p\",\n  mean.ci = TRUE, \n  pairwise.comparisons = TRUE, \n  pairwise.display = \"s\",\n  p.adjust.method = \"fdr\",\n  messages = FALSE\n)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#test-of-correlation",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#test-of-correlation",
-    "title": "Hands-on Exercise 4",
-    "section": "Test of Correlation",
-    "text": "Test of Correlation\n\nggscatterstats(\n  data = exam_data,\n  x = MATHS,\n  y = ENGLISH,\n  marginal = FALSE,\n  )"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#test-of-association-depedence",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#test-of-association-depedence",
-    "title": "Hands-on Exercise 4",
-    "section": "Test of Association (Depedence)",
-    "text": "Test of Association (Depedence)\n\nMaths Scores: Binned into 4-Class Variable\n\nexam1 &lt;- exam_data %&gt;% \n  mutate(MATHS_bins = \n           cut(MATHS, \n               breaks = c(0,60,75,85,100))\n)\n\n\n\nVisual: Significant Test of Association\n\nggbarstats(exam1, \n           x = MATHS_bins, \n           y = GENDER)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages-2",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages-2",
-    "title": "Hands-on Exercise 4",
-    "section": "Install and launching R packages",
-    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(plotly, crosstalk, DT, \n               ggdist, ggridges, colorspace,\n               gganimate, tidyverse)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#visualizing-uncertainty-of-point-estimates",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#visualizing-uncertainty-of-point-estimates",
-    "title": "Hands-on Exercise 4",
-    "section": "Visualizing Uncertainty of Point Estimates",
-    "text": "Visualizing Uncertainty of Point Estimates\n\nSummary Statistics\n\nmy_sum &lt;- exam_data %&gt;%\n  group_by(RACE) %&gt;%\n  summarise(\n    n=n(),\n    mean=mean(MATHS),\n    sd=sd(MATHS)\n    ) %&gt;%\n  mutate(se=sd/sqrt(n-1))\n\n\n\nDisplay Data Frame in Table Format\n\nknitr::kable(head(my_sum), format = 'html')\n\n\n\n\nRACE\nn\nmean\nsd\nse\n\n\n\n\nChinese\n193\n76.50777\n15.69040\n1.132357\n\n\nIndian\n12\n60.66667\n23.35237\n7.041005\n\n\nMalay\n108\n57.44444\n21.13478\n2.043177\n\n\nOthers\n9\n69.66667\n10.72381\n3.791438"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#standard-error-bars",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#standard-error-bars",
-    "title": "Hands-on Exercise 4",
-    "section": "Standard Error Bars",
-    "text": "Standard Error Bars\n\nggplot(my_sum) +\n  geom_errorbar(\n    aes(x=RACE, \n        ymin=mean-se, \n        ymax=mean+se), \n    width=0.2, \n    colour=\"black\", \n    alpha=0.9, \n    linewidth=0.5) +\n  geom_point(aes\n           (x=RACE, \n            y=mean), \n           stat=\"identity\", \n           color=\"red\",\n           size = 1.5,\n           alpha=1) +\n  ggtitle(\"Standard error of mean maths score by rac\")"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#confidence-intervals",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#confidence-intervals",
-    "title": "Hands-on Exercise 4",
-    "section": "Confidence Intervals ",
-    "text": "Confidence Intervals \n\nggplot(my_sum) +\n  geom_errorbar(\n    aes(x=reorder(RACE, -mean), \n        ymin=mean-1.96*se, \n        ymax=mean+1.96*se), \n    width=0.2, \n    colour=\"black\", \n    alpha=0.9, \n    linewidth=0.5) +\n  geom_point(aes\n           (x=RACE, \n            y=mean), \n           stat=\"identity\", \n           color=\"red\",\n           size = 1.5,\n           alpha=1) +\n  labs(x = \"Maths score\",\n       title = \"95% confidence interval of mean maths score by race\")"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#title",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#title",
-    "title": "Hands-on Exercise 4",
-    "section": "Title",
-    "text": "Title"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-1",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-1",
-    "title": "Hands-on Exercise 4",
-    "section": "Title",
-    "text": "Title"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-2",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-2",
-    "title": "Hands-on Exercise 4",
-    "section": "Title",
-    "text": "Title"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#interactive-error-bars",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#interactive-error-bars",
-    "title": "Hands-on Exercise 4",
-    "section": "Interactive Error Bars",
-    "text": "Interactive Error Bars\n\nshared_df = SharedData$new(my_sum)\n\nbscols(widths = c(4,8),\n       ggplotly((ggplot(shared_df) +\n                   geom_errorbar(aes(\n                     x=reorder(RACE, -mean),\n                     ymin=mean-2.58*se, \n                     ymax=mean+2.58*se), \n                     width=0.2, \n                     colour=\"black\", \n                     alpha=0.9, \n                     size=0.5) +\n                   geom_point(aes(\n                     x=RACE, \n                     y=mean, \n                     text = paste(\"Race:\", `RACE`, \n                                  \"&lt;br&gt;N:\", `n`,\n                                  \"&lt;br&gt;Avg. Scores:\", round(mean, digits = 2),\n                                  \"&lt;br&gt;95% CI:[\", \n                                  round((mean-2.58*se), digits = 2), \",\",\n                                  round((mean+2.58*se), digits = 2),\"]\")),\n                     stat=\"identity\", \n                     color=\"red\", \n                     size = 1.5, \n                     alpha=1) + \n                   xlab(\"Race\") + \n                   ylab(\"Average Scores\") + \n                   theme_minimal() + \n                   theme(axis.text.x = element_text(\n                     angle = 45, vjust = 0.5, hjust=1)) +\n                   ggtitle(\"99% Confidence interval of average /&lt;br&gt;maths scores by race\")), \n                tooltip = \"text\"), \n       DT::datatable(shared_df, \n                     rownames = FALSE, \n                     class=\"compact\", \n                     width=\"100%\", \n                     options = list(pageLength = 10,\n                                    scrollX=T), \n                     colnames = c(\"No. of pupils\", \n                                  \"Avg Scores\",\n                                  \"Std Dev\",\n                                  \"Std Error\")) %&gt;%\n         formatRound(columns=c('mean', 'sd', 'se'),\n                     digits=2))"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#uncertainty-of-point-estimates-with-ggdistmethods",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#uncertainty-of-point-estimates-with-ggdistmethods",
-    "title": "Hands-on Exercise 4",
-    "section": "Uncertainty of Point Estimates with ggdistmethods",
-    "text": "Uncertainty of Point Estimates with ggdistmethods\n\nexam_data %&gt;%\n  ggplot(aes(x = RACE, y = MATHS)) +\n  stat_pointinterval(.width = 0.95,\n  .point = median,\n  .interval = qi) +\n  labs(\n    title = \"Visualising confidence intervals of median math score\",\n    subtitle = \"Median Point + Multiple-interval plot\")"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#uncertainty-of-point-estimates-with-ggdistmethods-1",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#uncertainty-of-point-estimates-with-ggdistmethods-1",
-    "title": "Hands-on Exercise 4",
-    "section": "Uncertainty of Point Estimates with ggdistmethods",
-    "text": "Uncertainty of Point Estimates with ggdistmethods\n\nexam_data %&gt;%\n  ggplot(aes(x = RACE, \n             y = MATHS)) +\n  stat_gradientinterval(   \n    fill = \"skyblue\",      \n    show.legend = TRUE     \n  ) +                        \n  labs(\n    title = \"Visualising confidence intervals of mean math score\",\n    subtitle = \"Gradient + interval plot\")"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-3",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-3",
-    "title": "Hands-on Exercise 4",
-    "section": "Title",
-    "text": "Title"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-4",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-4",
-    "title": "Hands-on Exercise 4",
-    "section": "Title",
-    "text": "Title"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-5",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#title-5",
-    "title": "Hands-on Exercise 4",
-    "section": "Title",
-    "text": "Title"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#installing-ungeviz-package",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#installing-ungeviz-package",
-    "title": "Hands-on Exercise 4",
-    "section": "Installing ungeviz Package",
-    "text": "Installing ungeviz Package\n\ndevtools::install_github(\"wilkelab/ungeviz\")"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#hops",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#hops",
-    "title": "Hands-on Exercise 4",
-    "section": "HOPs",
-    "text": "HOPs\n\nggplot(\n  data = exam_data,\n  aes(x = factor(RACE), y = MATHS)\n) +\n  geom_point(\n    position = position_jitter(height = 0.3, width = 0.05),\n    size = 0.4,\n    color = \"#0072B2\",\n    alpha = 0.5\n  ) +\n  stat_summary(\n    fun = mean,\n    geom = \"crossbar\",\n    width = 0.6,\n    color = \"#D55E00\"\n  ) +\n  theme_bw()"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#installing-r-packages",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#installing-r-packages",
-    "title": "Hands-on Exercise 4",
-    "section": "Installing R Packages",
-    "text": "Installing R Packages\n\npacman::p_load(tidyverse, FunnelPlotR, plotly, knitr)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#the-data-1",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#the-data-1",
-    "title": "Hands-on Exercise 4",
-    "section": "The Data",
-    "text": "The Data\nImporting the data\n\ncovid19 &lt;- read_csv(\"data/COVID-19_DKI_Jakarta.csv\") %&gt;%\n  mutate_if(is.character, as.factor)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#funnelplotr-basic-plot",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#funnelplotr-basic-plot",
-    "title": "Hands-on Exercise 4",
-    "section": "FunnelPlotR: Basic Plot",
-    "text": "FunnelPlotR: Basic Plot\n\nfunnel_plot(\n  .data = covid19,\n  numerator = Death,\n  denominator = Positive,\n  group = `Sub-district`,\n  data_type = \"PR\",   \n  xrange = c(0, 6500),  \n  yrange = c(0, 0.05),\n  label = NA,\n  title = \"Cumulative COVID-19 Fatality Rate by Cumulative Total Number of COVID-19 Positive Cases\", #&lt;&lt;           \n  x_label = \"Cumulative COVID-19 Positive Cases\", #&lt;&lt;\n  y_label = \"Cumulative Fatality Rate\"  #&lt;&lt;\n)\n\n\n\n\n\n\n\n\nA funnel plot object with 267 points of which 7 are outliers. \nPlot is adjusted for overdispersion."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#funnel-plot-ggplot2-methods",
-    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#funnel-plot-ggplot2-methods",
-    "title": "Hands-on Exercise 4",
-    "section": "Funnel Plot: ggplot2 Methods",
-    "text": "Funnel Plot: ggplot2 Methods\n\nComputing Derived Fields\n\ndf &lt;- covid19 %&gt;%\n  mutate(rate = Death / Positive) %&gt;%\n  mutate(rate.se = sqrt((rate*(1-rate)) / (Positive))) %&gt;%\n  filter(rate &gt; 0)\n\n\nfit.mean &lt;- weighted.mean(df$rate, 1/df$rate.se^2)\n\n\n\nCalculate Lower & Upper CI Limits\n\nnumber.seq &lt;- seq(1, max(df$Positive), 1)\nnumber.ll95 &lt;- fit.mean - 1.96 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \nnumber.ul95 &lt;- fit.mean + 1.96 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \nnumber.ll999 &lt;- fit.mean - 3.29 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \nnumber.ul999 &lt;- fit.mean + 3.29 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \ndfCI &lt;- data.frame(number.ll95, number.ul95, number.ll999, \n                   number.ul999, number.seq, fit.mean)\n\n\n\nPlot Static Funnel\n\np &lt;- ggplot(df, aes(x = Positive, y = rate)) +\n  geom_point(aes(label=`Sub-district`), \n             alpha=0.4) +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ll95), \n            size = 0.4, \n            colour = \"grey40\", \n            linetype = \"dashed\") +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ul95), \n            size = 0.4, \n            colour = \"grey40\", \n            linetype = \"dashed\") +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ll999), \n            size = 0.4, \n            colour = \"grey40\") +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ul999), \n            size = 0.4, \n            colour = \"grey40\") +\n  geom_hline(data = dfCI, \n             aes(yintercept = fit.mean), \n             size = 0.4, \n             colour = \"grey40\") +\n  coord_cartesian(ylim=c(0,0.05)) +\n  annotate(\"text\", x = 1, y = -0.13, label = \"95%\", size = 3, colour = \"grey40\") + \n  annotate(\"text\", x = 4.5, y = -0.18, label = \"99%\", size = 3, colour = \"grey40\") + \n  ggtitle(\"Cumulative Fatality Rate by Cumulative Number of COVID-19 Cases\") +\n  xlab(\"Cumulative Number of COVID-19 Cases\") + \n  ylab(\"Cumulative Fatality Rate\") +\n  theme_light() +\n  theme(plot.title = element_text(size=12),\n        legend.position = c(0.91,0.85), \n        legend.title = element_text(size=7),\n        legend.text = element_text(size=7),\n        legend.background = element_rect(colour = \"grey60\", linetype = \"dotted\"),\n        legend.key.height = unit(0.3, \"cm\"))\np\n\n\n\n\n\n\n\n\n\n\nInteractive Funnel\n\nfp_ggplotly &lt;- ggplotly(p,\n  tooltip = c(\"label\", \n              \"x\", \n              \"y\"))\nfp_ggplotly"
-  },
-  {
     "objectID": "Take-home_Ex/TakeHome01/th_exc01.html",
     "href": "Take-home_Ex/TakeHome01/th_exc01.html",
     "title": "Take-Home Exercise 1",
     "section": "",
     "text": "Introduction: This project applies visual analytics to explore factors associated with student learning outcomes using a large-scale survey dataset from the University of Education, Vietnam National University, Hanoi. The dataset captures students demographic characteristics, study behaviors, time allocation, and perceptions of institutional and social support, alongside their academic performance measured by GPA.\nObjective: Use visually driven analysis to uncover and communicate key patterns in how individual, social, and institutional factors relate to student outcomes.\nThe analysis emphasizes exploratory visualization to support reasoning, comparison, and interpretation. Using R, ggplot2, and selected visualization extensions, the project identifies a set of key observations that highlight meaningful relationships and distributions within the data, demonstrating how visual analytics can help us understand of educational processes and learning environments.\n\n\n\n\n\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(tidyverse, ggcorrplot, ggridges, scales)\n\n\n\n\n\n\n\n\nPackage\nDescription\n\n\n\n\ntidyverse\nA collection of R packages (including ggplot2, dplyr, and tidyr) used for data cleaning, transformation, and visualization.\n\n\nggcorrplot\nUsed to visualize correlation matrices in a graphical format.\n\n\nggridges\nProvides ridgeplots that allow comparison of distributions across multiple groups.\n\n\nscales\nEnhances visualizations by formatting axes and legends (percentages, labels, breaks, etc.).\n\n\n\n\n\n\nThe original dataset was provided as an CSV file containing numerically coded demographic, behavioral, and perception variables.\n\nData preparation was conducted in R.\nAll categorical and ordinal variables were explicitly recoded as factors with meaningful labels based on the survey documentation (e.g., GPA levels, Likert-scale perceptions, and time-use categories).\nOrdinal variables were converted to ordered factors to preserve their inherent ranking.\nNo observations were removed during preprocessing, as the dataset contained complete responses.\nAll transformations and analytical visualizations are fully reproducible within this Quarto document.\n\n\nlearning_data &lt;- read_csv(\"data/database.csv\")\n\n\nlearning_data &lt;- learning_data %&gt;%\n  mutate(\n    GPA = factor(\n      GPA,\n      levels = 1:5,\n      labels = c(\"Poor\", \"Average\", \"Fair\", \"Good\", \"Excellent\"),\n      ordered = TRUE\n    ),\n\n    Gender = factor(\n      Gender,\n      levels = c(1, 2),\n      labels = c(\"Male\", \"Female\")\n    ),\n\n    Study_Methods = factor(Study_Methods, ordered = TRUE),\n    Quality_Lecturer = factor(Quality_Lecturer, ordered = TRUE),\n    TrainingCurriculum = factor(TrainingCurriculum, ordered = TRUE)\n  )\n\n\n\n\nOut of the 22 variables available in the original dataset, a subset of 15 key academic, behavioral, and demographic variables was selected to address the analytical questions. These fields were chosen because they directly relate to student performance, learning behavior and institutional context. Together, they provide a structured framework to examine how individual effort, environmental factors, and socioeconomic context have an impact on academic outcomes.\n\n\n\n\n\n\n\nVariable\nDescription\n\n\n\n\nGPA\nOrdinal academic performance category ranging from Poor to Excellent.\n\n\nGender\nBinary variable (Male/Female).\n\n\nTime_Studying\nNumber of hours spent studying per day.\n\n\nTime_SocialMedia\nDaily time allocated to social media usage.\n\n\nStudy_Methods\nSelf-reported effectiveness or quality of study strategies.\n\n\nQuality_Lecturer\nStudent’s perception of teaching effectiveness.\n\n\nAdapt_Learning_Uni\nPerception of student’s adaptation to university.\n\n\nStudy_Methods\nEffectiveness and organization of student’s study strategies and learning approaches.\n\n\nSupportOf_Uni\nPerception of academic and administrative support.\n\n\nSupportOf_Lec\nLevel of guidance, accessibility, and academic assistance from lecturers.\n\n\nFacilitie_Uni\nAdequacy and quality of university facilities.\n\n\nQuality_Lecturer\nPerception of teaching effectiveness.\n\n\nTrainingCurriculum\nPerceived relevance and structure of the curriculum.\n\n\nCompetitive_Class\nPerceived level of academic competition in the classroom.\n\n\nInfuenceF_Friends\nPerceived influence of peers and friends on academic motivation and performance."
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#install-and-launching-r-packages",
-    "href": "Take-home_Ex/TakeHome01/th_exc01.html#install-and-launching-r-packages",
-    "title": "Take-Home Exercise 1",
-    "section": "Install and launching R packages",
-    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(tidyverse, ggcorrplot, ggridges,\n               scales)"
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#data-preprocessing",
-    "href": "Take-home_Ex/TakeHome01/th_exc01.html#data-preprocessing",
-    "title": "Take-Home Exercise 1",
-    "section": "Data Preprocessing",
-    "text": "Data Preprocessing\nThe original dataset was provided as an CSV file containing numerically coded demographic, behavioral, and perception variables.\n\nData preparation was conducted in R.\nAll categorical and ordinal variables were explicitly recoded as factors with meaningful labels based on the survey documentation (e.g., GPA levels, Likert-scale perceptions, and time-use categories).\nOrdinal variables were converted to ordered factors to preserve their inherent ranking.\nNo observations were removed during preprocessing, as the dataset contained complete responses.\nAll transformations and analytical visualizations are fully reproducible within this Quarto document.\n\n\nlearning_data &lt;- read_csv(\"data/database.csv\")\n\n\nlearning_data &lt;- learning_data %&gt;%\n  mutate(\n    GPA = factor(\n      GPA,\n      levels = 1:5,\n      labels = c(\"Poor\", \"Average\", \"Fair\", \"Good\", \"Excellent\"),\n      ordered = TRUE\n    ),\n\n    Gender = factor(\n      Gender,\n      levels = c(1, 2),\n      labels = c(\"Male\", \"Female\")\n    ),\n\n    Study_Methods = factor(Study_Methods, ordered = TRUE),\n    Quality_Lecturer = factor(Quality_Lecturer, ordered = TRUE),\n    TrainingCurriculum = factor(TrainingCurriculum, ordered = TRUE)\n  )"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html",
-    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html",
-    "title": "Hands-on Exercise 5",
-    "section": "",
-    "text": "Hands-On Exercise # 5."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#overview",
-    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#overview",
-    "title": "Hands-on Exercise 5",
-    "section": "",
-    "text": "Hands-On Exercise # 5."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#install-and-launching-r-packages",
-    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#install-and-launching-r-packages",
-    "title": "Hands-on Exercise 5",
-    "section": "Install and Launching R Packages",
-    "text": "Install and Launching R Packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(plotly, ggtern, tidyverse)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#the-data",
-    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#the-data",
-    "title": "Hands-on Exercise 5",
-    "section": "The Data",
-    "text": "The Data\n\nImporting the Data\n\npop_data &lt;- read_csv(\"data/resp.csv\")\n\n\n\nPreparing the Data\nUse the mutate() function of dplyr package to derive three new measures, namely: young, active, and old.\n\n#Deriving the young, economy active and old measures\nagpop_mutated &lt;- pop_data %&gt;%\n  mutate(`Year` = as.character(Year))%&gt;%\n  spread(AG, Population) %&gt;%\n  mutate(YOUNG = rowSums(.[4:8]))%&gt;%\n  mutate(ACTIVE = rowSums(.[9:16]))  %&gt;%\n  mutate(OLD = rowSums(.[17:21])) %&gt;%\n  mutate(TOTAL = rowSums(.[22:24])) %&gt;%\n  filter(Year == 2018)%&gt;%\n  filter(TOTAL &gt; 0)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#plotting-a-static-ternary-diagram",
-    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#plotting-a-static-ternary-diagram",
-    "title": "Hands-on Exercise 5",
-    "section": "Plotting a Static Ternary Diagram",
-    "text": "Plotting a Static Ternary Diagram\n\n#Building the static ternary plot\nggtern(data=agpop_mutated, aes(x=YOUNG,y=ACTIVE, z=OLD)) +\n  geom_point() +\n  labs(title=\"Population structure, 2015\") +\n  theme_rgbw()"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#plotting-an-interative-ternary-diagram",
-    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#plotting-an-interative-ternary-diagram",
-    "title": "Hands-on Exercise 5",
-    "section": "Plotting an Interative Ternary Diagram",
-    "text": "Plotting an Interative Ternary Diagram\n\n# reusable function for creating annotation object\nlabel &lt;- function(txt) {\n  list(\n    text = txt, \n    x = 0.1, y = 1,\n    ax = 0, ay = 0,\n    xref = \"paper\", yref = \"paper\", \n    align = \"center\",\n    font = list(family = \"serif\", size = 15, color = \"white\"),\n    bgcolor = \"#b3b3b3\", bordercolor = \"black\", borderwidth = 2\n  )\n}\n\n# reusable function for axis formatting\naxis &lt;- function(txt) {\n  list(\n    title = txt, tickformat = \".0%\", tickfont = list(size = 10)\n  )\n}\n\nternaryAxes &lt;- list(\n  aaxis = axis(\"Young\"), \n  baxis = axis(\"Active\"), \n  caxis = axis(\"Old\")\n)\n\n# Initiating a plotly visualization \nplot_ly(\n  agpop_mutated, \n  a = ~YOUNG, \n  b = ~ACTIVE, \n  c = ~OLD, \n  color = I(\"black\"), \n  type = \"scatterternary\"\n) %&gt;%\n  layout(\n    annotations = label(\"Ternary Markers\"), \n    ternary = ternaryAxes\n  )"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#install-and-launching-r-packages-1",
-    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#install-and-launching-r-packages-1",
-    "title": "Hands-on Exercise 5",
-    "section": "Install and launching R packages",
-    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(corrplot, ggstatsplot, tidyverse)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#the-data-1",
-    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#the-data-1",
-    "title": "Hands-on Exercise 5",
-    "section": "The Data",
-    "text": "The Data\n\nImporting the Data\n\nwine &lt;- read_csv(\"data/wine_quality.csv\")"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#building-correlation-matrix",
-    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#building-correlation-matrix",
-    "title": "Hands-on Exercise 5",
-    "section": "Building Correlation Matrix",
-    "text": "Building Correlation Matrix\n\nPlotting a Basic Correlation Matrix: pairs() method\n\npairs(wine[,2:12])\n\n\n\n\n\n\n\n\n\n\nDrawing the Lower Corner\n\npairs(wine[,2:12], upper.panel = NULL)\n\n\n\n\n\n\n\n\n\n\nDrawing the Upper Corner\n\npairs(wine[,2:12], lower.panel = NULL)\n\n\n\n\n\n\n\n\n\n\nIncluding with correlation coefficients\n\npanel.cor &lt;- function(x, y, digits=2, prefix=\"\", cex.cor, ...) {\nusr &lt;- par(\"usr\")\non.exit(par(usr))\npar(usr = c(0, 1, 0, 1))\nr &lt;- abs(cor(x, y, use=\"complete.obs\"))\ntxt &lt;- format(c(r, 0.123456789), digits=digits)[1]\ntxt &lt;- paste(prefix, txt, sep=\"\")\nif(missing(cex.cor)) cex.cor &lt;- 0.8/strwidth(txt)\ntext(0.5, 0.5, txt, cex = cex.cor * (1 + r) / 2)\n}\n\npairs(wine[,2:12], \n      upper.panel = panel.cor)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#visualizing-correlation-matrix-ggcormat",
-    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#visualizing-correlation-matrix-ggcormat",
-    "title": "Hands-on Exercise 5",
-    "section": "Visualizing Correlation Matrix: ggcormat()",
-    "text": "Visualizing Correlation Matrix: ggcormat()\n\nThe Basic Plot\n\nggstatsplot::ggcorrmat(\n  data = wine, \n  cor.vars = 1:11,\n  ggcorrplot.args = list(outline.color = \"black\", \n                         hc.order = TRUE,\n                         tl.cex = 10),\n  title    = \"Correlogram for wine dataset\",\n  subtitle = \"Four pairs are no significant at p &lt; 0.05\"\n)\n\n\n\n\n\n\n\nggplot.component = list(\n    theme(text=element_text(size=5),\n      axis.text.x = element_text(size = 8),\n      axis.text.y = element_text(size = 8)))"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#building-multiple-plots",
-    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#building-multiple-plots",
-    "title": "Hands-on Exercise 5",
-    "section": "Building multiple plots",
-    "text": "Building multiple plots\n\ngrouped_ggcorrmat(\n  data = wine,\n  cor.vars = 1:11,\n  grouping.var = type,\n  type = \"robust\",\n  p.adjust.method = \"holm\",\n  plotgrid.args = list(ncol = 2),\n  ggcorrplot.args = list(outline.color = \"black\", \n                         hc.order = TRUE,\n                         tl.cex = 10),\n  annotation.args = list(\n    tag_levels = \"a\",\n    title = \"Correlogram for wine dataset\",\n    subtitle = \"The measures are: alcohol, sulphates, fixed acidity, citric acid, chlorides, residual sugar, density, free sulfur dioxide and volatile acidity\",\n    caption = \"Dataset: UCI Machine Learning Repository\"\n  )\n)"
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#install-and-launch-r-packages",
-    "href": "Take-home_Ex/TakeHome01/th_exc01.html#install-and-launch-r-packages",
-    "title": "Take-Home Exercise 1",
-    "section": "Install and Launch R packages",
-    "text": "Install and Launch R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(tidyverse, ggcorrplot, ggridges, scales)\n\n\n\n\n\n\n\n\nPackage\nDescription\n\n\n\n\ntidyverse\nA collection of R packages (including ggplot2, dplyr, and tidyr) used for data cleaning, transformation, and visualization.\n\n\nggcorrplot\nUsed to visualize correlation matrices in a graphical format.\n\n\nggridges\nProvides ridgeplots that allow comparison of distributions across multiple groups.\n\n\nscales\nEnhances visualizations by formatting axes and legends (percentages, labels, breaks, etc.)."
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#gpa-distribution-by-gender",
-    "href": "Take-home_Ex/TakeHome01/th_exc01.html#gpa-distribution-by-gender",
-    "title": "Take-Home Exercise 1",
-    "section": "1. GPA Distribution by Gender",
-    "text": "1. GPA Distribution by Gender\n\nlearning_data %&gt;%\n  count(GPA, Gender) %&gt;%\n  mutate(prop = n / sum(n)) %&gt;%\n  ggplot(aes(x = GPA, y = prop, fill = Gender)) +\n  geom_col() +\n  geom_text(\n    aes(label = scales::percent(prop, accuracy = 0.1)),\n    position = position_stack(vjust = 0.5),\n    size = 3.5,\n    color = \"white\"\n  ) +\n  scale_y_continuous(labels = scales::percent) +\n  labs(\n    title = \"Overall GPA Distribution by Gender\",\n    x = \"GPA Category\",\n    y = \"Proportion of All Students\",\n    fill = \"Gender\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\nThis graph show us the distribution of GPA categories segmented by gender. Overall, most students cluster within the “Fair” and “Good” categories, with relatively few in the “Poor” or “Excellent” extremes. When segmented, female students show a slightly higher proportional concentration in the upper GPA categories, particularly “Good,” while male students appear somewhat more represented in the lower GPA ranges. However, the overall pattern remains similar across both groups, indicating that gender differences in academic outcomes are present but not pronounced. Visually, the chart suggests modest differences rather than structural disparities in performance between genders."
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#study-time-vs-gpa",
-    "href": "Take-home_Ex/TakeHome01/th_exc01.html#study-time-vs-gpa",
-    "title": "Take-Home Exercise 1",
-    "section": "2. Study Time vs GPA",
-    "text": "2. Study Time vs GPA\n\nlearning_data %&gt;%\n  count(Time_Studying, GPA) %&gt;%\n  group_by(Time_Studying) %&gt;%\n  mutate(prop = n / sum(n)) %&gt;%\n  ggplot(aes(x = GPA, y = Time_Studying, fill = prop)) +\n  geom_tile(color = \"white\") +\n  geom_text(\n    aes(label = scales::percent(prop, accuracy = 0.1)),\n    size = 3\n  ) +\n  scale_fill_gradient(\n    low = \"white\",\n    high = \"steelblue\",\n    labels = scales::percent\n  ) +\n  labs(\n    title = \"Study Time vs GPA Distribution\",\n    x = \"GPA Category\",\n    y = \"Average Daily Study Time\",\n    fill = \"Proportion\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\nThis heatmap visualization represents the distribution of GPA categories across different levels of daily study time. While higher study time categories show a greater concentration of “Good” and “Excellent” outcomes, the relationship is not strictly linear.\nModerate study time also display substantial representation in upper GPA categories, suggesting diminishing returns beyond a certain limit. (Students reporting extremely high study time do not exclusively dominate the top GPA category) Indicating that time investment alone does not fully determine performance."
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#study-methods-vs-gpa",
-    "href": "Take-home_Ex/TakeHome01/th_exc01.html#study-methods-vs-gpa",
-    "title": "Take-Home Exercise 1",
-    "section": "4. Study Methods vs GPA",
-    "text": "4. Study Methods vs GPA\n\nggplot(learning_data, aes(x = GPA, y = as.numeric(Study_Methods))) +\n  geom_violin(fill = \"lightblue\", alpha = 0.7) +\n  geom_boxplot(width = 0.15, outlier.shape = NA) +\n  labs(\n    title = \"Perceived Study Methods by GPA\",\n    x = \"GPA Category\",\n    y = \"Study Methods Rating\"\n  ) +\n  theme_minimal()"
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#lecturer-quality-vs-gpa",
-    "href": "Take-home_Ex/TakeHome01/th_exc01.html#lecturer-quality-vs-gpa",
-    "title": "Take-Home Exercise 1",
-    "section": "5. Lecturer Quality vs GPA",
-    "text": "5. Lecturer Quality vs GPA\n\nggplot(learning_data, aes(\n  x = as.numeric(Quality_Lecturer),\n  y = GPA,\n  fill = GPA\n)) +\n  geom_density_ridges(alpha = 0.7, scale = 1.1) +\n  labs(\n    title = \"Perceived Lecturer Quality Across GPA Levels\",\n    x = \"Lecturer Quality Rating\",\n    y = \"GPA Category\"\n  ) +\n  theme_minimal() +\n  theme(legend.position = \"none\")\n\n\n\n\n\n\n\n\nThe ridgeline plot reveals a gradual upward shift in perceived lecturer quality as GPA increases. Higher-performing students tend to report stronger and more concentrated evaluations of lecturer quality, while lower GPA categories display broader and slightly lower distributions. The compression of variance among top GPA groups suggests greater consensus in their perceptions. The visual progression across GPA levels supports the interpretation that instructional quality contributes positively to student outcomes, but it operates within a broader ecosystem of academic and personal influences. Overall, the pattern highlights lecturer quality as a stabilizing rather than singular factor in performance differentiation."
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#correlation-matrix-of-learning-factors",
-    "href": "Take-home_Ex/TakeHome01/th_exc01.html#correlation-matrix-of-learning-factors",
-    "title": "Take-Home Exercise 1",
-    "section": "6. Correlation Matrix of Learning Factors",
-    "text": "6. Correlation Matrix of Learning Factors\n\ngroup_b &lt;- learning_data %&gt;%\n  select(\n    GPA,\n    Adapt_Learning_Uni,\n    Study_Methods,\n    SupportOf_Uni,\n    SupportOf_Lec,\n    Facilitie_Uni,\n    Quality_Lecturer,\n    TrainingCurriculum,\n    Competitive_Class,\n    InfuenceF_Friends\n  ) %&gt;%\n  mutate(across(everything(), as.numeric))\n\ncorr_matrix &lt;- cor(group_b, use = \"complete.obs\")\n\nggcorrplot(\n  corr_matrix,\n  type = \"lower\",\n  lab = TRUE,\n  lab_size = 3,\n  colors = c(\"firebrick\", \"white\", \"steelblue\")\n) +\n  labs(title = \"Correlation Matrix of Learning Factors and GPA\")\n\n\n\n\n\n\n\n\nThis correlation graph summarizes the relationships among institutional, behavioral, and social factors alongside GPA. Strong positive correlations are visible among institutional variables such as lecturer quality, university support, and curriculum suitability, suggesting that students perceive these elements as interconnected.\nWe can see that correlations between these factors and GPA are positive but comparatively modest, which indicates that academic performance is influenced by multiple dimensions rather than a single dominant variable.\n\nggplot(learning_data, aes(x = GPA, y = as.numeric(Competitive_Class))) +\n  geom_boxplot(outlier.shape = NA) +\n  geom_jitter(width = 0.15, alpha = 0.3) +\n  labs(\n    title = \"Perceived Classroom Competition by GPA\",\n    x = \"GPA Category\",\n    y = \"Competition Level\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\nThis plot compares perceived classroom competition levels across GPA categories. We can see that the distribution of perceived competition levels is relatively consistent across GPA categories, suggesting that classroom competition does not substantially differ between high or low performing students.\nWe can also notice variability is larger among lower GPA groups, indicating less consistent perceptions of competition. While moderate competition appears common across all GPA levels, extreme competition levels are less dominant among lower-performing students. The visualization suggests that competition may function as a motivating factor for some students, but its influence likely depends on individual adaptability and study strategies."
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#social-media-usage-vs-gpa",
-    "href": "Take-home_Ex/TakeHome01/th_exc01.html#social-media-usage-vs-gpa",
-    "title": "Take-Home Exercise 1",
-    "section": "3. Social Media Usage vs GPA",
-    "text": "3. Social Media Usage vs GPA\n\nlearning_data %&gt;%\n  count(Time_SocialMedia, GPA) %&gt;%\n  group_by(Time_SocialMedia) %&gt;%\n  mutate(prop = n / sum(n)) %&gt;%\n  ggplot(aes(x = GPA, y = Time_SocialMedia, fill = prop)) +\n  geom_tile(color = \"white\") +\n  geom_text(aes(label = scales::percent(prop, accuracy = 0.1)),\n            size = 3) +\n  scale_fill_gradient(low = \"white\", high = \"steelblue\",\n                      labels = scales::percent) +\n  labs(\n    title = \"Social Media Usage vs GPA Distribution\",\n    x = \"GPA Category\",\n    y = \"Daily Social Media Time\",\n    fill = \"Proportion\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\nThis second heatmap illustrates the distribution of GPA categories across levels of daily social media usage. Higher concentrations of “Good” and “Excellent” GPAs appear among students reporting moderate or lower usage, while heavier usage categories show a relatively larger presence in middle GPA tiers. However, the relationship is not completely linear. Overall, the pattern suggests that balanced time allocation may be more relevant than absolute restriction."
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#filtering-relevant-variables",
-    "href": "Take-home_Ex/TakeHome01/th_exc01.html#filtering-relevant-variables",
-    "title": "Take-Home Exercise 1",
-    "section": "Filtering Relevant Variables",
-    "text": "Filtering Relevant Variables\nOut of the 22 variables available in the original dataset, a subset of 15 key academic, behavioral, and demographic variables was elected to address the analytical questions. These fields were chosen because they directly relate to student performance, learning behavior and institutional context. Together, they provide a structured framework to examine how individual effort, environmental factors, and socioeconomic context have an impact on academic outcomes.\n\n\n\n\n\n\n\nVariable\nDescription\n\n\n\n\nGPA\nOrdinal academic performance category ranging from Poor to Excellent.\n\n\nGender\nBinary variable (Male/Female).\n\n\nTime_Studying\nNumber of hours spent studying per day.\n\n\nTime_SocialMedia\nDaily time allocated to social media usage.\n\n\nStudy_Methods\nSelf-reported effectiveness or quality of study strategies.\n\n\nQuality_Lecturer\nStudent’s perception of teaching effectiveness.\n\n\nAdapt_Learning_Uni\nPerception of student’s adaptation to university.\n\n\nStudy_Methods\nEffectiveness and organization of student’s study strategies and learning approaches.\n\n\nSupportOf_Uni\nPerception of academic and administrative support.\n\n\nSupportOf_Lec\nLevel of guidance, accessibility, and academic assistance from lecturers.\n\n\nFacilitie_Uni\nAdequacy and quality of university facilities.\n\n\nQuality_Lecturer\nPerception of teaching effectiveness.\n\n\nTrainingCurriculum\nPerceived relevance and structure of the curriculum.\n\n\nCompetitive_Class\nPerceived level of academic competition in the classroom.\n\n\nInfuenceF_Friends\nPerceived influence of peers and friends on academic motivation and performance."
   },
   {
     "objectID": "Take-home_Ex/TakeHome01/th_exc01.html#overview",
@@ -518,116 +35,11 @@
     "text": "6. Classroom Competition vs GPA\n\nPlotCode\n\n\n\nplot_competition\n\n\n\n\n\n\n\n\n\n\nplot_competition &lt;- ggplot(learning_data, aes(x = GPA, y = as.numeric(Competitive_Class))) +\n  geom_boxplot(outlier.shape = NA, color = \"steelblue\") +\n  geom_jitter(width = 0.15, alpha = 0.3, color = \"steelblue\") +\n  labs(\n    title = \"Perceived Classroom Competition by GPA\",\n    x = \"GPA Category\",\n    y = \"Competition Level\"\n  ) +\n  theme_minimal()\n\n\n\nThis plot compares perceived classroom competition levels across GPA categories. We can see that the distribution of perceived competition levels is relatively consistent across GPA categories, suggesting that classroom competition does not substantially differ between high or low performing students.\nWe can also notice variability is larger among lower GPA groups, indicating less consistent perceptions of competition. While moderate competition appears common across all GPA levels, extreme competition levels are less dominant among lower-performing students. The visualization suggests that competition may function as a motivating factor for some students, but its influence likely depends on individual adaptability and study strategies.\n\n7. Correlation Matrix of Learning Factors\n\nPlotCode\n\n\n\nplot_corr\n\n\n\n\n\n\n\n\n\n\ngroup_b &lt;- learning_data %&gt;%\n  select(\n    GPA,\n    Adapt_Learning_Uni,\n    Study_Methods,\n    SupportOf_Uni,\n    SupportOf_Lec,\n    Facilitie_Uni,\n    Quality_Lecturer,\n    TrainingCurriculum,\n    Competitive_Class,\n    InfuenceF_Friends\n  ) %&gt;%\n  mutate(across(everything(), as.numeric))\n\ncorr_matrix &lt;- cor(group_b, use = \"complete.obs\")\n\nplot_corr &lt;- ggcorrplot(\n  corr_matrix,\n  type = \"lower\",\n  lab = TRUE,\n  lab_size = 3,\n  colors = c(\"white\", \"grey80\", \"steelblue\")\n) +\n  labs(title = \"Correlation Matrix of Learning Factors and GPA\")\n\n\n\nThis correlation graph summarizes the relationships among institutional, behavioral, and social factors alongside GPA. Strong positive correlations are visible among institutional variables such as lecturer quality, university support, and curriculum suitability, suggesting that students perceive these elements as interconnected.\nWe can see that correlations between these factors and GPA are positive but modest, which indicates that academic performance is influenced by multiple dimensions rather than a single dominant variable."
   },
   {
-    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html",
-    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html",
-    "title": "Hands-on Exercise 7",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ISSS608_ORGMG",
     "section": "",
-    "text": "Hands-On Exercise # 7."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#overview",
-    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#overview",
-    "title": "Hands-on Exercise 7",
-    "section": "",
-    "text": "Hands-On Exercise # 7."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#install-and-launching-r-packages",
-    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#install-and-launching-r-packages",
-    "title": "Hands-on Exercise 7",
-    "section": "Install and Launching R Packages",
-    "text": "Install and Launching R Packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\n\npacman::p_load(scales, viridis, lubridate, ggthemes,\n               gridExtra, readxl, knitr, data.table,\n               CGPfunctions, ggHoriPlot, tidyverse)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#the-data",
-    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#the-data",
-    "title": "Hands-on Exercise 7",
-    "section": "The Data",
-    "text": "The Data\n\nImporting the Data\n\nattacks &lt;- read_csv(\"data/eventlog.csv\")\n\n\n\nPreparing the Data\nStep 1: Deriving “weekday” and “hour of day” fields\nBefore we can plot the calender heatmap, two new fields namely “wkday” and “hour” need to be derived. In this step, we will write a function to perform the task.\n\nmake_hr_wkday &lt;- function(ts, sc, tz) {\n  real_times &lt;- ymd_hms(ts, \n                        tz = tz[1], \n                        quiet = TRUE)\n  dt &lt;- data.table(source_country = sc,\n                   wkday = weekdays(real_times),\n                   hour = hour(real_times))\n  return(dt)\n  }\n\nStep 2: Deriving the attacks tibble data frame\n\nwkday_levels &lt;- c('Saturday', 'Friday', \n                  'Thursday', 'Wednesday', \n                  'Tuesday', 'Monday', \n                  'Sunday')\n\nattacks &lt;- attacks %&gt;%\n  group_by(tz) %&gt;%\n  do(make_hr_wkday(.$timestamp, \n                   .$source_country, \n                   .$tz)) %&gt;% \n  ungroup() %&gt;% \n  mutate(wkday = factor(\n    wkday, levels = wkday_levels),\n    hour  = factor(\n      hour, levels = 0:23))\n\nData Preview\n\nkable(head(attacks))\n\n\n\n\ntz\nsource_country\nwkday\nhour\n\n\n\n\nAfrica/Cairo\nBG\nSaturday\n20\n\n\nAfrica/Cairo\nTW\nSunday\n6\n\n\nAfrica/Cairo\nTW\nSunday\n8\n\n\nAfrica/Cairo\nCN\nSunday\n11\n\n\nAfrica/Cairo\nUS\nSunday\n15\n\n\nAfrica/Cairo\nCA\nMonday\n11"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-the-calendar-heatmaps",
-    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-the-calendar-heatmaps",
-    "title": "Hands-on Exercise 7",
-    "section": "Plotting the Calendar Heatmaps",
-    "text": "Plotting the Calendar Heatmaps\n\ngrouped &lt;- attacks %&gt;% \n  count(wkday, hour) %&gt;% \n  ungroup() %&gt;%\n  na.omit()\n\nggplot(grouped, \n       aes(hour, \n           wkday, \n           fill = n)) + \ngeom_tile(color = \"white\", \n          size = 0.1) + \ntheme_tufte(base_family = \"Helvetica\") + \ncoord_equal() +\nscale_fill_gradient(name = \"# of attacks\",\n                    low = \"sky blue\", \n                    high = \"dark blue\") +\nlabs(x = NULL, \n     y = NULL, \n     title = \"Attacks by weekday and time of day\") +\ntheme(axis.ticks = element_blank(),\n      plot.title = element_text(hjust = 0.5),\n      legend.title = element_text(size = 8),\n      legend.text = element_text(size = 6) )"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-multiple-calendar-heatmaps",
-    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-multiple-calendar-heatmaps",
-    "title": "Hands-on Exercise 7",
-    "section": "Plotting Multiple Calendar Heatmaps",
-    "text": "Plotting Multiple Calendar Heatmaps\nStep 1: Deriving attack by country object\nIdentify the top 4 countries with the highest number of attacks.\n\nattacks_by_country &lt;- count(\n  attacks, source_country) %&gt;%\n  mutate(percent = percent(n/sum(n))) %&gt;%\n  arrange(desc(n))\n\nStep 2: Preparing the tidy data frame\nExtract the attack records of the top 4 countries from the data frame and save in a new tibble data frame \n\ntop4 &lt;- attacks_by_country$source_country[1:4]\ntop4_attacks &lt;- attacks %&gt;%\n  filter(source_country %in% top4) %&gt;%\n  count(source_country, wkday, hour) %&gt;%\n  ungroup() %&gt;%\n  mutate(source_country = factor(\n    source_country, levels = top4)) %&gt;%\n  na.omit()\n\nStep 3: Plotting the Calendar Heatmaps by using ggplot2 package.\n\nggplot(top4_attacks, \n       aes(hour, \n           wkday, \n           fill = n)) + \n  geom_tile(color = \"white\", \n          size = 0.1) + \n  theme_tufte(base_family = \"Helvetica\") + \n  coord_equal() +\n  scale_fill_gradient(name = \"# of attacks\",\n                    low = \"sky blue\", \n                    high = \"dark blue\") +\n  facet_wrap(~source_country, ncol = 2) +\n  labs(x = NULL, y = NULL, \n     title = \"Attacks on top 4 countries by weekday and time of day\") +\n  theme(axis.ticks = element_blank(),\n        axis.text.x = element_text(size = 7),\n        plot.title = element_text(hjust = 0.5),\n        legend.title = element_text(size = 8),\n        legend.text = element_text(size = 6) )"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-cycle-plot",
-    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-cycle-plot",
-    "title": "Hands-on Exercise 7",
-    "section": "Plotting Cycle Plot",
-    "text": "Plotting Cycle Plot\nStep 1: Importing the Data\n\nair &lt;- read_excel(\"data/arrivals_by_air.xlsx\")\n\nStep 2: Deriving month and year fields\n\nair$month &lt;- factor(month(air$`Month-Year`), \n                    levels=1:12, \n                    labels=month.abb, \n                    ordered=TRUE) \nair$year &lt;- year(ymd(air$`Month-Year`))\n\nStep 3: Extracting the target country\n\nVietnam &lt;- air %&gt;% \n  select(`Vietnam`, \n         month, \n         year) %&gt;%\n  filter(year &gt;= 2010)\n\nStep 4: Computing year average arrivals by month\n\nhline.data &lt;- Vietnam %&gt;% \n  group_by(month) %&gt;%\n  summarise(avgvalue = mean(`Vietnam`))\n\nStep 5: Plotting the cycle graph\n\nggplot() + \n  geom_line(data=Vietnam,\n            aes(x=year, \n                y=`Vietnam`, \n                group=month), \n            colour=\"black\") +\n  geom_hline(aes(yintercept=avgvalue), \n             data=hline.data, \n             linetype=6, \n             colour=\"red\", \n             size=0.5) + \n  facet_grid(~month) +\n  labs(axis.text.x = element_blank(),\n       title = \"Visitor arrivals from Vietnam by air, Jan 2010-Dec 2019\") +\n  xlab(\"\") +\n  ylab(\"No. of Visitors\") +\n  theme_tufte(base_family = \"Helvetica\")"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-slopergraph",
-    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-slopergraph",
-    "title": "Hands-on Exercise 7",
-    "section": "Plotting Slopergraph",
-    "text": "Plotting Slopergraph\nStep 1: Data Import\n\nrice &lt;- read_csv(\"data/rice.csv\")\n\nStep 2: Plotting the slopegraph\n\nrice %&gt;% \n  mutate(Year = factor(Year)) %&gt;%\n  filter(Year %in% c(1961, 1980)) %&gt;%\n  newggslopegraph(Year, Yield, Country,\n                Title = \"Rice Yield of Top 11 Asian Counties\",\n                SubTitle = \"1961-1980\",\n                Caption = \"Prepared by: Dr. Kam Tin Seong\")"
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html",
-    "title": "Take-Home Exercise 2",
-    "section": "",
-    "text": "Fintech companies operate in highly competitive digital markets where customer engagement and retention are critical for long-term sustainability. Unlike traditional banks, fintech platforms rely heavily on digital interactions between users and financial services. Understanding how customers interact with these platforms is essential for identifying profitable customer segments and maintaining long-term customer relationships.\n\n\n\nAny business requires significant marketing and operational costs when it wants to attract new customers. Retaining existing customers proves to be more cost-effective and provide more value for extended periods.\nCustomers who remain active on a fintech platform tend to perform more financial transactions, adopt multiple financial products, and contribute higher customer lifetime value (CLV). In contrast, customers who show declining engagement or dissatisfaction may be more likely to discontinue their use of the platform.\nIdentifying customers with high churn risk allows fintech companies to implement specific strategies for retaining those customers. Organizations also need to track which customers produce the most value because this information allows them to distribute resources toward their most profitable customer groups.\n\n\n\nThe project objective is to develop a visual analytics application using R and Shiny for the interactive exploration of fintech customer data.\nThis tools would allow users to dynamically filter data, explore patterns across multiple dimensions, and find relationships between behavioral indicators and financial outcomes.\nIt is intended to help analysts compare churn risk across customer groups, examine engagement and profitability, and identify customers at risk of leaving the platform."
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#project-background",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#project-background",
-    "title": "Take-Home Exercise 2",
-    "section": "",
-    "text": "Fintech companies operate in highly competitive digital markets where customer engagement and retention are critical for long-term sustainability. Unlike traditional banks, fintech platforms rely heavily on digital interactions between users and financial services. Understanding how customers interact with these platforms is essential for identifying profitable customer segments and maintaining long-term customer relationships."
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#why-customer-retention-matters",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#why-customer-retention-matters",
-    "title": "Take-Home Exercise 2",
-    "section": "",
-    "text": "Any business requires significant marketing and operational costs when it wants to attract new customers. Retaining existing customers proves to be more cost-effective and provide more value for extended periods.\nCustomers who remain active on a fintech platform tend to perform more financial transactions, adopt multiple financial products, and contribute higher customer lifetime value (CLV). In contrast, customers who show declining engagement or dissatisfaction may be more likely to discontinue their use of the platform.\nIdentifying customers with high churn risk allows fintech companies to implement specific strategies for retaining those customers. Organizations also need to track which customers produce the most value because this information allows them to distribute resources toward their most profitable customer groups."
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#our-proposal",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#our-proposal",
-    "title": "Take-Home Exercise 2",
-    "section": "",
-    "text": "The project objective is to develop a visual analytics application using R and Shiny for the interactive exploration of fintech customer data.\nThis tools would allow users to dynamically filter data, explore patterns across multiple dimensions, and find relationships between behavioral indicators and financial outcomes.\nIt is intended to help analysts compare churn risk across customer groups, examine engagement and profitability, and identify customers at risk of leaving the platform."
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#raw-dataset",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#raw-dataset",
-    "title": "Take-Home Exercise 2",
-    "section": "3.1. Raw Dataset",
-    "text": "3.1. Raw Dataset\nThe analysis uses the COFINFAD (Colombian Fintech Financial Analytics) dataset, which contains detailed information about fintech customers. The dataset includes demographic information, financial product usage, transaction activity, customer satisfaction indicators, and predicted churn probabilities.\nThe dataset contains approximately 48,000 customer records and more than 50 variables, providing a comprehensive view of customer behavior within a fintech platform.\n\nlibrary(tidyverse)\nfintech &lt;- read_csv(\"data/customer_data.csv\")"
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#variable-grouping",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#variable-grouping",
-    "title": "Take-Home Exercise 2",
-    "section": "3.2. Variable Grouping",
-    "text": "3.2. Variable Grouping\nAlthough the dataset contains a wide range of variables, this module primarily focuses on variables related to:\n\nCustomer Value Indicators\nThese variables measure the long-term financial contribution of each customer.\n\n\n\ncustomer_lifetime_value\n\n\nclv_segment\n\n\ncustomer_segment\n\n\n\n\n\nRetention Risk Indicators\nThe indicators capture signals related to potential customer churn.\n\n\n\nchurn_probability\n\n\nsatisfaction_score\n\n\nnps_score\n\n\n\n\n\nTransaction & Engagement Behavior Indicators\nThese metrics indicate how actively a customer is and their engagement with the fintech platform.\n\n\n\nmonthly_transaction_count\n\n\naverage_transaction_value\n\n\ntotal_transaction_volume\n\n\ntransaction_frequency\n\n\nactive_products\n\n\n\n\n\nGeographic Variables\nThese fields allow spatial analysis of CLV and geographic patterns in fintech adoption.\n\n\n\ncity\n\n\ndepartment\n\n\nlatitude\n\n\nlongitude"
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#customer-lifetime-value-by-customer-segment",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#customer-lifetime-value-by-customer-segment",
-    "title": "Take-Home Exercise 2",
-    "section": "4.1. Customer Lifetime Value by Customer Segment",
-    "text": "4.1. Customer Lifetime Value by Customer Segment\nA boxplot will be used to compare the distribution of customer lifetime value across customer segments.\nThis chart is appropriate because CLV is a continuous variable, while customer segment is categorical. It allows the comparison of median values, spread, and outliers across different groups.\nThis visualization helps answer the following analytical question:\nWhich customers generate the highest lifetime value?\n\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(scales)\n\nggplot(fintech, aes(x = customer_segment, y = customer_lifetime_value)) +\n  geom_boxplot() +\n  scale_y_continuous(labels = comma) +\n  labs(\n    title = \"Customer Lifetime Value by Customer Segment\",\n    x = \"Customer Segment\",\n    y = \"Customer Lifetime Value\"\n  ) +\n  theme_minimal()"
-  },
-  {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#average-churn-probability-by-customer-segment",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#average-churn-probability-by-customer-segment",
-    "title": "Take-Home Exercise 2",
-    "section": "4.2. Average Churn Probability by Customer Segment",
-    "text": "4.2. Average Churn Probability by Customer Segment\nA bar chart is used to compare the average churn probability across customer segments. This chart is effective for showing differences in the mean churn risk between groups and is easy to interpret in a dashboard environment.\nThis visualization helps answer the following analytical question:\nWhich customers are most likely to churn?\n\nlibrary(ggplot2)\nlibrary(dplyr)\n\nchurn_by_segment &lt;- fintech %&gt;%\n  group_by(customer_segment) %&gt;%\n  summarise(avg_churn = mean(churn_probability, na.rm = TRUE))\n\nggplot(churn_by_segment, aes(x = customer_segment, y = avg_churn)) +\n  geom_col() +\n  labs(\n    title = \"Average Churn Probability by Customer Segment\",\n    x = \"Customer Segment\",\n    y = \"Average Churn Probability\"\n  ) +\n  theme_minimal()"
+    "text": "Welcome to ISSS608 Visual Analytics and Applications.\nIn this website you will find my coursework prepared for this course."
   },
   {
     "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html",
@@ -777,137 +189,389 @@
     "text": "Extreme Value Maps\nVariations of common choropleth maps where the classification is designed to highlight extreme values at the lower and upper end of the scale\n\nPercentile Map\n\nData Preparation\nStep 1: Exclude NAs\n\nNGA_wp &lt;- NGA_wp %&gt;%\n  drop_na()\n\nStep 2: Create customised classification and extract values\n\npercent &lt;- c(0,.01,.1,.5,.9,.99,1)\nvar &lt;- NGA_wp[\"pct_functional\"] %&gt;%\n  st_set_geometry(NULL)\nquantile(var[,1], percent)\n\n       0%        1%       10%       50%       90%       99%      100% \n0.0000000 0.0000000 0.2169811 0.4791667 0.8611111 1.0000000 1.0000000 \n\n\n\n\nCreating the get.var function\n\nget.var &lt;- function(vname,df) {\n  v &lt;- df[vname] %&gt;% \n    st_set_geometry(NULL)\n  v &lt;- unname(v[,1])\n  return(v)\n}\n\n\n\nA percentile mapping function\n\npercentmap &lt;- function(vnam, df, legtitle=NA, mtitle=\"Percentile Map\"){\n  percent &lt;- c(0,.01,.1,.5,.9,.99,1)\n  var &lt;- get.var(vnam, df)\n  bperc &lt;- quantile(var, percent)\n  tm_shape(df) +\n  tm_polygons() +\n  tm_shape(df) +\n     tm_polygons(vnam,\n             title=legtitle,\n             breaks=bperc,\n             palette=\"Blues\",\n          labels=c(\"&lt; 1%\", \"1% - 10%\", \"10% - 50%\", \"50% - 90%\", \"90% - 99%\", \"&gt; 99%\"))  +\n  tm_borders() +\n  tm_layout(main.title = mtitle, \n            title.position = c(\"right\",\"bottom\"))\n}\n\n\n\nTest drive the percentile mapping function\n\npercentmap(\"total_wp\", NGA_wp)\n\n\n\n\n\n\n\n\n\n\n\nBox Map\n\nggplot(data = NGA_wp,\n       aes(x = \"\",\n           y = wp_nonfunctional)) +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\nCreating the boxbreaks function\n\nboxbreaks &lt;- function(v,mult=1.5) {\n  qv &lt;- unname(quantile(v))\n  iqr &lt;- qv[4] - qv[2]\n  upfence &lt;- qv[4] + mult * iqr\n  lofence &lt;- qv[2] - mult * iqr\n  # initialize break points vector\n  bb &lt;- vector(mode=\"numeric\",length=7)\n  # logic for lower and upper fences\n  if (lofence &lt; qv[1]) {  # no lower outliers\n    bb[1] &lt;- lofence\n    bb[2] &lt;- floor(qv[1])\n  } else {\n    bb[2] &lt;- lofence\n    bb[1] &lt;- qv[1]\n  }\n  if (upfence &gt; qv[5]) { # no upper outliers\n    bb[7] &lt;- upfence\n    bb[6] &lt;- ceiling(qv[5])\n  } else {\n    bb[6] &lt;- upfence\n    bb[7] &lt;- qv[5]\n  }\n  bb[3:5] &lt;- qv[2:4]\n  return(bb)\n}\n\n\n\nCreating the get.var function\n\nget.var &lt;- function(vname,df) {\n  v &lt;- df[vname] %&gt;% st_set_geometry(NULL)\n  v &lt;- unname(v[,1])\n  return(v)\n}\n\n\nvar &lt;- get.var(\"wp_nonfunctional\", NGA_wp) \nboxbreaks(var)\n\n[1] -56.5   0.0  14.0  34.0  61.0 131.5 278.0\n\n\n\n\nBoxmap function\n\nboxmap &lt;- function(vnam, df, \n                   legtitle=NA,\n                   mtitle=\"Box Map\",\n                   mult=1.5){\n  var &lt;- get.var(vnam,df)\n  bb &lt;- boxbreaks(var)\n  tm_shape(df) +\n    tm_polygons() +\n  tm_shape(df) +\n     tm_fill(vnam,title=legtitle,\n             breaks=bb,\n             palette=\"Blues\",\n          labels = c(\"lower outlier\", \n                     \"&lt; 25%\", \n                     \"25% - 50%\", \n                     \"50% - 75%\",\n                     \"&gt; 75%\", \n                     \"upper outlier\"))  +\n  tm_borders() +\n  tm_layout(main.title = mtitle, \n            title.position = c(\"left\",\n                               \"top\"))\n}\n\n\ntmap_mode(\"plot\")\nboxmap(\"wp_nonfunctional\", NGA_wp)"
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#transaction-frequency-vs-customer-lifetime-value",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#transaction-frequency-vs-customer-lifetime-value",
-    "title": "Take-Home Exercise 2",
-    "section": "4.3 Transaction Frequency vs Customer Lifetime Value",
-    "text": "4.3 Transaction Frequency vs Customer Lifetime Value\nA scatter plot is used to examine the relationship between transaction frequency and customer lifetime value. This is appropriate because both variables are continuous, and the objective is to determine whether more active customers tend to generate greater financial value.\nThis visualisation helps answer the following analytical question:\nDo more active customers generate higher lifetime value?\n\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(scales)\n\nggplot(fintech, aes(x = transaction_frequency, y = customer_lifetime_value, color = customer_segment)) +\n  geom_point(alpha = 0.5) +\n  scale_y_continuous(labels = comma) +\n  labs(\n    title = \"Transaction Frequency vs Customer Lifetime Value\",\n    x = \"Transaction Frequency\",\n    y = \"Customer Lifetime Value\",\n    color = \"Customer Segment\"\n  ) +\n  theme_minimal()"
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html",
+    "title": "Hands-on Exercise 7",
+    "section": "",
+    "text": "Hands-On Exercise # 7."
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#customer-lifetime-value-vs-churn-probability",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#customer-lifetime-value-vs-churn-probability",
-    "title": "Take-Home Exercise 2",
-    "section": "4.4 Customer Lifetime Value vs Churn Probability",
-    "text": "4.4 Customer Lifetime Value vs Churn Probability\nA second scatter plot is used to examine the relationship between customer lifetime value and churn probability. This chart is particularly important for this module because it helps detect customers who are both highly valuable and at risk of leaving.\nThis visualization helps answer the following analytical question:\nAre high-value customers also at risk of churn?\n\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(scales)\n\nggplot(fintech, aes(x = customer_lifetime_value, y = churn_probability, color = clv_segment)) +\n  geom_point(alpha = 0.5) +\n  scale_x_continuous(labels = comma) +\n  labs(\n    title = \"Customer Lifetime Value vs Churn Probability\",\n    x = \"Customer Lifetime Value\",\n    y = \"Churn Probability\",\n    color = \"CLV Segment\"\n  ) +\n  theme_minimal()"
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#overview",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#overview",
+    "title": "Hands-on Exercise 7",
+    "section": "",
+    "text": "Hands-On Exercise # 7."
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#active-products-by-clv-segment",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#active-products-by-clv-segment",
-    "title": "Take-Home Exercise 2",
-    "section": "4.5 Active Products by CLV Segment",
-    "text": "4.5 Active Products by CLV Segment\nA boxplot can be used to compare the number of active products across CLV segments. This helps determine whether customers with higher lifetime value also tend to use more products.\nThis visualization helps answer the following analytical question:\nDoes product ownership relate to higher customer value?\n\nlibrary(ggplot2)\nlibrary(dplyr)\n\nggplot(fintech, aes(x = clv_segment, y = active_products)) +\n  geom_boxplot() +\n  labs(\n    title = \"Active Products by CLV Segment\",\n    x = \"CLV Segment\",\n    y = \"Number of Active Products\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n5. Visualisation Design and Interaction Principles \nreadability \ncomparison across segments \nprogressive drill-down \ncoordinated views \ncolour and label choices \n6. Proposed UI Design \nstoryboard logic \nsidebar + main panel layout \ninput-output mapping \n7. Prototype Visualisations \ntested charts with code and explanation \n8. Conclusion \nhow the module supports the final Shiny application"
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#install-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#install-and-launching-r-packages",
+    "title": "Hands-on Exercise 7",
+    "section": "Install and Launching R Packages",
+    "text": "Install and Launching R Packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\n\npacman::p_load(scales, viridis, lubridate, ggthemes,\n               gridExtra, readxl, knitr, data.table,\n               CGPfunctions, ggHoriPlot, tidyverse)"
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#project-storyline",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#project-storyline",
-    "title": "Take-Home Exercise 2",
-    "section": "2.1. Project Storyline",
-    "text": "2.1. Project Storyline\nThe project will deliver an interactive Shiny dashboard consisting of three analytical modules\n\nModule 1: Customer Overview and Exploratory Analysis\nWill provide a comprehensive overview of the customer population and identify key demographic and behavioral segments.\n\n\nModule 2: Customer Overview & Segmentation\nWill analyse how customers interact with the platform and evaluate their service experience.\n\n\nModule 3 – Retention Risk & Customer Value\nThis module will focus on analysing the relationship between customer engagement, churn risk, and long-term financial value.\nThe analysis will combines demographic, behavioral indicators and financial metrics to identify customers who generate significant value while also detecting customers who may be at risk of leaving."
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#the-data",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#the-data",
+    "title": "Hands-on Exercise 7",
+    "section": "The Data",
+    "text": "The Data\n\nImporting the Data\n\nattacks &lt;- read_csv(\"data/eventlog.csv\")\n\n\n\nPreparing the Data\nStep 1: Deriving “weekday” and “hour of day” fields\nBefore we can plot the calender heatmap, two new fields namely “wkday” and “hour” need to be derived. In this step, we will write a function to perform the task.\n\nmake_hr_wkday &lt;- function(ts, sc, tz) {\n  real_times &lt;- ymd_hms(ts, \n                        tz = tz[1], \n                        quiet = TRUE)\n  dt &lt;- data.table(source_country = sc,\n                   wkday = weekdays(real_times),\n                   hour = hour(real_times))\n  return(dt)\n  }\n\nStep 2: Deriving the attacks tibble data frame\n\nwkday_levels &lt;- c('Saturday', 'Friday', \n                  'Thursday', 'Wednesday', \n                  'Tuesday', 'Monday', \n                  'Sunday')\n\nattacks &lt;- attacks %&gt;%\n  group_by(tz) %&gt;%\n  do(make_hr_wkday(.$timestamp, \n                   .$source_country, \n                   .$tz)) %&gt;% \n  ungroup() %&gt;% \n  mutate(wkday = factor(\n    wkday, levels = wkday_levels),\n    hour  = factor(\n      hour, levels = 0:23))\n\nData Preview\n\nkable(head(attacks))\n\n\n\n\ntz\nsource_country\nwkday\nhour\n\n\n\n\nAfrica/Cairo\nBG\nSaturday\n20\n\n\nAfrica/Cairo\nTW\nSunday\n6\n\n\nAfrica/Cairo\nTW\nSunday\n8\n\n\nAfrica/Cairo\nCN\nSunday\n11\n\n\nAfrica/Cairo\nUS\nSunday\n15\n\n\nAfrica/Cairo\nCA\nMonday\n11"
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#role-of-the-module-in-the-larger-system",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#role-of-the-module-in-the-larger-system",
-    "title": "Take-Home Exercise 2",
-    "section": "2.2. Role of the Module in the Larger System",
-    "text": "2.2. Role of the Module in the Larger System\nThis report focuses on Module 3: Retention Risk & Customer Value.\nWhile the first two modules provide insights into the whole customer base and how they engagement with fintech services, this module focuses specifically on the customer profitability and retention risk.\nBy integrating the previously analyzed behavioral indicators, satisfaction metrics, and financial metrics, in this module we will be able to identify who are the most valuable customer segments while also detecting early warning signals of potential churn.\nThese insights could support decision-making for marketing strategies and if executed correctly, improve long-term profitability."
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-the-calendar-heatmaps",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-the-calendar-heatmaps",
+    "title": "Hands-on Exercise 7",
+    "section": "Plotting the Calendar Heatmaps",
+    "text": "Plotting the Calendar Heatmaps\n\ngrouped &lt;- attacks %&gt;% \n  count(wkday, hour) %&gt;% \n  ungroup() %&gt;%\n  na.omit()\n\nggplot(grouped, \n       aes(hour, \n           wkday, \n           fill = n)) + \ngeom_tile(color = \"white\", \n          size = 0.1) + \ntheme_tufte(base_family = \"Helvetica\") + \ncoord_equal() +\nscale_fill_gradient(name = \"# of attacks\",\n                    low = \"sky blue\", \n                    high = \"dark blue\") +\nlabs(x = NULL, \n     y = NULL, \n     title = \"Attacks by weekday and time of day\") +\ntheme(axis.ticks = element_blank(),\n      plot.title = element_text(hjust = 0.5),\n      legend.title = element_text(size = 8),\n      legend.text = element_text(size = 6) )"
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#data-cleaning",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#data-cleaning",
-    "title": "Take-Home Exercise 2",
-    "section": "3.3. Data Cleaning",
-    "text": "3.3. Data Cleaning\nData preparation involved various steps to ensure the dataset was suitable for analysis:\n\nVerify data types for numerical and categorical variables\nCheck for duplicate customers\nIdentify any missing values in key analytical variables\nRemove incomplete observations where necessary"
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-multiple-calendar-heatmaps",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-multiple-calendar-heatmaps",
+    "title": "Hands-on Exercise 7",
+    "section": "Plotting Multiple Calendar Heatmaps",
+    "text": "Plotting Multiple Calendar Heatmaps\nStep 1: Deriving attack by country object\nIdentify the top 4 countries with the highest number of attacks.\n\nattacks_by_country &lt;- count(\n  attacks, source_country) %&gt;%\n  mutate(percent = percent(n/sum(n))) %&gt;%\n  arrange(desc(n))\n\nStep 2: Preparing the tidy data frame\nExtract the attack records of the top 4 countries from the data frame and save in a new tibble data frame \n\ntop4 &lt;- attacks_by_country$source_country[1:4]\ntop4_attacks &lt;- attacks %&gt;%\n  filter(source_country %in% top4) %&gt;%\n  count(source_country, wkday, hour) %&gt;%\n  ungroup() %&gt;%\n  mutate(source_country = factor(\n    source_country, levels = top4)) %&gt;%\n  na.omit()\n\nStep 3: Plotting the Calendar Heatmaps by using ggplot2 package.\n\nggplot(top4_attacks, \n       aes(hour, \n           wkday, \n           fill = n)) + \n  geom_tile(color = \"white\", \n          size = 0.1) + \n  theme_tufte(base_family = \"Helvetica\") + \n  coord_equal() +\n  scale_fill_gradient(name = \"# of attacks\",\n                    low = \"sky blue\", \n                    high = \"dark blue\") +\n  facet_wrap(~source_country, ncol = 2) +\n  labs(x = NULL, y = NULL, \n     title = \"Attacks on top 4 countries by weekday and time of day\") +\n  theme(axis.ticks = element_blank(),\n        axis.text.x = element_text(size = 7),\n        plot.title = element_text(hjust = 0.5),\n        legend.title = element_text(size = 8),\n        legend.text = element_text(size = 6) )"
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#clv-distribution-by-customer-segment",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#clv-distribution-by-customer-segment",
-    "title": "Take-Home Exercise 2",
-    "section": "4.1. CLV Distribution by Customer Segment",
-    "text": "4.1. CLV Distribution by Customer Segment\nA boxplot is used to compare the distribution of customer lifetime value across customer segments. Because CLV values are highly skewed, a logarithmic scale is used to improve readability.\nFields used:\n\ncustomer_segment\ncustomer_lifetime_value\n\nThis visualization helps identify which segments generate the highest financial value."
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-cycle-plot",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-cycle-plot",
+    "title": "Hands-on Exercise 7",
+    "section": "Plotting Cycle Plot",
+    "text": "Plotting Cycle Plot\nStep 1: Importing the Data\n\nair &lt;- read_excel(\"data/arrivals_by_air.xlsx\")\n\nStep 2: Deriving month and year fields\n\nair$month &lt;- factor(month(air$`Month-Year`), \n                    levels=1:12, \n                    labels=month.abb, \n                    ordered=TRUE) \nair$year &lt;- year(ymd(air$`Month-Year`))\n\nStep 3: Extracting the target country\n\nVietnam &lt;- air %&gt;% \n  select(`Vietnam`, \n         month, \n         year) %&gt;%\n  filter(year &gt;= 2010)\n\nStep 4: Computing year average arrivals by month\n\nhline.data &lt;- Vietnam %&gt;% \n  group_by(month) %&gt;%\n  summarise(avgvalue = mean(`Vietnam`))\n\nStep 5: Plotting the cycle graph\n\nggplot() + \n  geom_line(data=Vietnam,\n            aes(x=year, \n                y=`Vietnam`, \n                group=month), \n            colour=\"black\") +\n  geom_hline(aes(yintercept=avgvalue), \n             data=hline.data, \n             linetype=6, \n             colour=\"red\", \n             size=0.5) + \n  facet_grid(~month) +\n  labs(axis.text.x = element_blank(),\n       title = \"Visitor arrivals from Vietnam by air, Jan 2010-Dec 2019\") +\n  xlab(\"\") +\n  ylab(\"No. of Visitors\") +\n  theme_tufte(base_family = \"Helvetica\")"
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#churn-probability-by-segment",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#churn-probability-by-segment",
-    "title": "Take-Home Exercise 2",
-    "section": "4.2. Churn Probability by Segment",
-    "text": "4.2. Churn Probability by Segment\nA bar chart compares average churn probability across customer segments.\nFields used:\n\ncustomer_segment\nchurn_probability\n\nThis graph highlights which customer groups exhibit higher retention risk."
+    "objectID": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-slopergraph",
+    "href": "Hands-on_Ex/Hands-on_EX07/HE07.html#plotting-slopergraph",
+    "title": "Hands-on Exercise 7",
+    "section": "Plotting Slopergraph",
+    "text": "Plotting Slopergraph\nStep 1: Data Import\n\nrice &lt;- read_csv(\"data/rice.csv\")\n\nStep 2: Plotting the slopegraph\n\nrice %&gt;% \n  mutate(Year = factor(Year)) %&gt;%\n  filter(Year %in% c(1961, 1980)) %&gt;%\n  newggslopegraph(Year, Yield, Country,\n                Title = \"Rice Yield of Top 11 Asian Counties\",\n                SubTitle = \"1961-1980\",\n                Caption = \"Prepared by: Dr. Kam Tin Seong\")"
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#engagement-behavior-vs-customer-value",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#engagement-behavior-vs-customer-value",
-    "title": "Take-Home Exercise 2",
-    "section": "4.3. Engagement Behavior vs Customer Value",
-    "text": "4.3. Engagement Behavior vs Customer Value\nA scatter plot examines the relationship between transaction frequency and customer lifetime value.\nFields used:\n\ntransaction_frequency\ncustomer_lifetime_value\ncustomer_segment\n\nThis chart helps determine whether highly engaged customers generate higher financial value."
+    "objectID": "Hands-on_Ex/Hands-on_EX02/HE02.html",
+    "href": "Hands-on_Ex/Hands-on_EX02/HE02.html",
+    "title": "Hands-on Exercise 2",
+    "section": "",
+    "text": "Hands-On Exercise # 2."
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#geographic-distribution-of-customer-value",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#geographic-distribution-of-customer-value",
-    "title": "Take-Home Exercise 2",
-    "section": "4.4. Geographic Distribution of Customer Value",
-    "text": "4.4. Geographic Distribution of Customer Value\nA geospatial map visualises the distribution of average customer lifetime value across geographic locations.\nFields used:\n\nlatitude\nlongitude\ncustomer_lifetime_value\n\nThis map reveals geographic patterns in fintech customer value."
+    "objectID": "Hands-on_Ex/Hands-on_EX02/HE02.html#install-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_EX02/HE02.html#install-and-launching-r-packages",
+    "title": "Hands-on Exercise 2",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(ggrepel, patchwork, \n               ggthemes, hrbrthemes,\n               tidyverse)"
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#readability",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#readability",
-    "title": "Take-Home Exercise 2",
-    "section": "Readability",
-    "text": "Readability\nVisualizations use clear axis labels, minimal visual clutter, and appropriate scaling to ensure readability."
+    "objectID": "Hands-on_Ex/Hands-on_EX02/HE02.html#the-data",
+    "href": "Hands-on_Ex/Hands-on_EX02/HE02.html#the-data",
+    "title": "Hands-on Exercise 2",
+    "section": "The Data",
+    "text": "The Data\nImporting the data\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#comparison-across-segments",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#comparison-across-segments",
-    "title": "Take-Home Exercise 2",
-    "section": "Comparison Across Segments",
-    "text": "Comparison Across Segments\nCharts will allow comparison across customer segments and groups to highlight meaningful differences in engagement and value."
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html",
+    "title": "Hands-on Exercise 4",
+    "section": "",
+    "text": "Hands-On Exercise # 4."
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#progressive-drill-down",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#progressive-drill-down",
-    "title": "Take-Home Exercise 2",
-    "section": "Progressive Drill-Down",
-    "text": "Progressive Drill-Down\nIn the proposed dashboard, users will be able to interactively filter the dataset to explore specific segments and behavioral patterns in greater detail."
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#overview",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#overview",
+    "title": "Hands-on Exercise 4",
+    "section": "",
+    "text": "Hands-On Exercise # 4."
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#coordinated-views",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#coordinated-views",
-    "title": "Take-Home Exercise 2",
-    "section": "Coordinated Views",
-    "text": "Coordinated Views\nMultiple visualizations are designed to work together, enabling users to analyse relationships between engagement, customer value, and retention risk."
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages",
+    "title": "Hands-on Exercise 4",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(ggdist, ggridges, ggthemes,\n               colorspace, tidyverse)"
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#colour-and-label-choices",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#colour-and-label-choices",
-    "title": "Take-Home Exercise 2",
-    "section": "Colour and Label Choices",
-    "text": "Colour and Label Choices\nConsistent color schemes will be used across visualizations to represent customer segments and ensure consistency."
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#the-data",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#the-data",
+    "title": "Hands-on Exercise 4",
+    "section": "The Data",
+    "text": "The Data\nImporting the data\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#clv-distribution-by-customer-segment-1",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#clv-distribution-by-customer-segment-1",
-    "title": "Take-Home Exercise 2",
-    "section": "7.1. CLV Distribution by Customer Segment",
-    "text": "7.1. CLV Distribution by Customer Segment\n\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(scales)\n\nggplot(fintech, aes(x = customer_segment, y = customer_lifetime_value)) +\n  geom_boxplot() +\n  scale_y_log10(labels = comma) +\n  labs(\n    title = \"Customer Lifetime Value by Customer Segment (Log Scale)\",\n    x = \"Customer Segment\",\n    y = \"Customer Lifetime Value (Log Scale)\"\n  ) +\n  theme_minimal()"
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-graph-ggridges-method",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-graph-ggridges-method",
+    "title": "Hands-on Exercise 4",
+    "section": "Ridgeline Graph: ggridges Method",
+    "text": "Ridgeline Graph: ggridges Method\n\nggplot(data=exam_data, \n       aes(x = ENGLISH, \n           y = CLASS, \n           fill = 0.5 - abs(0.5-after_stat(ecdf)))) +\n  stat_density_ridges(geom = \"density_ridges_gradient\", \n                      calc_ecdf = TRUE) +\n  scale_fill_viridis_c(name = \"Tail probability\",\n                       direction = -1) +\n  theme_ridges()"
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#churn-probability-by-segment-1",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#churn-probability-by-segment-1",
-    "title": "Take-Home Exercise 2",
-    "section": "7.2. Churn Probability by Segment",
-    "text": "7.2. Churn Probability by Segment\n\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(scales)\n\nchurn_by_segment &lt;- fintech %&gt;%\n  group_by(customer_segment) %&gt;%\n  summarise(avg_churn = mean(churn_probability, na.rm = TRUE))\n\nggplot(churn_by_segment, aes(x = customer_segment, y = avg_churn)) +\n  geom_col() +\n  geom_text(\n    aes(label = label_percent(accuracy = 0.1)(avg_churn)),\n    vjust = -0.5\n  ) +\n  scale_y_continuous(\n    labels = label_percent(),\n    breaks = seq(0.30, 0.35, 0.01)\n  ) +\n  coord_cartesian(ylim = c(0.30, 0.35)) +\n  labs(\n    title = \"Average Churn Probability by Customer Segment\",\n    x = \"Customer Segment\",\n    y = \"Average Churn Probability\"\n  ) +\n  theme_minimal()"
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-plots-with-quantile-lines",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-plots-with-quantile-lines",
+    "title": "Hands-on Exercise 4",
+    "section": "Ridgeline Plots with Quantile Lines",
+    "text": "Ridgeline Plots with Quantile Lines\n\nggplot(data=exam_data,\n       aes(x = ENGLISH, \n           y = CLASS, \n           fill = factor(stat(quantile))\n           )) +\n  stat_density_ridges(\n    geom = \"density_ridges_gradient\",\n    calc_ecdf = TRUE, \n    quantiles = c(0.025, 0.975)\n    ) +\n  scale_fill_manual(\n    name = \"Probability\",\n    values = c(\"#FF0000A0\", \"#A0A0A0A0\", \"#0000FFA0\"),\n    labels = c(\"(0, 0.025]\", \"(0.025, 0.975]\", \"(0.975, 1]\")\n  ) +\n  theme_ridges()"
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#engagement-behavior-vs-customer-value-1",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#engagement-behavior-vs-customer-value-1",
-    "title": "Take-Home Exercise 2",
-    "section": "7.3. Engagement Behavior vs Customer Value",
-    "text": "7.3. Engagement Behavior vs Customer Value\n\nx_limit &lt;- quantile(fintech$transaction_frequency, 0.95)\ny_limit &lt;- quantile(fintech$customer_lifetime_value, 0.95)\n\nggplot(fintech, aes(x = transaction_frequency, y = customer_lifetime_value, color = customer_segment)) +\n  geom_point(alpha = 0.5) +\n  scale_y_continuous(labels = comma) +\n  coord_cartesian(xlim = c(0, x_limit), ylim = c(0, y_limit)) +\n  labs(\n    title = \"Transaction Frequency vs Customer Lifetime Value\",\n    x = \"Transaction Frequency\",\n    y = \"Customer Lifetime Value\",\n    color = \"Customer Segment\"\n  ) +\n  theme_minimal()"
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-plots-with-quantile-lines-1",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#ridgeline-plots-with-quantile-lines-1",
+    "title": "Hands-on Exercise 4",
+    "section": "Ridgeline Plots with Quantile Lines",
+    "text": "Ridgeline Plots with Quantile Lines\n\nggplot(data=exam_data,\n       aes(x = RACE, \n           y = ENGLISH)) +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.2,\n               .width = 0,\n               point_colour = NA) +\n  geom_boxplot(width = .20,\n               outlier.shape = NA) +\n  stat_dots(side = \"left\", \n            justification = 1.2, \n            binwidth = NA,\n            dotsize = 1.5) +\n  coord_flip() +\n  theme_economist()"
   },
   {
-    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#geographic-distribution-of-customer-value-1",
-    "href": "Take-home_Ex/TakeHome02/th_exc02.html#geographic-distribution-of-customer-value-1",
-    "title": "Take-Home Exercise 2",
-    "section": "7.4. Geographic Distribution of Customer Value",
-    "text": "7.4. Geographic Distribution of Customer Value\n\n\nlibrary(maps)\n\nclv_location &lt;- fintech %&gt;%\n  group_by(city, department, latitude, longitude) %&gt;%\n  summarise(avg_clv = mean(customer_lifetime_value, na.rm = TRUE))\n\ncolombia_map &lt;- map_data(\"world\", region = \"Colombia\")\n\nggplot() +\n  geom_polygon(data = colombia_map,\n               aes(x = long, y = lat, group = group),\n               fill = \"gray90\", color = \"white\") +\n  geom_point(data = clv_location,\n             aes(x = longitude, y = latitude,\n                 color = avg_clv,\n                 size = avg_clv),\n             alpha = 0.7) +\n  scale_color_viridis_c(labels = scales::comma) +\n  labs(\n    title = \"Average Customer Lifetime Value by Location\",\n    color = \"Average CLV\",\n    size = \"Average CLV\"\n  ) +\n  theme_minimal()"
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages-1",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages-1",
+    "title": "Hands-on Exercise 4",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(ggstatsplot, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#one-sample-test",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#one-sample-test",
+    "title": "Hands-on Exercise 4",
+    "section": "One-Sample Test",
+    "text": "One-Sample Test\n\nset.seed(1234)\n\ngghistostats(\n  data = exam_data,\n  x = ENGLISH,\n  type = \"bayes\",\n  test.value = 60,\n  xlab = \"English scores\"\n)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#two-sample-mean",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#two-sample-mean",
+    "title": "Hands-on Exercise 4",
+    "section": "Two-Sample Mean",
+    "text": "Two-Sample Mean\n\nggbetweenstats(\n  data = exam_data,\n  x = GENDER, \n  y = MATHS,\n  type = \"np\",\n  \n  messages = FALSE\n)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#oneway-anova",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#oneway-anova",
+    "title": "Hands-on Exercise 4",
+    "section": "Oneway ANOVA",
+    "text": "Oneway ANOVA\n\nggbetweenstats(\n  data = exam_data,\n  x = RACE, \n  y = ENGLISH,\n  type = \"p\",\n  mean.ci = TRUE, \n  pairwise.comparisons = TRUE, \n  pairwise.display = \"s\",\n  p.adjust.method = \"fdr\",\n  messages = FALSE\n)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#test-of-correlation",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#test-of-correlation",
+    "title": "Hands-on Exercise 4",
+    "section": "Test of Correlation",
+    "text": "Test of Correlation\n\nggscatterstats(\n  data = exam_data,\n  x = MATHS,\n  y = ENGLISH,\n  marginal = FALSE,\n  )"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#test-of-association-depedence",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#test-of-association-depedence",
+    "title": "Hands-on Exercise 4",
+    "section": "Test of Association (Depedence)",
+    "text": "Test of Association (Depedence)\n\nMaths Scores: Binned into 4-Class Variable\n\nexam1 &lt;- exam_data %&gt;% \n  mutate(MATHS_bins = \n           cut(MATHS, \n               breaks = c(0,60,75,85,100))\n)\n\n\n\nVisual: Significant Test of Association\n\nggbarstats(exam1, \n           x = MATHS_bins, \n           y = GENDER)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages-2",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#install-and-launching-r-packages-2",
+    "title": "Hands-on Exercise 4",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(plotly, crosstalk, DT, \n               ggdist, ggridges, colorspace,\n               gganimate, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#visualizing-uncertainty-of-point-estimates",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#visualizing-uncertainty-of-point-estimates",
+    "title": "Hands-on Exercise 4",
+    "section": "Visualizing Uncertainty of Point Estimates",
+    "text": "Visualizing Uncertainty of Point Estimates\n\nSummary Statistics\n\nmy_sum &lt;- exam_data %&gt;%\n  group_by(RACE) %&gt;%\n  summarise(\n    n=n(),\n    mean=mean(MATHS),\n    sd=sd(MATHS)\n    ) %&gt;%\n  mutate(se=sd/sqrt(n-1))\n\n\n\nDisplay Data Frame in Table Format\n\nknitr::kable(head(my_sum), format = 'html')\n\n\n\n\nRACE\nn\nmean\nsd\nse\n\n\n\n\nChinese\n193\n76.50777\n15.69040\n1.132357\n\n\nIndian\n12\n60.66667\n23.35237\n7.041005\n\n\nMalay\n108\n57.44444\n21.13478\n2.043177\n\n\nOthers\n9\n69.66667\n10.72381\n3.791438"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#standard-error-bars",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#standard-error-bars",
+    "title": "Hands-on Exercise 4",
+    "section": "Standard Error Bars",
+    "text": "Standard Error Bars\n\nggplot(my_sum) +\n  geom_errorbar(\n    aes(x=RACE, \n        ymin=mean-se, \n        ymax=mean+se), \n    width=0.2, \n    colour=\"black\", \n    alpha=0.9, \n    linewidth=0.5) +\n  geom_point(aes\n           (x=RACE, \n            y=mean), \n           stat=\"identity\", \n           color=\"red\",\n           size = 1.5,\n           alpha=1) +\n  ggtitle(\"Standard error of mean maths score by rac\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#confidence-intervals",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#confidence-intervals",
+    "title": "Hands-on Exercise 4",
+    "section": "Confidence Intervals ",
+    "text": "Confidence Intervals \n\nggplot(my_sum) +\n  geom_errorbar(\n    aes(x=reorder(RACE, -mean), \n        ymin=mean-1.96*se, \n        ymax=mean+1.96*se), \n    width=0.2, \n    colour=\"black\", \n    alpha=0.9, \n    linewidth=0.5) +\n  geom_point(aes\n           (x=RACE, \n            y=mean), \n           stat=\"identity\", \n           color=\"red\",\n           size = 1.5,\n           alpha=1) +\n  labs(x = \"Maths score\",\n       title = \"95% confidence interval of mean maths score by race\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#interactive-error-bars",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#interactive-error-bars",
+    "title": "Hands-on Exercise 4",
+    "section": "Interactive Error Bars",
+    "text": "Interactive Error Bars\n\nshared_df = SharedData$new(my_sum)\n\nbscols(widths = c(4,8),\n       ggplotly((ggplot(shared_df) +\n                   geom_errorbar(aes(\n                     x=reorder(RACE, -mean),\n                     ymin=mean-2.58*se, \n                     ymax=mean+2.58*se), \n                     width=0.2, \n                     colour=\"black\", \n                     alpha=0.9, \n                     size=0.5) +\n                   geom_point(aes(\n                     x=RACE, \n                     y=mean, \n                     text = paste(\"Race:\", `RACE`, \n                                  \"&lt;br&gt;N:\", `n`,\n                                  \"&lt;br&gt;Avg. Scores:\", round(mean, digits = 2),\n                                  \"&lt;br&gt;95% CI:[\", \n                                  round((mean-2.58*se), digits = 2), \",\",\n                                  round((mean+2.58*se), digits = 2),\"]\")),\n                     stat=\"identity\", \n                     color=\"red\", \n                     size = 1.5, \n                     alpha=1) + \n                   xlab(\"Race\") + \n                   ylab(\"Average Scores\") + \n                   theme_minimal() + \n                   theme(axis.text.x = element_text(\n                     angle = 45, vjust = 0.5, hjust=1)) +\n                   ggtitle(\"99% Confidence interval of average /&lt;br&gt;maths scores by race\")), \n                tooltip = \"text\"), \n       DT::datatable(shared_df, \n                     rownames = FALSE, \n                     class=\"compact\", \n                     width=\"100%\", \n                     options = list(pageLength = 10,\n                                    scrollX=T), \n                     colnames = c(\"No. of pupils\", \n                                  \"Avg Scores\",\n                                  \"Std Dev\",\n                                  \"Std Error\")) %&gt;%\n         formatRound(columns=c('mean', 'sd', 'se'),\n                     digits=2))"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#uncertainty-of-point-estimates-with-ggdistmethods",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#uncertainty-of-point-estimates-with-ggdistmethods",
+    "title": "Hands-on Exercise 4",
+    "section": "Uncertainty of Point Estimates with ggdistmethods",
+    "text": "Uncertainty of Point Estimates with ggdistmethods\n\nexam_data %&gt;%\n  ggplot(aes(x = RACE, y = MATHS)) +\n  stat_pointinterval(.width = 0.95,\n  .point = median,\n  .interval = qi) +\n  labs(\n    title = \"Visualising confidence intervals of median math score\",\n    subtitle = \"Median Point + Multiple-interval plot\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#uncertainty-of-point-estimates-with-ggdistmethods-1",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#uncertainty-of-point-estimates-with-ggdistmethods-1",
+    "title": "Hands-on Exercise 4",
+    "section": "Uncertainty of Point Estimates with ggdistmethods",
+    "text": "Uncertainty of Point Estimates with ggdistmethods\n\nexam_data %&gt;%\n  ggplot(aes(x = RACE, \n             y = MATHS)) +\n  stat_gradientinterval(   \n    fill = \"skyblue\",      \n    show.legend = TRUE     \n  ) +                        \n  labs(\n    title = \"Visualising confidence intervals of mean math score\",\n    subtitle = \"Gradient + interval plot\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#installing-ungeviz-package",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#installing-ungeviz-package",
+    "title": "Hands-on Exercise 4",
+    "section": "Installing ungeviz Package",
+    "text": "Installing ungeviz Package\n\ndevtools::install_github(\"wilkelab/ungeviz\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#hops",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#hops",
+    "title": "Hands-on Exercise 4",
+    "section": "HOPs",
+    "text": "HOPs\n\nggplot(\n  data = exam_data,\n  aes(x = factor(RACE), y = MATHS)\n) +\n  geom_point(\n    position = position_jitter(height = 0.3, width = 0.05),\n    size = 0.4,\n    color = \"#0072B2\",\n    alpha = 0.5\n  ) +\n  stat_summary(\n    fun = mean,\n    geom = \"crossbar\",\n    width = 0.6,\n    color = \"#D55E00\"\n  ) +\n  theme_bw()"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#installing-r-packages",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#installing-r-packages",
+    "title": "Hands-on Exercise 4",
+    "section": "Installing R Packages",
+    "text": "Installing R Packages\n\npacman::p_load(tidyverse, FunnelPlotR, plotly, knitr)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#the-data-1",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#the-data-1",
+    "title": "Hands-on Exercise 4",
+    "section": "The Data",
+    "text": "The Data\nImporting the data\n\ncovid19 &lt;- read_csv(\"data/COVID-19_DKI_Jakarta.csv\") %&gt;%\n  mutate_if(is.character, as.factor)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#funnelplotr-basic-plot",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#funnelplotr-basic-plot",
+    "title": "Hands-on Exercise 4",
+    "section": "FunnelPlotR: Basic Plot",
+    "text": "FunnelPlotR: Basic Plot\n\nfunnel_plot(\n  .data = covid19,\n  numerator = Death,\n  denominator = Positive,\n  group = `Sub-district`,\n  data_type = \"PR\",   \n  xrange = c(0, 6500),  \n  yrange = c(0, 0.05),\n  label = NA,\n  title = \"Cumulative COVID-19 Fatality Rate by Cumulative Total Number of COVID-19 Positive Cases\", #&lt;&lt;           \n  x_label = \"Cumulative COVID-19 Positive Cases\", #&lt;&lt;\n  y_label = \"Cumulative Fatality Rate\"  #&lt;&lt;\n)\n\n\n\n\n\n\n\n\nA funnel plot object with 267 points of which 7 are outliers. \nPlot is adjusted for overdispersion."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX04/HE04.html#funnel-plot-ggplot2-methods",
+    "href": "Hands-on_Ex/Hands-on_EX04/HE04.html#funnel-plot-ggplot2-methods",
+    "title": "Hands-on Exercise 4",
+    "section": "Funnel Plot: ggplot2 Methods",
+    "text": "Funnel Plot: ggplot2 Methods\n\nComputing Derived Fields\n\ndf &lt;- covid19 %&gt;%\n  mutate(rate = Death / Positive) %&gt;%\n  mutate(rate.se = sqrt((rate*(1-rate)) / (Positive))) %&gt;%\n  filter(rate &gt; 0)\n\n\nfit.mean &lt;- weighted.mean(df$rate, 1/df$rate.se^2)\n\n\n\nCalculate Lower & Upper CI Limits\n\nnumber.seq &lt;- seq(1, max(df$Positive), 1)\nnumber.ll95 &lt;- fit.mean - 1.96 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \nnumber.ul95 &lt;- fit.mean + 1.96 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \nnumber.ll999 &lt;- fit.mean - 3.29 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \nnumber.ul999 &lt;- fit.mean + 3.29 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \ndfCI &lt;- data.frame(number.ll95, number.ul95, number.ll999, \n                   number.ul999, number.seq, fit.mean)\n\n\n\nPlot Static Funnel\n\np &lt;- ggplot(df, aes(x = Positive, y = rate)) +\n  geom_point(aes(label=`Sub-district`), \n             alpha=0.4) +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ll95), \n            size = 0.4, \n            colour = \"grey40\", \n            linetype = \"dashed\") +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ul95), \n            size = 0.4, \n            colour = \"grey40\", \n            linetype = \"dashed\") +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ll999), \n            size = 0.4, \n            colour = \"grey40\") +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ul999), \n            size = 0.4, \n            colour = \"grey40\") +\n  geom_hline(data = dfCI, \n             aes(yintercept = fit.mean), \n             size = 0.4, \n             colour = \"grey40\") +\n  coord_cartesian(ylim=c(0,0.05)) +\n  annotate(\"text\", x = 1, y = -0.13, label = \"95%\", size = 3, colour = \"grey40\") + \n  annotate(\"text\", x = 4.5, y = -0.18, label = \"99%\", size = 3, colour = \"grey40\") + \n  ggtitle(\"Cumulative Fatality Rate by Cumulative Number of COVID-19 Cases\") +\n  xlab(\"Cumulative Number of COVID-19 Cases\") + \n  ylab(\"Cumulative Fatality Rate\") +\n  theme_light() +\n  theme(plot.title = element_text(size=12),\n        legend.position = c(0.91,0.85), \n        legend.title = element_text(size=7),\n        legend.text = element_text(size=7),\n        legend.background = element_rect(colour = \"grey60\", linetype = \"dotted\"),\n        legend.key.height = unit(0.3, \"cm\"))\np\n\n\n\n\n\n\n\n\n\n\nInteractive Funnel\n\nfp_ggplotly &lt;- ggplotly(p,\n  tooltip = c(\"label\", \n              \"x\", \n              \"y\"))\nfp_ggplotly"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX03/HE03.html",
+    "href": "Hands-on_Ex/Hands-on_EX03/HE03.html",
+    "title": "Hands-on Exercise 3",
+    "section": "",
+    "text": "Hands-On Exercise # 3."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX03/HE03.html#install-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_EX03/HE03.html#install-and-launching-r-packages",
+    "title": "Hands-on Exercise 3",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(ggiraph, plotly, \n               patchwork, DT, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX03/HE03.html#the-data",
+    "href": "Hands-on_Ex/Hands-on_EX03/HE03.html#the-data",
+    "title": "Hands-on Exercise 3",
+    "section": "The Data",
+    "text": "The Data\nImporting the data\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX03/HE03.html#interactivity-tooltips",
+    "href": "Hands-on_Ex/Hands-on_EX03/HE03.html#interactivity-tooltips",
+    "title": "Hands-on Exercise 3",
+    "section": "Interactivity & Tooltips",
+    "text": "Interactivity & Tooltips\n\ntooltip_css &lt;- \"background-color:white; #&lt;&lt;\nfont-style:bold; color:black;\" #&lt;&lt;\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(tooltip = ID),                   \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(    #&lt;&lt;\n    opts_tooltip(    #&lt;&lt;\n      css = tooltip_css)) #&lt;&lt;\n)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX03/HE03.html#statistics-on-tooltip",
+    "href": "Hands-on_Ex/Hands-on_EX03/HE03.html#statistics-on-tooltip",
+    "title": "Hands-on Exercise 3",
+    "section": "Statistics on Tooltip",
+    "text": "Statistics on Tooltip\n\ntooltip &lt;- function(y, ymax, accuracy = .01) {\n  mean &lt;- scales::number(y, accuracy = accuracy)\n  sem &lt;- scales::number(ymax - y, accuracy = accuracy)\n  paste(\"Mean maths scores:\", mean, \"+/-\", sem)\n}\n\ngg_point &lt;- ggplot(data=exam_data, \n                   aes(x = RACE),\n) +\n  stat_summary(aes(y = MATHS, \n                   tooltip = after_stat(  \n                     tooltip(y, ymax))),  \n    fun.data = \"mean_se\", \n    geom = GeomInteractiveCol,  \n    fill = \"light blue\"\n  ) +\n  stat_summary(aes(y = MATHS),\n    fun.data = mean_se,\n    geom = \"errorbar\", width = 0.2, size = 0.2\n  )\n\ngirafe(ggobj = gg_point,\n       width_svg = 8,\n       height_svg = 8*0.618)\n\n\n\n\n\n\nHover Effect\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(tooltip = CLASS, \n        data_id = CLASS),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(                        \n    opts_hover(css = \"fill: #202020;\"),  \n    opts_hover_inv(css = \"opacity:0.2;\") \n  )                                        \n)                                                \n\n\n\n\n\n\n\nClick Effect with Onclick\n\nexam_data$onclick &lt;- sprintf(\"window.open(\\\"%s%s\\\")\",\n\"https://www.moe.gov.sg/schoolfinder?journey=Primary%20school\",\nas.character(exam_data$ID))\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(onclick = onclick),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618)                                        \n\n\n\n\n\n\n\nMultiple Views with ggiraph\n\np1 &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(data_id = ID),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +  \n  coord_cartesian(xlim=c(0,100)) + \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\n\np2 &lt;- ggplot(data=exam_data, \n       aes(x = ENGLISH)) +\n  geom_dotplot_interactive(              \n    aes(data_id = ID),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") + \n  coord_cartesian(xlim=c(0,100)) + \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\n\ngirafe(code = print(p1 + p2), \n       width_svg = 6,\n       height_svg = 3,\n       options = list(\n         opts_hover(css = \"fill: #202020;\"),\n         opts_hover_inv(css = \"opacity:0.2;\")\n         )\n       ) \n\n\n\n\n\n\n\nInteractive Data Vizualisation (Plotly Methods)\n\np &lt;- ggplot(data=exam_data, \n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nggplotly(p)\n\n\n\n\n\n\nd &lt;- highlight_key(exam_data)\np1 &lt;- ggplot(data=d, \n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\np2 &lt;- ggplot(data=d, \n            aes(x = MATHS,\n                y = SCIENCE)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nsubplot(ggplotly(p1),\n        ggplotly(p2))\n\n\n\n\n\n\n\nInteractive Data Table\n\nd &lt;- highlight_key(exam_data) \np &lt;- ggplot(d, \n            aes(ENGLISH, \n                MATHS)) + \n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\ngg &lt;- highlight(ggplotly(p),        \n                \"plotly_selected\")  \n\ncrosstalk::bscols(gg,               \n                  DT::datatable(d), \n                  widths = 5)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX03/HE03.html#install-and-launching-r-packages-1",
+    "href": "Hands-on_Ex/Hands-on_EX03/HE03.html#install-and-launching-r-packages-1",
+    "title": "Hands-on Exercise 3",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(readxl, gifski, gapminder,\n               plotly, gganimate, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX03/HE03.html#the-data-1",
+    "href": "Hands-on_Ex/Hands-on_EX03/HE03.html#the-data-1",
+    "title": "Hands-on Exercise 3",
+    "section": "The Data",
+    "text": "The Data\nImporting the data\n\ncol &lt;- c(\"Country\", \"Continent\")\nglobalPop &lt;- read_xls(\"data/GlobalPopulation.xls\",\n                      sheet=\"Data\") %&gt;%\n  mutate(across(col, as.factor)) %&gt;%\n  mutate(Year = as.integer(Year))\n\n\nStatic Population Bubble Plot\n\nggplot(globalPop, aes(x = Old, y = Young, \n                      size = Population, \n                      colour = Country)) +\n  geom_point(alpha = 0.7, \n             show.legend = FALSE) +\n  scale_colour_manual(values = country_colors) +\n  scale_size(range = c(2, 12)) +\n  labs(title = 'Year: {frame_time}', \n       x = '% Aged', \n       y = '% Young') \n\n\n\n\n\n\n\n\n\n\nAnimated Bubble Plot\n\ngg &lt;- ggplot(globalPop, \n       aes(x = Old, \n           y = Young, \n           size = Population, \n           colour = Country)) +\n  geom_point(aes(size = Population,\n                 frame = Year),\n             alpha = 0.7, \n             show.legend = FALSE) +\n  scale_colour_manual(values = country_colors) +\n  scale_size(range = c(2, 12)) +\n  labs(x = '% Aged', \n       y = '% Young')\n\nggplotly(gg)\n\n\n\n\n\n\nbp &lt;- globalPop %&gt;%\n  plot_ly(x = ~Old, \n          y = ~Young, \n          size = ~Population, \n          color = ~Continent,\n          sizes = c(2, 100),\n          frame = ~Year, \n          text = ~Country, \n          hoverinfo = \"text\",\n          type = 'scatter',\n          mode = 'markers'\n          ) %&gt;%\n  layout(showlegend = FALSE)\nbp"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html",
+    "title": "Hands-on Exercise 5",
+    "section": "",
+    "text": "Hands-On Exercise # 5."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#overview",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#overview",
+    "title": "Hands-on Exercise 5",
+    "section": "",
+    "text": "Hands-On Exercise # 5."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#install-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#install-and-launching-r-packages",
+    "title": "Hands-on Exercise 5",
+    "section": "Install and Launching R Packages",
+    "text": "Install and Launching R Packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(plotly, ggtern, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#the-data",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#the-data",
+    "title": "Hands-on Exercise 5",
+    "section": "The Data",
+    "text": "The Data\n\nImporting the Data\n\npop_data &lt;- read_csv(\"data/resp.csv\")\n\n\n\nPreparing the Data\nUse the mutate() function of dplyr package to derive three new measures, namely: young, active, and old.\n\n#Deriving the young, economy active and old measures\nagpop_mutated &lt;- pop_data %&gt;%\n  mutate(`Year` = as.character(Year))%&gt;%\n  spread(AG, Population) %&gt;%\n  mutate(YOUNG = rowSums(.[4:8]))%&gt;%\n  mutate(ACTIVE = rowSums(.[9:16]))  %&gt;%\n  mutate(OLD = rowSums(.[17:21])) %&gt;%\n  mutate(TOTAL = rowSums(.[22:24])) %&gt;%\n  filter(Year == 2018)%&gt;%\n  filter(TOTAL &gt; 0)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#plotting-a-static-ternary-diagram",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#plotting-a-static-ternary-diagram",
+    "title": "Hands-on Exercise 5",
+    "section": "Plotting a Static Ternary Diagram",
+    "text": "Plotting a Static Ternary Diagram\n\n#Building the static ternary plot\nggtern(data=agpop_mutated, aes(x=YOUNG,y=ACTIVE, z=OLD)) +\n  geom_point() +\n  labs(title=\"Population structure, 2015\") +\n  theme_rgbw()"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#plotting-an-interative-ternary-diagram",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#plotting-an-interative-ternary-diagram",
+    "title": "Hands-on Exercise 5",
+    "section": "Plotting an Interative Ternary Diagram",
+    "text": "Plotting an Interative Ternary Diagram\n\n# reusable function for creating annotation object\nlabel &lt;- function(txt) {\n  list(\n    text = txt, \n    x = 0.1, y = 1,\n    ax = 0, ay = 0,\n    xref = \"paper\", yref = \"paper\", \n    align = \"center\",\n    font = list(family = \"serif\", size = 15, color = \"white\"),\n    bgcolor = \"#b3b3b3\", bordercolor = \"black\", borderwidth = 2\n  )\n}\n\n# reusable function for axis formatting\naxis &lt;- function(txt) {\n  list(\n    title = txt, tickformat = \".0%\", tickfont = list(size = 10)\n  )\n}\n\nternaryAxes &lt;- list(\n  aaxis = axis(\"Young\"), \n  baxis = axis(\"Active\"), \n  caxis = axis(\"Old\")\n)\n\n# Initiating a plotly visualization \nplot_ly(\n  agpop_mutated, \n  a = ~YOUNG, \n  b = ~ACTIVE, \n  c = ~OLD, \n  color = I(\"black\"), \n  type = \"scatterternary\"\n) %&gt;%\n  layout(\n    annotations = label(\"Ternary Markers\"), \n    ternary = ternaryAxes\n  )"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#install-and-launching-r-packages-1",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#install-and-launching-r-packages-1",
+    "title": "Hands-on Exercise 5",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(corrplot, ggstatsplot, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#the-data-1",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#the-data-1",
+    "title": "Hands-on Exercise 5",
+    "section": "The Data",
+    "text": "The Data\n\nImporting the Data\n\nwine &lt;- read_csv(\"data/wine_quality.csv\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#building-correlation-matrix",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#building-correlation-matrix",
+    "title": "Hands-on Exercise 5",
+    "section": "Building Correlation Matrix",
+    "text": "Building Correlation Matrix\n\nPlotting a Basic Correlation Matrix: pairs() method\n\npairs(wine[,2:12])\n\n\n\n\n\n\n\n\n\n\nDrawing the Lower Corner\n\npairs(wine[,2:12], upper.panel = NULL)\n\n\n\n\n\n\n\n\n\n\nDrawing the Upper Corner\n\npairs(wine[,2:12], lower.panel = NULL)\n\n\n\n\n\n\n\n\n\n\nIncluding with correlation coefficients\n\npanel.cor &lt;- function(x, y, digits=2, prefix=\"\", cex.cor, ...) {\nusr &lt;- par(\"usr\")\non.exit(par(usr))\npar(usr = c(0, 1, 0, 1))\nr &lt;- abs(cor(x, y, use=\"complete.obs\"))\ntxt &lt;- format(c(r, 0.123456789), digits=digits)[1]\ntxt &lt;- paste(prefix, txt, sep=\"\")\nif(missing(cex.cor)) cex.cor &lt;- 0.8/strwidth(txt)\ntext(0.5, 0.5, txt, cex = cex.cor * (1 + r) / 2)\n}\n\npairs(wine[,2:12], \n      upper.panel = panel.cor)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#visualizing-correlation-matrix-ggcormat",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#visualizing-correlation-matrix-ggcormat",
+    "title": "Hands-on Exercise 5",
+    "section": "Visualizing Correlation Matrix: ggcormat()",
+    "text": "Visualizing Correlation Matrix: ggcormat()\n\nThe Basic Plot\n\nggstatsplot::ggcorrmat(\n  data = wine, \n  cor.vars = 1:11,\n  ggcorrplot.args = list(outline.color = \"black\", \n                         hc.order = TRUE,\n                         tl.cex = 10),\n  title    = \"Correlogram for wine dataset\",\n  subtitle = \"Four pairs are no significant at p &lt; 0.05\"\n)\n\n\n\n\n\n\n\nggplot.component = list(\n    theme(text=element_text(size=5),\n      axis.text.x = element_text(size = 8),\n      axis.text.y = element_text(size = 8)))"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html#building-multiple-plots",
+    "href": "Hands-on_Ex/Hands-on_EX05/HE05.html#building-multiple-plots",
+    "title": "Hands-on Exercise 5",
+    "section": "Building multiple plots",
+    "text": "Building multiple plots\n\ngrouped_ggcorrmat(\n  data = wine,\n  cor.vars = 1:11,\n  grouping.var = type,\n  type = \"robust\",\n  p.adjust.method = \"holm\",\n  plotgrid.args = list(ncol = 2),\n  ggcorrplot.args = list(outline.color = \"black\", \n                         hc.order = TRUE,\n                         tl.cex = 10),\n  annotation.args = list(\n    tag_levels = \"a\",\n    title = \"Correlogram for wine dataset\",\n    subtitle = \"The measures are: alcohol, sulphates, fixed acidity, citric acid, chlorides, residual sugar, density, free sulfur dioxide and volatile acidity\",\n    caption = \"Dataset: UCI Machine Learning Repository\"\n  )\n)"
   },
   {
     "objectID": "Hands-on_Ex/Hands-on_EX09/HE09.html",
@@ -971,5 +635,236 @@
     "title": "Hands-on Exercise 9",
     "section": "Building Interactive Network Graph with visNetwork",
     "text": "Building Interactive Network Graph with visNetwork\n\nData preparation\n\nGAStech_edges_aggregated &lt;- GAStech_edges %&gt;%\n  left_join(GAStech_nodes, by = c(\"sourceLabel\" = \"label\")) %&gt;%\n  rename(from = id) %&gt;%\n  left_join(GAStech_nodes, by = c(\"targetLabel\" = \"label\")) %&gt;%\n  rename(to = id) %&gt;%\n  filter(MainSubject == \"Work related\") %&gt;%\n  group_by(from, to) %&gt;%\n    summarise(weight = n()) %&gt;%\n  filter(from!=to) %&gt;%\n  filter(weight &gt; 1) %&gt;%\n  ungroup()\n\n\n\nPlotting the first interactive network graph\n\nvisNetwork(GAStech_nodes,\n           GAStech_edges_aggregated) %&gt;%\n  visIgraphLayout(layout = \"layout_with_fr\") \n\n\n\n\n\n\n\nWorking with visual attributes - Nodes\n\nGAStech_nodes &lt;- GAStech_nodes %&gt;%\n  rename(group = Department) \n\n\nvisNetwork(GAStech_nodes,\n           GAStech_edges_aggregated) %&gt;%\n  visIgraphLayout(layout = \"layout_with_fr\") %&gt;%\n  visLegend() %&gt;%\n  visLayout(randomSeed = 123)\n\n\n\n\n\n\n\nWorking with visual attributes - Edges\n\nvisNetwork(GAStech_nodes,\n           GAStech_edges_aggregated) %&gt;%\n  visIgraphLayout(layout = \"layout_with_fr\") %&gt;%\n  visEdges(arrows = \"to\", \n           smooth = list(enabled = TRUE, \n                         type = \"curvedCW\")) %&gt;%\n  visLegend() %&gt;%\n  visLayout(randomSeed = 123)\n\n\n\n\n\n\n\nInteractivity\n\nvisNetwork(GAStech_nodes,\n           GAStech_edges_aggregated) %&gt;%\n  visIgraphLayout(layout = \"layout_with_fr\") %&gt;%\n  visOptions(highlightNearest = TRUE,\n             nodesIdSelection = TRUE) %&gt;%\n  visLegend() %&gt;%\n  visLayout(randomSeed = 123)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX01/HE01.html",
+    "href": "Hands-on_Ex/Hands-on_EX01/HE01.html",
+    "title": "Hands-on Exercise 1",
+    "section": "",
+    "text": "This is my first attempt to create the course website."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX01/HE01.html#install-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_EX01/HE01.html#install-and-launching-r-packages",
+    "title": "Hands-on Exercise 1",
+    "section": "Install and launching R packages",
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_EX01/HE01.html#the-data",
+    "href": "Hands-on_Ex/Hands-on_EX01/HE01.html#the-data",
+    "title": "Hands-on Exercise 1",
+    "section": "The Data",
+    "text": "The Data\nImporting the data\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\nIn this website you will find the coursework prepared for the course: ISSS608 - Visual Analytics and Applications."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html",
+    "title": "Take-Home Exercise 2",
+    "section": "",
+    "text": "Fintech companies operate in highly competitive digital markets where customer engagement and retention are critical for long-term sustainability. Unlike traditional banks, fintech platforms rely heavily on digital interactions between users and financial services. Understanding how customers interact with these platforms is essential for identifying profitable customer segments and maintaining long-term customer relationships.\n\n\n\nAny business requires significant marketing and operational costs when it wants to attract new customers. Retaining existing customers proves to be more cost-effective and provide more value for extended periods.\nCustomers who remain active on a fintech platform tend to perform more financial transactions, adopt multiple financial products, and contribute higher customer lifetime value (CLV). In contrast, customers who show declining engagement or dissatisfaction may be more likely to discontinue their use of the platform.\nIdentifying customers with high churn risk allows fintech companies to implement specific strategies for retaining those customers. Organizations also need to track which customers produce the most value because this information allows them to distribute resources toward their most profitable customer groups.\n\n\n\nThe project objective is to develop a visual analytics application using R and Shiny for the interactive exploration of fintech customer data.\nThis tools would allow users to dynamically filter data, explore patterns across multiple dimensions, and find relationships between behavioral indicators and financial outcomes.\nIt is intended to help analysts compare churn risk across customer groups, examine engagement and profitability, and identify customers at risk of leaving the platform."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#project-background",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#project-background",
+    "title": "Take-Home Exercise 2",
+    "section": "",
+    "text": "Fintech companies operate in highly competitive digital markets where customer engagement and retention are critical for long-term sustainability. Unlike traditional banks, fintech platforms rely heavily on digital interactions between users and financial services. Understanding how customers interact with these platforms is essential for identifying profitable customer segments and maintaining long-term customer relationships."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#why-customer-retention-matters",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#why-customer-retention-matters",
+    "title": "Take-Home Exercise 2",
+    "section": "",
+    "text": "Any business requires significant marketing and operational costs when it wants to attract new customers. Retaining existing customers proves to be more cost-effective and provide more value for extended periods.\nCustomers who remain active on a fintech platform tend to perform more financial transactions, adopt multiple financial products, and contribute higher customer lifetime value (CLV). In contrast, customers who show declining engagement or dissatisfaction may be more likely to discontinue their use of the platform.\nIdentifying customers with high churn risk allows fintech companies to implement specific strategies for retaining those customers. Organizations also need to track which customers produce the most value because this information allows them to distribute resources toward their most profitable customer groups."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#our-proposal",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#our-proposal",
+    "title": "Take-Home Exercise 2",
+    "section": "",
+    "text": "The project objective is to develop a visual analytics application using R and Shiny for the interactive exploration of fintech customer data.\nThis tools would allow users to dynamically filter data, explore patterns across multiple dimensions, and find relationships between behavioral indicators and financial outcomes.\nIt is intended to help analysts compare churn risk across customer groups, examine engagement and profitability, and identify customers at risk of leaving the platform."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#project-storyline",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#project-storyline",
+    "title": "Take-Home Exercise 2",
+    "section": "2.1. Project Storyline",
+    "text": "2.1. Project Storyline\nThe project will deliver an interactive Shiny dashboard consisting of three analytical modules\n\nModule 1 - Customer Overview and Exploratory Analysis\nModule 2 - Customer Overview & Segmentation\nModule 3 – Exploratory Modelling: Retention Risk & Customer Value"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#role-of-the-module-in-the-larger-system",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#role-of-the-module-in-the-larger-system",
+    "title": "Take-Home Exercise 2",
+    "section": "2.2. Role of the Module in the Larger System",
+    "text": "2.2. Role of the Module in the Larger System\nThis report focuses on Module 3 - Exploratory Modelling: Retention Risk & Customer Value.\nWhile the first two modules provide insights into the whole customer base and how they engagement with fintech services, this module focuses specifically on the customer profitability and retention risk.\nBy integrating the previously analyzed behavioral indicators, satisfaction metrics, and financial metrics, this exploratory modelling approach allows us to identify the behavioral patterns associated with high-value customers while also detecting early warning signals of potential churn.\nThese insights could support decision-making for marketing strategies and if executed correctly, improve long-term profitability."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#raw-dataset",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#raw-dataset",
+    "title": "Take-Home Exercise 2",
+    "section": "3.1. Raw Dataset",
+    "text": "3.1. Raw Dataset\nThe analysis uses the COFINFAD (Colombian Fintech Financial Analytics) dataset, which contains detailed information about fintech customers. The dataset includes demographic information, financial product usage, transaction activity, customer satisfaction indicators, and predicted churn probabilities.\nThe dataset contains approximately 48,000 customer records and more than 50 variables, providing a comprehensive view of customer behavior within a fintech platform.\n\nlibrary(tidyverse)\nfintech &lt;- read_csv(\"data/customer_data.csv\")"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#variable-grouping",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#variable-grouping",
+    "title": "Take-Home Exercise 2",
+    "section": "3.2. Variable Grouping",
+    "text": "3.2. Variable Grouping\nAlthough the dataset contains a wide range of variables, this module primarily focuses on variables related to:\n\nCustomer Value Indicators\nThese variables measure the long-term financial contribution of each customer.\n\n\n\ncustomer_lifetime_value\n\n\nclv_segment\n\n\ncustomer_segment\n\n\n\n\n\nRetention Risk Indicators\nThe indicators capture signals related to potential customer churn.\n\n\n\nchurn_probability\n\n\nsatisfaction_score\n\n\nnps_score\n\n\n\n\n\nTransaction & Engagement Behavior Indicators\nThese metrics indicate how actively a customer is and their engagement with the fintech platform.\n\n\n\nmonthly_transaction_count\n\n\naverage_transaction_value\n\n\ntotal_transaction_volume\n\n\ntransaction_frequency\n\n\nactive_products\n\n\n\n\n\nGeographic Variables\nThese fields allow spatial analysis of CLV and geographic patterns in fintech adoption.\n\n\n\ncity\n\n\ndepartment\n\n\nlatitude\n\n\nlongitude\n\n\n\n\n\nDemographic Variables\nThese information help us identify the customers background and how different groups behave within fintech services.\n\n\n\ngender\n\n\nincome_bracket\n\n\noccupation\n\n\nage"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#data-cleaning",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#data-cleaning",
+    "title": "Take-Home Exercise 2",
+    "section": "3.3. Data Cleaning",
+    "text": "3.3. Data Cleaning\nData preparation involved various steps to ensure the dataset was suitable for analysis:\n\nVerify data types for numerical and categorical variables\n\nsapply(fintech, class)\n\n               customer_id                        age \n                 \"numeric\"                  \"numeric\" \n                    gender                       city \n               \"character\"                \"character\" \n                department                   latitude \n               \"character\"                  \"numeric\" \n                 longitude             income_bracket \n                 \"numeric\"                \"character\" \n                occupation            education_level \n               \"character\"                \"character\" \n            marital_status             household_size \n               \"character\"                  \"numeric\" \n       acquisition_channel           customer_segment \n               \"character\"                \"character\" \n           savings_account                credit_card \n                 \"logical\"                  \"logical\" \n             personal_loan         investment_account \n                 \"logical\"                  \"logical\" \n         insurance_product            active_products \n                 \"logical\"                  \"numeric\" \n      app_logins_frequency    feature_usage_diversity \n                 \"numeric\"                  \"numeric\" \n         bill_payment_user       auto_savings_enabled \n                 \"logical\"                  \"logical\" \n  credit_utilization_ratio international_transactions \n                 \"numeric\"                  \"numeric\" \n       failed_transactions                   tx_count \n                 \"numeric\"                  \"numeric\" \n              avg_tx_value            total_tx_volume \n                 \"numeric\"                  \"numeric\" \n                  first_tx                    last_tx \n               \"character\"                \"character\" \n         base_satisfaction            tx_satisfaction \n                 \"numeric\"                  \"numeric\" \n      product_satisfaction         satisfaction_score \n                 \"numeric\"                  \"numeric\" \n                 nps_score           last_survey_date \n                 \"numeric\"                \"character\" \n     support_tickets_count     resolved_tickets_ratio \n                 \"numeric\"                  \"numeric\" \n          app_store_rating         feedback_sentiment \n                 \"numeric\"                \"character\" \n          feature_requests           complaint_topics \n               \"character\"                \"character\" \n               clv_segment  monthly_transaction_count \n               \"character\"                  \"numeric\" \n average_transaction_value   total_transaction_volume \n                 \"numeric\"                  \"numeric\" \n     transaction_frequency      last_transaction_date \n                 \"numeric\"                \"character\" \npreferred_transaction_type     first_transaction_date \n               \"character\"                \"character\" \n weekend_transaction_ratio     avg_daily_transactions \n                 \"numeric\"                  \"numeric\" \n           customer_tenure          churn_probability \n                 \"numeric\"                  \"numeric\" \n   customer_lifetime_value \n                 \"numeric\" \n\n\nCheck for duplicated customers\n\nfintech %&gt;%\n  filter(duplicated(customer_id))\n\n# A tibble: 0 × 57\n# ℹ 57 variables: customer_id &lt;dbl&gt;, age &lt;dbl&gt;, gender &lt;chr&gt;, city &lt;chr&gt;,\n#   department &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;, income_bracket &lt;chr&gt;,\n#   occupation &lt;chr&gt;, education_level &lt;chr&gt;, marital_status &lt;chr&gt;,\n#   household_size &lt;dbl&gt;, acquisition_channel &lt;chr&gt;, customer_segment &lt;chr&gt;,\n#   savings_account &lt;lgl&gt;, credit_card &lt;lgl&gt;, personal_loan &lt;lgl&gt;,\n#   investment_account &lt;lgl&gt;, insurance_product &lt;lgl&gt;, active_products &lt;dbl&gt;,\n#   app_logins_frequency &lt;dbl&gt;, feature_usage_diversity &lt;dbl&gt;, …\n\n\nIdentify any missing values in key analytical variables\n\nfintech %&gt;%\n  summarise(\n    missing_clv = sum(is.na(customer_lifetime_value)),\n    missing_churn = sum(is.na(churn_probability)),\n    missing_transactions = sum(is.na(transaction_frequency))\n  )\n\n# A tibble: 1 × 3\n  missing_clv missing_churn missing_transactions\n        &lt;int&gt;         &lt;int&gt;                &lt;int&gt;\n1           0             0                    0\n\n\nRemove incomplete observations where necessary\n\nfintech_clean &lt;- fintech %&gt;%\n  filter(\n    !is.na(customer_lifetime_value),\n    !is.na(churn_probability),\n    !is.na(transaction_frequency)\n  )\n\n\n\nnrow(fintech) - nrow(fintech_clean)\n\n[1] 0\n\n\n\nCustomer Lifetime Value (CLV) values were rescaled from absolute currency values to millions of Colombian Pesos in order to improve readability and interpretability in visualisations.\n\nfintech_clean &lt;- fintech_clean %&gt;%\n  mutate(clv_millions = customer_lifetime_value / 1000000)\n\nAge was grouped into age buckets to facilitate segment comparison and improve interpretability of demographic patterns. This will also help when creating filters for a dynamic dashboard.\n\nlibrary(dplyr)\n\nfintech_clean &lt;- fintech_clean %&gt;%\n  mutate(\n    age_bucket = cut(\n      age,\n      breaks = c(18, 25, 35, 45, 55, 65, Inf),\n      labels = c(\"18–25\", \"26–35\", \"36–45\", \"46–55\", \"56–65\", \"65+\"),\n      right = TRUE\n    )\n  )"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#evaluation-of-r-packages",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#evaluation-of-r-packages",
+    "title": "Take-Home Exercise 2",
+    "section": "3.4. Evaluation of R Packages",
+    "text": "3.4. Evaluation of R Packages\nFor the development of the prototype module and the visual analytics components, several R packages are required to support data manipulation, visualization, and formatting of analytical outputs.\nThe main packages used in this project include:\n\n\n\nPackage\n\n\n\n\ntidyverse\n\n\nggplot2\n\n\ndplyr\n\n\nscales\n\n\n\nAll these packages are hosted and maintained on CRAN, ensuring compatibility with the R environment and allowing them to be installed easily.\nTo verify that these packages are available in CRAN, the following command can be used in R:\n\npackages &lt;- c(\"tidyverse\",\"ggplot2\",\"dplyr\",\"scales\")\n\nsapply(packages, requireNamespace, quietly = TRUE)\n\ntidyverse   ggplot2     dplyr    scales \n     TRUE      TRUE      TRUE      TRUE \n\n\nTo verify that these packages are available in CRAN, the following command can be used in R:"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#clv-distribution-by-customer-segment",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#clv-distribution-by-customer-segment",
+    "title": "Take-Home Exercise 2",
+    "section": "4.1. CLV Distribution by Customer Segment",
+    "text": "4.1. CLV Distribution by Customer Segment\nA boxplot is used to compare the distribution of customer lifetime value across customer segments. Because CLV values are highly skewed, a logarithmic scale is used to improve readability.\nFields used:\n\ncustomer_segment\ncustomer_lifetime_value\n\nThis visualization helps identify which segments generate the highest financial value."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#churn-probability-by-segment",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#churn-probability-by-segment",
+    "title": "Take-Home Exercise 2",
+    "section": "4.2. Churn Probability by Segment",
+    "text": "4.2. Churn Probability by Segment\nA bar chart compares average churn probability across customer segments.\nFields used:\n\ncustomer_segment\nchurn_probability\n\nThis graph highlights which customer groups exhibit higher retention risk."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#engagement-behavior-vs-customer-value",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#engagement-behavior-vs-customer-value",
+    "title": "Take-Home Exercise 2",
+    "section": "4.3. Engagement Behavior vs Customer Value",
+    "text": "4.3. Engagement Behavior vs Customer Value\nA scatter plot examines the relationship between transaction frequency and customer lifetime value.\nFields used:\n\ntransaction_frequency\ncustomer_lifetime_value\ncustomer_segment\n\nThis chart helps determine whether highly engaged customers generate higher financial value."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#geographic-distribution-of-customer-value",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#geographic-distribution-of-customer-value",
+    "title": "Take-Home Exercise 2",
+    "section": "4.4. Geographic Distribution of Customer Value",
+    "text": "4.4. Geographic Distribution of Customer Value\nA geospatial map visualizes the distribution of average customer lifetime value across geographic locations.\nFields used:\n\nlatitude\nlongitude\ncustomer_lifetime_value\n\nThis map reveals geographic patterns in fintech customer value."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#predicted-vs-actual-customer-lifetime-value",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#predicted-vs-actual-customer-lifetime-value",
+    "title": "Take-Home Exercise 2",
+    "section": "4.5. Predicted vs Actual Customer Lifetime Value",
+    "text": "4.5. Predicted vs Actual Customer Lifetime Value\nA scatter plot comparing predicted and actual CLV values is included.\nFields used:\n\ncustomer_lifetime_value\ntransaction_frequency\nactive_products\naverage_transaction_value\nsatisfaction_score\nnps_score\n\nThis illustrates the relationship between the CLV values predicted by the regression model and the observed CLV in the dataset."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#readability",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#readability",
+    "title": "Take-Home Exercise 2",
+    "section": "Readability",
+    "text": "Readability\nVisualizations use clear axis labels, minimal visual clutter, and appropriate scaling to ensure readability."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#comparison-across-segments",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#comparison-across-segments",
+    "title": "Take-Home Exercise 2",
+    "section": "Comparison Across Segments",
+    "text": "Comparison Across Segments\nCharts will allow comparison across customer segments and groups to highlight meaningful differences in engagement and value."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#progressive-drill-down",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#progressive-drill-down",
+    "title": "Take-Home Exercise 2",
+    "section": "Progressive Drill-Down",
+    "text": "Progressive Drill-Down\nIn the proposed dashboard, users will be able to interactively filter the dataset to explore specific segments and behavioral patterns in greater detail."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#coordinated-views",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#coordinated-views",
+    "title": "Take-Home Exercise 2",
+    "section": "Coordinated Views",
+    "text": "Coordinated Views\nMultiple visualizations are designed to work together, enabling users to analyse relationships between engagement, customer value, and retention risk."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#color-and-label-choices",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#color-and-label-choices",
+    "title": "Take-Home Exercise 2",
+    "section": "Color and Label Choices",
+    "text": "Color and Label Choices\nConsistent color schemes will be used across visualizations to represent customer segments and ensure consistency."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#sketch",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#sketch",
+    "title": "Take-Home Exercise 2",
+    "section": "6.1. Sketch",
+    "text": "6.1. Sketch"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#sidebar-panel",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#sidebar-panel",
+    "title": "Take-Home Exercise 2",
+    "section": "6.2. Sidebar Panel",
+    "text": "6.2. Sidebar Panel\nIt will contain filtering controls to select the subset of customers we wish to analyze.\nThese controls will include demographic variables such as:\n\nGender\nIncome bracket\nOccupation\nAge group"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#main-panel",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#main-panel",
+    "title": "Take-Home Exercise 2",
+    "section": "6.3. Main panel",
+    "text": "6.3. Main panel\nIt will display the visual analytics outputs of the module. These outputs include the key visualizations developed in this prototype (more details in section 4)"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#input-output-mapping",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#input-output-mapping",
+    "title": "Take-Home Exercise 2",
+    "section": "6.4. Input-output mapping ",
+    "text": "6.4. Input-output mapping \nThe demographic filters in the sidebar will serve as inputs, which dynamically filter the dataset used by each visualisation. The filtered dataset will then be passed to the output components, which generate the charts and visualizations displayed in the main panel."
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#clv-distribution-by-customer-segment-1",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#clv-distribution-by-customer-segment-1",
+    "title": "Take-Home Exercise 2",
+    "section": "7.1. CLV Distribution by Customer Segment",
+    "text": "7.1. CLV Distribution by Customer Segment\n\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(scales)\n\nggplot(fintech_clean, aes(x = customer_segment, y = clv_millions)) +\n  geom_boxplot() +\n  scale_y_log10(labels = comma) +\n  labs(\n    title = \"Customer Lifetime Value by Customer Segment (Log Scale)\",\n    x = \"Customer Segment\",\n    y = \"Customer Lifetime Value (Log Scale)\"\n  ) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#churn-probability-by-segment-1",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#churn-probability-by-segment-1",
+    "title": "Take-Home Exercise 2",
+    "section": "7.2. Churn Probability by Segment",
+    "text": "7.2. Churn Probability by Segment\n\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(scales)\n\nchurn_by_segment &lt;- fintech_clean %&gt;%\n  group_by(customer_segment) %&gt;%\n  summarise(avg_churn = mean(churn_probability, na.rm = TRUE))\n\nggplot(churn_by_segment, aes(x = customer_segment, y = avg_churn, fill = avg_churn)) +\n  geom_col() +\n  geom_text(\n    aes(label = label_percent(accuracy = 0.1)(avg_churn)),\n    vjust = -0.5\n  ) +\n  scale_fill_gradient(\n    low = \"lightblue\",\n    high = \"darkblue\",\n    guide = \"none\"\n  ) +\n  scale_y_continuous(\n    labels = label_percent(),\n    breaks = seq(0.30, 0.35, 0.01)\n  ) +\n  coord_cartesian(ylim = c(0.30, 0.35)) +\n  labs(\n    title = \"Average Churn Probability by Customer Segment\",\n    x = \"Customer Segment\",\n    y = \"Average Churn Probability\"\n  ) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#engagement-behavior-vs-customer-value-1",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#engagement-behavior-vs-customer-value-1",
+    "title": "Take-Home Exercise 2",
+    "section": "7.3. Engagement Behavior vs Customer Value",
+    "text": "7.3. Engagement Behavior vs Customer Value\n\nx_limit &lt;- quantile(fintech_clean$transaction_frequency, 0.95)\ny_limit &lt;- quantile(fintech_clean$clv_millions, 0.95)\n\nggplot(fintech_clean, aes(x = transaction_frequency, y = clv_millions, color = customer_segment)) +\n  geom_point(alpha = 0.5) +\n  scale_y_continuous(labels = comma) +\n  coord_cartesian(xlim = c(0, x_limit), ylim = c(0, y_limit)) +\n  labs(\n    title = \"Transaction Frequency vs Customer Lifetime Value\",\n    x = \"Transaction Frequency\",\n    y = \"Customer Lifetime Value\",\n    color = \"Customer Segment\"\n  ) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#geographic-distribution-of-customer-value-1",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#geographic-distribution-of-customer-value-1",
+    "title": "Take-Home Exercise 2",
+    "section": "7.4. Geographic Distribution of Customer Value",
+    "text": "7.4. Geographic Distribution of Customer Value\nFirst, we aggregate customers by city and calculates the average CLV and number of customers.\n\nclv_location &lt;- fintech_clean %&gt;%\n  group_by(city, department, latitude, longitude) %&gt;%\n  summarise(\n    avg_clv = mean(clv_millions, na.rm = TRUE),\n    customers = n(),\n    .groups = \"drop\"\n  ) %&gt;%\n  mutate(label = city)\n\nWe identify Identify the Top 5 cities by average CLV\n\ntop_cities &lt;- clv_location %&gt;%\n  slice_max(avg_clv, n = 5)\n\nWe map it\n\ncolombia_map &lt;- map_data(\"world\", region = \"Colombia\")\n\n\nggplot() +\n  geom_polygon(\n    data = colombia_map,\n    aes(x = long, y = lat, group = group),\n    fill = \"gray95\",\n    color = \"white\"\n  ) +\n  \n  geom_point(\n    data = clv_location,\n    aes(x = longitude, y = latitude,\n        color = avg_clv,\n        size = customers),\n    alpha = 0.7\n  ) +\n  \n  geom_text(\n    data = top_cities,\n    aes(x = longitude, y = latitude, label = label),\n    size = 2.5,\n    vjust = -0.8\n  ) +\n  \n  scale_color_gradient(\n    low = \"#9ecae1\",\n    high = \"#08306b\",\n    labels = scales::comma\n  ) +\n  \n  coord_quickmap(\n    xlim = c(-80, -67),\n    ylim = c(-5, 13)\n  ) +\n  \n  labs(\n    title = \"Average Customer Lifetime Value by Location\",\n    color = \"Average CLV\",\n    size = \"Number of Customers\"\n  ) +\n  \n  theme_minimal()"
+  },
+  {
+    "objectID": "Take-home_Ex/TakeHome02/th_exc02.html#predicted-vs-actual-customer-lifetime-value-1",
+    "href": "Take-home_Ex/TakeHome02/th_exc02.html#predicted-vs-actual-customer-lifetime-value-1",
+    "title": "Take-Home Exercise 2",
+    "section": "7.5. Predicted vs Actual Customer Lifetime Value",
+    "text": "7.5. Predicted vs Actual Customer Lifetime Value\n\nLinear Regression for CLV\n\nclv_model &lt;- lm(\n  clv_millions ~\n    transaction_frequency +\n    active_products +\n    average_transaction_value +\n    satisfaction_score +\n    nps_score,\n  data = fintech_clean\n)\n\nsummary(clv_model)\n\n\nCall:\nlm(formula = clv_millions ~ transaction_frequency + active_products + \n    average_transaction_value + satisfaction_score + nps_score, \n    data = fintech_clean)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n -457.3  -266.6  -189.4   -25.9 17452.2 \n\nCoefficients:\n                            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)                3.385e+01  8.285e+01   0.409    0.683    \ntransaction_frequency     -1.758e+00  2.104e+00  -0.835    0.404    \nactive_products            7.926e-01  3.043e+00   0.260    0.795    \naverage_transaction_value -3.189e-07  9.056e-07  -0.352    0.725    \nsatisfaction_score         7.189e+01  1.551e+01   4.634  3.6e-06 ***\nnps_score                  1.909e-01  7.144e-01   0.267    0.789    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 791.4 on 48717 degrees of freedom\nMultiple R-squared:  0.003074,  Adjusted R-squared:  0.002971 \nF-statistic: 30.04 on 5 and 48717 DF,  p-value: &lt; 2.2e-16\n\n\n\n\nVisualization of Model Results\n\nfintech_clean$predicted_clv &lt;- predict(clv_model)\n\nggplot(fintech_clean, aes(x = predicted_clv, y = clv_millions)) +\n  geom_point(alpha = 0.4) +\n  labs(\n    title = \"Predicted vs Actual Customer Lifetime Value\",\n    x = \"Predicted CLV (Millions)\",\n    y = \"Actual CLV (Millions)\"\n  ) +\n  theme_minimal()"
   }
 ]

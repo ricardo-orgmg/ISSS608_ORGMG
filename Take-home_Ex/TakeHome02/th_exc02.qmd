@@ -38,27 +38,19 @@ It is intended to help analysts compare churn risk across customer groups, exami
 
 The project will deliver an interactive Shiny dashboard consisting of three analytical modules
 
-### **Module 1: Customer Overview and Exploratory Analysis**
+-   **Module 1** - Customer Overview and Exploratory Analysis
 
-Will provide a comprehensive overview of the customer population and identify key demographic and behavioral segments.
+-   **Module 2** - Customer Overview & Segmentation
 
-### **Module 2:** Customer Overview & Segmentation
-
-Will analyse how customers interact with the platform and evaluate their service experience.
-
-### **Module 3 –** Retention Risk & Customer Value
-
-This module will focus on analysing the relationship between customer engagement, churn risk, and long-term financial value.
-
-The analysis will combines demographic, behavioral indicators and financial metrics to identify customers who generate significant value while also detecting customers who may be at risk of leaving.
+-   **Module 3** – Exploratory Modelling: Retention Risk & Customer Value
 
 ## 2.2. Role of the Module in the Larger System
 
-This report focuses on **Module 3: Retention Risk & Customer Value**.
+This report focuses on **Module 3 - Exploratory Modelling: Retention Risk & Customer Value.**
 
 While the first two modules provide insights into the whole customer base and how they engagement with fintech services, this module focuses specifically on the customer profitability and retention risk.
 
-By integrating the previously analyzed behavioral indicators, satisfaction metrics, and financial metrics, in this module we will be able to identify who are the most valuable customer segments while also detecting early warning signals of potential churn.
+By integrating the previously analyzed behavioral indicators, satisfaction metrics, and financial metrics, this exploratory modelling approach allows us to identify the behavioral patterns associated with high-value customers while also detecting early warning signals of potential churn.
 
 These insights could support decision-making for marketing strategies and if executed correctly, improve long-term profitability.
 
@@ -122,17 +114,107 @@ These fields allow spatial analysis of CLV and geographic patterns in fintech ad
 | latitude   |
 | longitude  |
 
-## 3.3. Data Cleaning 
+### Demographic Variables
+
+These information help us identify the customers background and how different groups behave within fintech services.
+
+|                |
+|----------------|
+| gender         |
+| income_bracket |
+| occupation     |
+| age            |
+
+## 3.3. Data Cleaning
 
 Data preparation involved various steps to ensure the dataset was suitable for analysis:
 
 1.  Verify data types for numerical and categorical variables
 
-2.  Check for duplicate customers
+    ```{r}
+    sapply(fintech, class)
+    ```
+
+2.  Check for duplicated customers
+
+    ```{r}
+    fintech %>%
+      filter(duplicated(customer_id))
+    ```
 
 3.  Identify any missing values in key analytical variables
 
+    ```{r}
+    fintech %>%
+      summarise(
+        missing_clv = sum(is.na(customer_lifetime_value)),
+        missing_churn = sum(is.na(churn_probability)),
+        missing_transactions = sum(is.na(transaction_frequency))
+      )
+    ```
+
 4.  Remove incomplete observations where necessary
+
+    ```{r}
+    fintech_clean <- fintech %>%
+      filter(
+        !is.na(customer_lifetime_value),
+        !is.na(churn_probability),
+        !is.na(transaction_frequency)
+      )
+    ```
+
+```{r}
+nrow(fintech) - nrow(fintech_clean)
+```
+
+5.  Customer Lifetime Value (CLV) values were rescaled from absolute currency values to millions of Colombian Pesos in order to improve readability and interpretability in visualisations.
+
+    ```{r}
+    fintech_clean <- fintech_clean %>%
+      mutate(clv_millions = customer_lifetime_value / 1000000)
+    ```
+
+6.  Age was grouped into age buckets to facilitate segment comparison and improve interpretability of demographic patterns. This will also help when creating filters for a dynamic dashboard.
+
+    ```{r}
+    library(dplyr)
+
+    fintech_clean <- fintech_clean %>%
+      mutate(
+        age_bucket = cut(
+          age,
+          breaks = c(18, 25, 35, 45, 55, 65, Inf),
+          labels = c("18–25", "26–35", "36–45", "46–55", "56–65", "65+"),
+          right = TRUE
+        )
+      )
+    ```
+
+## 3.4. Evaluation of R Packages
+
+For the development of the prototype module and the visual analytics components, several R packages are required to support data manipulation, visualization, and formatting of analytical outputs.
+
+The main packages used in this project include:
+
+| Package   |
+|-----------|
+| tidyverse |
+| ggplot2   |
+| dplyr     |
+| scales    |
+
+All these packages are hosted and maintained on CRAN, ensuring compatibility with the R environment and allowing them to be installed easily.
+
+To verify that these packages are available in CRAN, the following command can be used in R:
+
+```{r}
+packages <- c("tidyverse","ggplot2","dplyr","scales")
+
+sapply(packages, requireNamespace, quietly = TRUE)
+```
+
+To verify that these packages are available in CRAN, the following command can be used in R:
 
 # **4. Selection of Visualization Techniques**
 
@@ -178,9 +260,9 @@ Fields used:
 
 This chart helps determine whether highly engaged customers generate higher financial value.
 
-## 4.4. Geographic Distribution of Customer Value
+## 4.4. **Geographic Distribution of Customer Value**
 
-A geospatial map visualises the distribution of average customer lifetime value across geographic locations.
+A geospatial map visualizes the distribution of average customer lifetime value across geographic locations.
 
 Fields used:
 
@@ -191,6 +273,26 @@ Fields used:
 -   customer_lifetime_value
 
 This map reveals geographic patterns in fintech customer value.
+
+## 4.5. Predicted vs Actual Customer Lifetime Value
+
+A scatter plot comparing predicted and actual CLV values is included.
+
+Fields used:
+
+-   customer_lifetime_value
+
+-   transaction_frequency
+
+-   active_products
+
+-   average_transaction_value
+
+-   satisfaction_score
+
+-   nps_score
+
+This illustrates the relationship between the CLV values predicted by the regression model and the observed CLV in the dataset.
 
 # **5. Visualization Design and Interaction Principles**
 
@@ -212,17 +314,41 @@ In the proposed dashboard, users will be able to interactively filter the datase
 
 Multiple visualizations are designed to work together, enabling users to analyse relationships between engagement, customer value, and retention risk.
 
-## Colour and Label Choices
+## Color and Label Choices
 
 Consistent color schemes will be used across visualizations to represent customer segments and ensure consistency.
 
 # **6. Proposed UI Design**
 
-storyboard logic 
+The proposed user interface will be implemented as an interactive Shiny dashboard that allows users to dynamically explore customer retention risk and customer lifetime value through multiple coordinated visualizations.
 
-sidebar + main panel layout 
+The dashboard is designed to supportexploration of customer behavior and value. Users will begin by selecting demographic filters to define a specific customer group of interest. Once filters are applied, the visualizations will update automatically to display patterns related to CLV, churn risk, and engagement.
 
-input-output mapping 
+## 6.1. Sketch
+
+![](sketch.jpeg){fig-align="center"}
+
+## **6.2. Sidebar Panel**
+
+It will contain filtering controls to select the subset of customers we wish to analyze.
+
+These controls will include demographic variables such as:
+
+-   Gender
+
+-   Income bracket
+
+-   Occupation
+
+-   Age group
+
+## **6.3. Main panel**
+
+It will display the visual analytics outputs of the module. These outputs include the key visualizations developed in this prototype (more details in section 4)
+
+## **6.4. Input-output mapping** 
+
+The demographic filters in the sidebar will serve as **inputs**, which dynamically filter the dataset used by each visualisation. The filtered dataset will then be passed to the output components, which generate the charts and visualizations displayed in the main panel.
 
 # **7. Prototype Visualization**
 
@@ -233,7 +359,7 @@ library(ggplot2)
 library(dplyr)
 library(scales)
 
-ggplot(fintech, aes(x = customer_segment, y = customer_lifetime_value)) +
+ggplot(fintech_clean, aes(x = customer_segment, y = clv_millions)) +
   geom_boxplot() +
   scale_y_log10(labels = comma) +
   labs(
@@ -251,15 +377,20 @@ library(ggplot2)
 library(dplyr)
 library(scales)
 
-churn_by_segment <- fintech %>%
+churn_by_segment <- fintech_clean %>%
   group_by(customer_segment) %>%
   summarise(avg_churn = mean(churn_probability, na.rm = TRUE))
 
-ggplot(churn_by_segment, aes(x = customer_segment, y = avg_churn)) +
+ggplot(churn_by_segment, aes(x = customer_segment, y = avg_churn, fill = avg_churn)) +
   geom_col() +
   geom_text(
     aes(label = label_percent(accuracy = 0.1)(avg_churn)),
     vjust = -0.5
+  ) +
+  scale_fill_gradient(
+    low = "lightblue",
+    high = "darkblue",
+    guide = "none"
   ) +
   scale_y_continuous(
     labels = label_percent(),
@@ -277,10 +408,10 @@ ggplot(churn_by_segment, aes(x = customer_segment, y = avg_churn)) +
 ## 7.3. Engagement Behavior vs Customer Value
 
 ```{r}
-x_limit <- quantile(fintech$transaction_frequency, 0.95)
-y_limit <- quantile(fintech$customer_lifetime_value, 0.95)
+x_limit <- quantile(fintech_clean$transaction_frequency, 0.95)
+y_limit <- quantile(fintech_clean$clv_millions, 0.95)
 
-ggplot(fintech, aes(x = transaction_frequency, y = customer_lifetime_value, color = customer_segment)) +
+ggplot(fintech_clean, aes(x = transaction_frequency, y = clv_millions, color = customer_segment)) +
   geom_point(alpha = 0.5) +
   scale_y_continuous(labels = comma) +
   coord_cartesian(xlim = c(0, x_limit), ylim = c(0, y_limit)) +
@@ -295,32 +426,105 @@ ggplot(fintech, aes(x = transaction_frequency, y = customer_lifetime_value, colo
 
 ## 7.4. Geographic Distribution of Customer Value
 
-```{}
+First, we aggregate customers by city and calculates the average CLV and number of customers.
+
+```{r}
+clv_location <- fintech_clean %>%
+  group_by(city, department, latitude, longitude) %>%
+  summarise(
+    avg_clv = mean(clv_millions, na.rm = TRUE),
+    customers = n(),
+    .groups = "drop"
+  ) %>%
+  mutate(label = city)
+```
+
+We identify Identify the Top 5 cities by average CLV
+
+```{r}
+top_cities <- clv_location %>%
+  slice_max(avg_clv, n = 5)
+```
+
+We map it
+
+```{r}
+colombia_map <- map_data("world", region = "Colombia")
 ```
 
 ```{r}
-library(maps)
-
-clv_location <- fintech %>%
-  group_by(city, department, latitude, longitude) %>%
-  summarise(avg_clv = mean(customer_lifetime_value, na.rm = TRUE))
-
-colombia_map <- map_data("world", region = "Colombia")
-
 ggplot() +
-  geom_polygon(data = colombia_map,
-               aes(x = long, y = lat, group = group),
-               fill = "gray90", color = "white") +
-  geom_point(data = clv_location,
-             aes(x = longitude, y = latitude,
-                 color = avg_clv,
-                 size = avg_clv),
-             alpha = 0.7) +
-  scale_color_viridis_c(labels = scales::comma) +
+  geom_polygon(
+    data = colombia_map,
+    aes(x = long, y = lat, group = group),
+    fill = "gray95",
+    color = "white"
+  ) +
+  
+  geom_point(
+    data = clv_location,
+    aes(x = longitude, y = latitude,
+        color = avg_clv,
+        size = customers),
+    alpha = 0.7
+  ) +
+  
+  geom_text(
+    data = top_cities,
+    aes(x = longitude, y = latitude, label = label),
+    size = 2.5,
+    vjust = -0.8
+  ) +
+  
+  scale_color_gradient(
+    low = "#9ecae1",
+    high = "#08306b",
+    labels = scales::comma
+  ) +
+  
+  coord_quickmap(
+    xlim = c(-80, -67),
+    ylim = c(-5, 13)
+  ) +
+  
   labs(
     title = "Average Customer Lifetime Value by Location",
     color = "Average CLV",
-    size = "Average CLV"
+    size = "Number of Customers"
+  ) +
+  
+  theme_minimal()
+```
+
+## 7.5. Predicted vs Actual Customer Lifetime Value
+
+### Linear Regression for CLV
+
+```{r}
+clv_model <- lm(
+  clv_millions ~
+    transaction_frequency +
+    active_products +
+    average_transaction_value +
+    satisfaction_score +
+    nps_score,
+  data = fintech_clean
+)
+
+summary(clv_model)
+```
+
+### Visualization of Model Results
+
+```{r}
+fintech_clean$predicted_clv <- predict(clv_model)
+
+ggplot(fintech_clean, aes(x = predicted_clv, y = clv_millions)) +
+  geom_point(alpha = 0.4) +
+  labs(
+    title = "Predicted vs Actual Customer Lifetime Value",
+    x = "Predicted CLV (Millions)",
+    y = "Actual CLV (Millions)"
   ) +
   theme_minimal()
 ```
@@ -329,4 +533,4 @@ ggplot() +
 
 The Retention Risk & Customer Value module provides valuable insights into how customer engagement influence long-term profitability within the fintech platform. By analyzing key indicators, this module helps identifying high-value customers and segments that may be at risk of disengagement.
 
-Overall, the prototype developed in this module demonstrates how data exploration can support data-driven decision making across multiple business functions. The proposed Shiny application could provide a powerful tool for fintech organizations seeking to optimise customer strategy and maximize business value in the long run.
+Overall, the prototype developed in this module demonstrates how data exploration can support data-driven decision making across multiple business functions. The proposed Shiny application could provide a powerful tool for fintech organizations seeking to optimize customer strategy and maximize business value in the long run.

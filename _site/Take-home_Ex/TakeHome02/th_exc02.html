@@ -156,6 +156,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_EX07/HE7.html">
  <span class="dropdown-text">Hands-on Exercise 7</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_EX08/HE8.html">
+ <span class="dropdown-text">Hands-on Exercise 8</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_EX09/HE9.html">
+ <span class="dropdown-text">Hands-on Exercise 9</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -177,6 +185,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../../Take-home_Ex/TakeHome01/th_exc01.html">
  <span class="dropdown-text">Take-Home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/TakeHome02/th_exc02.html">
+ <span class="dropdown-text">Take-Home Exercise 2</span></a>
   </li>  
     </ul>
   </li>
@@ -214,12 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#proposed-project-storyline" id="toc-proposed-project-storyline" class="nav-link" data-scroll-target="#proposed-project-storyline"><strong>2. Proposed Project Storyline</strong></a>
   <ul class="collapse">
-  <li><a href="#project-storyline" id="toc-project-storyline" class="nav-link" data-scroll-target="#project-storyline">2.1. Project Storyline</a>
-  <ul class="collapse">
-  <li><a href="#module-1-customer-overview-and-exploratory-analysis" id="toc-module-1-customer-overview-and-exploratory-analysis" class="nav-link" data-scroll-target="#module-1-customer-overview-and-exploratory-analysis"><strong>Module 1: Customer Overview and Exploratory Analysis</strong></a></li>
-  <li><a href="#module-2-customer-overview-segmentation" id="toc-module-2-customer-overview-segmentation" class="nav-link" data-scroll-target="#module-2-customer-overview-segmentation"><strong>Module 2:</strong> Customer Overview &amp; Segmentation</a></li>
-  <li><a href="#module-3-retention-risk-customer-value" id="toc-module-3-retention-risk-customer-value" class="nav-link" data-scroll-target="#module-3-retention-risk-customer-value"><strong>Module 3 –</strong> Retention Risk &amp; Customer Value</a></li>
-  </ul></li>
+  <li><a href="#project-storyline" id="toc-project-storyline" class="nav-link" data-scroll-target="#project-storyline">2.1. Project Storyline</a></li>
   <li><a href="#role-of-the-module-in-the-larger-system" id="toc-role-of-the-module-in-the-larger-system" class="nav-link" data-scroll-target="#role-of-the-module-in-the-larger-system">2.2. Role of the Module in the Larger System</a></li>
   </ul></li>
   <li><a href="#data-preparation-process" id="toc-data-preparation-process" class="nav-link" data-scroll-target="#data-preparation-process"><strong>3. Data Preparation Process</strong></a>
@@ -231,15 +238,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#retention-risk-indicators" id="toc-retention-risk-indicators" class="nav-link" data-scroll-target="#retention-risk-indicators">Retention Risk Indicators</a></li>
   <li><a href="#transaction-engagement-behavior-indicators" id="toc-transaction-engagement-behavior-indicators" class="nav-link" data-scroll-target="#transaction-engagement-behavior-indicators">Transaction &amp; Engagement Behavior Indicators</a></li>
   <li><a href="#geographic-variables" id="toc-geographic-variables" class="nav-link" data-scroll-target="#geographic-variables">Geographic Variables</a></li>
+  <li><a href="#demographic-variables" id="toc-demographic-variables" class="nav-link" data-scroll-target="#demographic-variables">Demographic Variables</a></li>
   </ul></li>
   <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">3.3. Data Cleaning</a></li>
+  <li><a href="#evaluation-of-r-packages" id="toc-evaluation-of-r-packages" class="nav-link" data-scroll-target="#evaluation-of-r-packages">3.4. Evaluation of R Packages</a></li>
   </ul></li>
   <li><a href="#selection-of-visualization-techniques" id="toc-selection-of-visualization-techniques" class="nav-link" data-scroll-target="#selection-of-visualization-techniques"><strong>4. Selection of Visualization Techniques</strong></a>
   <ul class="collapse">
   <li><a href="#clv-distribution-by-customer-segment" id="toc-clv-distribution-by-customer-segment" class="nav-link" data-scroll-target="#clv-distribution-by-customer-segment">4.1. CLV Distribution by Customer Segment</a></li>
   <li><a href="#churn-probability-by-segment" id="toc-churn-probability-by-segment" class="nav-link" data-scroll-target="#churn-probability-by-segment">4.2. Churn Probability by Segment</a></li>
   <li><a href="#engagement-behavior-vs-customer-value" id="toc-engagement-behavior-vs-customer-value" class="nav-link" data-scroll-target="#engagement-behavior-vs-customer-value">4.3. Engagement Behavior vs Customer Value</a></li>
-  <li><a href="#geographic-distribution-of-customer-value" id="toc-geographic-distribution-of-customer-value" class="nav-link" data-scroll-target="#geographic-distribution-of-customer-value">4.4. Geographic Distribution of Customer Value</a></li>
+  <li><a href="#geographic-distribution-of-customer-value" id="toc-geographic-distribution-of-customer-value" class="nav-link" data-scroll-target="#geographic-distribution-of-customer-value">4.4. <strong>Geographic Distribution of Customer Value</strong></a></li>
+  <li><a href="#predicted-vs-actual-customer-lifetime-value" id="toc-predicted-vs-actual-customer-lifetime-value" class="nav-link" data-scroll-target="#predicted-vs-actual-customer-lifetime-value">4.5. Predicted vs Actual Customer Lifetime Value</a></li>
   </ul></li>
   <li><a href="#visualization-design-and-interaction-principles" id="toc-visualization-design-and-interaction-principles" class="nav-link" data-scroll-target="#visualization-design-and-interaction-principles"><strong>5. Visualization Design and Interaction Principles</strong></a>
   <ul class="collapse">
@@ -247,15 +257,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#comparison-across-segments" id="toc-comparison-across-segments" class="nav-link" data-scroll-target="#comparison-across-segments">Comparison Across Segments</a></li>
   <li><a href="#progressive-drill-down" id="toc-progressive-drill-down" class="nav-link" data-scroll-target="#progressive-drill-down">Progressive Drill-Down</a></li>
   <li><a href="#coordinated-views" id="toc-coordinated-views" class="nav-link" data-scroll-target="#coordinated-views">Coordinated Views</a></li>
-  <li><a href="#colour-and-label-choices" id="toc-colour-and-label-choices" class="nav-link" data-scroll-target="#colour-and-label-choices">Colour and Label Choices</a></li>
+  <li><a href="#color-and-label-choices" id="toc-color-and-label-choices" class="nav-link" data-scroll-target="#color-and-label-choices">Color and Label Choices</a></li>
   </ul></li>
-  <li><a href="#proposed-ui-design" id="toc-proposed-ui-design" class="nav-link" data-scroll-target="#proposed-ui-design"><strong>6. Proposed UI Design</strong></a></li>
+  <li><a href="#proposed-ui-design" id="toc-proposed-ui-design" class="nav-link" data-scroll-target="#proposed-ui-design"><strong>6. Proposed UI Design</strong></a>
+  <ul class="collapse">
+  <li><a href="#sketch" id="toc-sketch" class="nav-link" data-scroll-target="#sketch">6.1. Sketch</a></li>
+  <li><a href="#sidebar-panel" id="toc-sidebar-panel" class="nav-link" data-scroll-target="#sidebar-panel"><strong>6.2. Sidebar Panel</strong></a></li>
+  <li><a href="#main-panel" id="toc-main-panel" class="nav-link" data-scroll-target="#main-panel"><strong>6.3. Main panel</strong></a></li>
+  <li><a href="#input-output-mapping" id="toc-input-output-mapping" class="nav-link" data-scroll-target="#input-output-mapping"><strong>6.4. Input-output mapping</strong>&nbsp;</a></li>
+  </ul></li>
   <li><a href="#prototype-visualization" id="toc-prototype-visualization" class="nav-link" data-scroll-target="#prototype-visualization"><strong>7. Prototype Visualization</strong></a>
   <ul class="collapse">
   <li><a href="#clv-distribution-by-customer-segment-1" id="toc-clv-distribution-by-customer-segment-1" class="nav-link" data-scroll-target="#clv-distribution-by-customer-segment-1">7.1. CLV Distribution by Customer Segment</a></li>
   <li><a href="#churn-probability-by-segment-1" id="toc-churn-probability-by-segment-1" class="nav-link" data-scroll-target="#churn-probability-by-segment-1">7.2. Churn Probability by Segment</a></li>
   <li><a href="#engagement-behavior-vs-customer-value-1" id="toc-engagement-behavior-vs-customer-value-1" class="nav-link" data-scroll-target="#engagement-behavior-vs-customer-value-1">7.3. Engagement Behavior vs Customer Value</a></li>
   <li><a href="#geographic-distribution-of-customer-value-1" id="toc-geographic-distribution-of-customer-value-1" class="nav-link" data-scroll-target="#geographic-distribution-of-customer-value-1">7.4. Geographic Distribution of Customer Value</a></li>
+  <li><a href="#predicted-vs-actual-customer-lifetime-value-1" id="toc-predicted-vs-actual-customer-lifetime-value-1" class="nav-link" data-scroll-target="#predicted-vs-actual-customer-lifetime-value-1">7.5. Predicted vs Actual Customer Lifetime Value</a>
+  <ul class="collapse">
+  <li><a href="#linear-regression-for-clv" id="toc-linear-regression-for-clv" class="nav-link" data-scroll-target="#linear-regression-for-clv">Linear Regression for CLV</a></li>
+  <li><a href="#visualization-of-model-results" id="toc-visualization-of-model-results" class="nav-link" data-scroll-target="#visualization-of-model-results">Visualization of Model Results</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><strong>8. Conclusion</strong></a></li>
   </ul>
@@ -290,7 +311,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 13, 2026</p>
+      <p class="date-modified">March 15, 2026</p>
     </div>
   </div>
     
@@ -325,25 +346,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="project-storyline" class="level2">
 <h2 class="anchored" data-anchor-id="project-storyline">2.1. Project Storyline</h2>
 <p>The project will deliver an interactive Shiny dashboard consisting of three analytical modules</p>
-<section id="module-1-customer-overview-and-exploratory-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="module-1-customer-overview-and-exploratory-analysis"><strong>Module 1: Customer Overview and Exploratory Analysis</strong></h3>
-<p>Will provide a comprehensive overview of the customer population and identify key demographic and behavioral segments.</p>
-</section>
-<section id="module-2-customer-overview-segmentation" class="level3">
-<h3 class="anchored" data-anchor-id="module-2-customer-overview-segmentation"><strong>Module 2:</strong> Customer Overview &amp; Segmentation</h3>
-<p>Will analyse how customers interact with the platform and evaluate their service experience.</p>
-</section>
-<section id="module-3-retention-risk-customer-value" class="level3">
-<h3 class="anchored" data-anchor-id="module-3-retention-risk-customer-value"><strong>Module 3 –</strong> Retention Risk &amp; Customer Value</h3>
-<p>This module will focus on analysing the relationship between customer engagement, churn risk, and long-term financial value.</p>
-<p>The analysis will combines demographic, behavioral indicators and financial metrics to identify customers who generate significant value while also detecting customers who may be at risk of leaving.</p>
-</section>
+<ul>
+<li><p><strong>Module 1</strong> - Customer Overview and Exploratory Analysis</p></li>
+<li><p><strong>Module 2</strong> - Customer Overview &amp; Segmentation</p></li>
+<li><p><strong>Module 3</strong> – Exploratory Modelling: Retention Risk &amp; Customer Value</p></li>
+</ul>
 </section>
 <section id="role-of-the-module-in-the-larger-system" class="level2">
 <h2 class="anchored" data-anchor-id="role-of-the-module-in-the-larger-system">2.2. Role of the Module in the Larger System</h2>
-<p>This report focuses on <strong>Module 3: Retention Risk &amp; Customer Value</strong>.</p>
+<p>This report focuses on <strong>Module 3 - Exploratory Modelling: Retention Risk &amp; Customer Value.</strong></p>
 <p>While the first two modules provide insights into the whole customer base and how they engagement with fintech services, this module focuses specifically on the customer profitability and retention risk.</p>
-<p>By integrating the previously analyzed behavioral indicators, satisfaction metrics, and financial metrics, in this module we will be able to identify who are the most valuable customer segments while also detecting early warning signals of potential churn.</p>
+<p>By integrating the previously analyzed behavioral indicators, satisfaction metrics, and financial metrics, this exploratory modelling approach allows us to identify the behavioral patterns associated with high-value customers while also detecting early warning signals of potential churn.</p>
 <p>These insights could support decision-making for marketing strategies and if executed correctly, improve long-term profitability.</p>
 </section>
 </section>
@@ -438,16 +451,200 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
+<section id="demographic-variables" class="level3">
+<h3 class="anchored" data-anchor-id="demographic-variables">Demographic Variables</h3>
+<p>These information help us identify the customers background and how different groups behave within fintech services.</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>gender</td>
+</tr>
+<tr class="even">
+<td>income_bracket</td>
+</tr>
+<tr class="odd">
+<td>occupation</td>
+</tr>
+<tr class="even">
+<td>age</td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 <section id="data-cleaning" class="level2">
 <h2 class="anchored" data-anchor-id="data-cleaning">3.3. Data Cleaning</h2>
 <p>Data preparation involved various steps to ensure the dataset was suitable for analysis:</p>
 <ol type="1">
-<li><p>Verify data types for numerical and categorical variables</p></li>
-<li><p>Check for duplicate customers</p></li>
-<li><p>Identify any missing values in key analytical variables</p></li>
-<li><p>Remove incomplete observations where necessary</p></li>
+<li><p>Verify data types for numerical and categorical variables</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(fintech, class)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               customer_id                        age 
+                 "numeric"                  "numeric" 
+                    gender                       city 
+               "character"                "character" 
+                department                   latitude 
+               "character"                  "numeric" 
+                 longitude             income_bracket 
+                 "numeric"                "character" 
+                occupation            education_level 
+               "character"                "character" 
+            marital_status             household_size 
+               "character"                  "numeric" 
+       acquisition_channel           customer_segment 
+               "character"                "character" 
+           savings_account                credit_card 
+                 "logical"                  "logical" 
+             personal_loan         investment_account 
+                 "logical"                  "logical" 
+         insurance_product            active_products 
+                 "logical"                  "numeric" 
+      app_logins_frequency    feature_usage_diversity 
+                 "numeric"                  "numeric" 
+         bill_payment_user       auto_savings_enabled 
+                 "logical"                  "logical" 
+  credit_utilization_ratio international_transactions 
+                 "numeric"                  "numeric" 
+       failed_transactions                   tx_count 
+                 "numeric"                  "numeric" 
+              avg_tx_value            total_tx_volume 
+                 "numeric"                  "numeric" 
+                  first_tx                    last_tx 
+               "character"                "character" 
+         base_satisfaction            tx_satisfaction 
+                 "numeric"                  "numeric" 
+      product_satisfaction         satisfaction_score 
+                 "numeric"                  "numeric" 
+                 nps_score           last_survey_date 
+                 "numeric"                "character" 
+     support_tickets_count     resolved_tickets_ratio 
+                 "numeric"                  "numeric" 
+          app_store_rating         feedback_sentiment 
+                 "numeric"                "character" 
+          feature_requests           complaint_topics 
+               "character"                "character" 
+               clv_segment  monthly_transaction_count 
+               "character"                  "numeric" 
+ average_transaction_value   total_transaction_volume 
+                 "numeric"                  "numeric" 
+     transaction_frequency      last_transaction_date 
+                 "numeric"                "character" 
+preferred_transaction_type     first_transaction_date 
+               "character"                "character" 
+ weekend_transaction_ratio     avg_daily_transactions 
+                 "numeric"                  "numeric" 
+           customer_tenure          churn_probability 
+                 "numeric"                  "numeric" 
+   customer_lifetime_value 
+                 "numeric" </code></pre>
+</div>
+</div></li>
+<li><p>Check for duplicated customers</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fintech <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">duplicated</span>(customer_id))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 57
+# ℹ 57 variables: customer_id &lt;dbl&gt;, age &lt;dbl&gt;, gender &lt;chr&gt;, city &lt;chr&gt;,
+#   department &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;, income_bracket &lt;chr&gt;,
+#   occupation &lt;chr&gt;, education_level &lt;chr&gt;, marital_status &lt;chr&gt;,
+#   household_size &lt;dbl&gt;, acquisition_channel &lt;chr&gt;, customer_segment &lt;chr&gt;,
+#   savings_account &lt;lgl&gt;, credit_card &lt;lgl&gt;, personal_loan &lt;lgl&gt;,
+#   investment_account &lt;lgl&gt;, insurance_product &lt;lgl&gt;, active_products &lt;dbl&gt;,
+#   app_logins_frequency &lt;dbl&gt;, feature_usage_diversity &lt;dbl&gt;, …</code></pre>
+</div>
+</div></li>
+<li><p>Identify any missing values in key analytical variables</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fintech <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_clv =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(customer_lifetime_value)),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_churn =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(churn_probability)),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_transactions =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(transaction_frequency))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  missing_clv missing_churn missing_transactions
+        &lt;int&gt;         &lt;int&gt;                &lt;int&gt;
+1           0             0                    0</code></pre>
+</div>
+</div></li>
+<li><p>Remove incomplete observations where necessary</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fintech_clean <span class="ot">&lt;-</span> fintech <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(customer_lifetime_value),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(churn_probability),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(transaction_frequency)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></li>
 </ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(fintech) <span class="sc">-</span> <span class="fu">nrow</span>(fintech_clean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<ol start="5" type="1">
+<li><p>Customer Lifetime Value (CLV) values were rescaled from absolute currency values to millions of Colombian Pesos in order to improve readability and interpretability in visualisations.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fintech_clean <span class="ot">&lt;-</span> fintech_clean <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">clv_millions =</span> customer_lifetime_value <span class="sc">/</span> <span class="dv">1000000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></li>
+<li><p>Age was grouped into age buckets to facilitate segment comparison and improve interpretability of demographic patterns. This will also help when creating filters for a dynamic dashboard.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>fintech_clean <span class="ot">&lt;-</span> fintech_clean <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_bucket =</span> <span class="fu">cut</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>      age,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">45</span>, <span class="dv">55</span>, <span class="dv">65</span>, <span class="cn">Inf</span>),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"18–25"</span>, <span class="st">"26–35"</span>, <span class="st">"36–45"</span>, <span class="st">"46–55"</span>, <span class="st">"56–65"</span>, <span class="st">"65+"</span>),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">right =</span> <span class="cn">TRUE</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></li>
+</ol>
+</section>
+<section id="evaluation-of-r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="evaluation-of-r-packages">3.4. Evaluation of R Packages</h2>
+<p>For the development of the prototype module and the visual analytics components, several R packages are required to support data manipulation, visualization, and formatting of analytical outputs.</p>
+<p>The main packages used in this project include:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>tidyverse</td>
+</tr>
+<tr class="even">
+<td>ggplot2</td>
+</tr>
+<tr class="odd">
+<td>dplyr</td>
+</tr>
+<tr class="even">
+<td>scales</td>
+</tr>
+</tbody>
+</table>
+<p>All these packages are hosted and maintained on CRAN, ensuring compatibility with the R environment and allowing them to be installed easily.</p>
+<p>To verify that these packages are available in CRAN, the following command can be used in R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>,<span class="st">"ggplot2"</span>,<span class="st">"dplyr"</span>,<span class="st">"scales"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(packages, requireNamespace, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tidyverse   ggplot2     dplyr    scales 
+     TRUE      TRUE      TRUE      TRUE </code></pre>
+</div>
+</div>
+<p>To verify that these packages are available in CRAN, the following command can be used in R:</p>
 </section>
 </section>
 <section id="selection-of-visualization-techniques" class="level1">
@@ -486,8 +683,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This chart helps determine whether highly engaged customers generate higher financial value.</p>
 </section>
 <section id="geographic-distribution-of-customer-value" class="level2">
-<h2 class="anchored" data-anchor-id="geographic-distribution-of-customer-value">4.4. Geographic Distribution of Customer Value</h2>
-<p>A geospatial map visualises the distribution of average customer lifetime value across geographic locations.</p>
+<h2 class="anchored" data-anchor-id="geographic-distribution-of-customer-value">4.4. <strong>Geographic Distribution of Customer Value</strong></h2>
+<p>A geospatial map visualizes the distribution of average customer lifetime value across geographic locations.</p>
 <p>Fields used:</p>
 <ul>
 <li><p>latitude</p></li>
@@ -495,6 +692,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>customer_lifetime_value</p></li>
 </ul>
 <p>This map reveals geographic patterns in fintech customer value.</p>
+</section>
+<section id="predicted-vs-actual-customer-lifetime-value" class="level2">
+<h2 class="anchored" data-anchor-id="predicted-vs-actual-customer-lifetime-value">4.5. Predicted vs Actual Customer Lifetime Value</h2>
+<p>A scatter plot comparing predicted and actual CLV values is included.</p>
+<p>Fields used:</p>
+<ul>
+<li><p>customer_lifetime_value</p></li>
+<li><p>transaction_frequency</p></li>
+<li><p>active_products</p></li>
+<li><p>average_transaction_value</p></li>
+<li><p>satisfaction_score</p></li>
+<li><p>nps_score</p></li>
+</ul>
+<p>This illustrates the relationship between the CLV values predicted by the regression model and the observed CLV in the dataset.</p>
 </section>
 </section>
 <section id="visualization-design-and-interaction-principles" class="level1">
@@ -516,39 +727,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="coordinated-views">Coordinated Views</h2>
 <p>Multiple visualizations are designed to work together, enabling users to analyse relationships between engagement, customer value, and retention risk.</p>
 </section>
-<section id="colour-and-label-choices" class="level2">
-<h2 class="anchored" data-anchor-id="colour-and-label-choices">Colour and Label Choices</h2>
+<section id="color-and-label-choices" class="level2">
+<h2 class="anchored" data-anchor-id="color-and-label-choices">Color and Label Choices</h2>
 <p>Consistent color schemes will be used across visualizations to represent customer segments and ensure consistency.</p>
 </section>
 </section>
 <section id="proposed-ui-design" class="level1">
 <h1><strong>6. Proposed UI Design</strong></h1>
-<p>storyboard logic&nbsp;</p>
-<p>sidebar + main panel layout&nbsp;</p>
-<p>input-output mapping&nbsp;</p>
+<p>The proposed user interface will be implemented as an interactive Shiny dashboard that allows users to dynamically explore customer retention risk and customer lifetime value through multiple coordinated visualizations.</p>
+<p>The dashboard is designed to supportexploration of customer behavior and value. Users will begin by selecting demographic filters to define a specific customer group of interest. Once filters are applied, the visualizations will update automatically to display patterns related to CLV, churn risk, and engagement.</p>
+<section id="sketch" class="level2">
+<h2 class="anchored" data-anchor-id="sketch">6.1. Sketch</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="sketch.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="sidebar-panel" class="level2">
+<h2 class="anchored" data-anchor-id="sidebar-panel"><strong>6.2. Sidebar Panel</strong></h2>
+<p>It will contain filtering controls to select the subset of customers we wish to analyze.</p>
+<p>These controls will include demographic variables such as:</p>
+<ul>
+<li><p>Gender</p></li>
+<li><p>Income bracket</p></li>
+<li><p>Occupation</p></li>
+<li><p>Age group</p></li>
+</ul>
+</section>
+<section id="main-panel" class="level2">
+<h2 class="anchored" data-anchor-id="main-panel"><strong>6.3. Main panel</strong></h2>
+<p>It will display the visual analytics outputs of the module. These outputs include the key visualizations developed in this prototype (more details in section 4)</p>
+</section>
+<section id="input-output-mapping" class="level2">
+<h2 class="anchored" data-anchor-id="input-output-mapping"><strong>6.4. Input-output mapping</strong>&nbsp;</h2>
+<p>The demographic filters in the sidebar will serve as <strong>inputs</strong>, which dynamically filter the dataset used by each visualisation. The filtered dataset will then be passed to the output components, which generate the charts and visualizations displayed in the main panel.</p>
+</section>
 </section>
 <section id="prototype-visualization" class="level1">
 <h1><strong>7. Prototype Visualization</strong></h1>
 <section id="clv-distribution-by-customer-segment-1" class="level2">
 <h2 class="anchored" data-anchor-id="clv-distribution-by-customer-segment-1">7.1. CLV Distribution by Customer Segment</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fintech, <span class="fu">aes</span>(<span class="at">x =</span> customer_segment, <span class="at">y =</span> customer_lifetime_value)) <span class="sc">+</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Customer Lifetime Value by Customer Segment (Log Scale)"</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Customer Segment"</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Customer Lifetime Value (Log Scale)"</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fintech_clean, <span class="fu">aes</span>(<span class="at">x =</span> customer_segment, <span class="at">y =</span> clv_millions)) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Customer Lifetime Value by Customer Segment (Log Scale)"</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Customer Segment"</span>,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Customer Lifetime Value (Log Scale)"</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="th_exc02_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="th_exc02_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -557,35 +794,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="churn-probability-by-segment-1" class="level2">
 <h2 class="anchored" data-anchor-id="churn-probability-by-segment-1">7.2. Churn Probability by Segment</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>churn_by_segment <span class="ot">&lt;-</span> fintech <span class="sc">%&gt;%</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(customer_segment) <span class="sc">%&gt;%</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_churn =</span> <span class="fu">mean</span>(churn_probability, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(churn_by_segment, <span class="fu">aes</span>(<span class="at">x =</span> customer_segment, <span class="at">y =</span> avg_churn)) <span class="sc">+</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="fl">0.1</span>)(avg_churn)),</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">label_percent</span>(),</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">0.30</span>, <span class="fl">0.35</span>, <span class="fl">0.01</span>)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">0.30</span>, <span class="fl">0.35</span>)) <span class="sc">+</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Average Churn Probability by Customer Segment"</span>,</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Customer Segment"</span>,</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Average Churn Probability"</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>churn_by_segment <span class="ot">&lt;-</span> fintech_clean <span class="sc">%&gt;%</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(customer_segment) <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_churn =</span> <span class="fu">mean</span>(churn_probability, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(churn_by_segment, <span class="fu">aes</span>(<span class="at">x =</span> customer_segment, <span class="at">y =</span> avg_churn, <span class="at">fill =</span> avg_churn)) <span class="sc">+</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="fl">0.1</span>)(avg_churn)),</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">high =</span> <span class="st">"darkblue"</span>,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="st">"none"</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">label_percent</span>(),</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">0.30</span>, <span class="fl">0.35</span>, <span class="fl">0.01</span>)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">0.30</span>, <span class="fl">0.35</span>)) <span class="sc">+</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Average Churn Probability by Customer Segment"</span>,</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Customer Segment"</span>,</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Average Churn Probability"</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="th_exc02_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="th_exc02_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -594,24 +836,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="engagement-behavior-vs-customer-value-1" class="level2">
 <h2 class="anchored" data-anchor-id="engagement-behavior-vs-customer-value-1">7.3. Engagement Behavior vs Customer Value</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x_limit <span class="ot">&lt;-</span> <span class="fu">quantile</span>(fintech<span class="sc">$</span>transaction_frequency, <span class="fl">0.95</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>y_limit <span class="ot">&lt;-</span> <span class="fu">quantile</span>(fintech<span class="sc">$</span>customer_lifetime_value, <span class="fl">0.95</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fintech, <span class="fu">aes</span>(<span class="at">x =</span> transaction_frequency, <span class="at">y =</span> customer_lifetime_value, <span class="at">color =</span> customer_segment)) <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, x_limit), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, y_limit)) <span class="sc">+</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Transaction Frequency vs Customer Lifetime Value"</span>,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Transaction Frequency"</span>,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Customer Lifetime Value"</span>,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Customer Segment"</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x_limit <span class="ot">&lt;-</span> <span class="fu">quantile</span>(fintech_clean<span class="sc">$</span>transaction_frequency, <span class="fl">0.95</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>y_limit <span class="ot">&lt;-</span> <span class="fu">quantile</span>(fintech_clean<span class="sc">$</span>clv_millions, <span class="fl">0.95</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fintech_clean, <span class="fu">aes</span>(<span class="at">x =</span> transaction_frequency, <span class="at">y =</span> clv_millions, <span class="at">color =</span> customer_segment)) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, x_limit), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, y_limit)) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Transaction Frequency vs Customer Lifetime Value"</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Transaction Frequency"</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Customer Lifetime Value"</span>,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Customer Segment"</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="th_exc02_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="th_exc02_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -619,46 +861,149 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="geographic-distribution-of-customer-value-1" class="level2">
 <h2 class="anchored" data-anchor-id="geographic-distribution-of-customer-value-1">7.4. Geographic Distribution of Customer Value</h2>
-<pre><code></code></pre>
+<p>First, we aggregate customers by city and calculates the average CLV and number of customers.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maps)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>clv_location <span class="ot">&lt;-</span> fintech <span class="sc">%&gt;%</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(city, department, latitude, longitude) <span class="sc">%&gt;%</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_clv =</span> <span class="fu">mean</span>(customer_lifetime_value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>colombia_map <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"world"</span>, <span class="at">region =</span> <span class="st">"Colombia"</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> colombia_map,</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group),</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">"gray90"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> clv_location,</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> longitude, <span class="at">y =</span> latitude,</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> avg_clv,</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> avg_clv),</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Average Customer Lifetime Value by Location"</span>,</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Average CLV"</span>,</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="st">"Average CLV"</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>clv_location <span class="ot">&lt;-</span> fintech_clean <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(city, department, latitude, longitude) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_clv =</span> <span class="fu">mean</span>(clv_millions, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">customers =</span> <span class="fu">n</span>(),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">label =</span> city)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We identify Identify the Top 5 cities by average CLV</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>top_cities <span class="ot">&lt;-</span> clv_location <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(avg_clv, <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We map it</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>colombia_map <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"world"</span>, <span class="at">region =</span> <span class="st">"Colombia"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> colombia_map,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group),</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"gray95"</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"white"</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> clv_location,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> longitude, <span class="at">y =</span> latitude,</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> avg_clv,</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> customers),</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> top_cities,</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> longitude, <span class="at">y =</span> latitude, <span class="at">label =</span> label),</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">2.5</span>,</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.8</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="st">"#9ecae1"</span>,</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">high =</span> <span class="st">"#08306b"</span>,</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> scales<span class="sc">::</span>comma</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_quickmap</span>(</span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">80</span>, <span class="sc">-</span><span class="dv">67</span>),</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">13</span>)</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Average Customer Lifetime Value by Location"</span>,</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Average CLV"</span>,</span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="st">"Number of Customers"</span></span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="th_exc02_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="th_exc02_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="predicted-vs-actual-customer-lifetime-value-1" class="level2">
+<h2 class="anchored" data-anchor-id="predicted-vs-actual-customer-lifetime-value-1">7.5. Predicted vs Actual Customer Lifetime Value</h2>
+<section id="linear-regression-for-clv" class="level3">
+<h3 class="anchored" data-anchor-id="linear-regression-for-clv">Linear Regression for CLV</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>clv_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  clv_millions <span class="sc">~</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    transaction_frequency <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    active_products <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    average_transaction_value <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    satisfaction_score <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    nps_score,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> fintech_clean</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(clv_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = clv_millions ~ transaction_frequency + active_products + 
+    average_transaction_value + satisfaction_score + nps_score, 
+    data = fintech_clean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+ -457.3  -266.6  -189.4   -25.9 17452.2 
+
+Coefficients:
+                            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                3.385e+01  8.285e+01   0.409    0.683    
+transaction_frequency     -1.758e+00  2.104e+00  -0.835    0.404    
+active_products            7.926e-01  3.043e+00   0.260    0.795    
+average_transaction_value -3.189e-07  9.056e-07  -0.352    0.725    
+satisfaction_score         7.189e+01  1.551e+01   4.634  3.6e-06 ***
+nps_score                  1.909e-01  7.144e-01   0.267    0.789    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 791.4 on 48717 degrees of freedom
+Multiple R-squared:  0.003074,  Adjusted R-squared:  0.002971 
+F-statistic: 30.04 on 5 and 48717 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="visualization-of-model-results" class="level3">
+<h3 class="anchored" data-anchor-id="visualization-of-model-results">Visualization of Model Results</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fintech_clean<span class="sc">$</span>predicted_clv <span class="ot">&lt;-</span> <span class="fu">predict</span>(clv_model)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fintech_clean, <span class="fu">aes</span>(<span class="at">x =</span> predicted_clv, <span class="at">y =</span> clv_millions)) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Predicted vs Actual Customer Lifetime Value"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Predicted CLV (Millions)"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Actual CLV (Millions)"</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="th_exc02_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
 </section>
+</section>
 <section id="conclusion" class="level1">
 <h1><strong>8. Conclusion</strong></h1>
 <p>The Retention Risk &amp; Customer Value module provides valuable insights into how customer engagement influence long-term profitability within the fintech platform. By analyzing key indicators, this module helps identifying high-value customers and segments that may be at risk of disengagement.</p>
-<p>Overall, the prototype developed in this module demonstrates how data exploration can support data-driven decision making across multiple business functions. The proposed Shiny application could provide a powerful tool for fintech organizations seeking to optimise customer strategy and maximize business value in the long run.</p>
+<p>Overall, the prototype developed in this module demonstrates how data exploration can support data-driven decision making across multiple business functions. The proposed Shiny application could provide a powerful tool for fintech organizations seeking to optimize customer strategy and maximize business value in the long run.</p>
 
 
 </section>
