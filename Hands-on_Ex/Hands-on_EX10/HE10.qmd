@@ -1,0 +1,528 @@
+---
+title: "Hands-on Exercise 10"
+author: "Oscar Ricardo Moreno Gonzalez"
+date: "March 28, 2026"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+---
+
+## Overview
+
+Hands-On Exercise \# 10.
+
+# Getting Started
+
+## Install and Launching R Packages
+
+The code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.
+
+```{r}
+pacman::p_load(lubridate, ggthemes, reactable,
+reactablefmtr, gt, gtExtras, tidyverse,scales)
+```
+
+## The Data
+
+### Importing the Data
+
+```{r}
+coffeechain <- readRDS("data/coffeeChain.rds") 
+```
+
+### Data Preparation
+
+Aggregate Sales and Budgeted Sales at the Product level.
+
+```{r}
+product <- coffeechain %>%
+  group_by(`Product`) %>%
+  summarise(`target` = sum(`Budget Sales`),
+            `current` = sum(`Sales`)) %>%
+  ungroup()
+```
+
+## **Bullet chart in ggplot2**
+
+```{r}
+#Products ordered by current value
+product_plot <- product %>%
+  mutate(Product = reorder(Product, current))
+
+ggplot(product_plot, aes(x = Product, y = current)) +
+
+  #benchmark bands
+  geom_col(
+    aes(y = max(target) * 1.05),
+    fill = "grey90",
+    width = 0.8
+  ) +
+  geom_col(
+    aes(y = target),
+    fill = "grey75",
+    width = 0.8
+  ) +
+  geom_col(
+    aes(y = target * 0.67),
+    fill = "grey60",
+    width = 0.8
+  ) +
+
+  #actual vs current performance bar
+  geom_col(
+    fill = "grey15",
+    width = 0.32
+  ) +
+
+  #target marker
+  geom_errorbar(
+    aes(
+      ymin = target,
+      ymax = target
+    ),
+    width = 0.45,
+    linewidth = 0.9,
+    color = "#D55E00"
+  ) +
+
+  coord_flip() +
+
+  scale_y_continuous(
+    labels = comma,
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+
+  labs(
+    title = "Current Performance vs Target",
+    subtitle = "Dark bar shows current value; orange line shows target",
+    x = NULL,
+    y = NULL
+  ) +
+
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text.y = element_text(face = "bold", color = "grey20"),
+    axis.text.x = element_text(color = "grey30"),
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(color = "grey35"),
+    legend.position = "none"
+  )
+```
+
+## **Plotting sparklines using ggplot2**
+
+1st we create a monthly sales summary by product for 2013 onward, then stores the result in a new dataset (sales_report):
+
+```{r}
+sales_report <- coffeechain %>%
+  filter(Date >= "2013-01-01") %>%
+  mutate(Month = month(Date)) %>%
+  group_by(Month, Product) %>%
+  summarise(Sales = sum(Sales)) %>%
+  ungroup() %>%
+  select(Month, Product, Sales)
+```
+
+We compute the minimum, maximum and end othe the month sales.
+
+```{r}
+mins <- group_by(sales_report, Product) %>% 
+  slice(which.min(Sales))
+maxs <- group_by(sales_report, Product) %>% 
+  slice(which.max(Sales))
+ends <- group_by(sales_report, Product) %>% 
+  filter(Month == max(Month))
+```
+
+And compute the 25 and 75 quantiles.
+
+```{r}
+quarts <- sales_report %>%
+  group_by(Product) %>%
+  summarise(quart1 = quantile(Sales, 
+                              0.25),
+            quart2 = quantile(Sales, 
+                              0.75)) %>%
+  right_join(sales_report)
+```
+
+Plot the Sparkline
+
+```{r}
+ggplot(sales_report, aes(x = Month, y = Sales, group = 1)) +
+  facet_grid(Product ~ ., scales = "free_y") +
+
+  geom_ribbon(
+    data = quarts,
+    aes(ymin = quart1, ymax = quart2),
+    fill = "grey85",
+    alpha = 0.7
+  ) +
+
+  geom_line(linewidth = 0.6, color = "grey20") +
+
+  geom_point(data = mins, color = "#D55E00", size = 2) +
+  geom_point(data = maxs, color = "#0072B2", size = 2) +
+
+  geom_text(
+    data = mins,
+    aes(label = comma(Sales)),
+    vjust = -0.8,
+    size = 3,
+    color = "#D55E00"
+  ) +
+  geom_text(
+    data = maxs,
+    aes(label = comma(Sales)),
+    vjust = 1.6,
+    size = 3,
+    color = "#0072B2"
+  ) +
+
+  geom_text(
+    data = ends,
+    aes(label = comma(Sales)),
+    hjust = 0,
+    nudge_x = 0.3,
+    size = 3,
+    color = "grey30"
+  ) +
+  geom_text(
+    data = ends,
+    aes(label = Product),
+    hjust = 0,
+    nudge_x = 1.1,
+    fontface = "bold",
+    size = 3.2,
+    color = "grey10"
+  ) +
+
+  expand_limits(
+    x = max(sales_report$Month) +
+      0.25 * diff(range(sales_report$Month))
+  ) +
+
+  scale_x_continuous(
+    breaks = 1:12,
+    labels = month.abb
+  ) +
+  scale_y_continuous(
+    labels = comma,
+    expand = expansion(mult = c(0.05, 0.15))
+  ) +
+
+  labs(
+    title = "Monthly Sales by Product",
+    subtitle = "Red points show monthly min, blue points show monthly max",
+    caption = "Shaded band = interquartile range"
+  ) +
+
+  theme_tufte(base_size = 11, base_family = "Helvetica") +
+  theme(
+    axis.title = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank(),
+    strip.text = element_blank(),
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 10, color = "grey30"),
+    plot.caption = element_text(size = 9, color = "grey40"),
+    axis.text.x = element_text(size = 9, color = "grey20"),
+    panel.spacing = unit(1, "lines"),
+    plot.margin = margin(10, 50, 10, 10)
+  )
+```
+
+## **Static Dashboard Design (gt and gtExtras)**
+
+```{r}
+product %>%
+  gt() %>%
+
+  #column labels
+  cols_label(
+    Product = "Product",
+    current = "Performance"
+  ) %>%
+
+  #chart column
+  gt_plt_bullet(
+    column = current,
+    target = target,
+    width = 70,
+    palette = c("#A6CEE3", "#1F78B4")
+  ) %>%
+
+  fmt_number(
+    columns = c(current, target),
+    decimals = 0,
+    sep_mark = ","
+  ) %>%
+
+  cols_align(
+    align = "center",
+    columns = current
+  ) %>%
+
+  tab_header(
+    title = md("**Product Performance vs Target**"),
+    subtitle = "Bullet charts compare current values to targets"
+  ) %>%
+
+  cols_width(
+    Product ~ px(160),
+    current ~ px(260)
+  ) %>%
+
+  gt_theme_538() %>%
+
+  tab_options(
+    table.font.size = px(13),
+    data_row.padding = px(6),
+    column_labels.font.weight = "bold"
+  )
+```
+
+## **Sparklines (gtExtras method)**
+
+### Data Preparation
+
+We take the coffee sales data, keep only 2013, group it by product and month and calculate total monthly sales for each product.
+
+```{r}
+report <- coffeechain %>%
+  mutate(Year = year(Date)) %>%
+  filter(Year == "2013") %>%
+  mutate (Month = month(Date, 
+                        label = TRUE, 
+                        abbr = TRUE)) %>%
+  group_by(Product, Month) %>%
+  summarise(Sales = sum(Sales)) %>%
+  ungroup()
+```
+
+```{r}
+report %>%
+  group_by(Product) %>%
+  summarize('Monthly Sales' = list(Sales), 
+            .groups = "drop")
+```
+
+### Plot the report
+
+```{r}
+report %>%
+  group_by(Product) %>%
+  summarize(
+    `Monthly Sales` = list(Sales)
+  ) %>%
+
+  gt() %>%
+
+  gt_plt_sparkline(
+    column = `Monthly Sales`,
+    same_limit = FALSE
+  ) %>%
+
+  cols_label(
+    Product = "Product",
+    `Monthly Sales` = "Monthly Trend"
+  ) %>%
+
+  tab_header(
+    title = md("**Monthly Sales Trends by Product**"),
+    subtitle = "Sparkline view of monthly sales across 2013"
+  ) %>%
+
+  cols_width(
+    Product ~ px(160),
+    `Monthly Sales` ~ px(260)
+  ) %>%
+
+  cols_align(
+    align = "center",
+    columns = `Monthly Sales`
+  ) %>%
+
+  gt_theme_538() %>%
+
+  tab_options(
+    table.font.size = px(13),
+    data_row.padding = px(6),
+    column_labels.font.weight = "bold"
+  )
+```
+
+### **Adding statistics**
+
+```{r}
+report %>% 
+  group_by(Product) %>% 
+  summarise("Min" = min(Sales, na.rm = T),
+            "Max" = max(Sales, na.rm = T),
+            "Average" = mean(Sales, na.rm = T)
+            ) %>%
+  gt() %>%
+  fmt_number(columns = 4,
+    decimals = 2)
+```
+
+### **Combine it with the data.frame**
+
+```{r}
+spark <- report %>%
+  group_by(Product) %>%
+  summarize('Monthly Sales' = list(Sales), 
+            .groups = "drop")
+```
+
+```{r}
+sales <- report %>% 
+  group_by(Product) %>% 
+  summarise("Min" = min(Sales, na.rm = T),
+            "Max" = max(Sales, na.rm = T),
+            "Average" = mean(Sales, na.rm = T)
+            )
+```
+
+```{r}
+sales_data = left_join(sales, spark)
+```
+
+```{r}
+sales_data %>%
+  gt() %>%
+  gt_plt_sparkline('Monthly Sales',
+                   same_limit = FALSE)
+```
+
+### **Combining bullet chart and sparklines**
+
+We can combining the bullet chart and sparklines using the steps below:
+
+```{r}
+bullet <- coffeechain %>%
+  filter(Date >= "2013-01-01") %>%
+  group_by(`Product`) %>%
+  summarise(`Target` = sum(`Budget Sales`),
+            `Actual` = sum(`Sales`)) %>%
+  ungroup() 
+```
+
+```{r}
+sales_data = sales_data %>%
+  left_join(bullet)
+```
+
+```{r}
+sales_data %>%
+  gt() %>%
+  gt_plt_sparkline('Monthly Sales') %>%
+  gt_plt_bullet(column = Actual, 
+                target = Target, 
+                width = 28,
+                palette = c("lightblue", 
+                          "black")) %>%
+  gt_theme_538()
+```
+
+## **Interactive Dashboard - reactable and reactablefmtr methods**
+
+We need to install dataui R package to build an interactive sparklines
+
+```{r}
+remotes::install_github("timelyportfolio/dataui")
+```
+
+```{r}
+library(dataui)
+```
+
+```{r}
+remotes::install_github("kcuilla/reactablefmtr")
+```
+
+```{r}
+library(reactable)
+
+```
+
+**Plot the interactive sparklines**
+
+```{r}
+report <- report %>%
+  group_by(Product) %>%
+  summarize(`Monthly Sales` = list(Sales))
+
+```
+
+```{r}
+reactable(
+  report,
+  columns = list(
+    Product = colDef(maxWidth = 200),
+    `Monthly Sales` = colDef(
+      cell = react_sparkline(report)
+    )
+  )
+)
+```
+
+```{r}
+reactable(
+  report,
+  defaultPageSize = 13,
+  bordered = FALSE,
+  striped = TRUE,
+  highlight = TRUE,
+  compact = FALSE,
+  defaultColDef = colDef(
+    headerStyle = list(
+      background = "#F7F7F7",
+      color = "#222222",
+      fontWeight = "bold",
+      borderBottom = "2px solid #D9D9D9",
+      fontSize = "14px"
+    ),
+    style = list(
+      padding = "10px 12px",
+      fontSize = "13px",
+      borderBottom = "1px solid #F0F0F0"
+    )
+  ),
+  columns = list(
+    Product = colDef(
+      maxWidth = 200,
+      name = "Product",
+      style = list(
+        fontWeight = "600",
+        color = "#222222"
+      )
+    ),
+    `Monthly Sales` = colDef(
+      name = "Monthly Trend",
+      cell = react_sparkbar(
+        report,
+        highlight_bars = highlight_bars(
+          min = "red", max = "blue"
+        ),
+        bandline = "innerquartiles",
+        statline = "mean"
+      ),
+      style = list(
+        background = "#FCFCFC"
+      )
+    )
+  ),
+  style = list(
+    border = "1px solid #E6E6E6",
+    borderRadius = "8px",
+    overflow = "hidden",
+    boxShadow = "0 2px 6px rgba(0,0,0,0.06)"
+  )
+)
+```

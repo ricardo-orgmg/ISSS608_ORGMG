@@ -260,7 +260,7 @@ Fields used:
 
 This chart helps determine whether highly engaged customers generate higher financial value.
 
-## 4.4. **Geographic Distribution of Customer Value**
+## 4.4. Geographic Distribution of Customer Value
 
 A geospatial map visualizes the distribution of average customer lifetime value across geographic locations.
 

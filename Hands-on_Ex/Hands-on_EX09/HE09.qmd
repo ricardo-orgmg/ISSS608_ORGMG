@@ -26,9 +26,7 @@ pacman::p_load(tidyverse,igraph,tidygraph,ggraph,visNetwork,lubridate,clock,grap
 
 ## The Data
 
-### Importing t
-
-### he Data
+### Importing the Data
 
 We'll be importing two data sets. *GAStech-email_edges.csv* & *GAStech_email_nodes.csv*
 
