@@ -68,7 +68,7 @@ The primary dataset is the **COFINFAD Customer Dataset**, a single tabular file 
 library(tidyverse)
 library(readxl)
 
-customer <- read_excel("customer_data.xlsx")
+customer <- read_excel("customer_data.xls")
 cat(sprintf("Dataset: %d rows × %d columns\n", nrow(customer), ncol(customer)))
 col_map <- tribble(
   ~Variable,                    ~Category,
