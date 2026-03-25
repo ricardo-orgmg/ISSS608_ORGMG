@@ -24,7 +24,7 @@ website:
       - text: "Hands-on Exercise 9" 
         href: "Hands-on_Ex/Hands-on_EX09/HE09.html"
       - text: "Hands-on Exercise 10" 
-        href: "Hands-on_Ex/Hands-on_EX010/HE10.html"
+        href: "Hands-on_Ex/Hands-on_EX10/HE10.html"
     - text: "In-class Exercises"
       menu:
       - text: "Project Proposal" 
