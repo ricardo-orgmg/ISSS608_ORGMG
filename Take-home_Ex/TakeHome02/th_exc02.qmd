@@ -67,10 +67,6 @@ library(tidyverse)
 fintech <- read_csv("data/customer_data.csv")
 ```
 
-```{r}
-install.packages(c("shinyWidgets"))
-```
-
 ## 3.2. Variable Grouping
 
 Although the dataset contains a wide range of variables, this module primarily focuses on variables related to:
@@ -729,12 +725,6 @@ We need to try with a **more robust nonlinear model.**
 
 ### 2nd Option: Random Forest
 
-For this model we need the randomForest package installed:
-
-```{r}
-install.packages("randomForest")
-```
-
 ```{r}
 library(randomForest)
 
@@ -753,6 +743,25 @@ rf_model <- randomForest(
 ```
 
 For this model, we need to transform the categorical variables into factors
+
+```{r}
+
+rf_data <- fintech_clean %>%
+  select(
+    clv_millions,
+    transaction_frequency,
+    active_products,
+    average_transaction_value,
+    satisfaction_score,
+    nps_score,
+    customer_segment,
+    age_bucket,
+    income_bracket,
+    gender,
+    occupation
+  ) %>%
+  na.omit()
+```
 
 ```{r}
 rf_data <- rf_data %>%
