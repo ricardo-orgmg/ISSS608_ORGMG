@@ -27,8 +27,8 @@ website:
         href: "Hands-on_Ex/Hands-on_EX010/HE10.html"
     - text: "In-class Exercises"
       menu:
-      - text: "In-class Exercise 1" 
-        href: "In-class_Ex/In-class_Ex01/ICE01.html"
+      - text: "Project Proposal" 
+        href: "Project Proposal/proposal.html"
     - text: "Take-Home Exercise"
       menu:
       - text: "Take-Home Exercise 1" 
