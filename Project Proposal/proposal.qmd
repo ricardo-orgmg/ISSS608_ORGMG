@@ -40,7 +40,7 @@ The system follows a **progressive analytics workflow**, guiding users from broa
 The core objective of this project is to design and develop a **three-module visual analytics system** that answers key business questions about fintech customers.
 
 | Module | Key Questions |
-|---------------------------|---------------------------------------------|
+|----|----|
 | **Module 1: Customer Overview & Segmentation** | Who are our customers? Which segments and acquisition channels dominate the platform? |
 | **Module 2: Customer Engagement & Experience** | How active are customers? What drives satisfaction? What complaints arise? |
 | **Module 3: Retention Risk & Customer Value** | Which customers are at risk of churn? Which customers generate the highest lifetime value? |

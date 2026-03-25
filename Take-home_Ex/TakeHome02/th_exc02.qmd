@@ -67,6 +67,10 @@ library(tidyverse)
 fintech <- read_csv("data/customer_data.csv")
 ```
 
+```{r}
+install.packages(c("shinyWidgets"))
+```
+
 ## 3.2. Variable Grouping
 
 Although the dataset contains a wide range of variables, this module primarily focuses on variables related to:
@@ -197,19 +201,21 @@ For the development of the prototype module and the visual analytics components,
 
 The main packages used in this project include:
 
-| Package   |
-|-----------|
-| tidyverse |
-| ggplot2   |
-| dplyr     |
-| scales    |
+| Package | Use |
+|-------------------------------------|-----------------------------------|
+| tidyverse | Used to support the overall data science workflow, including data transformation, cleaning, and preparation of the fintech dataset. |
+| ggplot2 | Creates the core visualizations in this module, including boxplots, bar charts, scatterplots, and geographic maps. |
+| dplyr | Manipulates and summarizes the dataset, groups customers by segment or location and calculates metrics like average churn probability and average CLV. |
+| scales | Improve visualization readability by formatting large financial values, percentages, and axis labels. |
+| plotly | Adds interactivity to selected visualizations, enabling users to hover over elements. |
+| randomForest | Develop an exploratory machine learning model that predicts CLV by capturing nonlinear relationships and interactions between variables. |
 
 All these packages are hosted and maintained on CRAN, ensuring compatibility with the R environment and allowing them to be installed easily.
 
 To verify that these packages are available in CRAN, the following command can be used in R:
 
 ```{r}
-packages <- c("tidyverse","ggplot2","dplyr","scales")
+packages <- c("tidyverse","ggplot2","dplyr","scales","plotly","randomForest")
 
 sapply(packages, requireNamespace, quietly = TRUE)
 ```
@@ -322,7 +328,7 @@ Consistent color schemes will be used across visualizations to represent custome
 
 The proposed user interface will be implemented as an interactive Shiny dashboard that allows users to dynamically explore customer retention risk and customer lifetime value through multiple coordinated visualizations.
 
-The dashboard is designed to supportexploration of customer behavior and value. Users will begin by selecting demographic filters to define a specific customer group of interest. Once filters are applied, the visualizations will update automatically to display patterns related to CLV, churn risk, and engagement.
+The dashboard is designed to support exploration of customer behavior and value. Users will begin by selecting demographic filters to define a specific customer group of interest. Once filters are applied, the visualizations will update automatically to display patterns related to CLV, churn risk, and engagement.
 
 ## 6.1. Sketch
 
@@ -359,15 +365,49 @@ library(ggplot2)
 library(dplyr)
 library(scales)
 
-ggplot(fintech_clean, aes(x = customer_segment, y = clv_millions)) +
-  geom_boxplot() +
-  scale_y_log10(labels = comma) +
-  labs(
-    title = "Customer Lifetime Value by Customer Segment (Log Scale)",
-    x = "Customer Segment",
-    y = "Customer Lifetime Value (Log Scale)"
+ggplot(fintech_clean, 
+       aes(x = customer_segment, 
+           y = clv_millions,
+           fill = customer_segment)) +
+  
+  geom_boxplot(
+    alpha = 0.8,
+    outlier.alpha = 0.3,
+    width = 0.6
   ) +
-  theme_minimal()
+  
+  # Add mean points
+  stat_summary(
+    fun = mean,
+    geom = "point",
+    shape = 18,
+    size = 3,
+    color = "darkblue"
+  ) +
+  
+  scale_fill_brewer(
+    palette = "Blues",
+    guide = "none"
+  ) +
+  
+  scale_y_log10(
+    labels = comma
+  ) +
+  
+  labs(
+    title = "Customer Lifetime Value by Segment",
+    subtitle = "Distribution shown on logarithmic scale",
+    x = "Customer Segment",
+    y = "Customer Lifetime Value (Millions, Log Scale)"
+  ) +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold"),
+    axis.text.x = element_text(angle = 30, hjust = 1),
+    panel.grid.minor = element_blank()
+  )
 ```
 
 ## 7.2. Churn Probability by Segment
@@ -379,49 +419,102 @@ library(scales)
 
 churn_by_segment <- fintech_clean %>%
   group_by(customer_segment) %>%
-  summarise(avg_churn = mean(churn_probability, na.rm = TRUE))
+  summarise(avg_churn = mean(churn_probability, na.rm = TRUE), .groups = "drop") %>%
+  arrange(desc(avg_churn)) %>%
+  mutate(customer_segment = factor(customer_segment, levels = customer_segment))
 
 ggplot(churn_by_segment, aes(x = customer_segment, y = avg_churn, fill = avg_churn)) +
-  geom_col() +
+  geom_col(width = 0.7) +
   geom_text(
     aes(label = label_percent(accuracy = 0.1)(avg_churn)),
-    vjust = -0.5
+    vjust = -0.4,
+    size = 4,
+    fontface = "bold",
+    color = "#08306b"
   ) +
   scale_fill_gradient(
-    low = "lightblue",
-    high = "darkblue",
+    low = "#c6dbef",
+    high = "#08306b",
     guide = "none"
   ) +
   scale_y_continuous(
     labels = label_percent(),
-    breaks = seq(0.30, 0.35, 0.01)
+    breaks = seq(0.30, 0.35, 0.01),
+    expand = expansion(mult = c(0, 0.08))
   ) +
   coord_cartesian(ylim = c(0.30, 0.35)) +
   labs(
     title = "Average Churn Probability by Customer Segment",
+    subtitle = "Segments ranked from highest to lowest churn risk",
     x = "Customer Segment",
     y = "Average Churn Probability"
   ) +
-  theme_minimal()
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(color = "gray40"),
+    axis.text.x = element_text(angle = 25, hjust = 1),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank()
+  )
 ```
 
 ## 7.3. Engagement Behavior vs Customer Value
 
 ```{r}
+library(ggplot2)
+library(dplyr)
+library(scales)
+
 x_limit <- quantile(fintech_clean$transaction_frequency, 0.95)
 y_limit <- quantile(fintech_clean$clv_millions, 0.95)
 
-ggplot(fintech_clean, aes(x = transaction_frequency, y = clv_millions, color = customer_segment)) +
-  geom_point(alpha = 0.5) +
-  scale_y_continuous(labels = comma) +
-  coord_cartesian(xlim = c(0, x_limit), ylim = c(0, y_limit)) +
+ggplot(fintech_clean, 
+       aes(x = transaction_frequency, 
+           y = clv_millions,
+           color = customer_segment)) +
+  
+  geom_point(
+    alpha = 0.4,
+    size = 2
+  ) +
+  
+  geom_smooth(
+    method = "lm",
+    se = FALSE,
+    linewidth = 1,
+    alpha = 0.6
+  ) +
+  
+  scale_color_brewer(
+    palette = "Blues"
+  ) +
+  
+  scale_y_continuous(
+    labels = comma
+  ) +
+  
+  coord_cartesian(
+    xlim = c(0, x_limit),
+    ylim = c(0, y_limit)
+  ) +
+  
   labs(
     title = "Transaction Frequency vs Customer Lifetime Value",
+    subtitle = "Relationship between customer engagement and financial value",
     x = "Transaction Frequency",
-    y = "Customer Lifetime Value",
+    y = "Customer Lifetime Value (Millions)",
     color = "Customer Segment"
   ) +
-  theme_minimal()
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(color = "gray40"),
+    legend.position = "bottom",
+    panel.grid.minor = element_blank()
+  )
 ```
 
 ## 7.4. Geographic Distribution of Customer Value
@@ -453,33 +546,54 @@ colombia_map <- map_data("world", region = "Colombia")
 ```
 
 ```{r}
-ggplot() +
+library(ggplot2)
+library(dplyr)
+library(scales)
+library(plotly)
+
+map_plot <- ggplot() +
   geom_polygon(
     data = colombia_map,
     aes(x = long, y = lat, group = group),
-    fill = "gray95",
-    color = "white"
+    fill = "#f7fbff",
+    color = "gray80",
+    linewidth = 0.3
   ) +
   
   geom_point(
     data = clv_location,
-    aes(x = longitude, y = latitude,
-        color = avg_clv,
-        size = customers),
-    alpha = 0.7
+    aes(
+      x = longitude,
+      y = latitude,
+      color = avg_clv,
+      size = customers,
+      text = paste0(
+        "<b>City:</b> ", city,
+        "<br><b>Department:</b> ", department,
+        "<br><b>Average CLV:</b> ", comma(round(avg_clv, 2)),
+        "<br><b>Customers:</b> ", customers
+      )
+    ),
+    alpha = 0.75
   ) +
   
   geom_text(
     data = top_cities,
     aes(x = longitude, y = latitude, label = label),
-    size = 2.5,
+    size = 3,
+    fontface = "bold",
+    color = "#08306b",
     vjust = -0.8
   ) +
   
   scale_color_gradient(
     low = "#9ecae1",
     high = "#08306b",
-    labels = scales::comma
+    labels = comma
+  ) +
+  
+  scale_size_continuous(
+    range = c(2, 8)
   ) +
   
   coord_quickmap(
@@ -489,16 +603,31 @@ ggplot() +
   
   labs(
     title = "Average Customer Lifetime Value by Location",
-    color = "Average CLV",
-    size = "Number of Customers"
+    subtitle = "Bubble size represents number of customers; labels show top 5 cities by average CLV",
+    x = "Longitude",
+    y = "Latitude",
+    color = "Average CLV\n(Millions)",
+    size = "Number of\nCustomers"
   ) +
   
-  theme_minimal()
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(color = "gray40"),
+    legend.position = "right",
+    panel.grid.minor = element_blank(),
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    panel.grid.major = element_blank()
+  )
+
+ggplotly(map_plot, tooltip = "text")
 ```
 
 ## 7.5. Predicted vs Actual Customer Lifetime Value
 
-### Linear Regression for CLV
+### 1st option: Linear Regression for CLV
 
 ```{r}
 clv_model <- lm(
@@ -514,20 +643,218 @@ clv_model <- lm(
 summary(clv_model)
 ```
 
-### Visualization of Model Results
+### Visualization of LR Model Results:
 
 ```{r}
+library(ggplot2)
+library(dplyr)
+library(scales)
+
+# Generate predictions
 fintech_clean$predicted_clv <- predict(clv_model)
 
-ggplot(fintech_clean, aes(x = predicted_clv, y = clv_millions)) +
-  geom_point(alpha = 0.4) +
+# Define zoom limits (95th percentile)
+x_limit <- quantile(fintech_clean$predicted_clv, 0.95)
+y_limit <- quantile(fintech_clean$clv_millions, 0.95)
+
+ggplot(fintech_clean,
+       aes(x = predicted_clv,
+           y = clv_millions,
+           color = clv_millions)) +
+  
+  geom_point(
+    alpha = 0.4,
+    size = 2
+  ) +
+  
+  # Perfect prediction reference line
+  geom_abline(
+    slope = 1,
+    intercept = 0,
+    color = "#08306b",
+    linewidth = 1,
+    linetype = "dashed"
+  ) +
+  
+  scale_color_gradient(
+    low = "#9ecae1",
+    high = "#08306b",
+    labels = comma
+  ) +
+  
+  scale_y_continuous(
+    labels = comma
+  ) +
+  
+  scale_x_continuous(
+    labels = comma
+  ) +
+  
+  coord_cartesian(
+    xlim = c(0, x_limit),
+    ylim = c(0, y_limit)
+  ) +
+  
   labs(
     title = "Predicted vs Actual Customer Lifetime Value",
+    subtitle = "Dashed line represents perfect prediction",
     x = "Predicted CLV (Millions)",
-    y = "Actual CLV (Millions)"
+    y = "Actual CLV (Millions)",
+    color = "Actual CLV\n(Millions)"
   ) +
-  theme_minimal()
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(color = "gray40"),
+    legend.position = "right",
+    panel.grid.minor = element_blank()
+  )
 ```
+
+From the visualization we can see that this model is producing only a few **repeated predicted values**, while the actual CLV varies a lot.
+
+Several of those predictors are likely **discrete or heavily rounded**:
+
+-   `active_products` is a small integer
+
+-   `transaction_frequency` may take only a limited set of values
+
+-   `satisfaction_score` and `nps_score` are rounded scales
+
+This linear model combines these values, so many rows end up with the same or very similar prediction.
+
+We need to try with a **more robust nonlinear model.**
+
+### 2nd Option: Random Forest
+
+For this model we need the randomForest package installed:
+
+```{r}
+install.packages("randomForest")
+```
+
+```{r}
+library(randomForest)
+
+rf_model <- randomForest(
+  clv_millions ~
+    transaction_frequency +
+    active_products +
+    average_transaction_value +
+    satisfaction_score +
+    nps_score +
+    customer_segment +
+    age_bucket,
+  data = fintech_clean,
+  ntree = 100
+)
+```
+
+For this model, we need to transform the categorical variables into factors
+
+```{r}
+rf_data <- rf_data %>%
+  mutate(
+    customer_segment = as.factor(customer_segment),
+    age_bucket = as.factor(age_bucket),
+    income_bracket = as.factor(income_bracket),
+    gender = as.factor(gender),
+    occupation = as.factor(occupation)
+  )
+```
+
+We now split into training and testing sets to evaluate the model properly.
+
+```{r}
+set.seed(123)
+
+train_index <- sample(1:nrow(rf_data), 0.7 * nrow(rf_data))
+
+train_data <- rf_data[train_index, ]
+test_data  <- rf_data[-train_index, ]
+```
+
+We fit the Random Forest model
+
+```{r}
+set.seed(123)
+
+rf_model <- randomForest(
+  clv_millions ~
+    transaction_frequency +
+    active_products +
+    average_transaction_value +
+    satisfaction_score +
+    nps_score +
+    customer_segment +
+    age_bucket +
+    income_bracket +
+    gender +
+    occupation,
+  data = train_data,
+  ntree = 300,
+  importance = TRUE
+)
+```
+
+Results summary
+
+```{r}
+print(rf_model)
+```
+
+We now make the predictions on the test set
+
+```{r}
+test_data$predicted_clv <- predict(rf_model, newdata = test_data)
+```
+
+We graph the results: Predicted vs Actual CLV
+
+```{r}
+x_limit <- quantile(test_data$predicted_clv, 0.95)
+y_limit <- quantile(test_data$clv_millions, 0.95)
+
+ggplot(test_data, aes(x = predicted_clv, y = clv_millions, color = clv_millions)) +
+  geom_point(alpha = 0.4, size = 2) +
+  geom_abline(
+    slope = 1,
+    intercept = 0,
+    color = "#08306b",
+    linewidth = 1,
+    linetype = "dashed"
+  ) +
+  scale_color_gradient(
+    low = "#9ecae1",
+    high = "#08306b",
+    labels = comma
+  ) +
+  coord_cartesian(
+    xlim = c(0, x_limit),
+    ylim = c(0, y_limit)
+  ) +
+  labs(
+    title = "Random Forest: Predicted vs Actual Customer Lifetime Value",
+    subtitle = "Dashed line represents perfect prediction",
+    x = "Predicted CLV (Millions)",
+    y = "Actual CLV (Millions)",
+    color = "Actual CLV\n(Millions)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(color = "gray40"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+Compared to the linear regression model, the Random Forest model produces a more continuous spread of predicted values and captures more variability in CLV.
+
+This improvement occurs because Random Forest models can handle nonlinear relationships and interactions between variables, which are common in customer behaviour data.
+
+As a result, the predictions better reflect the complexity of customer engagement patterns and provide a **more flexible and robust modelling approach** than traditional linear regression.
 
 # **8. Conclusion**
 
