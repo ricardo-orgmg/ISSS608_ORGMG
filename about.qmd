@@ -2,6 +2,44 @@
 title: "About"
 ---
 
-About this site
+::: {.hero-banner}
+# About This Website
 
-In this website you will find the coursework prepared for the course: ISSS608 - Visual Analytics and Applications.
+This website presents my coursework for **ISSS608: Visual Analytics and Applications**.
+
+It serves as a portfolio of my hands-on exercises and take-home exercises, documenting my learning journey in data visualisation, interactive analytics, and visual storytelling.
+:::
+
+## Purpose of This Site
+
+This site was created to organise and showcase the work completed throughout the course. It provides a structured collection of exercises and projects, making it easier to review the techniques, tools, and insights developed over the semester.
+
+## What You Will Find
+
+::: {.grid}
+::: {.g-col-12 .g-col-md-6}
+::: {.feature-card}
+### Hands-on Exercises
+
+These exercises focus on building practical skills in visual analytics, including data exploration, chart design, mapping, and interactive visualisation.
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.feature-card}
+### Take-Home Exercises
+
+These assignments apply course concepts to broader analytical tasks, combining technical methods with interpretation and communication.
+:::
+:::
+:::
+
+## Tools Used
+
+::: {.mini-card}
+This website is built using **Quarto**, with coursework developed using data visualisation and analytical tools introduced in the course.
+:::
+
+## Closing Note
+
+Thank you for visiting this website. I hope it provides a clear overview of the work completed for **ISSS608** and reflects my learning progress throughout the course.

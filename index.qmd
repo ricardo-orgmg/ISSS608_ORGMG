@@ -2,6 +2,69 @@
 title: "ISSS608_ORGMG"
 ---
 
-Welcome to ISSS608 **Visual Analytics and Applications**.
+::: {.hero-banner}
+# ISSS608 Coursework Website
 
-In this website you will find my coursework prepared for this course.
+Welcome to my coursework portfolio for **ISSS608 Visual Analytics and Applications**.
+
+This site showcases my hands-on exercises and take-home exercises completed throughout the course.
+
+[Browse Hands-on Exercises](#hands-on){.btn-main}
+[View Take-Home Exercises](#take-home){.btn-secondary}
+:::
+
+## Course Overview
+
+This website documents my learning journey in visual analytics, interactive visualisation, and data storytelling using Quarto.
+
+::: {.grid}
+::: {.g-col-12 .g-col-md-6}
+::: {.feature-card #hands-on}
+### Hands-on Exercises
+
+- [Hands-on Exercise 1](Hands-on_Ex/Hands-on_EX01/HE01.html)
+- [Hands-on Exercise 2](Hands-on_Ex/Hands-on_EX02/HE02.html)
+- [Hands-on Exercise 3](Hands-on_Ex/Hands-on_EX03/HE03.html)
+- [Hands-on Exercise 4](Hands-on_Ex/Hands-on_EX04/HE04.html)
+- [Hands-on Exercise 5](Hands-on_Ex/Hands-on_EX05/HE05.html)
+- [Hands-on Exercise 7](Hands-on_Ex/Hands-on_EX07/HE07.html)
+- [Hands-on Exercise 8](Hands-on_Ex/Hands-on_EX08/HE08.html)
+- [Hands-on Exercise 9](Hands-on_Ex/Hands-on_EX09/HE09.html)
+- [Hands-on Exercise 10](Hands-on_Ex/Hands-on_EX10/HE10.html)
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.feature-card #take-home}
+### Take-Home Exercises
+
+- [Take-Home Exercise 1](Take-home_Ex/TakeHome01/th_exc01.html)
+- [Take-Home Exercise 2](Take-home_Ex/TakeHome02/th_exc02.html)
+:::
+:::
+:::
+
+## Highlights
+
+::: {.grid}
+::: {.g-col-12 .g-col-md-4}
+::: {.mini-card}
+### Interactive Visuals
+Explore charts, maps, and dashboards created during the course.
+:::
+:::
+
+::: {.g-col-12 .g-col-md-4}
+::: {.mini-card}
+### Applied Analytics
+See how visual methods support data exploration and insight generation.
+:::
+:::
+
+::: {.g-col-12 .g-col-md-4}
+::: {.mini-card}
+### Coursework Portfolio
+A clean collection of my weekly work and project submissions.
+:::
+:::
+:::

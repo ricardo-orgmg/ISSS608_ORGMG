@@ -198,7 +198,7 @@ For the development of the prototype module and the visual analytics components,
 The main packages used in this project include:
 
 | Package | Use |
-|-------------------------------------|-----------------------------------|
+|----|----|
 | tidyverse | Used to support the overall data science workflow, including data transformation, cleaning, and preparation of the fintech dataset. |
 | ggplot2 | Creates the core visualizations in this module, including boxplots, bar charts, scatterplots, and geographic maps. |
 | dplyr | Manipulates and summarizes the dataset, groups customers by segment or location and calculates metrics like average churn probability and average CLV. |

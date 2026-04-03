@@ -2,43 +2,40 @@ project:
   type: website
 
 website:
-  title: "ISSS608_Coursework Website"
+  title: "ISSS608 Coursework Website"
   navbar:
     left:
-    - text: "Hands-on Exercise"
-      menu:
-      - text: "Hands-on Exercise 1" 
-        href: "Hands-on_Ex/Hands-on_EX01/HE01.html"
-      - text: "Hands-on Exercise 2" 
-        href: "Hands-on_Ex/Hands-on_EX02/HE02.html"        
-      - text: "Hands-on Exercise 3" 
-        href: "Hands-on_Ex/Hands-on_EX03/HE03.html"   
-      - text: "Hands-on Exercise 4" 
-        href: "Hands-on_Ex/Hands-on_EX04/HE04.html"   
-      - text: "Hands-on Exercise 5" 
-        href: "Hands-on_Ex/Hands-on_EX05/HE05.html"
-      - text: "Hands-on Exercise 7" 
-        href: "Hands-on_Ex/Hands-on_EX07/HE07.html"
-      - text: "Hands-on Exercise 8" 
-        href: "Hands-on_Ex/Hands-on_EX08/HE08.html"
-      - text: "Hands-on Exercise 9" 
-        href: "Hands-on_Ex/Hands-on_EX09/HE09.html"
-      - text: "Hands-on Exercise 10" 
-        href: "Hands-on_Ex/Hands-on_EX10/HE10.html"
-    - text: "In-class Exercises"
-      menu:
-      - text: "Project Proposal" 
-        href: "Project Proposal/proposal.html"
-    - text: "Take-Home Exercise"
-      menu:
-      - text: "Take-Home Exercise 1" 
-        href: "Take-home_Ex/TakeHome01/th_exc01.html"
-      - text: "Take-Home Exercise 2" 
-        href: "Take-home_Ex/TakeHome02/th_exc02.html"
+      - text: "Hands-on Exercises"
+        menu:
+          - text: "Hands-on Exercise 1"
+            href: "Hands-on_Ex/Hands-on_EX01/HE01.html"
+          - text: "Hands-on Exercise 2"
+            href: "Hands-on_Ex/Hands-on_EX02/HE02.html"
+          - text: "Hands-on Exercise 3"
+            href: "Hands-on_Ex/Hands-on_EX03/HE03.html"
+          - text: "Hands-on Exercise 4"
+            href: "Hands-on_Ex/Hands-on_EX04/HE04.html"
+          - text: "Hands-on Exercise 5"
+            href: "Hands-on_Ex/Hands-on_EX05/HE05.html"
+          - text: "Hands-on Exercise 7"
+            href: "Hands-on_Ex/Hands-on_EX07/HE07.html"
+          - text: "Hands-on Exercise 8"
+            href: "Hands-on_Ex/Hands-on_EX08/HE08.html"
+          - text: "Hands-on Exercise 9"
+            href: "Hands-on_Ex/Hands-on_EX09/HE09.html"
+          - text: "Hands-on Exercise 10"
+            href: "Hands-on_Ex/Hands-on_EX10/HE10.html"
+      - text: "Take-Home Exercises"
+        menu:
+          - text: "Take-Home Exercise 1"
+            href: "Take-home_Ex/TakeHome01/th_exc01.html"
+          - text: "Take-Home Exercise 2"
+            href: "Take-home_Ex/TakeHome02/th_exc02.html"
     right:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: about.qmd
+        text: About
 
 format:
   html:
@@ -46,7 +43,7 @@ format:
       - flatly
       - brand
     css: styles.css
-    toc: true
+    toc: false
+    page-layout: full
 
 editor: visual
-

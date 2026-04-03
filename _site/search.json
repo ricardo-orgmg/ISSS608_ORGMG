@@ -39,7 +39,7 @@
     "href": "index.html",
     "title": "ISSS608_ORGMG",
     "section": "",
-    "text": "Welcome to ISSS608 Visual Analytics and Applications.\nIn this website you will find my coursework prepared for this course."
+    "text": "Welcome to my coursework portfolio for ISSS608 Visual Analytics and Applications.\nThis site showcases my hands-on exercises and take-home exercises completed throughout the course.\nBrowse Hands-on Exercises View Take-Home Exercises"
   },
   {
     "objectID": "Hands-on_Ex/Hands-on_EX08/HE08.html",
@@ -473,28 +473,28 @@
     "href": "Hands-on_Ex/Hands-on_EX03/HE03.html#interactivity-tooltips",
     "title": "Hands-on Exercise 3",
     "section": "Interactivity & Tooltips",
-    "text": "Interactivity & Tooltips\n\ntooltip_css &lt;- \"background-color:white; #&lt;&lt;\nfont-style:bold; color:black;\" #&lt;&lt;\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(tooltip = ID),                   \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(    #&lt;&lt;\n    opts_tooltip(    #&lt;&lt;\n      css = tooltip_css)) #&lt;&lt;\n)"
+    "text": "Interactivity & Tooltips\n\n\nShow the code\ntooltip_css &lt;- \"background-color:white; #&lt;&lt;\nfont-style:bold; color:black;\" #&lt;&lt;\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(tooltip = ID),                   \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(    #&lt;&lt;\n    opts_tooltip(    #&lt;&lt;\n      css = tooltip_css)) #&lt;&lt;\n)"
   },
   {
     "objectID": "Hands-on_Ex/Hands-on_EX03/HE03.html#statistics-on-tooltip",
     "href": "Hands-on_Ex/Hands-on_EX03/HE03.html#statistics-on-tooltip",
     "title": "Hands-on Exercise 3",
     "section": "Statistics on Tooltip",
-    "text": "Statistics on Tooltip\n\ntooltip &lt;- function(y, ymax, accuracy = .01) {\n  mean &lt;- scales::number(y, accuracy = accuracy)\n  sem &lt;- scales::number(ymax - y, accuracy = accuracy)\n  paste(\"Mean maths scores:\", mean, \"+/-\", sem)\n}\n\ngg_point &lt;- ggplot(data=exam_data, \n                   aes(x = RACE),\n) +\n  stat_summary(aes(y = MATHS, \n                   tooltip = after_stat(  \n                     tooltip(y, ymax))),  \n    fun.data = \"mean_se\", \n    geom = GeomInteractiveCol,  \n    fill = \"light blue\"\n  ) +\n  stat_summary(aes(y = MATHS),\n    fun.data = mean_se,\n    geom = \"errorbar\", width = 0.2, size = 0.2\n  )\n\ngirafe(ggobj = gg_point,\n       width_svg = 8,\n       height_svg = 8*0.618)\n\n\n\n\n\n\nHover Effect\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(tooltip = CLASS, \n        data_id = CLASS),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(                        \n    opts_hover(css = \"fill: #202020;\"),  \n    opts_hover_inv(css = \"opacity:0.2;\") \n  )                                        \n)                                                \n\n\n\n\n\n\n\nClick Effect with Onclick\n\nexam_data$onclick &lt;- sprintf(\"window.open(\\\"%s%s\\\")\",\n\"https://www.moe.gov.sg/schoolfinder?journey=Primary%20school\",\nas.character(exam_data$ID))\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(onclick = onclick),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618)                                        \n\n\n\n\n\n\n\nMultiple Views with ggiraph\n\np1 &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(data_id = ID),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +  \n  coord_cartesian(xlim=c(0,100)) + \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\n\np2 &lt;- ggplot(data=exam_data, \n       aes(x = ENGLISH)) +\n  geom_dotplot_interactive(              \n    aes(data_id = ID),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") + \n  coord_cartesian(xlim=c(0,100)) + \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\n\ngirafe(code = print(p1 + p2), \n       width_svg = 6,\n       height_svg = 3,\n       options = list(\n         opts_hover(css = \"fill: #202020;\"),\n         opts_hover_inv(css = \"opacity:0.2;\")\n         )\n       ) \n\n\n\n\n\n\n\nInteractive Data Vizualisation (Plotly Methods)\n\np &lt;- ggplot(data=exam_data, \n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nggplotly(p)\n\n\n\n\n\n\nd &lt;- highlight_key(exam_data)\np1 &lt;- ggplot(data=d, \n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\np2 &lt;- ggplot(data=d, \n            aes(x = MATHS,\n                y = SCIENCE)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nsubplot(ggplotly(p1),\n        ggplotly(p2))\n\n\n\n\n\n\n\nInteractive Data Table\n\nd &lt;- highlight_key(exam_data) \np &lt;- ggplot(d, \n            aes(ENGLISH, \n                MATHS)) + \n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\ngg &lt;- highlight(ggplotly(p),        \n                \"plotly_selected\")  \n\ncrosstalk::bscols(gg,               \n                  DT::datatable(d), \n                  widths = 5)"
+    "text": "Statistics on Tooltip\n\n\nShow the code\ntooltip &lt;- function(y, ymax, accuracy = .01) {\n  mean &lt;- scales::number(y, accuracy = accuracy)\n  sem &lt;- scales::number(ymax - y, accuracy = accuracy)\n  paste(\"Mean maths scores:\", mean, \"+/-\", sem)\n}\n\ngg_point &lt;- ggplot(data=exam_data, \n                   aes(x = RACE),\n) +\n  stat_summary(aes(y = MATHS, \n                   tooltip = after_stat(  \n                     tooltip(y, ymax))),  \n    fun.data = \"mean_se\", \n    geom = GeomInteractiveCol,  \n    fill = \"light blue\"\n  ) +\n  stat_summary(aes(y = MATHS),\n    fun.data = mean_se,\n    geom = \"errorbar\", width = 0.2, size = 0.2\n  )\n\ngirafe(ggobj = gg_point,\n       width_svg = 8,\n       height_svg = 8*0.618)\n\n\n\n\n\n\n\nHover Effect\n\n\nShow the code\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(tooltip = CLASS, \n        data_id = CLASS),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(                        \n    opts_hover(css = \"fill: #202020;\"),  \n    opts_hover_inv(css = \"opacity:0.2;\") \n  )                                        \n)                                                \n\n\n\n\n\n\n\n\nClick Effect with Onclick\n\n\nShow the code\nexam_data$onclick &lt;- sprintf(\"window.open(\\\"%s%s\\\")\",\n\"https://www.moe.gov.sg/schoolfinder?journey=Primary%20school\",\nas.character(exam_data$ID))\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(onclick = onclick),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618)                                        \n\n\n\n\n\n\n\n\nMultiple Views with ggiraph\n\n\nShow the code\np1 &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(data_id = ID),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +  \n  coord_cartesian(xlim=c(0,100)) + \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\n\np2 &lt;- ggplot(data=exam_data, \n       aes(x = ENGLISH)) +\n  geom_dotplot_interactive(              \n    aes(data_id = ID),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") + \n  coord_cartesian(xlim=c(0,100)) + \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\n\ngirafe(code = print(p1 + p2), \n       width_svg = 6,\n       height_svg = 3,\n       options = list(\n         opts_hover(css = \"fill: #202020;\"),\n         opts_hover_inv(css = \"opacity:0.2;\")\n         )\n       ) \n\n\n\n\n\n\n\n\nInteractive Data Vizualisation (Plotly Methods)\n\n\nShow the code\np &lt;- ggplot(data=exam_data, \n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nggplotly(p)\n\n\n\n\n\n\n\n\nShow the code\nd &lt;- highlight_key(exam_data)\np1 &lt;- ggplot(data=d, \n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\np2 &lt;- ggplot(data=d, \n            aes(x = MATHS,\n                y = SCIENCE)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nsubplot(ggplotly(p1),\n        ggplotly(p2))\n\n\n\n\n\n\n\n\nInteractive Data Table\n\n\nShow the code\nd &lt;- highlight_key(exam_data) \np &lt;- ggplot(d, \n            aes(ENGLISH, \n                MATHS)) + \n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\ngg &lt;- highlight(ggplotly(p),        \n                \"plotly_selected\")  \n\ncrosstalk::bscols(gg,               \n                  DT::datatable(d), \n                  widths = 5)"
   },
   {
     "objectID": "Hands-on_Ex/Hands-on_EX03/HE03.html#install-and-launching-r-packages-1",
     "href": "Hands-on_Ex/Hands-on_EX03/HE03.html#install-and-launching-r-packages-1",
     "title": "Hands-on Exercise 3",
     "section": "Install and launching R packages",
-    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(readxl, gifski, gapminder,\n               plotly, gganimate, tidyverse)"
+    "text": "Install and launching R packages\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\n\nShow the code\npacman::p_load(readxl, gifski, gapminder,\n               plotly, gganimate, tidyverse)"
   },
   {
     "objectID": "Hands-on_Ex/Hands-on_EX03/HE03.html#the-data-1",
     "href": "Hands-on_Ex/Hands-on_EX03/HE03.html#the-data-1",
     "title": "Hands-on Exercise 3",
     "section": "The Data",
-    "text": "The Data\nImporting the data\n\ncol &lt;- c(\"Country\", \"Continent\")\nglobalPop &lt;- read_xls(\"data/GlobalPopulation.xls\",\n                      sheet=\"Data\") %&gt;%\n  mutate(across(col, as.factor)) %&gt;%\n  mutate(Year = as.integer(Year))\n\n\nStatic Population Bubble Plot\n\nggplot(globalPop, aes(x = Old, y = Young, \n                      size = Population, \n                      colour = Country)) +\n  geom_point(alpha = 0.7, \n             show.legend = FALSE) +\n  scale_colour_manual(values = country_colors) +\n  scale_size(range = c(2, 12)) +\n  labs(title = 'Year: {frame_time}', \n       x = '% Aged', \n       y = '% Young') \n\n\n\n\n\n\n\n\n\n\nAnimated Bubble Plot\n\ngg &lt;- ggplot(globalPop, \n       aes(x = Old, \n           y = Young, \n           size = Population, \n           colour = Country)) +\n  geom_point(aes(size = Population,\n                 frame = Year),\n             alpha = 0.7, \n             show.legend = FALSE) +\n  scale_colour_manual(values = country_colors) +\n  scale_size(range = c(2, 12)) +\n  labs(x = '% Aged', \n       y = '% Young')\n\nggplotly(gg)\n\n\n\n\n\n\nbp &lt;- globalPop %&gt;%\n  plot_ly(x = ~Old, \n          y = ~Young, \n          size = ~Population, \n          color = ~Continent,\n          sizes = c(2, 100),\n          frame = ~Year, \n          text = ~Country, \n          hoverinfo = \"text\",\n          type = 'scatter',\n          mode = 'markers'\n          ) %&gt;%\n  layout(showlegend = FALSE)\nbp"
+    "text": "The Data\nImporting the data\n\n\nShow the code\ncol &lt;- c(\"Country\", \"Continent\")\nglobalPop &lt;- read_xls(\"data/GlobalPopulation.xls\",\n                      sheet=\"Data\") %&gt;%\n  mutate(across(col, as.factor)) %&gt;%\n  mutate(Year = as.integer(Year))\n\n\n\nStatic Population Bubble Plot\n\n\nShow the code\nggplot(globalPop, aes(x = Old, y = Young, \n                      size = Population, \n                      colour = Country)) +\n  geom_point(alpha = 0.7, \n             show.legend = FALSE) +\n  scale_colour_manual(values = country_colors) +\n  scale_size(range = c(2, 12)) +\n  labs(title = 'Year: {frame_time}', \n       x = '% Aged', \n       y = '% Young') \n\n\n\n\n\n\n\n\n\n\n\nAnimated Bubble Plot\n\n\nShow the code\ngg &lt;- ggplot(globalPop, \n       aes(x = Old, \n           y = Young, \n           size = Population, \n           colour = Country)) +\n  geom_point(aes(size = Population,\n                 frame = Year),\n             alpha = 0.7, \n             show.legend = FALSE) +\n  scale_colour_manual(values = country_colors) +\n  scale_size(range = c(2, 12)) +\n  labs(x = '% Aged', \n       y = '% Young')\n\nggplotly(gg)\n\n\n\n\n\n\n\n\nShow the code\nbp &lt;- globalPop %&gt;%\n  plot_ly(x = ~Old, \n          y = ~Young, \n          size = ~Population, \n          color = ~Continent,\n          sizes = c(2, 100),\n          frame = ~Year, \n          text = ~Country, \n          hoverinfo = \"text\",\n          type = 'scatter',\n          mode = 'markers'\n          ) %&gt;%\n  layout(showlegend = FALSE)\nbp"
   },
   {
     "objectID": "Hands-on_Ex/Hands-on_EX05/HE05.html",
@@ -662,7 +662,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site\nIn this website you will find the coursework prepared for the course: ISSS608 - Visual Analytics and Applications."
+    "text": "This website presents my coursework for ISSS608: Visual Analytics and Applications.\nIt serves as a portfolio of my hands-on exercises and take-home exercises, documenting my learning journey in data visualisation, interactive analytics, and visual storytelling."
   },
   {
     "objectID": "Take-home_Ex/TakeHome02/th_exc02.html",
@@ -992,5 +992,54 @@
     "title": "COFINFAD: Colombian Fintech Customer Analytics Dashboard",
     "section": "5.3 Module 3 — Retention Risk & Customer Value",
     "text": "5.3 Module 3 — Retention Risk & Customer Value"
+  },
+  {
+    "objectID": "index.html#exercise-section",
+    "href": "index.html#exercise-section",
+    "title": "ISSS608_ORGMG",
+    "section": "Course Overview",
+    "text": "Course Overview\nThis website documents my learning journey in data visualization, interactive analytics, and visual storytelling using Quarto and R.\n\n\n\nHands-on Exercises\nA collection of practical weekly activities covering core techniques, methods, and tools used in visual analytics.\n\nHands-on Exercise 1\nHands-on Exercise 2\nHands-on Exercise 3\nHands-on Exercise 4\nHands-on Exercise 5\nHands-on Exercise 7\nHands-on Exercise 8\nHands-on Exercise 9\nHands-on Exercise 10\n\n\n\n\n\n\nTake-Home Exercises\nThese projects apply the concepts from class to more open-ended analysis and communication tasks.\n\nTake-Home Exercise 1\nTake-Home Exercise 2"
+  },
+  {
+    "objectID": "index.html#highlights",
+    "href": "index.html#highlights",
+    "title": "ISSS608_ORGMG",
+    "section": "Highlights",
+    "text": "Highlights\n\n\n\nInteractive Visuals\nExplore charts, maps, and dashboards created during the course.\n\n\n\n\nApplied Analytics\nSee how visual methods support data exploration and insight generation.\n\n\n\n\nCoursework Portfolio\nA clean collection of my weekly work and project submissions."
+  },
+  {
+    "objectID": "index.html#course-overview",
+    "href": "index.html#course-overview",
+    "title": "ISSS608_ORGMG",
+    "section": "Course Overview",
+    "text": "Course Overview\nThis website documents my learning journey in visual analytics, interactive visualisation, and data storytelling using Quarto.\n\n\n\n\nHands-on Exercises\n\nHands-on Exercise 1\nHands-on Exercise 2\nHands-on Exercise 3\nHands-on Exercise 4\nHands-on Exercise 5\nHands-on Exercise 7\nHands-on Exercise 8\nHands-on Exercise 9\nHands-on Exercise 10\n\n\n\n\n\n\n\nTake-Home Exercises\n\nTake-Home Exercise 1\nTake-Home Exercise 2"
+  },
+  {
+    "objectID": "about.html#purpose-of-this-site",
+    "href": "about.html#purpose-of-this-site",
+    "title": "About",
+    "section": "Purpose of This Site",
+    "text": "Purpose of This Site\nThis site was created to organise and showcase the work completed throughout the course. It provides a structured collection of exercises and projects, making it easier to review the techniques, tools, and insights developed over the semester."
+  },
+  {
+    "objectID": "about.html#what-you-will-find",
+    "href": "about.html#what-you-will-find",
+    "title": "About",
+    "section": "What You Will Find",
+    "text": "What You Will Find\n\n\n\nHands-on Exercises\nThese exercises focus on building practical skills in visual analytics, including data exploration, chart design, mapping, and interactive visualisation.\n\n\n\n\nTake-Home Exercises\nThese assignments apply course concepts to broader analytical tasks, combining technical methods with interpretation and communication."
+  },
+  {
+    "objectID": "about.html#tools-used",
+    "href": "about.html#tools-used",
+    "title": "About",
+    "section": "Tools Used",
+    "text": "Tools Used\n\nThis website is built using Quarto, with coursework developed using data visualisation and analytical tools introduced in the course."
+  },
+  {
+    "objectID": "about.html#closing-note",
+    "href": "about.html#closing-note",
+    "title": "About",
+    "section": "Closing Note",
+    "text": "Closing Note\nThank you for visiting this website. I hope it provides a clear overview of the work completed for ISSS608 and reflects my learning progress throughout the course."
   }
 ]

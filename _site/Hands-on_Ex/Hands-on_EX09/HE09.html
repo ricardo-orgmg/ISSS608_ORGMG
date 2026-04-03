@@ -9,7 +9,7 @@
 <meta name="author" content="Oscar Ricardo Moreno Gonzalez">
 <meta name="dcterms.date" content="2026-03-14">
 
-<title>Hands-on Exercise 9 – ISSS608_Coursework Website</title>
+<title>Hands-on Exercise 9 – ISSS608 Coursework Website</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -123,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">ISSS608_Coursework Website</span>
+    <span class="navbar-title">ISSS608 Coursework Website</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -133,10 +133,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Hands-on Exercise</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercises" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Hands-on Exercises</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercises">    
         <li>
     <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_EX01/HE01.html">
  <span class="dropdown-text">Hands-on Exercise 1</span></a>
@@ -170,27 +170,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Hands-on Exercise 9</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_EX010/HE10.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_EX10/HE10.html">
  <span class="dropdown-text">Hands-on Exercise 10</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercises" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">In-class Exercises</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercises" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-Home Exercises</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercises">    
-        <li>
-    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex01/ICE01.html">
- <span class="dropdown-text">In-class Exercise 1</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Take-Home Exercise</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercises">    
         <li>
     <a class="dropdown-item" href="../../Take-home_Ex/TakeHome01/th_exc01.html">
  <span class="dropdown-text">Take-Home Exercise 1</span></a>
@@ -219,63 +208,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a>
-  <ul class="collapse">
-  <li><a href="#install-and-launching-r-packages" id="toc-install-and-launching-r-packages" class="nav-link" data-scroll-target="#install-and-launching-r-packages">Install and Launching R Packages</a></li>
-  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The Data</a>
-  <ul class="collapse">
-  <li><a href="#importing-t" id="toc-importing-t" class="nav-link" data-scroll-target="#importing-t">Importing t</a></li>
-  <li><a href="#he-data" id="toc-he-data" class="nav-link" data-scroll-target="#he-data">he Data</a></li>
-  <li><a href="#reviewing-the-imported-data" id="toc-reviewing-the-imported-data" class="nav-link" data-scroll-target="#reviewing-the-imported-data"><strong>Reviewing the imported data</strong></a></li>
-  <li><a href="#wrangling-time" id="toc-wrangling-time" class="nav-link" data-scroll-target="#wrangling-time"><strong>Wrangling time</strong></a></li>
-  <li><a href="#wrangling-attributes" id="toc-wrangling-attributes" class="nav-link" data-scroll-target="#wrangling-attributes"><strong>Wrangling attributes</strong></a></li>
-  </ul></li>
-  <li><a href="#creating-network-objects-using-tidygraph" id="toc-creating-network-objects-using-tidygraph" class="nav-link" data-scroll-target="#creating-network-objects-using-tidygraph"><strong>Creating network objects using tidygraph</strong></a>
-  <ul class="collapse">
-  <li><a href="#using-tbl_graph-to-build-tidygraph-data-model." id="toc-using-tbl_graph-to-build-tidygraph-data-model." class="nav-link" data-scroll-target="#using-tbl_graph-to-build-tidygraph-data-model."><strong>Using <code>tbl_graph()</code> to build tidygraph data model.</strong></a></li>
-  <li><a href="#changing-the-active-object" id="toc-changing-the-active-object" class="nav-link" data-scroll-target="#changing-the-active-object"><strong>Changing the active object</strong></a></li>
-  </ul></li>
-  <li><a href="#plotting-static-network-graphs-with-ggraphpackage" id="toc-plotting-static-network-graphs-with-ggraphpackage" class="nav-link" data-scroll-target="#plotting-static-network-graphs-with-ggraphpackage"><strong>Plotting Static Network Graphs with ggraphpackage</strong></a>
-  <ul class="collapse">
-  <li><a href="#fruchterman-and-reingold-layout" id="toc-fruchterman-and-reingold-layout" class="nav-link" data-scroll-target="#fruchterman-and-reingold-layout"><strong>Fruchterman and Reingold layout</strong></a></li>
-  <li><a href="#modifying-network-nodes" id="toc-modifying-network-nodes" class="nav-link" data-scroll-target="#modifying-network-nodes"><strong>Modifying network nodes</strong></a></li>
-  <li><a href="#modifying-edges" id="toc-modifying-edges" class="nav-link" data-scroll-target="#modifying-edges"><strong>Modifying edges</strong></a></li>
-  </ul></li>
-  <li><a href="#creating-facet-graphs" id="toc-creating-facet-graphs" class="nav-link" data-scroll-target="#creating-facet-graphs"><strong>Creating facet graphs</strong></a>
-  <ul class="collapse">
-  <li><a href="#working-with-facet_edges" id="toc-working-with-facet_edges" class="nav-link" data-scroll-target="#working-with-facet_edges"><strong>Working with <em>facet_edges()</em></strong></a></li>
-  <li><a href="#a-framed-facet-graph" id="toc-a-framed-facet-graph" class="nav-link" data-scroll-target="#a-framed-facet-graph"><strong>A framed facet graph</strong></a></li>
-  <li><a href="#working-with-facet_nodes" id="toc-working-with-facet_nodes" class="nav-link" data-scroll-target="#working-with-facet_nodes"><strong>Working with <em>facet_nodes()</em></strong></a></li>
-  </ul></li>
-  <li><a href="#network-metrics-analysis" id="toc-network-metrics-analysis" class="nav-link" data-scroll-target="#network-metrics-analysis"><strong>Network Metrics Analysis</strong></a>
-  <ul class="collapse">
-  <li><a href="#computing-centrality-indices" id="toc-computing-centrality-indices" class="nav-link" data-scroll-target="#computing-centrality-indices"><strong>Computing centrality indices</strong></a></li>
-  <li><a href="#visualising-network-metrics" id="toc-visualising-network-metrics" class="nav-link" data-scroll-target="#visualising-network-metrics"><strong>Visualising network metrics</strong></a></li>
-  <li><a href="#visualizing-community" id="toc-visualizing-community" class="nav-link" data-scroll-target="#visualizing-community"><strong>Visualizing Community</strong></a></li>
-  </ul></li>
-  <li><a href="#building-interactive-network-graph-with-visnetwork" id="toc-building-interactive-network-graph-with-visnetwork" class="nav-link" data-scroll-target="#building-interactive-network-graph-with-visnetwork"><strong>Building Interactive Network Graph with visNetwork</strong></a>
-  <ul class="collapse">
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><strong>Data preparation</strong></a></li>
-  <li><a href="#plotting-the-first-interactive-network-graph" id="toc-plotting-the-first-interactive-network-graph" class="nav-link" data-scroll-target="#plotting-the-first-interactive-network-graph"><strong>Plotting the first interactive network graph</strong></a></li>
-  <li><a href="#working-with-visual-attributes---nodes" id="toc-working-with-visual-attributes---nodes" class="nav-link" data-scroll-target="#working-with-visual-attributes---nodes"><strong>Working with visual attributes - Nodes</strong></a></li>
-  <li><a href="#working-with-visual-attributes---edges" id="toc-working-with-visual-attributes---edges" class="nav-link" data-scroll-target="#working-with-visual-attributes---edges"><strong>Working with visual attributes - Edges</strong></a></li>
-  <li><a href="#interactivity" id="toc-interactivity" class="nav-link" data-scroll-target="#interactivity"><strong>Interactivity</strong></a></li>
-  </ul></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -284,7 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page">
 
     <div>
     <div class="quarto-title-meta-heading">Author</div>

@@ -37,6 +37,9 @@ exam_data <- read_csv("data/Exam_data.csv")
 # Data Visualization
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggplot(data=exam_data, 
        aes(x= MATHS, 
            y=ENGLISH)) +
@@ -51,6 +54,9 @@ ggplot(data=exam_data,
 ```
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggplot(data=exam_data, 
              aes(x = MATHS)) +
   geom_histogram(bins=20, 
@@ -64,6 +70,9 @@ ggplot(data=exam_data,
 ```
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 p1 <- ggplot(data=exam_data, 
              aes(x = MATHS)) +
   geom_histogram(bins=20, 

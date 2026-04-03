@@ -1,1 +1,207 @@
-/* css styles */
+/* =========================
+   General page styling
+========================= */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.7;
+  color: #1f2937;
+  background-color: #f8f9fb;
+}
+
+/* Main content width and spacing */
+#quarto-content .content,
+.quarto-container .content,
+main.content {
+  padding-top: 1.5rem;
+}
+
+/* =========================
+   Navbar
+========================= */
+.navbar {
+  background-color: #244683 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-bottom: none !important;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link,
+.navbar #quarto-search.type-overlay .aa-Autocomplete svg,
+.navbar .bi {
+  color: white !important;
+}
+
+.navbar-brand {
+  font-weight: 700;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  color: #dbe6ff !important;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.dropdown-item:hover {
+  background-color: #edf3ff;
+  color: #244683;
+}
+
+/* =========================
+   Hero banner
+========================= */
+.hero-banner {
+  background: #244683;
+  color: white;
+  padding: 5rem 2rem;
+  border-radius: 22px;
+  text-align: center;
+  margin: 2rem 0 3rem 0;
+  box-shadow: 0 10px 30px rgba(36, 70, 131, 0.18);
+}
+
+.hero-banner h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.hero-banner p {
+  font-size: 1.2rem;
+  max-width: 780px;
+  margin: 0 auto 1.5rem auto;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* =========================
+   Buttons
+========================= */
+.btn-main,
+.btn-secondary {
+  display: inline-block;
+  padding: 0.9rem 1.6rem;
+  margin: 0.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.25s ease;
+}
+
+.btn-main {
+  background-color: #ffffff;
+  color: #244683;
+  border: 2px solid #ffffff;
+}
+
+.btn-main:hover {
+  background-color: #f2f5fb;
+  color: #1d3768;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* =========================
+   Cards
+========================= */
+.feature-card,
+.mini-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  height: 100%;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover,
+.mini-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.feature-card h3,
+.mini-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  color: #244683;
+  font-weight: 700;
+}
+
+.feature-card ul {
+  padding-left: 1.2rem;
+  margin-bottom: 0;
+}
+
+.feature-card li {
+  margin-bottom: 0.45rem;
+}
+
+/* =========================
+   Section headings
+========================= */
+h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+/* Optional: style h3 globally a little nicer */
+h3 {
+  font-weight: 700;
+}
+
+/* =========================
+   Links
+========================= */
+a {
+  color: #244683;
+}
+
+a:hover {
+  color: #1d3768;
+}
+
+/* =========================
+   Mobile responsiveness
+========================= */
+@media (max-width: 768px) {
+  .hero-banner {
+    padding: 3rem 1.2rem;
+    border-radius: 16px;
+  }
+
+  .hero-banner h1 {
+    font-size: 2.1rem;
+  }
+
+  .hero-banner p {
+    font-size: 1.05rem;
+  }
+
+  .btn-main,
+  .btn-secondary {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin: 0.75rem auto;
+  }
+}

@@ -38,6 +38,9 @@ exam_data <- read_csv("data/Exam_data.csv")
 ## Interactivity & **Tooltips**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tooltip_css <- "background-color:white; #<<
 font-style:bold; color:black;" #<<
 
@@ -63,6 +66,9 @@ girafe(
 ## S**tatistics on Tooltip**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tooltip <- function(y, ymax, accuracy = .01) {
   mean <- scales::number(y, accuracy = accuracy)
   sem <- scales::number(ymax - y, accuracy = accuracy)
@@ -92,6 +98,9 @@ girafe(ggobj = gg_point,
 ### **Hover Effect**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 p <- ggplot(data=exam_data, 
        aes(x = MATHS)) +
   geom_dotplot_interactive(              
@@ -116,6 +125,9 @@ girafe(
 ### **Click Effect with Onclick**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 exam_data$onclick <- sprintf("window.open(\"%s%s\")",
 "https://www.moe.gov.sg/schoolfinder?journey=Primary%20school",
 as.character(exam_data$ID))
@@ -138,6 +150,9 @@ girafe(
 ### Multiple Views **with ggiraph**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 p1 <- ggplot(data=exam_data, 
        aes(x = MATHS)) +
   geom_dotplot_interactive(              
@@ -173,6 +188,9 @@ girafe(code = print(p1 + p2),
 ### I**nteractive Data Vizualisation (Plotly Methods)**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 p <- ggplot(data=exam_data, 
             aes(x = MATHS,
                 y = ENGLISH)) +
@@ -183,6 +201,9 @@ ggplotly(p)
 ```
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 d <- highlight_key(exam_data)
 p1 <- ggplot(data=d, 
             aes(x = MATHS,
@@ -204,6 +225,9 @@ subplot(ggplotly(p1),
 ### I**nteractive Data Table**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 d <- highlight_key(exam_data) 
 p <- ggplot(d, 
             aes(ENGLISH, 
@@ -227,6 +251,9 @@ crosstalk::bscols(gg,
 The code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 pacman::p_load(readxl, gifski, gapminder,
                plotly, gganimate, tidyverse)
 ```
@@ -236,6 +263,9 @@ pacman::p_load(readxl, gifski, gapminder,
 Importing the data
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 col <- c("Country", "Continent")
 globalPop <- read_xls("data/GlobalPopulation.xls",
                       sheet="Data") %>%
@@ -246,6 +276,9 @@ globalPop <- read_xls("data/GlobalPopulation.xls",
 ### **Static Population Bubble Plot**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggplot(globalPop, aes(x = Old, y = Young, 
                       size = Population, 
                       colour = Country)) +
@@ -261,6 +294,9 @@ ggplot(globalPop, aes(x = Old, y = Young,
 ### **Animated Bubble Plot**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 gg <- ggplot(globalPop, 
        aes(x = Old, 
            y = Young, 
@@ -279,6 +315,9 @@ ggplotly(gg)
 ```
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 bp <- globalPop %>%
   plot_ly(x = ~Old, 
           y = ~Young, 
