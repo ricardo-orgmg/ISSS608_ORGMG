@@ -54,6 +54,9 @@ agpop_mutated <- pop_data %>%
 ## **Plotting a Static Ternary Diagram**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 #Building the static ternary plot
 ggtern(data=agpop_mutated, aes(x=YOUNG,y=ACTIVE, z=OLD)) +
   geom_point() +
@@ -64,6 +67,9 @@ ggtern(data=agpop_mutated, aes(x=YOUNG,y=ACTIVE, z=OLD)) +
 ## **Plotting an Interative Ternary Diagram**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 # reusable function for creating annotation object
 label <- function(txt) {
   list(
@@ -146,6 +152,9 @@ pairs(wine[,2:12], lower.panel = NULL)
 ### **Including with correlation coefficients**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 panel.cor <- function(x, y, digits=2, prefix="", cex.cor, ...) {
 usr <- par("usr")
 on.exit(par(usr))
@@ -166,6 +175,9 @@ pairs(wine[,2:12],
 ### **The Basic Plot**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggstatsplot::ggcorrmat(
   data = wine, 
   cor.vars = 1:11,
@@ -185,6 +197,9 @@ ggplot.component = list(
 ## **Building multiple plots**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 grouped_ggcorrmat(
   data = wine,
   cor.vars = 1:11,
@@ -226,6 +241,9 @@ corrplot(wine.cor,
 ### **Working with Mixed Layout**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 corrplot.mixed(wine.cor, 
                lower = "ellipse", 
                upper = "number",
@@ -241,6 +259,9 @@ wine.sig = cor.mtest(wine.cor, conf.level= .95)
 ```
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 corrplot(wine.cor,
          method = "number",
          type = "lower",
@@ -254,6 +275,9 @@ corrplot(wine.cor,
 ## **Reorder a corrgram**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 corrplot.mixed(wine.cor, 
                lower = "ellipse", 
                upper = "number",
@@ -266,6 +290,9 @@ corrplot.mixed(wine.cor,
 ### **Reordering Using hclust**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 corrplot(wine.cor, 
          method = "ellipse", 
          tl.pos = "lt",
@@ -309,6 +336,9 @@ wh_matrix <- data.matrix(wh)
 ### **Heatmap() of R Stats**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 wh_heatmap <- heatmap(wh_matrix,
                       scale="column",
                       cexRow = 0.6, 
@@ -383,6 +413,9 @@ heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
 ### **The Finishing Touch**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
           Colv=NA,
           seriate = "none",
@@ -418,6 +451,9 @@ wh <- read_csv("data/WHData-2018.csv")
 ## **Plotting Static Parallel Coordinates Plot**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggparcoord(data = wh, 
            columns = c(7:12))
 ```
@@ -425,6 +461,9 @@ ggparcoord(data = wh,
 ### **Plotting a Parallel Coordinates with Boxplot**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggparcoord(data = wh, 
            columns = c(7:12), 
            groupColumn = 2,
@@ -437,6 +476,9 @@ ggparcoord(data = wh,
 ### **Parallel Coordinates with Facet**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggparcoord(data = wh, 
            columns = c(7:12), 
            groupColumn = 2,
@@ -453,6 +495,9 @@ ggparcoord(data = wh,
 ### Basic Plot
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 parallelPlot(wh,
              continuousCS = "YlOrRd",
              rotateTitle = TRUE)
@@ -461,6 +506,9 @@ parallelPlot(wh,
 ### **Parallel Coordinates Plot with Histogram**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 histoVisibility <- rep(TRUE, ncol(wh))
 parallelPlot(wh,
              rotateTitle = TRUE,
@@ -508,6 +556,9 @@ realis2018_selected <- realis2018_summarised %>%
 ```
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 treemap(realis2018_selected,
         index=c("Planning Region", "Planning Area", "Project Name"),
         vSize="Total Unit Sold",
@@ -520,6 +571,9 @@ treemap(realis2018_selected,
 ### **Working with *vColor* and *type* Argument**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 treemap(realis2018_selected,
         index=c("Planning Region", "Planning Area", "Project Name"),
         vSize="Total Unit Sold",
@@ -533,6 +587,9 @@ treemap(realis2018_selected,
 ### **The “Value” Type Treemap**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 treemap(realis2018_selected,
         index=c("Planning Region", "Planning Area", "Project Name"),
         vSize="Total Unit Sold",
@@ -547,6 +604,9 @@ treemap(realis2018_selected,
 ### **The “Manual” Type Treemap**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 treemap(realis2018_selected,
         index=c("Planning Region", "Planning Area", "Project Name"),
         vSize="Total Unit Sold",
@@ -565,6 +625,9 @@ treemap(realis2018_selected,
 ### **Designing a Basic Treemap**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggplot(data=realis2018_selected, 
        aes(area = `Total Unit Sold`,
            fill = `Median Unit Price ($ psm)`,
@@ -597,6 +660,9 @@ library(d3treeR)
 ### **Designing An Interactive Treemap**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm <- treemap(realis2018_summarised,
         index=c("Planning Region", "Planning Area"),
         vSize="Total Unit Sold",
@@ -608,5 +674,8 @@ tm <- treemap(realis2018_summarised,
 ```
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 d3tree(tm,rootname = "Singapore" )
 ```

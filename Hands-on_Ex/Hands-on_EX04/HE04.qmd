@@ -38,6 +38,9 @@ exam_data <- read_csv("data/Exam_data.csv")
 ## R**idgeline Graph: ggridges Method**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggplot(data=exam_data, 
        aes(x = ENGLISH, 
            y = CLASS, 
@@ -52,6 +55,9 @@ ggplot(data=exam_data,
 ## R**idgeline Plots with Quantile Lines**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggplot(data=exam_data,
        aes(x = ENGLISH, 
            y = CLASS, 
@@ -73,6 +79,9 @@ ggplot(data=exam_data,
 ## R**idgeline Plots with Quantile Lines**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggplot(data=exam_data,
        aes(x = RACE, 
            y = ENGLISH)) +
@@ -103,6 +112,9 @@ pacman::p_load(ggstatsplot, tidyverse)
 ## **One-Sample Test**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 set.seed(1234)
 
 gghistostats(
@@ -117,6 +129,9 @@ gghistostats(
 ## **Two-Sample Mean**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggbetweenstats(
   data = exam_data,
   x = GENDER, 
@@ -130,6 +145,9 @@ ggbetweenstats(
 ## **Oneway ANOVA**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggbetweenstats(
   data = exam_data,
   x = RACE, 
@@ -146,6 +164,9 @@ ggbetweenstats(
 ## **Test of Correlation**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggscatterstats(
   data = exam_data,
   x = MATHS,
@@ -170,6 +191,9 @@ exam1 <- exam_data %>%
 ### Visual: Significant Test of Association
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggbarstats(exam1, 
            x = MATHS_bins, 
            y = GENDER)
@@ -211,6 +235,9 @@ knitr::kable(head(my_sum), format = 'html')
 ## **Standard Error Bars**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggplot(my_sum) +
   geom_errorbar(
     aes(x=RACE, 
@@ -233,6 +260,9 @@ ggplot(my_sum) +
 ## **C**onfidence Intervals 
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggplot(my_sum) +
   geom_errorbar(
     aes(x=reorder(RACE, -mean), 
@@ -256,6 +286,9 @@ ggplot(my_sum) +
 ## **Interactive Error Bars**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 shared_df = SharedData$new(my_sum)
 
 bscols(widths = c(4,8),
@@ -305,6 +338,9 @@ bscols(widths = c(4,8),
 ## **Uncertainty of Point Estimates with ggdistmethods**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 exam_data %>%
   ggplot(aes(x = RACE, y = MATHS)) +
   stat_pointinterval(.width = 0.95,
@@ -319,6 +355,9 @@ exam_data %>%
 ## **Uncertainty of Point Estimates with ggdistmethods**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 exam_data %>%
   ggplot(aes(x = RACE, 
              y = MATHS)) +
@@ -344,6 +383,9 @@ devtools::install_github("wilkelab/ungeviz")
 ## **HOPs**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggplot(
   data = exam_data,
   aes(x = factor(RACE), y = MATHS)
@@ -383,6 +425,9 @@ covid19 <- read_csv("data/COVID-19_DKI_Jakarta.csv") %>%
 ## **FunnelPlotR: Basic Plot**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 funnel_plot(
   .data = covid19,
   numerator = Death,
@@ -403,6 +448,9 @@ funnel_plot(
 ### **Computing Derived Fields**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 
 df <- covid19 %>%
   mutate(rate = Death / Positive) %>%
@@ -429,6 +477,9 @@ dfCI <- data.frame(number.ll95, number.ul95, number.ll999,
 ### **Plot Static Funnel**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 p <- ggplot(df, aes(x = Positive, y = rate)) +
   geom_point(aes(label=`Sub-district`), 
              alpha=0.4) +
@@ -477,6 +528,9 @@ p
 ### **Interactive Funnel**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 fp_ggplotly <- ggplotly(p,
   tooltip = c("label", 
               "x", 
