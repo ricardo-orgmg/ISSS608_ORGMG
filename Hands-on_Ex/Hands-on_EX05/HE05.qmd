@@ -644,16 +644,6 @@ ggplot(data=realis2018_selected,
 ### **Installing *d3treeR* Package**
 
 ```{r}
-install.packages("devtools")
-```
-
-```{r}
-library(devtools)
-install_github("timelyportfolio/d3treeR")
-options(repos = c(CRAN = "https://cloud.r-project.org"))
-```
-
-```{r}
 library(d3treeR)
 ```
 
