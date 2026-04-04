@@ -106,6 +106,9 @@ write_rds(mpsz_pop2020, "data/rds/mpszpop2020.rds")
 ## **Plotting choropleth map by using *qtm()***
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tmap_mode("plot")
 qtm(mpsz_pop2020, 
     fill = "DEPENDENCY")
@@ -114,6 +117,9 @@ qtm(mpsz_pop2020,
 ## **Creating a choropleth map by using *tmap*’s elements**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(mpsz_pop2020)+
   tm_polygons(fill = "DEPENDENCY", 
               fill.scale = tm_scale_intervals(
@@ -134,6 +140,9 @@ tm_shape(mpsz_pop2020)+
 ## Drawing a base map
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(mpsz_pop2020) +
   tm_polygons()
 ```
@@ -141,6 +150,9 @@ tm_shape(mpsz_pop2020) +
 ## Drawing a choropleth map using *tm_polygons()*
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(mpsz_pop2020)+
   tm_polygons("DEPENDENCY")
 ```
@@ -150,6 +162,9 @@ tm_shape(mpsz_pop2020)+
 Choropleth map by using *tm_fill()*alone
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(mpsz_pop2020)+
   tm_fill("DEPENDENCY")
 ```
@@ -157,6 +172,9 @@ tm_shape(mpsz_pop2020)+
 To add the boundary of the planning subzones, tm_borders can be used 
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(mpsz_pop2020)+
   tm_polygons(fill = "DEPENDENCY") +
   tm_borders(lwd = 0.01,  
@@ -170,6 +188,9 @@ tm_shape(mpsz_pop2020)+
 ### Plotting choropleth maps with built-in classification methods
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(mpsz_pop2020)+
   tm_polygons("DEPENDENCY",
       fill.scale = tm_scale_intervals(
@@ -181,6 +202,9 @@ tm_shape(mpsz_pop2020)+
 *Equal* data classification
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(mpsz_pop2020)+
   tm_polygons("DEPENDENCY",
       fill.scale = tm_scale_intervals(
@@ -192,6 +216,9 @@ tm_shape(mpsz_pop2020)+
 *fisher* data classification
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(mpsz_pop2020)+
   tm_polygons("DEPENDENCY",
       fill.scale = tm_scale_intervals(
@@ -211,6 +238,9 @@ summary(mpsz_pop2020$DEPENDENCY)
 Then, we set break point at 0.60, 0.70, 0.80, and 0.90. In addition, we also need to include a minimum and maximum, which we set at 0 and 100. Our *breaks* vector is thus c(0, 0.60, 0.70, 0.80, 0.90, 1.00)
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(mpsz_pop2020)+
   tm_polygons("DEPENDENCY",
           breaks = c(0, 0.60, 0.70, 0.80, 0.90, 1.00)) +
@@ -222,6 +252,9 @@ tm_shape(mpsz_pop2020)+
 ### Using ColourBrewer Palette
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(mpsz_pop2020)+
   tm_polygons("DEPENDENCY",
       fill.scale = tm_scale_intervals(
@@ -236,6 +269,9 @@ tm_shape(mpsz_pop2020)+
 ### Map Legend
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(mpsz_pop2020)+
   tm_polygons("DEPENDENCY",
       fill.scale = tm_scale_intervals(
@@ -251,6 +287,9 @@ tm_shape(mpsz_pop2020)+
 ### Map Style
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(mpsz_pop2020)+
   tm_fill("DEPENDENCY", 
           style = "quantile", 
@@ -262,6 +301,9 @@ tm_shape(mpsz_pop2020)+
 ### Cartographic Furniture
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(mpsz_pop2020)+
   tm_polygons(fill = "DEPENDENCY", 
               fill.scale = tm_scale_intervals(
@@ -290,6 +332,9 @@ tmap_style("white")
 ### By assigning multiple values to at least one of the aesthetic arguments
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(mpsz_pop2020)+ 
   tm_polygons(c("DEPENDENCY","AGED"),
           style = c("equal", "quantile"), 
@@ -300,6 +345,9 @@ tm_shape(mpsz_pop2020)+
 ### By defining a group-by variable in *tm_facets()*
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(mpsz_pop2020) +
   tm_fill("DEPENDENCY",
           style = "quantile",
@@ -316,6 +364,9 @@ tm_shape(mpsz_pop2020) +
 ### By creating multiple stand-alone maps with `tmap_arrange()`
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 youngmap <- tm_shape(mpsz_pop2020)+ 
   tm_polygons("YOUNG", 
               style = "quantile", 
@@ -332,6 +383,7 @@ tmap_arrange(youngmap, agedmap, asp=1, ncol=2)
 ## **Mappping Spatial Object Meeting a Selection Criterion**
 
 ```{r}
+
 tm_shape(mpsz_pop2020[mpsz_pop2020$REGION_N=="CENTRAL REGION", ])+
   tm_fill("DEPENDENCY", 
           style = "quantile", 
@@ -388,6 +440,9 @@ tmap_mode("view")
 ### **Interactive point symbol map**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(sgpools_sf) + 
   tm_bubbles(fill = "red",
            size = 1,
@@ -398,6 +453,9 @@ tm_shape(sgpools_sf) +
 ### **Lets make it proportional & different colour**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(sgpools_sf) + 
   tm_bubbles(fill = "OUTLET TYPE", 
              size = "Gp1Gp2 Winnings",
@@ -408,6 +466,9 @@ tm_shape(sgpools_sf) +
 ### Faceted plots
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(sgpools_sf) + 
   tm_bubbles(fill = "OUTLET TYPE", 
              size = "Gp1Gp2 Winnings",
@@ -485,6 +546,9 @@ NGA_wp <- NGA_wp %>%
 ### **Plotting map of rate**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tm_shape(NGA_wp) +
   tm_polygons("pct_functional",
               fill.scale = tm_scale_intervals(
@@ -557,12 +621,18 @@ percentmap <- function(vnam, df, legtitle=NA, mtitle="Percentile Map"){
 #### Test drive the percentile mapping function
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 percentmap("total_wp", NGA_wp)
 ```
 
 ### **Box Map**
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 ggplot(data = NGA_wp,
        aes(x = "",
            y = wp_nonfunctional)) +
@@ -643,6 +713,9 @@ boxmap <- function(vnam, df,
 ```
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
 tmap_mode("plot")
 boxmap("wp_nonfunctional", NGA_wp)
 ```
